@@ -23,7 +23,6 @@
     color: #62676B;
     font-size: 14px;
     display: block;
-
 }
 
 ::placeholder {
@@ -40,7 +39,18 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
+}
+
+.input-password {
+    border-radius: 8px;
+    width: 360px;
+    height: 48px;
+    border: 1px solid #CED4DA;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
 }
 
 a {
@@ -74,6 +84,7 @@ a {
     margin-left: auto;
     margin-right: auto;
     width: 72px;
+    padding-left: 10px;
 }
 
 .onboard-table {
@@ -84,13 +95,15 @@ a {
 table {
     border-radius: 8px;
     width: 560px;
-    border: 1px solid #CED4DA;
+    box-shadow: 0 0 0 1px #CED4DA;
+    overflow: hidden;
 }
 
 th {
     font-size: 18px;
     background-color: #F8F8F8;
     height: 72px;
+    padding-left: 24px;
 }
 
 td {
@@ -105,8 +118,11 @@ tr {
 tr h2 {
     font-weight: bold;
     font-size: 16px;
+    padding-left: 15px;
 }
 
 tr p {
     font-size: 14px;
+    padding-left: 15px;
 }
+
