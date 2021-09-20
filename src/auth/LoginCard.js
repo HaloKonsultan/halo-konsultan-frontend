@@ -1,11 +1,44 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import { Card, Button, Checkbox } from 'antd';
+import Cookies from "js-cookie"
 import axios from "axios"
 import "../assets/css/register.css"
 import Logo from "../assets/img/logo.png"
 import { useHistory } from "react-router-dom"
+import UserContext from "../components/context/UserContext"
 
 const LoginCard = () => {
+    let history = useHistory()
+    const { setLoginStatus } = useContext(UserContext)
+
+    const [input, setInput] = useState({
+        email: "",
+        password: ""
+    })
+
+    const handleChange = (event) => {
+        let value = event.target.value
+        let name = event.target.name
+
+        setInput({...input, [name] : value})
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        axios.post(`nunggu api mas fatih`,{
+            email : input.email,
+            password : input.password
+        }).then((res) => {
+            let token = res.data.token
+            let user = res.data.user
+
+            Cookies.set('token', token, {expires: 1})
+            Cookies.set('name', user.name, {expires: 1})
+            Cookies.set('email', user.email, {expires: 1})
+            history.push('/')
+        })
+    }
 
     function onChange(e) {
         console.log(`checked = ${e.target.checked}`);
@@ -15,14 +48,14 @@ const LoginCard = () => {
         <>
             <div className="container">
                 <Card className="card">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <br/>
                         <img className="logo" src={Logo}/>
                         <br/><br/>
                         <p className="label">Masukkan Email Anda</p>
-                        <input type="text" placeholder="Email" className="input" name="email" />
+                        <input type="text" placeholder="Email" className="input" name="email" value={input.email} onChange={handleChange} />
                         <p className="label">Masukkan Password Anda</p>
-                        <input type="password" placeholder="Password" className="input-password" name="password" />
+                        <input type="password" placeholder="Password" className="input-password" name="password" value={input.password} onChange={handleChange} />
                         <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
 
                         <Button style={{
