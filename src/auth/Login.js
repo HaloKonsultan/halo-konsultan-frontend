@@ -1,6 +1,6 @@
 import React from "react"
 import { Row, Col } from 'antd';
-import "../assets/css/register.css"
+import "../assets/css/auth.css"
 import 'antd/dist/antd.css';
 import Onboard from "./Onboard";
 import LoginCard from "./LoginCard";

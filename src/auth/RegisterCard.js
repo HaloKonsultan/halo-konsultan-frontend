@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { Card, Button, Checkbox } from 'antd';
 import axios from "axios"
-import "../assets/css/register.css"
+import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
-import { useHistory } from "react-router-dom"
+import {Link, useHistory} from "react-router-dom"
 
 const RegisterCard = () => {
     let history = useHistory()
@@ -20,12 +20,12 @@ const RegisterCard = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(input)
-        axios.post(`api menunggu mas fatih`,{
+        axios.post(`/api/consultant/register`,{
             name : input.name,
             email : input.email,
             password : input.password
         }).then(() => {
-            history.push(`/login`)
+            history.push(`/`)
         })
     }
 
@@ -42,7 +42,7 @@ const RegisterCard = () => {
                 <Card className="card">
                     <form onSubmit={handleSubmit}>
                         <br/>
-                        <img className="logo" src={Logo}/>
+                        <img className="logo1" src={Logo}/>
                         <br/><br/>
                         <p className="label">Masukkan Nama Lengkap Anda</p>
                         <input type="text" placeholder="Nama Lengkap" className="input" name="name" value={input.name} onChange={handleChange}/>
@@ -58,11 +58,11 @@ const RegisterCard = () => {
                             backgroundColor: "#3B85FA",
                             marginTop: 40,
                             marginBottom:32,
-                        }} size="large" className="button" type="primary" block>
+                        }} size="large" className="button" type="primary" htmlType="submit" block>
                             Daftar
                         </Button>
 
-                        <p className="sign-in" >Sudah punya akun ? <a href="">Masuk</a></p>
+                        <Link to="/"><p className="sign-in" >Sudah punya akun ? <a href="">Masuk</a></p></Link>
                     </form>
                 </Card>
             </div>
