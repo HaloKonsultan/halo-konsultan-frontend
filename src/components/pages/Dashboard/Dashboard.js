@@ -1,10 +1,10 @@
 import React, {useContext, useEffect} from "react"
 import { Row, Col } from 'antd';
-import TabelMasuk from "./TabelMasuk";
-import TabelAktif from "./TabelAktif";
-import TabelMenungguBayar from "./TabelMenungguBayar";
-import JadwalCard from "./JadwalCard";
-import "../../assets/css/dashboard.css"
+import IncomingOrderTable from "./IncomingOrderTable";
+import OrderTable from "./OrderTable";
+import WaitingPaymentTable from "./WaitingPaymentTable";
+import Schedule from "./Schedule";
+import "../../../assets/css/dashboard.css"
 
 function Dashboard() {
 
@@ -13,17 +13,19 @@ function Dashboard() {
             <Row>
                 <Col span={14}>
                     <div className="incoming-order-table">
-                        <TabelMasuk/>
+                        <IncomingOrderTable/>
                     </div>
                     <div className="order-table">
-                        <TabelAktif/>
+                        <OrderTable/>
                     </div>
                     <div className="waiting-for-payment-table">
-                        <TabelMenungguBayar/>
+                        <WaitingPaymentTable/>
                     </div>
                 </Col>
                 <Col span={10}>
-                    <JadwalCard/>
+                    <div className="schedule">
+                        <Schedule/>
+                    </div>
                 </Col>
             </Row>
         </>

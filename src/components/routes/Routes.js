@@ -11,12 +11,15 @@ import Login from "../../auth/Login";
 import Register from "../../auth/Register";
 import {UserProvider} from "../context/UserContext";
 import LayoutComponent from "../layout/Layout";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import History from "../pages/History";
+import Profile from "../pages/Profile";
+import Message from "../pages/Message";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
         if (Cookies.get('token') === undefined) {
-            return <Login/>
+            return <LayoutComponent content={<Login />} />
         } else {
             return <Route {...props} />
         }
@@ -27,16 +30,27 @@ const Routes = () => {
             <Router>
                 <Layout className="layout">
                     <UserProvider>
-                        <LoginRoute path="/login" exact >
-                            <LayoutComponent content={<Login />} />
-                        </LoginRoute>
-                        <Route path="/register" exact >
-                            <LayoutComponent content={<Register />} />
-                        </Route>
+                        <Switch>
+                            <LoginRoute path="/login" exact >
+                                <LayoutComponent content={<Login />} />
+                            </LoginRoute>
+                            <Route path="/register" exact >
+                                <LayoutComponent content={<Register />} />
+                            </Route>
 
-                        <LoginRoute path="/" exact >
-                            <LayoutComponent content={<Dashboard />} />
-                        </LoginRoute>
+                            <LoginRoute path="/" exact >
+                                <LayoutComponent content={<Dashboard />} />
+                            </LoginRoute>
+                            <LoginRoute path="/message" exact >
+                                <LayoutComponent content={<Message />} />
+                            </LoginRoute>
+                            <LoginRoute path="/history" exact >
+                                <LayoutComponent content={<History />} />
+                            </LoginRoute>
+                            <LoginRoute path="/profile" exact >
+                                <LayoutComponent content={<Profile />} />
+                            </LoginRoute>
+                        </Switch>
                     </UserProvider>
                 </Layout>
             </Router>

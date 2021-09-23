@@ -17,7 +17,7 @@ const Onboard = () => {
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center"
                 }}>
-                    <table>
+                    <table className="onboard-table">
                         <tbody>
                         <th>
                             <td>Gabung bersama HaloKonsultan dan Dapatkan.</td>

@@ -1,0 +1,31 @@
+.incoming-order-table  {
+    margin: 40px;
+}
+
+.order-table {
+    margin: 40px;
+}
+
+.waiting-for-payment-table {
+    margin: 40px;
+}
+
+.schedule {
+    margin: 40px;
+}
+
+.ant-card-head {
+    background-color: #3B85FA;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.ant-table-tbody > tr >th{
+    color: #4B4B4B;
+}
+
+.ant-table-thead > tr > th{
+    color: #4B4B4B;
+    background: #F4F4F4 !important;
+    border: none;
+}

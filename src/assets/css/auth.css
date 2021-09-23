@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.card {
+    box-shadow: 0 0 8px 0 rgba(34,34,34,0.16);
+    border-radius: 8px;
+    width: 408px;
+    padding: 20px;
+}
+
+.logo1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 151px;
+}
+
+.label {
+    color: #62676B;
+    font-size: 14px;
+    display: block;
+}
+
+::placeholder {
+    font-size: 16px;
+    color: #979595;
+    padding-left: 10px;
+}
+
+.input {
+    border-radius: 8px;
+    width: 360px;
+    height: 48px;
+    border: 1px solid #CED4DA;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 24px;
+}
+
+.input-password {
+    border-radius: 8px;
+    width: 360px;
+    height: 48px;
+    border: 1px solid #CED4DA;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #3B85FA;
+    font-weight: bold
+}
+
+.sign-in {
+    color: #62676B;
+    font-size: 14px;
+    display: block;
+    text-align: center;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+
+    /* Change values 👇 to experiment*/
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    border-radius: 8px;
+}
+
+.image-table {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 72px;
+    padding-left: 10px;
+}
+
+.onboard-table {
+    width: auto;
+    min-width: unset !important;
+}
+
+.onboard-table {
+    border-radius: 8px;
+    width: 560px;
+    box-shadow: 0 0 0 1px #CED4DA;
+    overflow: hidden;
+}
+
+.onboard-table th {
+    font-size: 18px;
+    background-color: #F8F8F8;
+    height: 72px;
+    padding-left: 24px;
+}
+
+.onboard-table td {
+    padding-right:10px;
+}
+
+.onboard-table tr {
+    height: 144px;
+    background-color: #FFFFFF;
+}
+
+.onboard-table tr h2 {
+    font-weight: bold;
+    font-size: 16px;
+    padding-left: 15px;
+}
+
+.onboard-table tr p {
+    font-size: 14px;
+    padding-left: 15px;
+}
+

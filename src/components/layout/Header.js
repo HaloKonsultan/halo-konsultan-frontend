@@ -1,8 +1,9 @@
 import React, { useContext } from "react"
 import { Link, useHistory } from "react-router-dom"
-import {Layout, PageHeader} from 'antd';
+import {Button, Layout, PageHeader} from 'antd';
 import Cookies from "js-cookie";
 import {UserContext} from "../context/UserContext";
+import {LogoutOutlined} from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 
 
@@ -25,13 +26,13 @@ const Nav = () => {
                     Cookies.get('token') !== undefined &&
                     <PageHeader
                         style={{backgroundColor: "white"}}
-                        className="site-page-header"
-                    >
-                        <ul className="header-menu">
-                            <li><p className="title">Dashboard</p></li>
-                            <li><p className="logout">Logout</p></li>
-                        </ul>
-                    </PageHeader>
+                        title="Dashboard"
+                        extra={[
+                            <Button key="1" size="large" type="text" onClick={handleLogout} danger>
+                                <LogoutOutlined />Keluar
+                            </Button>,
+                        ]}
+                    />
                 }
             </Layout>
         </>
