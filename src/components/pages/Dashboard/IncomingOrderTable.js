@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Button } from 'antd';
-import { PageHeader } from 'antd';
+import {Link} from "react-router-dom";
 
 const IncomingOrderTable = () => {
     const columns = [
@@ -21,7 +21,7 @@ const IncomingOrderTable = () => {
             align: 'center',
           render: buttons => (
             <>
-                <Button type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
+                <Link to="/request"><Button type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button></Link>
             </>
           ),
         },
@@ -50,15 +50,6 @@ const IncomingOrderTable = () => {
 
     return (
         <>
-            <PageHeader
-                style={{backgroundColor: "transparent", padding: 0}}
-                ghost={false}
-                title="Konsultasi Masuk"
-                extra={[
-                    <Button style={{color: "#3B85FA"}} type="text">
-                        <b>Lihat Semua</b>
-                    </Button>,
-                ]}/>
             <Table
                 style={{
                     borderRadius: 8,

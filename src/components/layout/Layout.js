@@ -21,7 +21,7 @@ const LayoutComponent = (props) => {
 
                     <Sider theme="light" width={266}>
                         <div className="container-logo">
-                            <img src={Logo} className="logo" alt=""/>
+                            <img  src={Logo} className="logo" alt=""/>
                         </div>
                         <Menu
                             mode="inline"
@@ -35,8 +35,8 @@ const LayoutComponent = (props) => {
                     </Sider>
                 }
                 <Layout>
-                    <Nav/>
-                    <Content>
+
+                    <Content style={{backgroundColor: "white"}}>
                         <div className="site-layout-content" style={{ minHeight: "100vh" }}>
                             {props.content}
                         </div>

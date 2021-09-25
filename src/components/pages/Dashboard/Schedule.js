@@ -1,6 +1,5 @@
 import React from "react";
-import { Card, Avatar } from 'antd';
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card } from 'antd';
 import Title from "antd/es/typography/Title";
 
 const { Meta } = Card;

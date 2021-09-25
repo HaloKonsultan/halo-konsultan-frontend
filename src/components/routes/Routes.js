@@ -15,6 +15,11 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import History from "../pages/History";
 import Profile from "../pages/Profile";
 import Message from "../pages/Message";
+import IncomingOrder from "../pages/Dashboard/pages/IncomingOrder";
+import Order from "../pages/Dashboard/pages/Order";
+import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
+import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
+import ConsultationDetail from "../pages/Dashboard/pages/ConsultationDetail";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
@@ -31,6 +36,10 @@ const Routes = () => {
                 <Layout className="layout">
                     <UserProvider>
                         <Switch>
+                            <LoginRoute path="/" exact >
+                                <LayoutComponent content={<Dashboard />} />
+                            </LoginRoute>
+
                             <LoginRoute path="/login" exact >
                                 <LayoutComponent content={<Login />} />
                             </LoginRoute>
@@ -38,9 +47,25 @@ const Routes = () => {
                                 <LayoutComponent content={<Register />} />
                             </Route>
 
-                            <LoginRoute path="/" exact >
-                                <LayoutComponent content={<Dashboard />} />
+                            {/*Dashboard Table*/}
+                            <LoginRoute path="/incoming-order" exact >
+                                <LayoutComponent content={<IncomingOrder />} />
                             </LoginRoute>
+                            <LoginRoute path="/order" exact >
+                                <LayoutComponent content={<Order />} />
+                            </LoginRoute>
+                            <LoginRoute path="/waiting-payment" exact >
+                                <LayoutComponent content={<WaitingPayment />} />
+                            </LoginRoute>
+
+                            <LoginRoute path="/request" exact >
+                                <LayoutComponent content={<ConsultationRequest />} />
+                            </LoginRoute>
+                            <LoginRoute path="/detail" exact >
+                                <LayoutComponent content={<ConsultationDetail />} />
+                            </LoginRoute>
+
+                            {/*Menu*/}
                             <LoginRoute path="/message" exact >
                                 <LayoutComponent content={<Message />} />
                             </LoginRoute>

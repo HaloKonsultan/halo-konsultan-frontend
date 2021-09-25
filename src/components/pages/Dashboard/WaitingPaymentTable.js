@@ -42,15 +42,6 @@ const WaitingPaymentTable = () => {
 
     return (
         <>
-            <PageHeader
-                style={{backgroundColor: "transparent", padding: 0}}
-                ghost={false}
-                title="Menunggu Pembayaran"
-                extra={[
-                    <Button style={{color: "#3B85FA"}} type="text">
-                        <b>Lihat Semua</b>
-                    </Button>,
-                ]}/>
             <Table
                 style={{
                     borderRadius: 8,

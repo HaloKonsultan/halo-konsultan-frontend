@@ -6,7 +6,6 @@ import {UserContext} from "../context/UserContext";
 import {LogoutOutlined} from '@ant-design/icons';
 const { Header, Content, Footer } = Layout;
 
-
 const Nav = () => {
     let history = useHistory()
     const { loginStatus, setLoginStatus } = useContext(UserContext)
@@ -25,7 +24,7 @@ const Nav = () => {
                 {
                     Cookies.get('token') !== undefined &&
                     <PageHeader
-                        style={{backgroundColor: "white"}}
+                        style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
                         title="Dashboard"
                         extra={[
                             <Button key="1" size="large" type="text" onClick={handleLogout} danger>
