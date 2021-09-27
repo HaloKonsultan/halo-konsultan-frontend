@@ -36,3 +36,18 @@
 .dashboard-label {
     color: #62676B;
 }
+
+.schedule-card > .ant-card-head{
+    background-color: #3B85FA;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.schedule-card > .ant-table-tbody > tr >th{
+    color: #4B4B4B;
+}
+
+.schedule-card > .ant-table-thead > tr >th{
+    color: #4B4B4B;
+    background: #F4F4F4 !important;
+}

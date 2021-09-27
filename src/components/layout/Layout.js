@@ -17,7 +17,7 @@ const LayoutComponent = (props) => {
         <>
             <Layout>
                 {
-                    Cookies.get('token') !== undefined &&
+                    Cookies.get('token') === undefined &&
 
                     <Sider theme="light" width={266}>
                         <div className="container-logo">
@@ -30,7 +30,7 @@ const LayoutComponent = (props) => {
                             <Menu.Item key="1" icon={<HomeOutlined />}><Link to="/">Beranda</Link></Menu.Item>
                             <Menu.Item key="2" icon={<MailOutlined />}><Link to="/message">Pesan</Link></Menu.Item>
                             <Menu.Item key="3" icon={<HistoryOutlined />}><Link to="/history">Riwayat</Link></Menu.Item>
-                            <Menu.Item key="4" icon={<UserOutlined />}><Link to="/profile">Profil</Link></Menu.Item>
+                            <Menu.Item key="4" icon={<UserOutlined />}><Link to="/Profil-empty">Profil</Link></Menu.Item>
                         </Menu>
                     </Sider>
                 }

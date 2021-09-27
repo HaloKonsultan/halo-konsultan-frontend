@@ -20,10 +20,13 @@ import Order from "../pages/Dashboard/pages/Order";
 import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
 import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
 import ConsultationDetail from "../pages/Dashboard/pages/ConsultationDetail";
+import ProfilBiodata from "../pages/Profile/ProfilBiodata";
+import Biodata from "../pages/Profile/Biodata";
+import EditProfil2 from "../pages/Profile/EditProfil2";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
-        if (Cookies.get('token') === undefined) {
+        if (Cookies.get('token') !== undefined) {
             return <LayoutComponent content={<Login />} />
         } else {
             return <Route {...props} />
@@ -75,6 +78,19 @@ const Routes = () => {
                             <LoginRoute path="/profile" exact >
                                 <LayoutComponent content={<Profile />} />
                             </LoginRoute>
+
+                            {/*Profile*/}
+                            <LoginRoute path="/profil-empty" exact>
+                                <LayoutComponent content ={<ProfilBiodata/>}/>
+                            </LoginRoute>
+                            <LoginRoute path="/edit-biodata" exact>
+                                <LayoutComponent content ={<Biodata/>}/>
+                            </LoginRoute>
+                            <LoginRoute path="/edit-profil" exact>
+                                <LayoutComponent content ={<EditProfil2/>}/>
+                            </LoginRoute>
+
+
                         </Switch>
                     </UserProvider>
                 </Layout>
