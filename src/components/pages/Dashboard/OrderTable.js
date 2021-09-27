@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from "react"
 import {Table, Tag, Space, PageHeader, Button} from 'antd';
+import {OrderContext} from "../../context/OrderContext";
 
 const OrderTable = () => {
+    // const{ dataOrder, functions, fetchStatus, setFetchStatus} = useContext(OrderContext)
+    // const { fetchData } = functions
+    //
+    // useEffect(() => {
+    //
+    //     fetchData()
+    //
+    // }, [])
 
     const columns = [
         {
@@ -58,6 +67,8 @@ const OrderTable = () => {
             date: '15-Sept-2021, 15.00',
         },
       ];
+
+      // data = dataOrder;
 
     return (
         <>

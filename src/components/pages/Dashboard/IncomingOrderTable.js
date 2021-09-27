@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react"
 import { Table, Button } from 'antd';
 import {Link} from "react-router-dom";
+import {IncomingOrderContext} from "../../context/IncomingOrderContext";
 
 const IncomingOrderTable = () => {
+    // const{ dataIncomingOrder, functions, fetchStatus, setFetchStatus} = useContext(IncomingOrderContext)
+    // const { fetchData } = functions
+    //
+    // useEffect(() => {
+    //
+    //     fetchData()
+    //
+    // }, [])
+
     const columns = [
         {
             title: 'Judul Konsultasi',
@@ -47,6 +57,8 @@ const IncomingOrderTable = () => {
             action : '',
         },
       ];
+
+      // data = dataIncomingOrder;
 
     return (
         <>

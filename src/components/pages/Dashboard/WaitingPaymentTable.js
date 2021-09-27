@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from "react"
 import {Button, PageHeader} from 'antd';
 import { Row, Col } from 'antd';
 
 import { Table, Tag, Space } from 'antd';
+import {WaitingPaymentContext} from "../../context/WaitingPaymentContext";
 
 const WaitingPaymentTable = () => {
+    // const{ dataPayment, functions, fetchStatus, setFetchStatus} = useContext(WaitingPaymentContext)
+    // const { fetchData } = functions
+    //
+    // useEffect(() => {
+    //
+    //     fetchData()
+    //
+    // }, [])
 
     const columns = [
         {
@@ -39,6 +48,8 @@ const WaitingPaymentTable = () => {
           tags: '15-Sept-2021, 15.00',
         },
       ];
+
+      // data = dataPayment;
 
     return (
         <>

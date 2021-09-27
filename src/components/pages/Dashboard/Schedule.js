@@ -8,6 +8,7 @@ const Schedule = () => {
     return (
         <>
             <Card
+                  className="schedule-card"
                   style={{ width: 454, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA", backgroundColor: "#F4F4F4"}}
                   title={
                       <>

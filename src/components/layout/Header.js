@@ -22,7 +22,7 @@ const Nav = () => {
         <>
             <Layout>
                 {
-                    Cookies.get('token') === undefined &&
+                    Cookies.get('token') !== undefined &&
                     <PageHeader
                         style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
                         title="Dashboard"
