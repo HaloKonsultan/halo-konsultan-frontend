@@ -26,7 +26,7 @@ import EditProfil2 from "../pages/Profile/EditProfil2";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
-        if (Cookies.get('token') === undefined) {
+        if (Cookies.get('token') !== undefined) {
             return <LayoutComponent content={<Login />} />
         } else {
             return <Route {...props} />

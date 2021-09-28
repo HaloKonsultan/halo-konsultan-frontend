@@ -3,6 +3,7 @@ import { Row, Col } from 'antd';
 import { Card } from 'antd';
 import { Input } from 'antd';
 import { Button } from 'antd';
+import {Link} from "react-router-dom";
 import {EditOutlined} from '@ant-design/icons';
 
 
@@ -45,10 +46,10 @@ const EditProfil2= () => {
                     </Row> <br/>
 
 
-                  <Button size="large" className="button" type="primary" block 
+                  <Link to="/profil-empty"> <Button size="large" className="button" type="primary" block 
                   style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
                         Simpan
-                    </Button>
+                    </Button></Link>
             </Card>
         </>
     )
