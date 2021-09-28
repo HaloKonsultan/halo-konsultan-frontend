@@ -33,13 +33,13 @@ const EditProfil2= () => {
                             </Col>
                     </Row> <br/>
                   <h4 style={{color:"gray"}}>Harga Jasa Diskusi</h4>
-                      <Input style={{borderRadius:8, height:48}}/>
+                      <Input style={{borderRadius:8, height:48}} placeholder="Harga Jasa Diskusi"/>
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Harga Jasa Konsultasi</h4>
-                      <Input style={{borderRadius:8, height:48}}/>
+                      <Input style={{borderRadius:8, height:48}} placeholder="Harga Jasa Konsultasi"/>
                     <br/><br/>
                    <Row>       
-                       <Col span={13}> <p style={{color:"gray"}}>Dokumentasi Kerja</p></Col>
+                       <Col span={12}> <p style={{color:"gray"}}>Dokumentasi Kerja</p></Col>
                             <Col span={25}>
                             <Button type="link">+ Tambah Dokumentasi Kerja</Button>
                             </Col>

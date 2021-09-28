@@ -34,7 +34,7 @@ const Biodata = () => {
                       <Input style={{borderRadius:8, height:48}} placeholder="Nama lengkap"/>
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Deskripsi tentang Anda</h4>
-                      <TextArea rows={6} placeholder="Deskripsi"/> 
+                      <TextArea style={{borderRadius:8}} rows={6} placeholder="Deskripsi"/> 
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Jenis Kelamin</h4>
                   <Radio value={1}>Laki - Laki </Radio><Radio value={2}>Perempuan</Radio>
@@ -42,7 +42,7 @@ const Biodata = () => {
                       <Input style={{borderRadius:8, height:48}} placeholder="Bidang Konsultasi"/>
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Kota</h4>
-                      <TextArea rows={6} placeholder="Lokasi/Kota"/> 
+                      <TextArea style={{borderRadius:8}} rows={6} placeholder="Lokasi/Kota"/> 
                     <br/><br/>
                   <h6 style={{color:"gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang konsultasi</h6>
                   <br/>

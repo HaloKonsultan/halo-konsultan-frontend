@@ -14,7 +14,7 @@ const BiodataDiri= () => {
              <Card style={{borderRadius:8}} title={ 
                     <>
                       <Row>       
-                            <Col span={14}> <Title level={4}> Biodata Diri </Title></Col>
+                            <Col span={16}> <Title level={4}> Biodata Diri </Title></Col>
                             <Col span={25}>
                                 <Link to="/edit-biodata"><Button style={{borderRadius:8}}>
                                 Edit Biodata Diri
