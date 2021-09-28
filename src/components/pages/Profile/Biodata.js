@@ -1,39 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from 'antd';
 import { Card , Modal} from 'antd';
 import { Input } from 'antd';
 import { Button } from 'antd';
 import { Radio } from 'antd';
+import TambahRekening from "../Profile/pop-up/TambahRekening";
+import {Link} from "react-router-dom";
 import {CloseOutlined} from '@ant-design/icons';
-
 
 const Biodata = () => {
 
-  function confirm() {
-    Modal.confirm(
-        <Card style={{ width: 528, height:444, borderRadius:8 }}>
-                  <Row className="center">
-                        <Col span={23}><h2>
-                             <b>Tambahkan Rekening</b> 
-                             </h2></Col>
-                        <Col span={25}><CloseOutlined /></Col>
-                 </Row>
-                  <h4 style={{color:"gray"}}>Nama Bank</h4>
-                      <Input style={{borderRadius:8}}/><br/><br/>   
-                  <h4 style={{color:"gray"}}>Nomor Rekening</h4>
-                      <Input style={{borderRadius:8}}/><br/><br/> 
-                  <h4 style={{color:"gray"}}>Nama Pemegang Rekening</h4>
-                      <Input style={{borderRadius:8}}/><br/><br/><br/>
-                  <Button size="large" className="button" type="primary" block 
-                  style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
-                        Tambahkan Rekening
-                    </Button>
-                  
-            </Card>,
-     );
-}
-    
-    const { TextArea } = Input;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+ 
+ const { TextArea } = Input;
 
     return (
         <>
@@ -50,7 +34,7 @@ const Biodata = () => {
                       <Input style={{borderRadius:8, height:48}} placeholder="Nama lengkap"/>
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Deskripsi tentang Anda</h4>
-                      <TextArea rows={6} placeholder="Deskripsi"/> 
+                      <TextArea style={{borderRadius:8}} rows={6} placeholder="Deskripsi"/> 
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Jenis Kelamin</h4>
                   <Radio value={1}>Laki - Laki </Radio><Radio value={2}>Perempuan</Radio>
@@ -58,16 +42,19 @@ const Biodata = () => {
                       <Input style={{borderRadius:8, height:48}} placeholder="Bidang Konsultasi"/>
                     <br/><br/>
                   <h4 style={{color:"gray"}}>Kota</h4>
-                      <TextArea rows={6} placeholder="Lokasi/Kota"/> 
+                      <TextArea style={{borderRadius:8}} rows={6} placeholder="Lokasi/Kota"/> 
                     <br/><br/>
                   <h6 style={{color:"gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang konsultasi</h6>
                   <br/>
                   <Row>       
                       <Col span={13}><h4 style={{color:"gray"}}>Pengalaman Kerja</h4></Col>
                             <Col span={25}>
-                            <Button onClick={confirm} type="link">+ Tambah Pengalaman kerja</Button>
+                            <Button onClick={showModal}type="link">+ Tambah Pengalaman kerja</Button>
                             </Col>
                     </Row> 
+                    <Modal visible={isModalVisible}>
+                            <TambahRekening/>
+                    </Modal>
                   <h6 style={{color:"gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang konsultasi</h6>
                   <Row>       
                       <Col span={13}><h4 style={{color:"gray"}}>Bidang Keahlian</h4></Col>
@@ -81,10 +68,10 @@ const Biodata = () => {
                             <Button type="link">+ Tambah Riwayat Pendidikan</Button>
                             </Col>
                     </Row>               
-                  <Button size="large" className="button" type="primary" block 
+                    <Link to="/profil-empty"><Button size="large" className="button" type="primary" block 
                   style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
                         Simpan
-                    </Button>
+                    </Button> </Link>
             </Card>
         </>
     )
