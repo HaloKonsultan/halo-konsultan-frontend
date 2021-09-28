@@ -1,8 +1,16 @@
-import React from 'react';
-
+import React, {useContext, useEffect} from 'react';
 import { Table, Tag, Space } from 'antd';
+import {HistoryContext} from "../../context/HistoryContext";
 
 const HistoryTable = () => {
+    // const{ dataHistory, functions, fetchStatus, setFetchStatus} = useContext(HistoryContext)
+    // const { fetchData } = functions
+    //
+    // useEffect(() => {
+    //
+    //     fetchData()
+    //
+    // }, [])
 
     const columns = [
         {
@@ -65,6 +73,8 @@ const HistoryTable = () => {
           tags: ['Selesai'],
         },
       ];
+
+      // const data = dataHistory;
 
     return (
         <>

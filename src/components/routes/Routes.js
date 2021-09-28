@@ -12,7 +12,7 @@ import Register from "../../auth/Register";
 import {UserProvider} from "../context/UserContext";
 import LayoutComponent from "../layout/Layout";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import History from "../pages/History";
+import History from "../pages/history/History";
 import Profile from "../pages/Profile";
 import Message from "../pages/Message";
 import IncomingOrder from "../pages/Dashboard/pages/IncomingOrder";
