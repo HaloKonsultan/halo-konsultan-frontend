@@ -1,0 +1,11 @@
+.profile-modal .ant-modal-content {
+    overflow: auto;
+    border-radius: 8px
+}
+
+.profile-label {
+    display: flex;
+
+    /* Change values 👇 to experiment*/
+    align-items: center;
+}

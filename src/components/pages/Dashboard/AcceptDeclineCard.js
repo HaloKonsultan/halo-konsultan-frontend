@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 
 const { Title } = Typography;
 
-
 const AcceptDeclineCard = () => {
 
     function confirm() {
