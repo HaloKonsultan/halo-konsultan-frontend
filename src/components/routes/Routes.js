@@ -20,9 +20,9 @@ import Order from "../pages/Dashboard/pages/Order";
 import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
 import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
 import ConsultationDetail from "../pages/Dashboard/pages/ConsultationDetail";
-import ProfilBiodata from "../pages/Profile/ProfilBiodata";
 import Biodata from "../pages/Profile/Biodata";
-import EditProfil2 from "../pages/Profile/EditProfil2";
+import EditProfile from "../pages/Profile/EditProfile";
+import ProfileAndBiodata from "../pages/Profile/ProfileAndBiodata";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
@@ -81,13 +81,13 @@ const Routes = () => {
 
                             {/*Profile*/}
                             <LoginRoute path="/profil-empty" exact>
-                                <LayoutComponent content ={<ProfilBiodata/>}/>
+                                <LayoutComponent content ={<ProfileAndBiodata/>}/>
                             </LoginRoute>
                             <LoginRoute path="/edit-biodata" exact>
                                 <LayoutComponent content ={<Biodata/>}/>
                             </LoginRoute>
                             <LoginRoute path="/edit-profil" exact>
-                                <LayoutComponent content ={<EditProfil2/>}/>
+                                <LayoutComponent content ={<EditProfile/>}/>
                             </LoginRoute>
 
 
