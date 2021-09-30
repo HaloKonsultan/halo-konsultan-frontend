@@ -4,14 +4,20 @@ import {Link} from "react-router-dom";
 import {IncomingOrderContext} from "../../context/IncomingOrderContext";
 
 const IncomingOrderTable = () => {
-    // const{ dataIncomingOrder, functions, fetchStatus, setFetchStatus} = useContext(IncomingOrderContext)
-    // const { fetchData } = functions
-    //
-    // useEffect(() => {
-    //
-    //     fetchData()
-    //
-    // }, [])
+    const{ dataIncomingOrder, functions, fetchStatus, setFetchStatus} = useContext(IncomingOrderContext)
+    const { fetchData, functionDetail } = functions
+
+    useEffect(() => {
+
+        fetchData()
+
+    }, [])
+
+    const handleDetail = (event) => {
+        let idClient = parseInt(event.currentTarget.value)
+
+        functionDetail(idClient)
+    }
 
     const columns = [
         {
@@ -29,9 +35,9 @@ const IncomingOrderTable = () => {
             key: 'buttons',
             dataIndex: 'buttons',
             align: 'center',
-          render: buttons => (
+          render: (buttons) => (
             <>
-                <Link to="/request"><Button type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button></Link>
+                <Button onClick={handleDetail} value={buttons.id} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
             </>
           ),
         },

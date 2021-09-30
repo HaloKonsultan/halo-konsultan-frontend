@@ -1,32 +1,47 @@
-import React from "react"
+import React, {useContext, useEffect, useState} from "react"
+import { useParams } from  "react-router-dom"
 import { Typography } from 'antd';
 import { Input } from 'antd';
+import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
 
 const { Title, Paragraph } = Typography;
 
 const ConsultationDetail = () => {
+    let { Id } = useParams()
+    console.log(Id)
+
+    const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultationDetailContext)
+    const { fetchDataById  } = functions
+
+    useEffect(() => {
+        if( Id !== undefined ){
+            fetchDataById(Id)
+        }
+    },[])
 
     return (
         <>
             <div className="dashboard-container">
-                <Title level={3}>Strategi marketing menggunakan digitalisasi</Title>
+                <Title level={3}>{input.title}</Title>
                 <Paragraph >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu mus amet sit viverra sed iaculis laoreet pellentesque mattis. Libero aliquet orci, tempor ut. Eleifend ipsum ultrices phasellus at sed habitant. Varius viverra dui nunc sit cras massa fermentum. Tincidunt donec ultrices egestas vitae. Pellentesque risus amet et ultrices mattis. In nulla mauris ipsum vitae varius nisi morbi imperdiet tortor. Odio ultrices lacus, leo pharetra enim. Consectetur proin enim, id at bibendum venenatis nisi. Porta fames neque lorem viverra massa consequat viverra.
+                    {input.description}
                 </Paragraph>
-                <Paragraph >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu mus amet sit viverra sed iaculis laoreet pellentesque mattis. Libero aliquet orci, tempor ut. Eleifend ipsum ultrices phasellus at sed habitant. Varius viverra dui nunc sit cras massa fermentum. Tincidunt donec ultrices egestas vitae. Pellentesque risus amet et ultrices mattis. In nulla mauris ipsum vitae varius nisi morbi imperdiet tortor. Odio ultrices lacus, leo pharetra enim. Consectetur proin enim, id at bibendum venenatis nisi. Porta fames neque lorem viverra massa consequat viverra.
-                </Paragraph>
-                <Paragraph >
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu mus amet sit viverra sed iaculis laoreet pellentesque mattis. Libero aliquet orci, tempor ut. Eleifend ipsum ultrices phasellus at sed habitant. Varius viverra dui nunc sit cras massa fermentum. Tincidunt donec ultrices egestas vitae. Pellentesque risus amet et ultrices mattis. In nulla mauris ipsum vitae varius nisi morbi imperdiet tortor. Odio ultrices lacus, leo pharetra enim. Consectetur proin enim, id at bibendum venenatis nisi. Porta fames neque lorem viverra massa consequat viverra.
-                </Paragraph>
-
                 <br/>
-                <p className="dashboard-label" >Preferensi Konsultasi Klien</p>
-                <Input style={{width: 344, borderRadius: 8}} prefix="Konsultasi Online" disabled />
-
-                <br/><br/>
-                <p className="dashboard-label" >Lokasi Konsultasi</p>
-                <Input style={{width: 344, borderRadius: 8}} prefix="Rumah mas fatih" disabled />
+                {
+                    input.preference !== null &&
+                        <>
+                            <p className="dashboard-label" >Preferensi Konsultasi Klien</p>
+                            <Input style={{width: 344, borderRadius: 8}} prefix="Konsultasi Online" disabled />
+                        </>
+                }
+                {
+                    input.location !== null &&
+                        <>
+                            <br/><br/>
+                            <p className="dashboard-label" >Lokasi Konsultasi</p>
+                            <Input style={{width: 344, borderRadius: 8}} prefix="Rumah mas fatih" disabled />
+                        </>
+                }
             </div>
         </>
     )

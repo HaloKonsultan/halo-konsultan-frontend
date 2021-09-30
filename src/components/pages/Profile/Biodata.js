@@ -14,12 +14,19 @@ const Biodata = () => {
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
 
+    const [isSkillVisible, setIsSkillVisible] = useState(false);
+
     const showExperienceModal = () => {
         setIsExperienceVisible(true);
     };
 
+    const showSkillModal = () => {
+        setIsSkillVisible(true);
+    };
+
     const handleCancel = () => {
         setIsExperienceVisible(false);
+        setIsSkillVisible(false);
     };
  
     const { TextArea } = Input;
@@ -89,9 +96,26 @@ const Biodata = () => {
                         <h4 style={{color:"gray"}}>Bidang Keahlian</h4>
                     </Col>
                     <Col span={11}>
-                            <Button type="link">+ Tambah Bidang Keahlian</Button>
+                            <Button onClick={showSkillModal} type="link">+ Tambah Bidang Keahlian</Button>
                     </Col>
                 </Row>
+
+                <Modal
+                    className="profile-modal"
+                    title="Tambahkan Pengalaman Kerja"
+                    visible={isSkillVisible}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
+                    <h4 style={{color:"gray"}}>Titel Pengalaman Kerja</h4>
+                    <Input style={{borderRadius:8}}/><br/><br/>
+                    <h4 style={{color:"gray"}}>Lama Bekerja</h4>
+                    <Input style={{borderRadius:8}}/><br/><br/>
+                    <Button size="large" className="button" type="primary" block
+                            style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
+                        Tambahkan Pengalaman Kerja
+                    </Button>
+                </Modal>
 
                 <Row>
                     <Col span={13}> <h4 style={{color:"gray"}}>Pendidikan</h4><br/></Col>

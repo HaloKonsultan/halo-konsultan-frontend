@@ -4,14 +4,16 @@ import { useHistory } from "react-router-dom"
 import {message} from "antd";
 import Cookies from "js-cookie";
 
-export const IncomingOrderContext = createContext()
+export const ConsultationDetailContext = createContext()
 
-export const IncomingOrderProvider = props => {
+export const ConsultationDetailProvider = props => {
     let history = useHistory()
-    const [dataIncomingOrder, setDataIncomingOrder] = useState([])
+    const [dataConsultation, setDataConsultation] = useState([])
     const [input, setInput] = useState({
         title: "",
-        date: ""
+        description: "",
+        preference: "",
+        location: ""
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
@@ -20,11 +22,13 @@ export const IncomingOrderProvider = props => {
         let result = await axios.get(`menunggu api`)
         let data = result.data
         console.log(data)
-        setDataIncomingOrder(data.map((e) => {
+        setDataConsultation(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
-                date: e.date
+                description: e.description,
+                preference: e.preference,
+                location: e.location
             }
         }))
     }
@@ -35,25 +39,22 @@ export const IncomingOrderProvider = props => {
         setInput({
             id: data.id,
             title: data.title,
-            date: data.date
+            description: data.description,
+            preference: data.preference,
+            location: data.location
         })
         setCurrentId(data.id)
     }
 
-    const functionDetail = (idClient) => {
-        history.push(`/incoming-order/detail/${idClient}`)
-    }
-
     const functions = {
         fetchData,
-        fetchDataById,
-        functionDetail
+        fetchDataById
     }
 
     return (
-        <IncomingOrderContext.Provider value = {{
-            dataIncomingOrder,
-            setDataIncomingOrder,
+        <ConsultationDetailContext.Provider value = {{
+            dataConsultation,
+            setDataConsultation,
             input,
             setInput,
             currentId,
@@ -63,7 +64,6 @@ export const IncomingOrderProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </IncomingOrderContext.Provider>
+        </ConsultationDetailContext.Provider>
     )
-
 }

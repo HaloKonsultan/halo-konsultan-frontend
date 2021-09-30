@@ -64,6 +64,9 @@ const Routes = () => {
                             <LoginRoute path="/request" exact >
                                 <LayoutComponent content={<ConsultationRequest />} />
                             </LoginRoute>
+                            <LoginRoute path="/incoming-order/detail/:Id" exact >
+                                <LayoutComponent content={<ConsultationRequest />} />
+                            </LoginRoute>
                             <LoginRoute path="/detail" exact >
                                 <LayoutComponent content={<ConsultationDetail />} />
                             </LoginRoute>
