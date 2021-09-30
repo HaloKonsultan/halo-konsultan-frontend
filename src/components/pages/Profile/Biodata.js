@@ -5,6 +5,7 @@ import { Input } from 'antd';
 import { Button } from 'antd';
 import { Radio } from 'antd';
 import {Link} from "react-router-dom";
+import { DatePicker, Space } from 'antd';
 import "../../../assets/css/profile.css"
 import { Typography } from 'antd';
 
@@ -13,6 +14,9 @@ const { Title, Text } = Typography;
 const Biodata = () => {
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
+    const [isSkillVisible, setIsSkillVisible] = useState(false);
+    const [isHistoryVisible, setIsHistoryVisible] = useState(false);
+
 
     const [isSkillVisible, setIsSkillVisible] = useState(false);
 
@@ -24,9 +28,20 @@ const Biodata = () => {
         setIsSkillVisible(true);
     };
 
+<<<<<<< HEAD
     const handleCancel = () => {
         setIsExperienceVisible(false);
         setIsSkillVisible(false);
+=======
+    const showHistoryModal = () => {
+        setIsHistoryVisible(true);
+    };
+
+    const handleCancel = () => {
+        setIsExperienceVisible(false);
+        setIsSkillVisible(false);
+        setIsHistoryVisible(false);
+>>>>>>> 1704fe94f12fb6b0617c8e791627f34f41ac4d67
     };
  
     const { TextArea } = Input;
@@ -82,12 +97,18 @@ const Biodata = () => {
                 >
                     <h4 style={{color:"gray"}}>Titel Pengalaman Kerja</h4>
                     <Input style={{borderRadius:8}}/><br/><br/>
-                    <h4 style={{color:"gray"}}>Lama Bekerja</h4>
-                    <Input style={{borderRadius:8}}/><br/><br/>
-                    <Button size="large" className="button" type="primary" block
+                     <Row>
+                        <Col span={12}> <h4 style={{color:"gray"}}>Tahun Mulai</h4>
+                            <DatePicker style={{width:215, borderRadius:8}} picker="year" /></Col>
+                            <Col span={11} offset={1}>
+                            <h4 style={{color:"gray"}}>Tahun Selesai</h4>
+                            <DatePicker style={{width:215, borderRadius:8}} picker="year" /><br/><br/>
+                        </Col>
+                    </Row>
+                    <Link to="/edit-biodata">  <Button size="large" className="button" type="primary" block
                             style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
                             Tambahkan Pengalaman Kerja
-                    </Button>
+                    </Button></Link>
                 </Modal>
 
                 <h6 style={{color:"gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang konsultasi</h6>
@@ -96,9 +117,27 @@ const Biodata = () => {
                         <h4 style={{color:"gray"}}>Bidang Keahlian</h4>
                     </Col>
                     <Col span={11}>
+<<<<<<< HEAD
                             <Button onClick={showSkillModal} type="link">+ Tambah Bidang Keahlian</Button>
+=======
+                          <Button onClick={showSkillModal} type="link">+ Tambah Bidang Keahlian</Button>
+>>>>>>> 1704fe94f12fb6b0617c8e791627f34f41ac4d67
                     </Col>
                 </Row>
+                <Modal
+                    className="profile-modal"
+                    title="Tambahkan Bidang Keahlian"
+                    visible={isSkillVisible}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
+                    <h4 style={{color:"gray"}}>Titel Bidang Keahlian</h4>
+                    <Input style={{borderRadius:8}}/><br/><br/>
+                    <Button size="large" className="button" type="primary" block
+                            style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
+                            Tambahkan Bidang Keahlian
+                    </Button>
+                </Modal>
 
                 <Modal
                     className="profile-modal"
@@ -120,9 +159,34 @@ const Biodata = () => {
                 <Row>
                     <Col span={13}> <h4 style={{color:"gray"}}>Pendidikan</h4><br/></Col>
                     <Col span={11}>
-                        <Button type="link">+ Tambah Riwayat Pendidikan</Button>
+                        <Button onClick={showHistoryModal}type="link">+ Tambah Riwayat Pendidikan</Button>
                     </Col>
                 </Row>
+
+                <Modal
+                    className="profile-modal"
+                    title="Tambahkan Riwayat Pendidikan"
+                    visible={isHistoryVisible}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
+                    <h4 style={{color:"gray"}}>Nama Instansi</h4>
+                    <Input style={{borderRadius:8}}/><br/><br/>
+                    <h4 style={{color:"gray"}}>Titel</h4>
+                    <Input style={{borderRadius:8}}/><br/><br/>
+                    <Row>
+                        <Col span={12}> <h4 style={{color:"gray"}}>Tahun Mulai</h4>
+                            <Input style={{borderRadius:8}}/><br/><br/></Col>
+                            <Col span={11} offset={1}>
+                            <h4 style={{color:"gray"}}>Tahun Selesai</h4>
+                            <Input style={{borderRadius:8}}/><br/><br/>
+                        </Col>
+                    </Row>
+                    <Button size="large" className="button" type="primary" block
+                            style={{borderRadius:8, backgroundColor:"#3B85FA"}}>
+                            Tambahkan Pengalaman Kerja
+                    </Button>
+                </Modal>
 
                 <Link to="/profil-empty">
                     <Button

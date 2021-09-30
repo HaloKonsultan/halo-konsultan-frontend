@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 const { Title } = Typography;
 
-const ProfilKonsultasi= () => {
+const ConsultationProfile= () => {
 
     return (
         <>
@@ -36,4 +36,4 @@ const ProfilKonsultasi= () => {
     )
 }
 
-export default ProfilKonsultasi
+export default ConsultationProfile

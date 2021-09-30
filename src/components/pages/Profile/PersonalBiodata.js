@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 
 const { Title } = Typography;
 
-const BiodataDiri= () => {
+const PersonalBiodata= () => {
 
     return (
         <>
@@ -42,4 +42,4 @@ const BiodataDiri= () => {
     )
 }
 
-export default BiodataDiri
+export default PersonalBiodata
