@@ -18,8 +18,6 @@ const Biodata = () => {
     const [isHistoryVisible, setIsHistoryVisible] = useState(false);
 
 
-    const [isSkillVisible, setIsSkillVisible] = useState(false);
-
     const showExperienceModal = () => {
         setIsExperienceVisible(true);
     };
@@ -28,11 +26,6 @@ const Biodata = () => {
         setIsSkillVisible(true);
     };
 
-<<<<<<< HEAD
-    const handleCancel = () => {
-        setIsExperienceVisible(false);
-        setIsSkillVisible(false);
-=======
     const showHistoryModal = () => {
         setIsHistoryVisible(true);
     };
@@ -41,7 +34,6 @@ const Biodata = () => {
         setIsExperienceVisible(false);
         setIsSkillVisible(false);
         setIsHistoryVisible(false);
->>>>>>> 1704fe94f12fb6b0617c8e791627f34f41ac4d67
     };
  
     const { TextArea } = Input;
@@ -117,11 +109,7 @@ const Biodata = () => {
                         <h4 style={{color:"gray"}}>Bidang Keahlian</h4>
                     </Col>
                     <Col span={11}>
-<<<<<<< HEAD
-                            <Button onClick={showSkillModal} type="link">+ Tambah Bidang Keahlian</Button>
-=======
                           <Button onClick={showSkillModal} type="link">+ Tambah Bidang Keahlian</Button>
->>>>>>> 1704fe94f12fb6b0617c8e791627f34f41ac4d67
                     </Col>
                 </Row>
                 <Modal

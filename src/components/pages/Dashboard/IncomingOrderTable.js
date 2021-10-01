@@ -37,7 +37,8 @@ const IncomingOrderTable = () => {
             align: 'center',
           render: (buttons) => (
             <>
-                <Button onClick={handleDetail} value={buttons.id} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
+                {/*<Button onClick={handleDetail} value={buttons.id} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>*/}
+                <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
             </>
           ),
         },
