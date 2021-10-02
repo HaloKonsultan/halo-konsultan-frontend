@@ -13,8 +13,10 @@ const PersonalBiodata= () => {
         <>
              <Card style={{borderRadius:8}} title={ 
                     <>
-                      <Row>       
-                            <Col span={16}> <Title level={4}> Biodata Diri </Title></Col>
+                      <Row> 
+                            <Col span={16}>
+                                <Title level={4}> Biodata Diri </Title>
+                            </Col>
                             <Col span={25}>
                                 <Link to="/edit-biodata"><Button style={{borderRadius:8}}>
                                 Edit Biodata Diri
@@ -37,8 +39,10 @@ const PersonalBiodata= () => {
                             <h4>Belum ditambahkan</h4>
                             <h5 style={{color:"gray"}}>Bidang Keahlian</h5>
                             <h4>Belum ditambahkan</h4>  
+          
             </Card>
         </>
+        
     )
 }
 

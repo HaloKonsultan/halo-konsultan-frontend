@@ -7,6 +7,7 @@ import { Radio } from 'antd';
 import {Link} from "react-router-dom";
 import { DatePicker, Space } from 'antd';
 import "../../../assets/css/profile.css"
+import Nav from "../../layout/Header";
 import { Typography } from 'antd';
 
 const { Title, Text } = Typography;
@@ -40,6 +41,8 @@ const Biodata = () => {
 
     return (
         <>
+        <Nav/>
+        <div className="container-profile">   
             <Card title="Edit Profil Diri"  style={{ width: 528, height:1088, borderRadius:8 }}>
                 <Row>
                     <Col span={4}> </Col>
@@ -169,6 +172,7 @@ const Biodata = () => {
                     </Button>
                 </Link>
             </Card>
+        </div>
         </>
     )
 }

@@ -9,3 +9,7 @@
     /* Change values 👇 to experiment*/
     align-items: center;
 }
+
+.container-profile {
+    margin: 40px;
+}
