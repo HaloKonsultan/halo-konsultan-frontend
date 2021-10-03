@@ -4,6 +4,7 @@ import { Card, Modal } from 'antd';
 import { Input } from 'antd';
 import { Button } from 'antd';
 import {Link} from "react-router-dom";
+import Nav from "../../layout/Header";
 import {EditOutlined} from '@ant-design/icons';
 
 
@@ -21,6 +22,8 @@ const EditProfile= () => {
 
     return (
         <>
+        <Nav/>
+        <div className="container-profile">   
             <Card title="Edit Profil Konsultasi"  style={{ width: 528, height:800, borderRadius:8 }}>
                  <Row>       
                         <Col span={15}><p style={{color:"gray"}}>Rekening</p></Col>
@@ -85,6 +88,7 @@ const EditProfile= () => {
                     Simpan
                 </Button></Link>
             </Card>
+        </div>
         </>
     )
 }

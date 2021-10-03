@@ -11,8 +11,16 @@ const ProfileAndBiodata = () => {
         <>
         <Nav/>
             <Row className="center">
-                <Col span={9}><PersonalBiodata/></Col>
-                <Col span={9}><ConsultationProfile/></Col>
+                <Col span={9}>
+                    <div className="container-profile">   
+                        <PersonalBiodata/>
+                    </div>
+                </Col>
+                <Col span={9}>
+                    <div className="container-profile">   
+                        <ConsultationProfile/>
+                    </div>
+                </Col>
             </Row>
         </>
     )
