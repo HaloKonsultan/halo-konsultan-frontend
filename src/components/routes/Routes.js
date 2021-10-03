@@ -24,6 +24,7 @@ import ConsultationDetail from "../pages/Dashboard/pages/ConsultationDetail";
 import Biodata from "../pages/Profile/Biodata";
 import EditProfile from "../pages/Profile/EditProfile";
 import ProfileAndBiodata from "../pages/Profile/ProfileAndBiodata";
+import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
 
 
 const Routes = () => {
@@ -41,63 +42,65 @@ const Routes = () => {
                 <Layout className="layout">
                     <UserProvider>
                         <IncomingOrderProvider>
-                            <Switch>
-                                <LoginRoute path="/" exact >
-                                    <LayoutComponent content={<Dashboard />} />
-                                </LoginRoute>
+                            <ConsultationDetailProvider>
 
-                                <LoginRoute path="/login" exact >
-                                    <LayoutComponent content={<Login />} />
-                                </LoginRoute>
-                                <Route path="/register" exact >
-                                    <LayoutComponent content={<Register />} />
-                                </Route>
+                                <Switch>
+                                    <LoginRoute path="/" exact >
+                                        <LayoutComponent content={<Dashboard />} />
+                                    </LoginRoute>
 
-                                {/*Dashboard Table*/}
-                                <LoginRoute path="/incoming-order" exact >
-                                    <LayoutComponent content={<IncomingOrder />} />
-                                </LoginRoute>
-                                <LoginRoute path="/order" exact >
-                                    <LayoutComponent content={<Order />} />
-                                </LoginRoute>
-                                <LoginRoute path="/waiting-payment" exact >
-                                    <LayoutComponent content={<WaitingPayment />} />
-                                </LoginRoute>
+                                    <LoginRoute path="/login" exact >
+                                        <LayoutComponent content={<Login />} />
+                                    </LoginRoute>
+                                    <Route path="/register" exact >
+                                        <LayoutComponent content={<Register />} />
+                                    </Route>
 
-                                <LoginRoute path="/request" exact >
-                                    <LayoutComponent content={<ConsultationRequest />} />
-                                </LoginRoute>
-                                <LoginRoute path="/incoming-order/detail/:Id" exact >
-                                    <LayoutComponent content={<ConsultationRequest />} />
-                                </LoginRoute>
-                                <LoginRoute path="/detail" exact >
-                                    <LayoutComponent content={<ConsultationDetail />} />
-                                </LoginRoute>
+                                    {/*Dashboard Table*/}
+                                    <LoginRoute path="/incoming-order" exact >
+                                        <LayoutComponent content={<IncomingOrder />} />
+                                    </LoginRoute>
+                                    <LoginRoute path="/order" exact >
+                                        <LayoutComponent content={<Order />} />
+                                    </LoginRoute>
+                                    <LoginRoute path="/waiting-payment" exact >
+                                        <LayoutComponent content={<WaitingPayment />} />
+                                    </LoginRoute>
 
-                                {/*Menu*/}
-                                <LoginRoute path="/message" exact >
-                                    <LayoutComponent content={<Message />} />
-                                </LoginRoute>
-                                <LoginRoute path="/history" exact >
-                                    <LayoutComponent content={<History />} />
-                                </LoginRoute>
-                                <LoginRoute path="/profile" exact >
-                                    <LayoutComponent content={<Profile />} />
-                                </LoginRoute>
+                                    <LoginRoute path="/request" exact >
+                                        <LayoutComponent content={<ConsultationRequest />} />
+                                    </LoginRoute>
+                                    <LoginRoute path="/incoming-order/detail/:Id" exact >
+                                        <LayoutComponent content={<ConsultationRequest />} />
+                                    </LoginRoute>
+                                    <LoginRoute path="/detail" exact >
+                                        <LayoutComponent content={<ConsultationDetail />} />
+                                    </LoginRoute>
 
-                                {/*Profile*/}
-                                <LoginRoute path="/profil-empty" exact>
-                                    <LayoutComponent content ={<ProfileAndBiodata/>}/>
-                                </LoginRoute>
-                                <LoginRoute path="/edit-biodata" exact>
-                                    <LayoutComponent content ={<Biodata/>}/>
-                                </LoginRoute>
-                                <LoginRoute path="/edit-profil" exact>
-                                    <LayoutComponent content ={<EditProfile/>}/>
-                                </LoginRoute>
+                                    {/*Menu*/}
+                                    <LoginRoute path="/message" exact >
+                                        <LayoutComponent content={<Message />} />
+                                    </LoginRoute>
+                                    <LoginRoute path="/history" exact >
+                                        <LayoutComponent content={<History />} />
+                                    </LoginRoute>
+                                    <LoginRoute path="/profile" exact >
+                                        <LayoutComponent content={<Profile />} />
+                                    </LoginRoute>
 
+                                    {/*Profile*/}
+                                    <LoginRoute path="/profil-empty" exact>
+                                        <LayoutComponent content ={<ProfileAndBiodata/>}/>
+                                    </LoginRoute>
+                                    <LoginRoute path="/edit-biodata" exact>
+                                        <LayoutComponent content ={<Biodata/>}/>
+                                    </LoginRoute>
+                                    <LoginRoute path="/edit-profil" exact>
+                                        <LayoutComponent content ={<EditProfile/>}/>
+                                    </LoginRoute>
+                                </Switch>
 
-                            </Switch>
+                            </ConsultationDetailProvider>
                         </IncomingOrderProvider>
                     </UserProvider>
                 </Layout>

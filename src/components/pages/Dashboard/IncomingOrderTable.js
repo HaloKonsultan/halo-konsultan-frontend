@@ -47,7 +47,7 @@ const IncomingOrderTable = () => {
       const data = [
         {
             key: '1',
-            name: 'Konsultasi#3',
+            name: 'Konsultasi#1',
             address: '15-Sept-2021, 15.00',
             action : '',
         },
@@ -59,9 +59,21 @@ const IncomingOrderTable = () => {
         },
         {
             key: '3',
-            name: 'Konsultasi#1',
+            name: 'Konsultasi#3',
             address: '19-Sept-2021, 15.00',
             action : '',
+        },
+        {
+          key: '4',
+          name: 'Konsultasi#4',
+          address: '19-Sept-2021, 15.00',
+          action : '',
+        },
+        {
+          key: '5',
+          name: 'Konsultasi#5',
+          address: '19-Sept-2021, 15.00',
+          action : '',
         },
       ];
 
@@ -75,7 +87,7 @@ const IncomingOrderTable = () => {
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
-                columns={columns} dataSource={data} pagination={false} />
+                columns={columns} dataSource={data.slice(-3)} pagination={false} />
         </>
     )
 }

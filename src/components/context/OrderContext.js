@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 export const OrderContext = createContext()
 
-export const IncomingOrderProvider = props => {
+export const OrderProvider = props => {
     let history = useHistory()
     const [dataOrder, setDataOrder] = useState([])
     const [input, setInput] = useState({

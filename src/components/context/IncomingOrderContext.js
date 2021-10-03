@@ -29,7 +29,6 @@ export const IncomingOrderProvider = props => {
         }))
     }
 
-    
     const fetchDataById = async (id) => {
         let result = await axios.get(`menunggu api/${id}`)
         let data = result.data

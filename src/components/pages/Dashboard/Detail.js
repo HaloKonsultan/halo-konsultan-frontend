@@ -11,7 +11,7 @@ const ConsultationDetail = () => {
     console.log(Id)
 
     const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultationDetailContext)
-    const { fetchDataById  } = functions
+    const { fetchDataById } = functions
 
     useEffect(() => {
         if( Id !== undefined ){
@@ -28,14 +28,14 @@ const ConsultationDetail = () => {
                 </Paragraph>
                 <br/>
                 {
-                    input.preference !== null &&
+                    input.preference === null &&
                         <>
                             <p className="dashboard-label" >Preferensi Konsultasi Klien</p>
                             <Input style={{width: 344, borderRadius: 8}} prefix="Konsultasi Online" disabled />
                         </>
                 }
                 {
-                    input.location !== null &&
+                    input.location === null &&
                         <>
                             <br/><br/>
                             <p className="dashboard-label" >Lokasi Konsultasi</p>

@@ -13,7 +13,8 @@ export const ConsultationDetailProvider = props => {
         title: "",
         description: "",
         preference: "",
-        location: ""
+        location: "",
+        status:""
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
@@ -28,7 +29,8 @@ export const ConsultationDetailProvider = props => {
                 title: e.title,
                 description: e.description,
                 preference: e.preference,
-                location: e.location
+                location: e.location,
+                status: e.status
             }
         }))
     }
@@ -41,14 +43,41 @@ export const ConsultationDetailProvider = props => {
             title: data.title,
             description: data.description,
             preference: data.preference,
-            location: data.location
+            location: data.location,
+            status: data.status
         })
         setCurrentId(data.id)
     }
 
+    const functionAccept = () => {
+        axios.post(`menunggu mas backend`, {
+                title: input.title,
+                description: input.description,
+                preference: input.preference,
+                location: input.location,
+                status: input.status
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                let data = res.data
+                setDataConsultation([...dataConsultation, {
+                    id: data.id,
+                    title: data.title,
+                    description: data.description,
+                    preference: data.preference,
+                    location: data.location,
+                    status: data.status
+                }])
+                history.push('/')
+            })
+        message.success('Data berhasil ditambahkan', 3);
+    }
+
     const functions = {
         fetchData,
-        fetchDataById
+        fetchDataById,
+        functionAccept
     }
 
     return (
