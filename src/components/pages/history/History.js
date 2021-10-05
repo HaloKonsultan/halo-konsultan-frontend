@@ -1,17 +1,16 @@
 import React from "react"
 import { Result, Button } from 'antd';
+import Nav from "../../layout/Header";
+import HistoryTable from "./HistoryTable";
 
 function History() {
 
-
     return (
         <>
-            <Result
-                status="403"
-                title="403"
-                subTitle="Sorry, the history page is currently not available"
-                extra={<Button type="primary">Back Home</Button>}
-            />
+            <Nav/>
+            <div className="incoming-order-table">
+                <HistoryTable/>
+            </div>
         </>
     )
 }

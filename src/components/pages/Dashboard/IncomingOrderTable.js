@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react"
 import { Table, Button } from 'antd';
-import {Link} from "react-router-dom";
 import {IncomingOrderContext} from "../../context/IncomingOrderContext";
 
 const IncomingOrderTable = () => {
@@ -11,7 +10,7 @@ const IncomingOrderTable = () => {
 
         fetchData()
 
-    }, [])
+    }, [fetchData])
 
     const handleDetail = (event) => {
         let idClient = parseInt(event.currentTarget.value)
@@ -38,7 +37,7 @@ const IncomingOrderTable = () => {
           render: (buttons) => (
             <>
                 {/*<Button onClick={handleDetail} value={buttons.id} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>*/}
-                <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
+                <Button onClick={handleDetail} value="1213" type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
             </>
           ),
         },

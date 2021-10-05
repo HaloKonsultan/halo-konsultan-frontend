@@ -36,11 +36,13 @@ const HistoryTable = () => {
             <>
               {tags.map(tag => {
                 let color = tag.length > 5 ? 'geekblue' : 'green';
+                let fontColor = 'geekblue'
                 if (tag === 'Ditolak') {
                   color = 'volcano';
+                  fontColor = '#F63131'
                 }
                 return (
-                  <Tag color={color} key={tag}>
+                  <Tag style={{borderRadius: 20, color: {fontColor}, fontWeight: "bold"}} color={color} key={tag}>
                     {tag.toUpperCase()}
                   </Tag>
                 );
@@ -78,7 +80,13 @@ const HistoryTable = () => {
 
     return (
         <>
-            <Table columns={columns} dataSource={data} />
+            <Table
+                style={{
+                    borderRadius: 8,
+                    overflow: "hidden",
+                    boxShadow: "0 0 0 1px #CED4DA"
+                }}
+                columns={columns} dataSource={data} pagination={false}/>
         </>
     )
 }

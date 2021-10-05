@@ -1,20 +1,20 @@
 import React from "react"
 import { Row, Col } from 'antd';
 import Detail from "../Detail";
-import ConsultationSetting from "../ConsultationSetting";
 import Nav from "../../../layout/Header";
+import ConsultationActive from "../ConsultationActive";
 
-const ConsultationDetail = () => {
+const ActiveConsultationDetail = () => {
 
     return (
         <>
             <Nav/>
             <Row className="center">
                 <Col span={13}><Detail /></Col>
-                <Col span={11}><ConsultationSetting /></Col>
+                <Col span={11}><ConsultationActive /></Col>
             </Row>
         </>
     )
 }
 
-export default ConsultationDetail
+export default ActiveConsultationDetail

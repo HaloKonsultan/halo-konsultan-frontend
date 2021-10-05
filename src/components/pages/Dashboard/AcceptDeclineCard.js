@@ -18,15 +18,17 @@ const AcceptDeclineCard = () => {
         if( Id !== undefined ){
             fetchDataById(Id)
         }
-    },[])
+    },[Id, fetchDataById])
 
-    function handleAccept(event) {
+    function handleDecline(event) {
         Modal.confirm({
             title: 'Apakah Anda yakin menolak permintaan Konsultasi ini ?',
             okText: 'Batalkan',
             cancelText: 'Tolak Permintaan',
         });
+    }
 
+    function handleAccept(event) {
         let idClient = parseInt(event.currentTarget.value)
 
         functionAccept(idClient)
@@ -38,8 +40,8 @@ const AcceptDeclineCard = () => {
                 <Card style={{ width: 440, display: "flex", justifyContent: "center", borderRadius: 16, boxShadow: "0 0 0 1px #CED4DA"}} >
                     <Title level={5}>Apakah Anda Menerima Permintaan Konsultasi ini ?</Title>
                     <Space>
-                        <Button style={{borderRadius: 8}} type="primary"><CheckOutlined />Terima Permintaan</Button>
-                        <Button onClick={handleAccept} style={{borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}} >Tolak Permintaan</Button>
+                        <Button onClick={handleAccept} value={Id} style={{borderRadius: 8}} type="primary"><CheckOutlined />Terima Permintaan</Button>
+                        <Button onClick={handleDecline} style={{borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}} >Tolak Permintaan</Button>
                     </Space>
                 </Card>
             </div>

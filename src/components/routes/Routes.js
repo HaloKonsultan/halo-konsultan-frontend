@@ -20,12 +20,12 @@ import IncomingOrder from "../pages/Dashboard/pages/IncomingOrder";
 import Order from "../pages/Dashboard/pages/Order";
 import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
 import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
-import ConsultationDetail from "../pages/Dashboard/pages/ConsultationDetail";
+import IncomingConsultationDetail from "../pages/Dashboard/pages/IncomingConsultationDetail";
 import Biodata from "../pages/Profile/Biodata";
 import EditProfile from "../pages/Profile/EditProfile";
 import ProfileAndBiodata from "../pages/Profile/ProfileAndBiodata";
 import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
-
+import ActiveConsultationDetail from "../pages/Dashboard/pages/ActiveConsultationDetail";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
@@ -73,8 +73,9 @@ const Routes = () => {
                                     <LoginRoute path="/incoming-order/detail/:Id" exact >
                                         <LayoutComponent content={<ConsultationRequest />} />
                                     </LoginRoute>
-                                    <LoginRoute path="/detail" exact >
-                                        <LayoutComponent content={<ConsultationDetail />} />
+                                    <LoginRoute path="/incoming-order/detail/accept/:Id" exact >
+                                        <LayoutComponent content={<ActiveConsultationDetail />} />
+                                        {/*<LayoutComponent content={<IncomingConsultationDetail />} />*/}
                                     </LoginRoute>
 
                                     {/*Menu*/}
