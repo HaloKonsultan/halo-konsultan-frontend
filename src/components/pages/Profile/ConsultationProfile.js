@@ -11,10 +11,10 @@ const ConsultationProfile= () => {
 
     return (
         <>
-            <Card style={{borderRadius:8}} title={ 
+            <Card style={{borderRadius:8, width:406}} title={ 
                     <>
                       <Row>       
-                            <Col span={14}> <Title level={4}> Profil Konsultasi </Title></Col>
+                            <Col span={12}> <Title level={4}> Profil Konsultasi </Title></Col>
                             <Col span={25}>
                             <Link to="/edit-profil"><Button style={{borderRadius:8}}>
                                  Edit Profil Konsultasi

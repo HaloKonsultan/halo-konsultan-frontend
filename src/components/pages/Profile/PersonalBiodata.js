@@ -11,10 +11,10 @@ const PersonalBiodata= () => {
 
     return (
         <>
-             <Card style={{borderRadius:8}} title={ 
+             <Card style={{borderRadius:8, width:528}} title={ 
                     <>
                       <Row> 
-                            <Col span={16}>
+                            <Col span={17}>
                                 <Title level={4}> Biodata Diri </Title>
                             </Col>
                             <Col span={25}>
