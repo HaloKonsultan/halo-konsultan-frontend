@@ -3,7 +3,7 @@ import {Button, PageHeader} from 'antd';
 import { Row, Col } from 'antd';
 
 import { Table, Tag, Space } from 'antd';
-import {WaitingPaymentContext} from "../../context/WaitingPaymentContext";
+import {WaitingPaymentContext} from "../../../context/WaitingPaymentContext";
 
 const WaitingPaymentTable = () => {
     // const{ dataPayment, functions, fetchStatus, setFetchStatus} = useContext(WaitingPaymentContext)

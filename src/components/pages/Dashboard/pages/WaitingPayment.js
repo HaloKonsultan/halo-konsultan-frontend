@@ -1,6 +1,6 @@
 import React from "react"
 import Nav from "../../../layout/Header";
-import WaitingPaymentTable from "../WaitingPaymentTable";
+import WaitingPaymentTable from "../table/WaitingPaymentTable";
 
 function IncomingOrder() {
 

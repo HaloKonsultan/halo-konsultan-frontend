@@ -1,16 +1,22 @@
 import React, { useEffect, useState, useContext } from "react"
 import {Table, Tag, Space, PageHeader, Button} from 'antd';
-import {OrderContext} from "../../context/OrderContext";
+import {OrderContext} from "../../../context/OrderContext";
 
 const OrderTable = () => {
-    // const{ dataOrder, functions, fetchStatus, setFetchStatus} = useContext(OrderContext)
-    // const { fetchData } = functions
-    //
-    // useEffect(() => {
-    //
-    //     fetchData()
-    //
-    // }, [])
+    const{ dataOrder, functions, fetchStatus, setFetchStatus} = useContext(OrderContext)
+    const { fetchData, functionDetail } = functions
+
+    useEffect(() => {
+
+        fetchData()
+
+    }, [])
+
+    const handleDetail = (event) => {
+        let idClient = event
+
+        functionDetail(idClient)
+    }
 
     const columns = [
         {
@@ -45,22 +51,26 @@ const OrderTable = () => {
             key: 'date',
             dataIndex: 'date',
         },
+
       ];
       
       const data = [
         {
+            id:5,
             key: '1',
             name: 'Konsultasi#3',
             action : ['ada link'],
             date: '15-Sept-2021, 15.00',
         },
         {
+            id:7,
             key: '2',
             name: 'Konsultasi#2',
             action : ['ada link'],
             date: '15-Sept-2021, 15.00',
         },
         {
+            id:9,
             key: '3',
             name: 'Konsultasi#1',
             action : ['Belum ada link'],
@@ -73,6 +83,11 @@ const OrderTable = () => {
     return (
         <>
             <Table
+                onRow={(record, rowIndex) => {
+                    return {
+                        onClick: event => {handleDetail(record.id)}, // click row
+                    };
+                }}
                 style={{
                     borderRadius: 8,
                     overflow: "hidden",

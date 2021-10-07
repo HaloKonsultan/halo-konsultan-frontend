@@ -1,6 +1,6 @@
-import React, { useState, createContext } from "react";
+import React, {useState, createContext} from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import {message} from "antd";
 import Cookies from "js-cookie";
 
@@ -46,13 +46,18 @@ export const HistoryProvider = props => {
         setCurrentId(data.id)
     }
 
+    const functionDetail = (idClient) => {
+        history.push(`/history/detail/${idClient}`)
+    }
+
     const functions = {
         fetchData,
-        fetchDataById
+        fetchDataById,
+        functionDetail
     }
 
     return (
-        <HistoryContext.Provider value = {{
+        <HistoryContext.Provider value={{
             dataHistory,
             setDataHistory,
             input,

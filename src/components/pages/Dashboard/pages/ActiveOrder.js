@@ -1,8 +1,8 @@
 import React from "react"
 import Nav from "../../../layout/Header";
-import OrderTable from "../OrderTable";
+import OrderTable from "../table/OrderTable";
 
-function Order() {
+function ActiveOrder() {
 
     return (
         <>
@@ -14,4 +14,4 @@ function Order() {
     )
 }
 
-export default Order
+export default ActiveOrder

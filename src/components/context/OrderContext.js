@@ -40,9 +40,14 @@ export const OrderProvider = props => {
         setCurrentId(data.id)
     }
 
+    const functionDetail = (idClient) => {
+        history.push(`/order/detail/${idClient}`)
+    }
+
     const functions = {
         fetchData,
-        fetchDataById
+        fetchDataById,
+        functionDetail
     }
 
     return (

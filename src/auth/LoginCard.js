@@ -52,12 +52,22 @@ const LoginCard = () => {
                         <br/>
                         <img className="logo1" src={Logo}/>
                         <br/><br/>
-                        <p className="label">Masukkan Email Anda</p>
-                        <input type="text" placeholder="Email" className="input" name="email" value={input.email} onChange={handleChange} />
-                        <p className="label">Masukkan Password Anda</p>
-                        <input type="password" placeholder="Password" className="input-password" name="password" value={input.password} onChange={handleChange} />
-                        <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
 
+                        <p className="label">Masukkan Email Anda</p>
+                        <input type="text"
+                               placeholder="Email"
+                               className="input"
+                               name="email"
+                               value={input.email}
+                               onChange={handleChange} required/>
+
+                        <p className="label">Masukkan Password Anda</p>
+                        <input type="password"
+                               placeholder="Password"
+                               className="input-password"
+                               name="password" value={input.password}
+                               onChange={handleChange} required/>
+                        <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
 
                             <Button style={{
                                 borderRadius: 8,
