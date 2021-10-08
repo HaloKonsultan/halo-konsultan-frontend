@@ -9,10 +9,23 @@ import { DatePicker, Space } from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import { Typography } from 'antd';
+import { ConsultantProfileContext } from "../../context/ConsultantProfileContext";
 
 const { Title, Text } = Typography;
 
-const Biodata = () => {
+const EditBiodata = () => {
+
+    let { Id } = useParams()
+    console.log(Id)
+
+    const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultantProfileContext)
+    const { fetchDataById } = functions
+
+    useEffect(() => {
+        if( Id !== undefined ){
+            fetchDataById(Id)
+        }
+    },[])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
@@ -194,4 +207,4 @@ const Biodata = () => {
     )
 }
 
-export default Biodata
+export default EditBiodata

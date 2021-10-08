@@ -21,11 +21,11 @@ import Order from "../pages/Dashboard/pages/Order";
 import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
 import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
 import IncomingConsultationDetail from "../pages/Dashboard/pages/IncomingConsultationDetail";
-import Biodata from "../pages/Profile/Biodata";
 import EditProfile from "../pages/Profile/EditProfile";
 import ProfileAndBiodata from "../pages/Profile/ProfileAndBiodata";
 import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
 import ActiveConsultationDetail from "../pages/Dashboard/pages/ActiveConsultationDetail";
+import EditBiodata from "../pages/Profile/EditBiodata";
 
 const Routes = () => {
     const LoginRoute = ({ ...props }) => {
@@ -94,7 +94,7 @@ const Routes = () => {
                                         <LayoutComponent content ={<ProfileAndBiodata/>}/>
                                     </LoginRoute>
                                     <LoginRoute path="/edit-biodata" exact>
-                                        <LayoutComponent content ={<Biodata/>}/>
+                                        <LayoutComponent content ={<EditBiodata/>}/>
                                     </LoginRoute>
                                     <LoginRoute path="/edit-profil" exact>
                                         <LayoutComponent content ={<EditProfile/>}/>
