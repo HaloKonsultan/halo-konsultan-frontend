@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from "react"
 import {Row, Col, Button, PageHeader} from 'antd';
-import IncomingOrderTable from "./IncomingOrderTable";
-import OrderTable from "./OrderTable";
-import WaitingPaymentTable from "./WaitingPaymentTable";
-import Schedule from "./Schedule";
+import IncomingOrderTable from "./table/IncomingOrderTable";
+import OrderTable from "./table/OrderTable";
+import WaitingPaymentTable from "./table/WaitingPaymentTable";
+import Schedule from "./table/Schedule";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import {Link} from "react-router-dom";

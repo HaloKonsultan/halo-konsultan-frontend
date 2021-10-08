@@ -45,11 +45,11 @@ const RegisterCard = () => {
                         <img className="logo1" src={Logo}/>
                         <br/><br/>
                         <p className="label">Masukkan Nama Lengkap Anda</p>
-                        <input type="text" placeholder="Nama Lengkap" className="input" name="name" value={input.name} onChange={handleChange}/>
+                        <input type="text" placeholder="Nama Lengkap" className="input" name="name" value={input.name} onChange={handleChange} required/>
                         <p className="label">Masukkan Email Anda</p>
-                        <input type="text" placeholder="Email" className="input" name="email" value={input.email} onChange={handleChange}/>
+                        <input type="text" placeholder="Email" className="input" name="email" value={input.email} onChange={handleChange} required/>
                         <p className="label">Masukkan Password Anda</p>
-                        <input type="password" placeholder="Password" className="input-password" name="password" value={input.password} onChange={handleChange}/>
+                        <input type="password" placeholder="Password" className="input-password" name="password" value={input.password} onChange={handleChange} required min={8}/>
                         <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
 
                         <Button style={{

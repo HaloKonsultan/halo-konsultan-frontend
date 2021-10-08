@@ -1,5 +1,5 @@
 import React from "react"
-import IncomingOrderTable from "../IncomingOrderTable";
+import IncomingOrderTable from "../table/IncomingOrderTable";
 import Nav from "../../../layout/Header";
 
 function IncomingOrder() {

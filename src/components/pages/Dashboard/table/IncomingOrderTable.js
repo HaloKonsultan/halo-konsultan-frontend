@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import { Table, Button } from 'antd';
-import {IncomingOrderContext} from "../../context/IncomingOrderContext";
+import {IncomingOrderContext} from "../../../context/IncomingOrderContext";
 
 const IncomingOrderTable = () => {
     const{ dataIncomingOrder, functions, fetchStatus, setFetchStatus} = useContext(IncomingOrderContext)
