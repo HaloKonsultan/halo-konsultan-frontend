@@ -5,8 +5,8 @@ import Routes from "./components/routes/Routes";
 function App() {
   return (
     <div>
-      {/* <Routes/> */}
-      <CompleteSuccess/>
+      <Routes/>
+      {/* <CompleteSuccess/> */}
     </div>
   );
 }

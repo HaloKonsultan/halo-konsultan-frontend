@@ -22,16 +22,13 @@ import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
 import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
 import IncomingConsultationDetail from "../pages/Dashboard/pages/IncomingConsultationDetail";
 import EditProfile from "../pages/Profile/EditProfile";
+import EditBiodata from "../pages/Profile/EditBiodata";
 import ProfileAndBiodata from "../pages/Profile/ProfileAndBiodata";
 import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
 import ActiveConsultationDetail from "../pages/Dashboard/pages/ActiveConsultationDetail";
-<<<<<<< HEAD
-import EditBiodata from "../pages/Profile/EditBiodata";
-=======
 import {OrderProvider} from "../context/OrderContext";
 import {HistoryProvider} from "../context/HistoryContext";
 import ConsultationHistoryDetail from "../pages/history/pages/ConsultationHistoryDetail";
->>>>>>> daa92456e9002f506db5b7ff6f72b3162287cbb2
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -100,30 +97,16 @@ const Routes = () => {
                                                 <LayoutComponent content={<ConsultationHistoryDetail/>}/>
                                             </LoginRoute>
 
-<<<<<<< HEAD
-                                    {/*Profile*/}
-                                    <LoginRoute path="/profil-empty" exact>
-                                        <LayoutComponent content ={<ProfileAndBiodata/>}/>
-                                    </LoginRoute>
-                                    <LoginRoute path="/edit-biodata" exact>
-                                        <LayoutComponent content ={<EditBiodata/>}/>
-                                    </LoginRoute>
-                                    <LoginRoute path="/edit-profil" exact>
-                                        <LayoutComponent content ={<EditProfile/>}/>
-                                    </LoginRoute>
-                                </Switch>
-=======
                                             <LoginRoute path="/profile" exact>
                                                 <LayoutComponent content={<Profile/>}/>
                                             </LoginRoute>
->>>>>>> daa92456e9002f506db5b7ff6f72b3162287cbb2
 
                                             {/*Profile*/}
                                             <LoginRoute path="/profil-empty" exact>
                                                 <LayoutComponent content={<ProfileAndBiodata/>}/>
                                             </LoginRoute>
                                             <LoginRoute path="/edit-biodata" exact>
-                                                <LayoutComponent content={<Biodata/>}/>
+                                                <LayoutComponent content={<EditBiodata/>}/>
                                             </LoginRoute>
                                             <LoginRoute path="/edit-profil" exact>
                                                 <LayoutComponent content={<EditProfile/>}/>
