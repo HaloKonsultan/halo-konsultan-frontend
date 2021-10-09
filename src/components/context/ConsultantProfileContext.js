@@ -35,10 +35,48 @@ export const ConsultantProfileProvider = props => {
         let data = result.data
         setInput({
             id: data.id,
+<<<<<<< HEAD
             consultant_id: e.consultant_id,
             card_number: e.card_number,
             bank: e.bank
         })
+=======
+            name: data.name,
+            email: data.email,
+            photo: data.photo,
+            gender: data.gender,
+            location: data.location,
+            description: data.description,
+            chat_price: data.chat_price,
+            consultant_price: data.consultant_price,
+            consultant_doc: [{
+                consultant_id: data.consultant_id,
+                photo: data.photo,
+            }],
+            consultant_experience:[{
+                consultant_id: data.consultant_id,
+                position: data.position,
+                start_year: data.start_year,
+                end_year: data.end_year
+            }],
+            consultant_educations:[{
+                consultant_id: data.consultant_id,
+                institution_name: data.institution_name,
+                major: data.major,
+                start_year: data.start_year,
+                end_year: data.end_year
+            }],
+            consultant_skills:[{
+                consultant_id: data.consultant_id,
+                skills: data.skills,
+            }],
+            consultant_virtual_account:[{
+                consultant_id: data.consultant_id,
+                card_number: data.card_number,
+                bank: data.bank
+            }]
+         })
+>>>>>>> 06c7226fc0d9e76dd9f07985990353944352184a
         setCurrentId(data.id)
     }
 
@@ -52,8 +90,13 @@ export const ConsultantProfileProvider = props => {
         // functionDetail
     }
 
+<<<<<<< HEAD
     return (
         <ConsultantProfileContext.Provider value={{
+=======
+     return (
+         <ConsultantProfileContext.Provider value ={{
+>>>>>>> 06c7226fc0d9e76dd9f07985990353944352184a
             dataProfile,
             setDataProfile,
             input,
