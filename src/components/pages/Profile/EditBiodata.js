@@ -9,7 +9,7 @@ import { DatePicker, Space } from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import { Typography } from 'antd';
-import { ConsultantProfileContext } from "../../context/ConsultantProfileContext";
+import { ConsultantBiodataContext } from "../../context/ConsultantBiodataContext";
 
 const { Title, Text } = Typography;
 
@@ -18,7 +18,7 @@ const EditBiodata = () => {
     let { Id } = useParams()
     console.log(Id)
 
-    const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultantProfileContext)
+    const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultantBiodataContext)
     const { fetchDataById } = functions
 
     useEffect(() => {
