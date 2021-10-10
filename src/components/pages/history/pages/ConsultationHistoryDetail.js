@@ -10,7 +10,7 @@ const ConsultationHistoryDetail = () => {
         <>
             <Nav/>
             <Row className="center">
-                <Col span={13}><Detail /></Col>
+                <Col span={13}><br/><Detail /></Col>
                 <Col span={11}><ConsultationHistory /></Col>
             </Row>
         </>

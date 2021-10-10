@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react"
-import { Card, Button, Checkbox } from 'antd';
+import React, {useContext, useState} from "react"
+import {Card, Button, Checkbox} from 'antd';
 import Cookies from "js-cookie"
 import axios from "axios"
 import "../assets/css/auth.css"
@@ -10,7 +10,7 @@ import {UserContext} from "../components/context/UserContext";
 const LoginCard = () => {
     let history = useHistory()
 
-    const { setLoginStatus } = useContext(UserContext)
+    const {setLoginStatus} = useContext(UserContext)
 
     const [input, setInput] = useState({
         email: "",
@@ -21,21 +21,22 @@ const LoginCard = () => {
         let value = event.target.value
         let name = event.target.name
 
-        setInput({...input, [name] : value})
+        setInput({...input, [name]: value})
     }
 
     const handleSubmit = (event) => {
         event.preventDefault()
 
         console.log(input)
-        axios.post(`http://localhost:8000/api/consultant/login`,{
-            email : input.email,
-            password : input.password
+        axios.post(`http://localhost:8000/api/consultant/login`, {
+            email: input.email,
+            password: input.password
         }).then((res) => {
-            let token = res.data.token
-            let user = res.data.user
+            let token = res.data.access_token
+            let id = res.data.data.id
 
             Cookies.set('token', token, {expires: 1})
+            Cookies.set('id', id, {expires: 1})
             history.push('/')
         })
     }
@@ -69,17 +70,17 @@ const LoginCard = () => {
                                onChange={handleChange} required/>
                         <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
 
-                            <Button style={{
-                                borderRadius: 8,
-                                height: 44,
-                                backgroundColor: "#3B85FA",
-                                marginTop: 40,
-                                marginBottom:32,
-                            }} size="large" className="button" type="primary" htmlType="submit" block>
-                                Masuk
-                            </Button>
+                        <Button style={{
+                            borderRadius: 8,
+                            height: 44,
+                            backgroundColor: "#3B85FA",
+                            marginTop: 40,
+                            marginBottom: 32,
+                        }} size="large" className="button" type="primary" htmlType="submit" block>
+                            Masuk
+                        </Button>
 
-                        <Link to="/register"><p className="sign-in" >Belum punya akun ? <a href="">Daftar</a></p></Link>
+                        <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p></Link>
                     </form>
                 </Card>
             </div>

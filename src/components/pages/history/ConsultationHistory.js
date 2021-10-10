@@ -1,12 +1,12 @@
-import React, {useContext, useEffect, useState} from "react"
-import {Button, Card, Input} from 'antd';
+import React, {useContext, useEffect} from "react"
+import {Card, Input} from 'antd';
 import 'antd/dist/antd.css';
 import {Typography} from 'antd';
 import {useParams} from "react-router-dom";
 import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
 import {Row, Col} from 'antd';
-import {ArrowRightOutlined, FileTextOutlined} from '@ant-design/icons';
-import { Alert } from 'antd';
+import {FileTextOutlined} from '@ant-design/icons';
+import {Alert} from 'antd';
 
 const {Title, Link} = Typography;
 
@@ -29,10 +29,10 @@ const ConsultationHistory = () => {
                 {
                     input.status === 'Selesai' &&
 
-                            <Alert style={{width: 438, borderRadius: 8, color: "#3B85FA"}}
-                                   message="Konsultasi ini telah Selesai"
-                                   type="info"
-                                   showIcon />
+                    <Alert style={{width: 438, borderRadius: 8, color: "#3B85FA"}}
+                           message="Konsultasi ini telah Selesai"
+                           type="info"
+                           showIcon/>
 
                 }
                 {
@@ -111,8 +111,8 @@ const ConsultationHistory = () => {
                 <Input
                     style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                     name="conference_link"
-                    // value={input.conference_link}
-                    value="https://meet.google.com/xtx-gfvc-day"
+                    value={input.conference_link}
+                    // value="https://meet.google.com/xtx-gfvc-day"
                     disabled/>
                 <br/><br/>
             </div>

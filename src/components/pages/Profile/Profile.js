@@ -1,23 +1,26 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import { Row, Col } from 'antd';
 import Nav from "../../layout/Header";
-import {Link} from "react-router-dom";
 import PersonalBiodata from "./PersonalBiodata";
 import ConsultationProfile from "./ConsultationProfile";
+import Cookies from "js-cookie";
+import {OrderContext} from "../../context/OrderContext";
 
-const ProfileAndBiodata = () => {
+const Profile = () => {
+    let page = 'Profil';
+    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
         <Nav/>
             <Row className="center">
-                <Col span={11}>
+                <Col span={12}>
                     <div className="container-profile">   
                         <PersonalBiodata/>
                     </div>
                 </Col>
-                <Col span={9}>
-                    <div className="container-profile">   
+                <Col span={12}>
+                    <div className="container-profile">
                         <ConsultationProfile/>
                     </div>
                 </Col>
@@ -26,4 +29,4 @@ const ProfileAndBiodata = () => {
     )
 }
 
-export default ProfileAndBiodata
+export default Profile

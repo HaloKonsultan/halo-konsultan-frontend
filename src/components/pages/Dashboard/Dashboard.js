@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react"
+import React from "react"
 import {Row, Col, Button, PageHeader} from 'antd';
 import IncomingOrderTable from "./table/IncomingOrderTable";
 import OrderTable from "./table/OrderTable";
@@ -7,8 +7,11 @@ import Schedule from "./table/Schedule";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import {Link} from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Dashboard() {
+    let page = 'Dashboard';
+    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
