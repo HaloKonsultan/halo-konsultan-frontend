@@ -13,7 +13,7 @@ const Nav = () => {
     const handleLogout = () => {
         setLoginStatus(false)
         Cookies.remove('token')
-        Cookies.remove('name')
+        Cookies.remove('id')
         Cookies.remove('email')
         history.push('/')
     }
@@ -22,10 +22,10 @@ const Nav = () => {
         <>
             <Layout>
                 {
-                    Cookies.get('token') === undefined &&
+                    Cookies.get('token') !== undefined &&
                     <PageHeader
                         style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
-                        title="Dashboard"
+                        title={Cookies.get('page')}
                         extra={[
                             <Button key="1" size="large" type="text" onClick={handleLogout} danger>
                                 <LogoutOutlined />Keluar

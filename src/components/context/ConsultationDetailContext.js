@@ -31,40 +31,10 @@ export const ConsultationDetailProvider = props => {
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
-    const fetchData = async () => {
-        let result = await axios.get(`menunggu api`)
-        let data = result.data
-        console.log(data)
-        setDataConsultation(data.map((e) => {
-            return {
-                id: e.id,
-                title: e.title,
-                consultant_id: e.consultant_id,
-                description: e.description,
-                preference: e.preference,
-                location: e.location,
-                status: e.status,
-                consultation_price: e.consultation_price,
-                is_confirmed: e.is_confirmed,
-                date: e.date,
-                conference_link: e.conference_link,
-                consultations_pref_date:[{
-                    id: e.id,
-                    date:e.date
-                }],
-                consultations_document:[{
-                    id: e.id,
-                    name: e.name,
-                    description: e.description,
-                    file: e.file
-                }]
-            }
-        }))
-    }
-
-    const fetchDataById = async (id) => {
-        let result = await axios.get(`menunggu api/${id}`)
-        let data = result.data
+    const fetchDataById = async (consultation_id) => {
+        let result = await axios.get(`http://localhost:8000/api/consultant/consultations/${consultation_id}`,
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
+        let data = result.data.data
         setInput({
             id: data.id,
             title: data.title,
@@ -92,10 +62,9 @@ export const ConsultationDetailProvider = props => {
 
     const functionAccept = (idClient) => {
         //hapus bila yang bawah di uncomment
-        history.push(`/incoming-order/detail/accept/${idClient}`)
+        // history.push(`/incoming-order/detail/accept/${idClient}`)
 
         //uncomment bila API sudah tersedia karena harus login buat input data
-
         // axios.post(`menunggu mas backend`, {
         //         status: 1
         //     },
@@ -205,9 +174,9 @@ export const ConsultationDetailProvider = props => {
     }
 
     const functions = {
-        fetchData,
         fetchDataById,
         functionAccept,
+        functionSubmit,
         functionSubmitDocument
     }
 

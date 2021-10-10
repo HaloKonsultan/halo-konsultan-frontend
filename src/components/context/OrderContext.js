@@ -1,7 +1,6 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom"
-import {message} from "antd";
 import Cookies from "js-cookie";
 
 export const OrderContext = createContext()
@@ -17,27 +16,19 @@ export const OrderProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
-        let result = await axios.get(`menunggu api`)
-        let data = result.data
+        let result = await axios.get(
+            `http://localhost:8000/api/consultant/consultations/user/${Cookies.get('id')}/active`,
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
+        let data = result.data.data.data
         console.log(data)
         setDataOrder(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
+                name: e.name,
                 date: e.date
             }
         }))
-    }
-
-    const fetchDataById = async (id) => {
-        let result = await axios.get(`menunggu api/${id}`)
-        let data = result.data
-        setInput({
-            id: data.id,
-            title: data.title,
-            date: data.date
-        })
-        setCurrentId(data.id)
     }
 
     const functionDetail = (idClient) => {
@@ -46,7 +37,6 @@ export const OrderProvider = props => {
 
     const functions = {
         fetchData,
-        fetchDataById,
         functionDetail
     }
 

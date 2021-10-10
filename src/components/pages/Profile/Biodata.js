@@ -13,11 +13,9 @@ import { Typography } from 'antd';
 const { Title, Text } = Typography;
 
 const Biodata = () => {
-
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
     const [isHistoryVisible, setIsHistoryVisible] = useState(false);
-
 
     const showExperienceModal = () => {
         setIsExperienceVisible(true);

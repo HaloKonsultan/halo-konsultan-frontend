@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react"
+import React, {useContext, useEffect} from "react"
 import { useParams } from  "react-router-dom"
 import { Typography } from 'antd';
 import { Input } from 'antd';
@@ -10,7 +10,7 @@ const ConsultationDetail = () => {
     let { Id } = useParams()
     console.log(Id)
 
-    const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultationDetailContext)
+    const { input, functions } = useContext(ConsultationDetailContext)
     const { fetchDataById } = functions
 
     useEffect(() => {

@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useContext } from "react"
-import { Table, Button } from 'antd';
+import React, {useEffect, useContext} from "react"
+import {Table, Button} from 'antd';
 import {IncomingOrderContext} from "../../../context/IncomingOrderContext";
 
 const IncomingOrderTable = () => {
-    const{ dataIncomingOrder, functions, fetchStatus, setFetchStatus} = useContext(IncomingOrderContext)
-    const { fetchData, functionDetail } = functions
+    const {dataIncomingOrder, functions} = useContext(IncomingOrderContext)
+    const {fetchData, functionDetail} = functions
 
     useEffect(() => {
 
         fetchData()
 
-    }, [fetchData])
+    }, [])
 
     const handleDetail = (event) => {
         let idClient = parseInt(event.currentTarget.value)
@@ -21,62 +21,28 @@ const IncomingOrderTable = () => {
     const columns = [
         {
             title: 'Judul Konsultasi',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'title',
+            key: 'title',
         },
         {
             title: 'Tanggal Masuk',
-            dataIndex: 'address',
-            key: 'address',
+            dataIndex: 'date',
+            key: 'date',
         },
         {
             title: '',
             key: 'buttons',
             dataIndex: 'buttons',
             align: 'center',
-          render: (buttons) => (
-            <>
-                {/*<Button onClick={handleDetail} value={buttons.id} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>*/}
-                <Button onClick={handleDetail} value="1213" type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
-            </>
-          ),
+            render: (buttons) => (
+                <>
+                    <Button onClick={handleDetail} value={buttons.id} type="primary" ghost style={{borderRadius: 8}}>Lihat Detail</Button>
+                </>
+            ),
         },
-      ];
+    ];
 
-      const data = [
-        {
-            key: '1',
-            name: 'Konsultasi#1',
-            address: '15-Sept-2021, 15.00',
-            action : '',
-        },
-        {
-            key: '2',
-            name: 'Konsultasi#2',
-            address: '17-Sept-2021, 15.00',
-            action : '',
-        },
-        {
-            key: '3',
-            name: 'Konsultasi#3',
-            address: '19-Sept-2021, 15.00',
-            action : '',
-        },
-        {
-          key: '4',
-          name: 'Konsultasi#4',
-          address: '19-Sept-2021, 15.00',
-          action : '',
-        },
-        {
-          key: '5',
-          name: 'Konsultasi#5',
-          address: '19-Sept-2021, 15.00',
-          action : '',
-        },
-      ];
-
-      // data = dataIncomingOrder;
+    const data = dataIncomingOrder;
 
     return (
         <>
@@ -86,7 +52,7 @@ const IncomingOrderTable = () => {
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
-                columns={columns} dataSource={data.slice(-3)} pagination={false} />
+                columns={columns} dataSource={data} pagination={false}/>
         </>
     )
 }
