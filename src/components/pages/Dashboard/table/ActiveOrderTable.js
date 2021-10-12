@@ -1,9 +1,9 @@
 import React, {useEffect, useContext} from "react"
 import {Table, Tag} from 'antd';
-import {OrderContext} from "../../../context/OrderContext";
+import {ActiveOrderContext} from "../../../context/ActiveOrderContext";
 
-const OrderTable = () => {
-    const {dataOrder, functions} = useContext(OrderContext)
+const ActiveOrderTable = () => {
+    const {dataOrder, functions} = useContext(ActiveOrderContext)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
@@ -25,13 +25,20 @@ const OrderTable = () => {
         {
             title: '',
             dataIndex: 'conference_link',
+            key: 'conference_link',
             align: 'right',
-            render: conference_link => conference_link !== null &&
-                <>
-                    <Tag style={{borderRadius: 20, color: "#F63131", fontWeight: "bold"}} color='#FDD6D6'>
-                        Belum ada link
-                    </Tag>
-                </>
+            render: (conference_link) => {
+                console.log(conference_link)
+                if (conference_link !== null){
+                    return (
+                        <>
+                            <Tag style={{borderRadius: 20, color: "#F63131", fontWeight: "bold"}} color='#FDD6D6'>
+                                Belum ada link
+                            </Tag>
+                        </>
+                    )
+                }
+            },
         },
         {
             title: 'Tanggal Konsultasi',
@@ -63,4 +70,4 @@ const OrderTable = () => {
     )
 }
 
-export default OrderTable
+export default ActiveOrderTable

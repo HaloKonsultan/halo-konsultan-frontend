@@ -24,11 +24,12 @@ import EditBiodata from "../pages/Profile/EditBiodata";
 import Profile from "../pages/Profile/Profile";
 import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
 import ActiveConsultationDetail from "../pages/Dashboard/pages/ActiveConsultationDetail";
-import {OrderProvider} from "../context/OrderContext";
+import {OrderProvider} from "../context/ActiveOrderContext";
 import {HistoryProvider} from "../context/HistoryContext";
 import ConsultationHistoryDetail from "../pages/history/pages/ConsultationHistoryDetail";
 import History from "../pages/history/History";
 import {WaitingPaymentProvider} from "../context/WaitingPaymentContext";
+import {TodayOrderProvider} from "../context/TodayOrderContext";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -49,66 +50,68 @@ const Routes = () => {
                                 <OrderProvider>
                                     <HistoryProvider>
                                         <WaitingPaymentProvider>
-                                            <Switch>
-                                                <LoginRoute path="/" exact>
-                                                    <LayoutComponent content={<Dashboard/>}/>
-                                                </LoginRoute>
+                                            <TodayOrderProvider>
+                                                <Switch>
+                                                    <LoginRoute path="/" exact>
+                                                        <LayoutComponent content={<Dashboard/>}/>
+                                                    </LoginRoute>
 
-                                                <LoginRoute path="/login" exact>
-                                                    <LayoutComponent content={<Login/>}/>
-                                                </LoginRoute>
-                                                <Route path="/register" exact>
-                                                    <LayoutComponent content={<Register/>}/>
-                                                </Route>
+                                                    <LoginRoute path="/login" exact>
+                                                        <LayoutComponent content={<Login/>}/>
+                                                    </LoginRoute>
+                                                    <Route path="/register" exact>
+                                                        <LayoutComponent content={<Register/>}/>
+                                                    </Route>
 
-                                                {/*Dashboard Table*/}
-                                                <LoginRoute path="/incoming-order" exact>
-                                                    <LayoutComponent content={<IncomingOrder/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/order" exact>
-                                                    <LayoutComponent content={<ActiveOrder/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/waiting-payment" exact>
-                                                    <LayoutComponent content={<WaitingPayment/>}/>
-                                                </LoginRoute>
+                                                    {/*Dashboard Table*/}
+                                                    <LoginRoute path="/incoming-order" exact>
+                                                        <LayoutComponent content={<IncomingOrder/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/order" exact>
+                                                        <LayoutComponent content={<ActiveOrder/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/waiting-payment" exact>
+                                                        <LayoutComponent content={<WaitingPayment/>}/>
+                                                    </LoginRoute>
 
-                                                <LoginRoute path="/request" exact>
-                                                    <LayoutComponent content={<ConsultationRequest/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/incoming-order/detail/:Id" exact>
-                                                    <LayoutComponent content={<ConsultationRequest/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/incoming-order/detail/accept/:Id" exact>
-                                                    <LayoutComponent content={<IncomingConsultationDetail/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/order/detail/:Id" exact>
-                                                    <LayoutComponent content={<ActiveConsultationDetail/>}/>
-                                                </LoginRoute>
+                                                    <LoginRoute path="/request" exact>
+                                                        <LayoutComponent content={<ConsultationRequest/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/incoming-order/detail/:Id" exact>
+                                                        <LayoutComponent content={<ConsultationRequest/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/incoming-order/detail/accept/:Id" exact>
+                                                        <LayoutComponent content={<IncomingConsultationDetail/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/order/detail/:Id" exact>
+                                                        <LayoutComponent content={<ActiveConsultationDetail/>}/>
+                                                    </LoginRoute>
 
-                                                {/*Menu*/}
-                                                <LoginRoute path="/message" exact>
-                                                    <LayoutComponent content={<Message/>}/>
-                                                </LoginRoute>
+                                                    {/*Menu*/}
+                                                    <LoginRoute path="/message" exact>
+                                                        <LayoutComponent content={<Message/>}/>
+                                                    </LoginRoute>
 
-                                                {/*History*/}
-                                                <LoginRoute path="/history" exact>
-                                                    <LayoutComponent content={<History/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/history/detail/:Id" exact>
-                                                    <LayoutComponent content={<ConsultationHistoryDetail/>}/>
-                                                </LoginRoute>
+                                                    {/*History*/}
+                                                    <LoginRoute path="/history" exact>
+                                                        <LayoutComponent content={<History/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/history/detail/:Id" exact>
+                                                        <LayoutComponent content={<ConsultationHistoryDetail/>}/>
+                                                    </LoginRoute>
 
-                                                {/*Profile*/}
-                                                <LoginRoute path="/profile" exact>
-                                                    <LayoutComponent content={<Profile/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/edit-biodata" exact>
-                                                    <LayoutComponent content={<EditBiodata/>}/>
-                                                </LoginRoute>
-                                                <LoginRoute path="/edit-profile" exact>
-                                                    <LayoutComponent content={<EditProfile/>}/>
-                                                </LoginRoute>
-                                            </Switch>
+                                                    {/*Profile*/}
+                                                    <LoginRoute path="/profile" exact>
+                                                        <LayoutComponent content={<Profile/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/edit-biodata" exact>
+                                                        <LayoutComponent content={<EditBiodata/>}/>
+                                                    </LoginRoute>
+                                                    <LoginRoute path="/edit-profile" exact>
+                                                        <LayoutComponent content={<EditProfile/>}/>
+                                                    </LoginRoute>
+                                                </Switch>
+                                            </TodayOrderProvider>
                                         </WaitingPaymentProvider>
                                     </HistoryProvider>
                                 </OrderProvider>

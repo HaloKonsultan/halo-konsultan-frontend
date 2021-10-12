@@ -34,9 +34,11 @@ const LoginCard = () => {
         }).then((res) => {
             let token = res.data.access_token
             let id = res.data.data.id
+            let location = res.data.data.location
 
             Cookies.set('token', token, {expires: 1})
             Cookies.set('id', id, {expires: 1})
+            Cookies.set('location', location, {expires: 1})
             history.push('/')
         })
     }

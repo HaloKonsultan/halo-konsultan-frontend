@@ -1,10 +1,9 @@
-import React, {useContext, useEffect} from "react";
+import React from "react";
 import { Row, Col } from 'antd';
 import Nav from "../../layout/Header";
 import PersonalBiodata from "./PersonalBiodata";
 import ConsultationProfile from "./ConsultationProfile";
 import Cookies from "js-cookie";
-import {OrderContext} from "../../context/OrderContext";
 
 const Profile = () => {
     let page = 'Profil';

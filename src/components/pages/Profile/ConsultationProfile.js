@@ -16,7 +16,7 @@ const ConsultationProfile = () => {
 
     return (
         <>
-            <Card style={{borderRadius: 8, width: 406}} title={
+            <Card style={{borderRadius: 8, width: 406, boxShadow: "0 0 0 1px #CED4DA"}} title={
                 <>
                     <Row>
                         <Col span={12}> <Title level={4}> Profil Konsultasi </Title></Col>
