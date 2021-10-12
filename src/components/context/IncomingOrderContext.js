@@ -10,14 +10,16 @@ export const IncomingOrderProvider = props => {
     const [dataIncomingOrder, setDataIncomingOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
-        date: ""
+        date: "",
+        time: "",
+        status: ""
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultations/user/${Cookies.get('id')}/incoming`,
+            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/incoming`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
@@ -25,8 +27,9 @@ export const IncomingOrderProvider = props => {
             return {
                 id: e.id,
                 title: e.title,
-                name: e.name,
-                date: e.date
+                date: e.date,
+                time: e.time,
+                status: e.status
             }
         }))
     }

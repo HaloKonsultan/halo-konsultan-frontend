@@ -4,13 +4,13 @@ import {Card} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
-import {OrderContext} from "../../context/OrderContext";
+import {ActiveOrderContext} from "../../context/ActiveOrderContext";
 
 const {Title, Text, Link} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()
-    const {dataProfile, functions} = useContext(OrderContext)
+    const {dataProfile, functions} = useContext(ActiveOrderContext)
     const {fetchData, functionEditBiodata} = functions
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const PersonalBiodata = () => {
 
     return (
         <>
-            <Card style={{borderRadius: 8, width: 528}} title={
+            <Card style={{boxShadow: "0 0 0 1px #CED4DA", borderRadius: 8, width: 528}} title={
                 <>
                     <Row>
                         <Col span={17}>

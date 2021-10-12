@@ -3,11 +3,11 @@ import axios from "axios";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 
-export const WaitingPaymentContext = createContext()
+export const TodayOrderContext = createContext()
 
-export const WaitingPaymentProvider = props => {
+export const TodayOrderProvider = props => {
     let history = useHistory()
-    const [dataPayment, setDataPayment] = useState([])
+    const [dataTodayOrder, setDataTodayOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
         date: "",
@@ -19,11 +19,11 @@ export const WaitingPaymentProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/waiting`,
+            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/status/today`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
-        setDataPayment(data.map((e) => {
+        setDataTodayOrder(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
@@ -34,14 +34,19 @@ export const WaitingPaymentProvider = props => {
         }))
     }
 
+    const functionDetail = (idClient) => {
+        history.push(`/incoming-order/detail/${idClient}`)
+    }
+
     const functions = {
-        fetchData
+        fetchData,
+        functionDetail
     }
 
     return (
-        <WaitingPaymentContext.Provider value = {{
-            dataPayment,
-            setDataPayment,
+        <TodayOrderContext.Provider value = {{
+            dataTodayOrder,
+            setDataTodayOrder,
             input,
             setInput,
             currentId,
@@ -51,7 +56,7 @@ export const WaitingPaymentProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </WaitingPaymentContext.Provider>
+        </TodayOrderContext.Provider>
     )
 
 }
