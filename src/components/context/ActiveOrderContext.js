@@ -3,21 +3,23 @@ import axios from "axios";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 
-export const OrderContext = createContext()
+export const ActiveOrderContext = createContext()
 
 export const OrderProvider = props => {
     let history = useHistory()
     const [dataOrder, setDataOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
-        date: ""
+        date: "",
+        time: "",
+        status: ""
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultations/user/${Cookies.get('id')}/active`,
+            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/active`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
@@ -25,8 +27,10 @@ export const OrderProvider = props => {
             return {
                 id: e.id,
                 title: e.title,
-                name: e.name,
-                date: e.date
+                date: e.date,
+                time: e.time,
+                status: e.status,
+                conference_link: e.conference_link
             }
         }))
     }
@@ -41,7 +45,7 @@ export const OrderProvider = props => {
     }
 
     return (
-        <OrderContext.Provider value = {{
+        <ActiveOrderContext.Provider value = {{
             dataOrder,
             setDataOrder,
             input,
@@ -53,7 +57,6 @@ export const OrderProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </OrderContext.Provider>
+        </ActiveOrderContext.Provider>
     )
-
 }

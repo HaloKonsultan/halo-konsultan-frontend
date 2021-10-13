@@ -7,9 +7,7 @@ const IncomingOrderTable = () => {
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
-
         fetchData()
-
     }, [])
 
     const handleDetail = (event) => {

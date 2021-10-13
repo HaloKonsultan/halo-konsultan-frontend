@@ -7,9 +7,7 @@ const HistoryTable = () => {
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
-
         fetchData()
-
     }, [])
 
     const handleDetail = (event) => {
@@ -26,8 +24,8 @@ const HistoryTable = () => {
         },
         {
             title: 'Nama Klien',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'user_name',
+            key: 'user_name',
         },
         {
             title: 'Tanggal Konsultasi',
@@ -38,13 +36,13 @@ const HistoryTable = () => {
             title: 'Status',
             key: 'status',
             dataIndex: 'status',
-            render: status => {
+            render: (status, is_confirmed) => {
                 let color
                 let fontColor
-                if (status === 'active') {
+                if (status === 'done' && is_confirmed === true) {
                     color = '#D8E7FE'
                     fontColor = '#3B85FA'
-                } else if (status === 'done'){
+                } else if (status === 'done' && is_confirmed === false) {
                     color = '#D8E7FE'
                     fontColor = '#3B85FA'
                 }

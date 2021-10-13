@@ -1,6 +1,6 @@
 import React from "react"
 import Nav from "../../../layout/Header";
-import OrderTable from "../table/OrderTable";
+import ActiveOrderTable from "../table/ActiveOrderTable";
 
 function ActiveOrder() {
 
@@ -8,7 +8,7 @@ function ActiveOrder() {
         <>
             <Nav/>
             <div className="incoming-order-table">
-                <OrderTable />
+                <ActiveOrderTable />
             </div>
         </>
     )

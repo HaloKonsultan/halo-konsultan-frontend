@@ -1,9 +1,9 @@
 import React from "react"
 import {Row, Col, Button, PageHeader} from 'antd';
 import IncomingOrderTable from "./table/IncomingOrderTable";
-import OrderTable from "./table/OrderTable";
+import ActiveOrderTable from "./table/ActiveOrderTable";
 import WaitingPaymentTable from "./table/WaitingPaymentTable";
-import Schedule from "./table/Schedule";
+import TodayOrder from "./table/TodayOrder";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import {Link} from "react-router-dom";
@@ -40,7 +40,7 @@ function Dashboard() {
                                     <b>Lihat Semua</b>
                                 </Button></Link>,
                             ]}/>
-                        <OrderTable/>
+                        <ActiveOrderTable/>
                     </div>
                     <div className="waiting-for-payment-table">
                         <PageHeader
@@ -57,7 +57,7 @@ function Dashboard() {
                 </Col>
                 <Col span={10}>
                     <div className="schedule">
-                        <Schedule/>
+                        <TodayOrder/>
                     </div>
                 </Col>
             </Row>
