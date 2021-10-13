@@ -10,6 +10,13 @@ const {Title, Text, Link} = Typography;
 const ConsultationProfile = () => {
     let history = useHistory()
 
+    const {input, functions} = useContext(ProfileContext)
+    const {fetchData, functionEditBiodata} = functions
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     const handleDetail = () => {
         history.push('/edit-profile')
     }
@@ -30,18 +37,18 @@ const ConsultationProfile = () => {
                 <Space size={24} direction="vertical">
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Rekening</Text>
-                        <Text strong>Himma Filangga Sutopo</Text>
+                        <Text strong>{input.name}</Text>
                         <Text type="secondary">BNI - 72121217233</Text>
                         <Text strong>Fatih Khoiri</Text>
                         <Text type="secondary">BCA - 81726781233</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Harga Jasa Diskusi</Text>
-                        <Text strong>Rp. 30.000</Text>
+                        <Text strong>{input.chat_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Harga Jasa Konsultasi</Text>
-                        <Text strong>Rp. 730.000</Text>
+                        <Text strong>{input.consultant_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Dokumentasi Kerja</Text>

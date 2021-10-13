@@ -1,16 +1,16 @@
 import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router";
-import {Card} from 'antd';
+import {Card, Input} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
-import {ActiveOrderContext} from "../../context/ActiveOrderContext";
+import { ProfileContext } from "../../context/ProfileContext";
 
 const {Title, Text, Link} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()
-    const {dataProfile, functions} = useContext(ActiveOrderContext)
+    const {input, functions} = useContext(ProfileContext)
     const {fetchData, functionEditBiodata} = functions
 
     useEffect(() => {
@@ -47,33 +47,32 @@ const PersonalBiodata = () => {
                         <Space size={24} direction="vertical">
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>
-                                <Text strong>Himma Filangga Sutopo</Text>
+                                <Text strong> {input.name}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Deskripsi Tentang Anda</Text>
-                                <Text strong>Saya adalah Konsultan Hukum Perdata dengan pengalaman lebih dari 6 tahun di
-                                    bidang ini. Saya telah...</Text>
+                                <Text strong>{input.description}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Jenis Kelamin</Text>
-                                <Text strong>Non-Binary</Text>
+                                <Text strong>{input.gender}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Konsultasi</Text>
-                                <Text strong>Hukum</Text>
+                                <Text strong>{input.position}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Kota</Text>
-                                <Text strong>Bekasi</Text>
+                                <Text strong>{input.location}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pengalaman Kerja</Text>
                                 <Row>
                                     <Col span={12}>
-                                        <Text strong>Konsultan Marketing</Text>
+                                        <Text strong>{input.position}</Text>
                                     </Col>
                                     <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>2019 - Present</Text>
+                                        <Text strong>{input.start_year}{input.end_year}</Text>
                                     </Col>
                                 </Row>
 
@@ -85,13 +84,13 @@ const PersonalBiodata = () => {
                                         <Text strong>University Up and Down</Text>
                                     </Col>
                                     <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>2017 - 2019</Text>
+                                        <Text strong>{input.start_year}{input.end_year}</Text>
                                     </Col>
                                 </Row>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
-                                <Text strong>Mencintaimu apa adanya</Text>
+                                <Text strong>{input.skills}{input.end_year}</Text>
                             </Space>
                         </Space>
                     </Col>
