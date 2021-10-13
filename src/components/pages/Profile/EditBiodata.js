@@ -14,12 +14,12 @@ import {ProfileContext} from "../../context/ProfileContext";
 const {Title, Text} = Typography;
 
 const EditBiodata = () => {
-    // const { input, setInput, currentId, setCurrentId, functions } = useContext(ProfileContext)
-    // const { fetchData } = functions
-    //
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
+    const {input, functions} = useContext(ProfileContext)
+    const {fetchData, functionEditBiodata} = functions
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
@@ -69,11 +69,11 @@ const EditBiodata = () => {
                     </Space>
                     <br/><br/>
                     <h4 style={{color: "gray"}}>Nama Lengkap</h4>
-                    <Input style={{borderRadius: 8, height: 48}} placeholder="Nama lengkap"/>
+                    <Input style={{borderRadius: 8, height: 48}} placeholder="Nama lengkap" value={input.name}/>
 
                     <br/><br/>
                     <h4 style={{color: "gray"}}>Deskripsi tentang Anda</h4>
-                    <TextArea style={{borderRadius: 8}} rows={6} placeholder="Deskripsi"/>
+                    <TextArea style={{borderRadius: 8}} rows={6} placeholder="Deskripsi" value={input.description}/>
 
                     <br/><br/>
                     <h4 style={{color: "gray"}}>Jenis Kelamin</h4>
@@ -81,11 +81,11 @@ const EditBiodata = () => {
 
                     <br/><br/>
                     <h4 style={{color: "gray"}}>Bidang Konsultasi</h4>
-                    <Input style={{borderRadius: 8, height: 48}} placeholder="Bidang Konsultasi"/>
+                    <Input style={{borderRadius: 8, height: 48}} placeholder="Bidang Konsultasi" value={input.position}/>
 
                     <br/><br/>
                     <h4 style={{color: "gray"}}>Kota</h4>
-                    <TextArea style={{borderRadius: 8}} rows={6} placeholder="Lokasi/Kota"/>
+                    <TextArea style={{borderRadius: 8}} rows={6} placeholder="Lokasi/Kota" value={input.location}/>
 
                     <br/><br/>
                     <h6 style={{color: "gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
@@ -124,13 +124,13 @@ const EditBiodata = () => {
                         footer={null}
                     >
                         <h4 style={{color: "gray"}}>Titel Pengalaman Kerja</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.position}/><br/><br/>
                         <Row>
                             <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
-                                <DatePicker style={{width: 215, borderRadius: 8}} picker="year"/></Col>
+                                <DatePicker style={{width: 215, borderRadius: 8}} picker="year" value={input.start_year}/></Col>
                             <Col span={11} offset={1}>
                                 <h4 style={{color: "gray"}}>Tahun Selesai</h4>
-                                <DatePicker style={{width: 215, borderRadius: 8}} picker="year"/><br/><br/>
+                                <DatePicker style={{width: 215, borderRadius: 8}} picker="year" value={input.end_year}/><br/><br/>
                             </Col>
                         </Row>
                         <Link to="/edit-biodata"> <Button size="large" className="button" type="primary" block
@@ -146,7 +146,7 @@ const EditBiodata = () => {
                         footer={null}
                     >
                         <h4 style={{color: "gray"}}>Titel Bidang Keahlian</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.skills}/><br/><br/>
                         <Button size="large" className="button" type="primary" block
                                 style={{borderRadius: 8, backgroundColor: "#3B85FA"}}>
                             Tambahkan Bidang Keahlian
@@ -176,20 +176,20 @@ const EditBiodata = () => {
                         footer={null}
                     >
                         <h4 style={{color: "gray"}}>Nama Instansi</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.institution_name}/><br/><br/>
                         <h4 style={{color: "gray"}}>Titel</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.major}/><br/><br/>
                         <Row>
                             <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
-                                <Input style={{borderRadius: 8}}/><br/><br/></Col>
+                                <Input style={{borderRadius: 8}}  value={input.start_year}/><br/><br/></Col>
                             <Col span={11} offset={1}>
                                 <h4 style={{color: "gray"}}>Tahun Selesai</h4>
-                                <Input style={{borderRadius: 8}}/><br/><br/>
+                                <Input style={{borderRadius: 8}} value={input.end_year}/><br/><br/>
                             </Col>
                         </Row>
                         <Button size="large" className="button" type="primary" block
                                 style={{borderRadius: 8, backgroundColor: "#3B85FA"}}>
-                            Tambahkan Pengalaman Kerja
+                            Tambahkan Riwayat Pendidikan
                         </Button>
                     </Modal>
                     <Button

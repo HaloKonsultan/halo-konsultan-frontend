@@ -6,9 +6,16 @@ import {Button} from 'antd';
 import {Link} from "react-router-dom";
 import Nav from "../../layout/Header";
 import {EditOutlined} from '@ant-design/icons';
-
+import {ProfileContext} from "../../context/ProfileContext";
 
 const EditProfile = () => {
+
+    const {input, functions} = useContext(ProfileContext)
+    const {fetchData, functionEditBiodata} = functions
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
@@ -39,11 +46,11 @@ const EditProfile = () => {
                         footer={null}
                     >
                         <h4 style={{color: "gray"}}>Nama Bank</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.bank}/><br/><br/>
                         <h4 style={{color: "gray"}}>Nomor Rekening</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.card_number}/><br/><br/>
                         <h4 style={{color: "gray"}}>Nama Pemegang Rekening</h4>
-                        <Input style={{borderRadius: 8}}/><br/><br/>
+                        <Input style={{borderRadius: 8}} value={input.name}/><br/><br/>
                         <Button size="large" className="button" type="primary" block
                                 style={{borderRadius: 8, backgroundColor: "#3B85FA"}}>
                             Tambahkan Bidang Keahlian
@@ -68,11 +75,11 @@ const EditProfile = () => {
                     </Row> <br/>
 
                     <h4 style={{color: "gray"}}>Harga Jasa Diskusi</h4>
-                    <Input style={{borderRadius: 8, height: 48}} placeholder="Harga Jasa Diskusi"/>
+                    <Input style={{borderRadius: 8, height: 48}} placeholder="Harga Jasa Diskusi" value={input.chat_price}/>
                     <br/><br/>
 
                     <h4 style={{color: "gray"}}>Harga Jasa Konsultasi</h4>
-                    <Input style={{borderRadius: 8, height: 48}} placeholder="Harga Jasa Konsultasi"/>
+                    <Input style={{borderRadius: 8, height: 48}} placeholder="Harga Jasa Konsultasi" value={input.consultant_price}/>
                     <br/><br/>
 
                     <Row>

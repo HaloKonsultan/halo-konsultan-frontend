@@ -59,7 +59,7 @@ const PersonalBiodata = () => {
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Konsultasi</Text>
-                                <Text strong>Hukum</Text>
+                                <Text strong>{input.position}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Kota</Text>
@@ -72,7 +72,7 @@ const PersonalBiodata = () => {
                                         <Text strong>{input.position}</Text>
                                     </Col>
                                     <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>{input.start_year}</Text>
+                                        <Text strong>{input.start_year}{input.end_year}</Text>
                                     </Col>
                                 </Row>
 
@@ -84,13 +84,13 @@ const PersonalBiodata = () => {
                                         <Text strong>University Up and Down</Text>
                                     </Col>
                                     <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>{input.start_year}</Text>
+                                        <Text strong>{input.start_year}{input.end_year}</Text>
                                     </Col>
                                 </Row>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
-                                <Text strong>{input.skills}</Text>
+                                <Text strong>{input.skills}{input.end_year}</Text>
                             </Space>
                         </Space>
                     </Col>
