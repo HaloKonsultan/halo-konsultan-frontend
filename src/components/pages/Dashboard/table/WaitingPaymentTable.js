@@ -4,11 +4,17 @@ import {WaitingPaymentContext} from "../../../context/WaitingPaymentContext";
 
 const WaitingPaymentTable = () => {
     const {dataPayment, functions} = useContext(WaitingPaymentContext)
-    const {fetchData} = functions
+    const {fetchData, functionDetail} = functions
 
     useEffect(() => {
         fetchData()
     }, [])
+
+    const handleDetail = (event) => {
+        let idClient = event
+
+        functionDetail(idClient)
+    }
 
     const columns = [
         {
@@ -28,11 +34,19 @@ const WaitingPaymentTable = () => {
     return (
         <>
             <Table
+                onRow={(record, rowIndex) => {
+                    return {
+                        onClick: event => {
+                            handleDetail(record.id)
+                        }, // click row
+                    };
+                }}
                 style={{
                     borderRadius: 8,
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
+                rowKey={"waiting"}
                 columns={columns} dataSource={data} pagination={false}/>
         </>
     )

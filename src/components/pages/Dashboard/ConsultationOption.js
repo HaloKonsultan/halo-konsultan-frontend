@@ -11,9 +11,10 @@ const ConsultationOption = () => {
     let { Id } = useParams()
     console.log(Id)
 
-    const [ isExperienceVisible, setIsExperienceVisible ] = useState(false);
     const { dataConsultation, input, setInput, currentId, setCurrentId, functions } = useContext(ConsultationDetailContext)
     const { fetchDataById, functionSubmitDocument } = functions
+
+    const [ isExperienceVisible, setIsExperienceVisible ] = useState(false);
 
     useEffect(() => {
         if( Id !== undefined ){

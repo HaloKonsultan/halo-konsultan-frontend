@@ -10,7 +10,7 @@ export const HistoryProvider = props => {
     const [dataHistory, setDataHistory] = useState([])
     const [input, setInput] = useState({
         title: "",
-        user_name: "",
+        name: "",
         date: "",
         status: "",
         is_confirmed: ""
@@ -28,7 +28,7 @@ export const HistoryProvider = props => {
             return {
                 id: e.id,
                 title: e.title,
-                user_name: e.user_name,
+                name: e.name,
                 date: e.date,
                 status: e.status,
                 is_confirmed: e.is_confirmed
@@ -44,7 +44,7 @@ export const HistoryProvider = props => {
         setInput({
             id: data.id,
             title: data.title,
-            user_name: data.user_name,
+            name: data.name,
             date: data.date,
             status: data.status,
             is_confirmed: data.is_confirmed

@@ -32,10 +32,9 @@ export const ConsultationDetailProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchDataById = async (consultation_id) => {
-        let result = await axios.get(`http://localhost:8000/api/consultant/consultations/${consultation_id}`,
+        let result = await axios.get(`http://localhost:8000/api/consultant/consultation/${consultation_id}`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data
-        console.log(data)
         setInput({
             id: data.id,
             title: data.title,
@@ -47,11 +46,11 @@ export const ConsultationDetailProvider = props => {
             is_confirmed: data.is_confirmed,
             date: data.date,
             conference_link: data.conference_link,
-            consultations_pref_date:[{
+            consultations_pref_date: [{
                 id: data.id,
-                date:data.date
+                date: data.date
             }],
-            consultations_document:[{
+            consultations_document: [{
                 id: data.id,
                 name: data.name,
                 description: data.description,
@@ -61,77 +60,35 @@ export const ConsultationDetailProvider = props => {
         setCurrentId(data.id)
     }
 
-    const functionAccept = (idClient) => {
-        //hapus bila yang bawah di uncomment
-        // history.push(`/incoming-order/detail/accept/${idClient}`)
-
-        //uncomment bila API sudah tersedia karena harus login buat input data
-        // axios.post(`menunggu mas backend`, {
-        //         status: 1
-        //     },
-        //     { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
-        // )
-        //     .then((res) => {
-        //         let data = res.data
-        //         setDataConsultation([...dataConsultation, {
-        //             id: data.id,
-        //             title: data.title,
-        //             description: data.description,
-        //             preference: data.preference,
-        //             location: data.location,
-        //             status: data.status,
-        //             consultation_price: data.consultation_price,
-        //             is_confirmed: data.is_confirmed,
-        //             date: data.date,
-        //             conference_link: data.conference_link,
-        //             consultations_pref_date:[{
-        //                 id: data.id,
-        //                 date:data.date
-        //             }],
-        //             consultations_document:[{
-        //                 id: data.id,
-        //                 name: data.name,
-        //                 description: data.description,
-        //                 file: data.file
-        //             }]
-        //         }])
-        //         history.push(`/incoming-order/detail/accept/${idClient}`)
-        //     })
-    }
-
-    const functionSubmit = () => {
-        axios.post(`menunggu mas backend`, {
-                id: input.id,
-                consultations_document : [{
-                    name: input.name,
-                    description: input.description
-                }]
+    const functionAccept = (consultation_id) => {
+        axios.patch(`http://localhost:8000/api/consultant/consultation/${consultation_id}/accept`, {
+                confirmed: 1,
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
                 let data = res.data
+                console.log(data)
+                setDataConsultation([...dataConsultation, {
+                    is_confirmed: data.is_confirmed,
+                }])
+                history.push(`/incoming-order/detail/accept/${consultation_id}`)
+            })
+    }
+
+    const functionSubmit = (consultation_id) => {
+        console.log(input.conference_link)
+        axios.patch(`http://localhost:8000/api/consultant/consultation/${consultation_id}/send-link`, {
+                link: input.conference_link
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                let data = res.data
+                console.log('kauwdhiauwd' + data)
                 setDataConsultation([...dataConsultation, {
                     id: data.id,
-                    title: data.title,
-                    description: data.description,
-                    preference: data.preference,
-                    location: data.location,
-                    status: data.status,
-                    consultation_price: data.consultation_price,
-                    is_confirmed: data.is_confirmed,
-                    date: data.date,
-                    conference_link: data.conference_link,
-                    consultations_pref_date:[{
-                        id: data.id,
-                        date:data.date
-                    }],
-                    consultations_document:[{
-                        id: data.id,
-                        name: data.name,
-                        description: data.description,
-                        file: data.file
-                    }]
+                    conference_link: data.conference_link
                 }])
                 history.push("/")
             })

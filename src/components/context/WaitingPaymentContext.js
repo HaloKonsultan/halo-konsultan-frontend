@@ -34,8 +34,13 @@ export const WaitingPaymentProvider = props => {
         }))
     }
 
+    const functionDetail = (consultation_id) => {
+        history.push(`/incoming-order/detail/accept/${consultation_id}`)
+    }
+
     const functions = {
-        fetchData
+        fetchData,
+        functionDetail
     }
 
     return (
