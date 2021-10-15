@@ -1,3 +1,24 @@
+Cara menjalankan front-end
+- clone HaloKonsultan-Frontend
+- clone HaloKonsultan-Backend
+- npm start
+- pastikan backend telah berjalan
+
+Cara menjalankan Backend
+- clone Halokonsultan-Backend
+- composer install
+- composer update
+- buat .env file di HaloKonsultan-backend, yang isinya diambil dari .env.example
+- nyalakan xampp untuk apache dan MySQL
+- buka phpmyadmin dan buat database baru
+- ganti DB_DATABASE(line 12) dengan nama database yang dibuat di phpmyadmin
+- php artisan jwt:secret
+- php artisan migrate:fresh --seed
+- untuk menjalankan backend, gunakan perintah "php artisan serve"
+
+Tambahan :
+- untuk login dapat menggunakan email yang ada di table consultant yang telah di generate di database phpmyadmin dan password "password"
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
