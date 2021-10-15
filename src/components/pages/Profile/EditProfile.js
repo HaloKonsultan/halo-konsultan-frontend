@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Row, Col} from 'antd';
 import {Card, Modal} from 'antd';
 import {Input} from 'antd';
 import {Button} from 'antd';
 import {Link} from "react-router-dom";
 import Nav from "../../layout/Header";
-import {EditOutlined} from '@ant-design/icons';
 import {ProfileContext} from "../../context/ProfileContext";
 
 const EditProfile = () => {

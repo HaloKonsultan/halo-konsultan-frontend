@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router";
 import {Card} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
+import {ProfileContext} from "../../context/ProfileContext";
 
 const {Title, Text, Link} = Typography;
 
