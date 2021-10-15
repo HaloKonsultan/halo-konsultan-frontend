@@ -1,6 +1,6 @@
 Cara menjalankan front-end
 - clone HaloKonsultan-Frontend
-- clone HaloKonsultan-Backend
+- clone HaloKonsultan-Backend https://github.com/HaloKonsultan/halo-konsultan-backend
 - npm start
 - pastikan backend telah berjalan
 
