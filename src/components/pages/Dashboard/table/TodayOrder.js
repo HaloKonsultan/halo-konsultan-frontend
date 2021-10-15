@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import {Card} from 'antd';
+import {Card, Space} from 'antd';
 import Title from "antd/es/typography/Title";
 import {TodayOrderContext} from "../../../context/TodayOrderContext";
 
@@ -8,16 +8,13 @@ const TodayOrder = () => {
     const {dataTodayOrder, functions} = useContext(TodayOrderContext)
     const {fetchData, functionDetail} = functions
     const today = new Date()
-    // const today = "1231"
 
     useEffect(() => {
         fetchData()
     }, [])
 
     const handleDetail = (event) => {
-        let idClient = event
-
-        functionDetail(idClient)
+        functionDetail(event)
     }
 
     return (
@@ -35,27 +32,33 @@ const TodayOrder = () => {
                 }
             >
                 <>
-                    {dataTodayOrder !== null && (
-                        <>
-                            {dataTodayOrder.map((e, index) => {
-                                console.log(e)
-                                return (
-                                    <>
-                                        <div onClick={handleDetail(e.id)}>
+                    {
+                        dataTodayOrder !== null && (
+                            <>
+                                {dataTodayOrder.map((e, index) => {
+                                    return (
+                                        <>
                                             <Card
-                                                style={{width: 407, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                                onClick={() => {
+                                                    handleDetail(e.id)
+                                                }}
+                                                style={{
+                                                    width: 407,
+                                                    borderRadius: 8,
+                                                    boxShadow: "0 0 0 1px #CED4DA"
+                                                }}
                                                 type="inner"
                                             >
                                                 <Meta
-                                                    title={<Title style={{margin: 0}} level={5}>{e.title}</Title>}
-                                                    description={e.description}/>
+                                                    title={<Title style={{margin: 0}}
+                                                                  level={5}>{e.title}</Title>}
+                                                    description={e.date}/>
                                             </Card>
-                                        </div>
-                                    </>
-                                )
-                            })}
-                        </>
-                    )}
+                                        </>
+                                    )
+                                })}
+                            </>
+                        )}
                 </>
             </Card>
         </>

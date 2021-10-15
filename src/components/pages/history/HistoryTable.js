@@ -24,8 +24,8 @@ const HistoryTable = () => {
         },
         {
             title: 'Nama Klien',
-            dataIndex: 'user_name',
-            key: 'user_name',
+            dataIndex: 'name',
+            key: 'name',
         },
         {
             title: 'Tanggal Konsultasi',
@@ -37,19 +37,13 @@ const HistoryTable = () => {
             key: 'status',
             dataIndex: 'status',
             render: (status, is_confirmed) => {
-                let color
-                let fontColor
-                if (status === 'done' && is_confirmed === true) {
-                    color = '#D8E7FE'
-                    fontColor = '#3B85FA'
-                } else if (status === 'done' && is_confirmed === false) {
-                    color = '#D8E7FE'
-                    fontColor = '#3B85FA'
-                }
+                let color = status === 'done' && is_confirmed === true ? '#F63131' : '#3B85FA';
+                let fontColor = status === 'done' && is_confirmed === true ? '#FDD6D6' : '#D8E7FE';
+                let consultationStatus = status === 'done' ? 'Selesai' : 'Ditolak'
                 return (
                     <>
-                        <Tag style={{borderRadius: 20, color: {fontColor}, fontWeight: "bold"}} color={color}>
-                            {status}
+                        <Tag style={{borderRadius: 20, fontWeight: "bold"}} color={color}>
+                            {consultationStatus}
                         </Tag>
                     </>
                 )

@@ -29,7 +29,7 @@ const ActiveOrderTable = () => {
             align: 'right',
             render: (conference_link) => {
                 console.log(conference_link)
-                if (conference_link !== null){
+                if (conference_link === ""){
                     return (
                         <>
                             <Tag style={{borderRadius: 20, color: "#F63131", fontWeight: "bold"}} color='#FDD6D6'>
@@ -45,7 +45,6 @@ const ActiveOrderTable = () => {
             key: 'date',
             dataIndex: 'date',
         },
-
     ];
 
     const data = dataOrder;
@@ -65,6 +64,7 @@ const ActiveOrderTable = () => {
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
+                rowKey={"active"}
                 columns={columns} dataSource={data} pagination={false}/>
         </>
     )

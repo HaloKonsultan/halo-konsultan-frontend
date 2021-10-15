@@ -18,7 +18,7 @@ const AcceptDeclineCard = () => {
         if( Id !== undefined ){
             fetchDataById(Id)
         }
-    },[Id, fetchDataById])
+    },[])
 
     function handleDecline(event) {
         Modal.confirm({

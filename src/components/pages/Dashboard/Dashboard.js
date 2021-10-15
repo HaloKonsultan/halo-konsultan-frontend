@@ -8,6 +8,7 @@ import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie";
+import ProfileNotifications from "./ProfileNotifications";
 
 function Dashboard() {
     let page = 'Dashboard';
@@ -18,6 +19,9 @@ function Dashboard() {
             <Nav/>
             <Row>
                 <Col span={14}>
+                    <div className="incoming-order-table">
+                        <ProfileNotifications/>
+                    </div>
                     <div className="incoming-order-table">
                         <PageHeader
                             style={{backgroundColor: "transparent", padding: 0}}

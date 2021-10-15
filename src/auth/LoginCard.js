@@ -9,6 +9,7 @@ import {UserContext} from "../components/context/UserContext";
 
 const LoginCard = () => {
     let history = useHistory()
+    let showPassword = document.getElementById("password");
 
     const {setLoginStatus} = useContext(UserContext)
 
@@ -43,8 +44,14 @@ const LoginCard = () => {
         })
     }
 
-    function onChange(e) {
+    function handleShowPassword(e) {
         console.log(`checked = ${e.target.checked}`);
+        if ( e.target.checked === true ) {
+            showPassword.type = "text";
+        } else {
+            showPassword.type = "password";
+        }
+        console.log(showPassword)
     }
 
     return (
@@ -68,9 +75,10 @@ const LoginCard = () => {
                         <input type="password"
                                placeholder="Password"
                                className="input-password"
+                               id="password"
                                name="password" value={input.password}
                                onChange={handleChange} required/>
-                        <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
+                        <Checkbox onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
 
                         <Button style={{
                             borderRadius: 8,
@@ -81,7 +89,6 @@ const LoginCard = () => {
                         }} size="large" className="button" type="primary" htmlType="submit" block>
                             Masuk
                         </Button>
-
                         <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p></Link>
                     </form>
                 </Card>

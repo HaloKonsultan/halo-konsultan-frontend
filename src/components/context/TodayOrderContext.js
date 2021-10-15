@@ -19,10 +19,9 @@ export const TodayOrderProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/status/today`,
+            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/today`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
-        console.log(data)
         setDataTodayOrder(data.map((e) => {
             return {
                 id: e.id,
@@ -35,7 +34,7 @@ export const TodayOrderProvider = props => {
     }
 
     const functionDetail = (idClient) => {
-        history.push(`/incoming-order/detail/${idClient}`)
+        history.push(`/order/detail/${idClient}`)
     }
 
     const functions = {
