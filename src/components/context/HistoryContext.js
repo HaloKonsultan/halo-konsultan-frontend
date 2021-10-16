@@ -12,14 +12,15 @@ export const HistoryProvider = props => {
         title: "",
         name: "",
         date: "",
-        status: ""
+        status: "",
+        is_confirmed: ""
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/history`,
+            `http://localhost:8000/api/consultants/${Cookies.get('id')}/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
@@ -29,22 +30,24 @@ export const HistoryProvider = props => {
                 title: e.title,
                 name: e.name,
                 date: e.date,
-                status: e.status
+                status: e.status,
+                is_confirmed: e.is_confirmed
             }
         }))
     }
 
     const fetchDataById = async (id) => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/history`,
+            `http://localhost:8000/api/consultants/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data
         setInput({
             id: data.id,
             title: data.title,
-            user_name: data.user_name,
+            name: data.name,
             date: data.date,
-            status: data.status
+            status: data.status,
+            is_confirmed: data.is_confirmed
         })
         setCurrentId(data.id)
     }

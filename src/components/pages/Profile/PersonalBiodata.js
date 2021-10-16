@@ -23,7 +23,7 @@ const PersonalBiodata = () => {
 
     return (
         <>
-            <Card style={{borderRadius: 8, width: 528}} title={
+            <Card style={{boxShadow: "0 0 0 1px #CED4DA", borderRadius: 8, width: 528}} title={
                 <>
                     <Row>
                         <Col span={17}>

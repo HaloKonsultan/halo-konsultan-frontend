@@ -10,15 +10,16 @@ export const WaitingPaymentProvider = props => {
     const [dataPayment, setDataPayment] = useState([])
     const [input, setInput] = useState({
         title: "",
-        name: "",
-        date: ""
+        date: "",
+        time: "",
+        status: ""
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultations/user/${Cookies.get('id')}/waiting`,
+            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/waiting`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
@@ -26,14 +27,20 @@ export const WaitingPaymentProvider = props => {
             return {
                 id: e.id,
                 title: e.title,
-                name: e.name,
-                date: e.date
+                date: e.date,
+                time: e.time,
+                status: e.status
             }
         }))
     }
 
+    const functionDetail = (consultation_id) => {
+        history.push(`/incoming-order/detail/accept/${consultation_id}`)
+    }
+
     const functions = {
-        fetchData
+        fetchData,
+        functionDetail
     }
 
     return (

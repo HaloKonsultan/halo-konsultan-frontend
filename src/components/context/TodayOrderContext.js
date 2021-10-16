@@ -3,11 +3,11 @@ import axios from "axios";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 
-export const IncomingOrderContext = createContext()
+export const TodayOrderContext = createContext()
 
-export const IncomingOrderProvider = props => {
+export const TodayOrderProvider = props => {
     let history = useHistory()
-    const [dataIncomingOrder, setDataIncomingOrder] = useState([])
+    const [dataTodayOrder, setDataTodayOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
         date: "",
@@ -19,11 +19,10 @@ export const IncomingOrderProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/incoming`,
+            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/today`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
-        console.log(data)
-        setDataIncomingOrder(data.map((e) => {
+        setDataTodayOrder(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
@@ -35,7 +34,7 @@ export const IncomingOrderProvider = props => {
     }
 
     const functionDetail = (idClient) => {
-        history.push(`/incoming-order/detail/${idClient}`)
+        history.push(`/order/detail/${idClient}`)
     }
 
     const functions = {
@@ -44,9 +43,9 @@ export const IncomingOrderProvider = props => {
     }
 
     return (
-        <IncomingOrderContext.Provider value = {{
-            dataIncomingOrder,
-            setDataIncomingOrder,
+        <TodayOrderContext.Provider value = {{
+            dataTodayOrder,
+            setDataTodayOrder,
             input,
             setInput,
             currentId,
@@ -56,7 +55,7 @@ export const IncomingOrderProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </IncomingOrderContext.Provider>
+        </TodayOrderContext.Provider>
     )
 
 }

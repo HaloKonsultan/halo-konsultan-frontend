@@ -9,6 +9,7 @@ import {UserContext} from "../components/context/UserContext";
 
 const LoginCard = () => {
     let history = useHistory()
+    let showPassword = document.getElementById("password");
 
     const {setLoginStatus} = useContext(UserContext)
 
@@ -28,21 +29,29 @@ const LoginCard = () => {
         event.preventDefault()
 
         console.log(input)
-        axios.post(`http://localhost:8000/api/consultant/login`, {
+        axios.post(`http://localhost:8000/api/consultants/login`, {
             email: input.email,
             password: input.password
         }).then((res) => {
             let token = res.data.access_token
             let id = res.data.data.id
+            let location = res.data.data.location
 
             Cookies.set('token', token, {expires: 1})
             Cookies.set('id', id, {expires: 1})
+            Cookies.set('location', location, {expires: 1})
             history.push('/')
         })
     }
 
-    function onChange(e) {
+    function handleShowPassword(e) {
         console.log(`checked = ${e.target.checked}`);
+        if ( e.target.checked === true ) {
+            showPassword.type = "text";
+        } else {
+            showPassword.type = "password";
+        }
+        console.log(showPassword)
     }
 
     return (
@@ -66,9 +75,10 @@ const LoginCard = () => {
                         <input type="password"
                                placeholder="Password"
                                className="input-password"
+                               id="password"
                                name="password" value={input.password}
                                onChange={handleChange} required/>
-                        <Checkbox onChange={onChange}>Tunjukkan Password</Checkbox>
+                        <Checkbox onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
 
                         <Button style={{
                             borderRadius: 8,
@@ -79,7 +89,6 @@ const LoginCard = () => {
                         }} size="large" className="button" type="primary" htmlType="submit" block>
                             Masuk
                         </Button>
-
                         <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p></Link>
                     </form>
                 </Card>

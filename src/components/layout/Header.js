@@ -1,20 +1,21 @@
-import React, { useContext } from "react"
-import { Link, useHistory } from "react-router-dom"
+import React, {useContext} from "react"
+import {useHistory} from "react-router-dom"
 import {Button, Layout, PageHeader} from 'antd';
 import Cookies from "js-cookie";
 import {UserContext} from "../context/UserContext";
 import {LogoutOutlined} from '@ant-design/icons';
-const { Header, Content, Footer } = Layout;
+
+const {Header, Content, Footer} = Layout;
 
 const Nav = () => {
     let history = useHistory()
-    const { loginStatus, setLoginStatus } = useContext(UserContext)
+    const {loginStatus, setLoginStatus} = useContext(UserContext)
 
     const handleLogout = () => {
         setLoginStatus(false)
         Cookies.remove('token')
         Cookies.remove('id')
-        Cookies.remove('email')
+        Cookies.remove('location')
         history.push('/')
     }
 
@@ -28,11 +29,11 @@ const Nav = () => {
                         title={Cookies.get('page')}
                         extra={[
                             <Button key="1" size="large" type="text" onClick={handleLogout} danger>
-                                <LogoutOutlined />Keluar
+                                <LogoutOutlined/>Keluar
                             </Button>,
                         ]}
                     />
-                    
+
                 }
             </Layout>
         </>

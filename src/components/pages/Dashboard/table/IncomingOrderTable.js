@@ -7,9 +7,7 @@ const IncomingOrderTable = () => {
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
-
         fetchData()
-
     }, [])
 
     const handleDetail = (event) => {
@@ -52,6 +50,7 @@ const IncomingOrderTable = () => {
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
+                rowKey={"incoming"}
                 columns={columns} dataSource={data} pagination={false}/>
         </>
     )
