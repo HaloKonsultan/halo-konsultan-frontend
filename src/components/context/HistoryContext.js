@@ -20,7 +20,7 @@ export const HistoryProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/${Cookies.get('id')}/history`,
+            `http://localhost:8000/api/consultants/${Cookies.get('id')}/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
@@ -38,7 +38,7 @@ export const HistoryProvider = props => {
 
     const fetchDataById = async (id) => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/history`,
+            `http://localhost:8000/api/consultants/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data
         setInput({

@@ -19,7 +19,7 @@ export const OrderProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/active`,
+            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/active`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)

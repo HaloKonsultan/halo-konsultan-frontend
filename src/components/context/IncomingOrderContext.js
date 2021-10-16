@@ -19,7 +19,7 @@ export const IncomingOrderProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/incoming`,
+            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/incoming`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)

@@ -31,6 +31,7 @@ import History from "../pages/history/History";
 import {WaitingPaymentProvider} from "../context/WaitingPaymentContext";
 import {TodayOrderProvider} from "../context/TodayOrderContext";
 import {ProfileProvider} from "../context/ProfileContext";
+import {AfterBookingProvider} from "../context/AfterBookingContext";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -53,6 +54,7 @@ const Routes = () => {
                     <WaitingPaymentProvider>
                     <TodayOrderProvider>
                     <ProfileProvider>
+                    <AfterBookingProvider>
                         <Switch>
                             <LoginRoute path="/" exact>
                                 <LayoutComponent content={<Dashboard/>}/>
@@ -113,6 +115,7 @@ const Routes = () => {
                                 <LayoutComponent content={<EditProfile/>}/>
                             </LoginRoute>
                         </Switch>
+                    </AfterBookingProvider>
                     </ProfileProvider>
                     </TodayOrderProvider>
                     </WaitingPaymentProvider>
