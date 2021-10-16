@@ -28,7 +28,7 @@ const RegisterCard = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(input)
-        axios.post(`http://localhost:8000/api/consultant/register`, {
+        axios.post(`http://localhost:8000/api/consultants/register`, {
             name: input.name,
             email: input.email,
             password: input.password

@@ -40,64 +40,30 @@ const ConsultationActive = () => {
             <div className="dashboard-container">
                 <Card title={<Title style={{color: "black", margin: 0}} level={4}>Dokumen Klien</Title>}
                       style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
-                    <Row>
-                        <Col span={12}>
-                            <p>
-                                <FileTextOutlined style={{fontSize: '20px', paddingRight: 16}}/>
-                                Nama Dokumen</p>
-                        </Col>
-                        <Col span={12}>
-                            <Link
-                                style={{display: "flex", float: "right"}}
-                                href="">
-                                Download</Link>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={12}>
-                            <p>
-                                <FileTextOutlined style={{fontSize: '20px', paddingRight: 16}}/>
-                                Nama Dokumen</p>
-                        </Col>
-                        <Col span={12}>
-                            <Link
-                                style={{display: "flex", float: "right"}}
-                                href="">
-                                Download</Link>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={12}>
-                            <p>
-                                <FileTextOutlined style={{fontSize: '20px', paddingRight: 16}}/>
-                                Nama Dokumen</p>
-                        </Col>
-                        <Col span={12}>
-                            <Link
-                                style={{display: "flex", float: "right"}}
-                                href="">
-                                Download</Link>
-                        </Col>
-                    </Row>
-
-                    {/*menggunakan API nanti uncomment ini*/}
-                    {/*{dataConsultation.map((e) => {*/}
-                    {/*     return (*/}
-                    {/*         <Row>*/}
-                    {/*             <Col span={12}>*/}
-                    {/*                 <p>*/}
-                    {/*                     <FileTextOutlined style={{ fontSize: '20px', paddingRight: 16 }} />*/}
-                    {/*                     {e.consultations_document.name}</p>*/}
-                    {/*             </Col>*/}
-                    {/*             <Col span={12}>*/}
-                    {/*                 <Link*/}
-                    {/*                     style={{ display: "flex", float: "right" }}*/}
-                    {/*                     href={e.consultations_document.file} >*/}
-                    {/*                     Download</Link>*/}
-                    {/*             </Col>*/}
-                    {/*         </Row>*/}
-                    {/*     )*/}
-                    {/*})}*/}
+                    {
+                        input.consultation_document !== null && (
+                            <>
+                                {input.consultation_document.map((e, index) => {
+                                    return (
+                                        <>
+                                            <Row>
+                                                <Col span={12}>
+                                                    <p>
+                                                        <FileTextOutlined style={{fontSize: '20px', paddingRight: 16}}/>
+                                                        {e.name}</p>
+                                                </Col>
+                                                <Col span={12}>
+                                                    <Link
+                                                        style={{display: "flex", float: "right"}}
+                                                        href={e.file}>
+                                                        Download</Link>
+                                                </Col>
+                                            </Row>
+                                        </>
+                                    )
+                                })}
+                            </>
+                        )}
                 </Card>
                 <br/>
                 <form onSubmit={handleSubmit}>

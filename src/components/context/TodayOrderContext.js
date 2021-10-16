@@ -19,7 +19,7 @@ export const TodayOrderProvider = props => {
 
     const fetchData = async () => {
         let result = await axios.get(
-            `http://localhost:8000/api/consultant/consultation/user/${Cookies.get('id')}/today`,
+            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/today`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         setDataTodayOrder(data.map((e) => {

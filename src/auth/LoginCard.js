@@ -29,7 +29,7 @@ const LoginCard = () => {
         event.preventDefault()
 
         console.log(input)
-        axios.post(`http://localhost:8000/api/consultant/login`, {
+        axios.post(`http://localhost:8000/api/consultants/login`, {
             email: input.email,
             password: input.password
         }).then((res) => {

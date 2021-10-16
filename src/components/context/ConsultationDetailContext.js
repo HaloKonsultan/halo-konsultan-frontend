@@ -10,19 +10,20 @@ export const ConsultationDetailProvider = props => {
     const [dataConsultation, setDataConsultation] = useState([])
     const [input, setInput] = useState({
         title: "",
-        consultant_id:"",
         description: "",
         preference: "",
         location: "",
-        status:"",
-        consultation_price:"",
-        is_confirmed:"",
-        date:"",
-        conference_link:"",
-        consultations_pref_date:[{
-            date:""
+        status: "",
+        consultation_price: "",
+        is_confirmed: "",
+        date: "",
+        conference_link: "",
+        consultation_preference_date: [{
+            id: "",
+            date: ""
         }],
-        consultations_document:[{
+        consultation_document: [{
+            id: "",
             name: "",
             description: "",
             file: ""
@@ -32,7 +33,7 @@ export const ConsultationDetailProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchDataById = async (consultation_id) => {
-        let result = await axios.get(`http://localhost:8000/api/consultant/consultation/${consultation_id}`,
+        let result = await axios.get(`http://localhost:8000/api/consultants/consultations/${consultation_id}`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data
         setInput({
@@ -46,22 +47,23 @@ export const ConsultationDetailProvider = props => {
             is_confirmed: data.is_confirmed,
             date: data.date,
             conference_link: data.conference_link,
-            consultations_pref_date: [{
-                id: data.id,
-                date: data.date
-            }],
-            consultations_document: [{
-                id: data.id,
-                name: data.name,
-                description: data.description,
-                file: data.file
-            }]
+            consultation_preference_date: data.consultation_preference_date.map(key => {
+                return {
+                    id: key.id}
+            }),
+            consultation_document: data.consultation_document.map(key => {
+                return {
+                    id: key.id,
+                    name: key.name,
+                    file: key.file}
+            })
         })
+        console.log("tes cetak " + JSON.stringify(input))
         setCurrentId(data.id)
     }
 
     const functionAccept = (consultation_id) => {
-        axios.patch(`http://localhost:8000/api/consultant/consultation/${consultation_id}/accept`, {
+        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/accept`, {
                 confirmed: 1,
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
@@ -78,7 +80,7 @@ export const ConsultationDetailProvider = props => {
 
     const functionSubmit = (consultation_id) => {
         console.log(input.conference_link)
-        axios.patch(`http://localhost:8000/api/consultant/consultation/${consultation_id}/send-link`, {
+        axios.patch(`http://localhost:8000/api/consultants/consultation/${consultation_id}/send-link`, {
                 link: input.conference_link
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
