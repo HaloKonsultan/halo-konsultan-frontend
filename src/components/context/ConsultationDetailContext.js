@@ -80,7 +80,7 @@ export const ConsultationDetailProvider = props => {
 
     const functionSubmit = (consultation_id) => {
         console.log(input.conference_link)
-        axios.patch(`http://localhost:8000/api/consultants/consultation/${consultation_id}/send-link`, {
+        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/send-link`, {
                 link: input.conference_link
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}

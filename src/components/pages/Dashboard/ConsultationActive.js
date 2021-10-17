@@ -32,7 +32,7 @@ const ConsultationActive = () => {
         event.preventDefault()
         console.log(input)
 
-        // functionSubmit(Id)
+        functionSubmit(Id)
     };
 
     return (
@@ -67,11 +67,13 @@ const ConsultationActive = () => {
                 </Card>
                 <br/>
                 <form onSubmit={handleSubmit}>
-                    <Space direction="vertical">
-                        <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
-                        <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
-                               name="conference_link"
-                               value={input.conference_link} onChange={handleChange}/>
+                    <Space size={24} direction="vertical">
+                        <Space size={8} direction="vertical">
+                            <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
+                            <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                   name="conference_link"
+                                   value={input.conference_link} onChange={handleChange}/>
+                        </Space>
                         <Button style={{borderRadius: 8}} value={input.id} type="primary" htmlType="submit">
                             Kirim Link ke Klien<ArrowRightOutlined/>
                         </Button>

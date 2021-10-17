@@ -32,6 +32,7 @@ import {WaitingPaymentProvider} from "../context/WaitingPaymentContext";
 import {TodayOrderProvider} from "../context/TodayOrderContext";
 import {ProfileProvider} from "../context/ProfileContext";
 import {AfterBookingProvider} from "../context/AfterBookingContext";
+import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -89,6 +90,9 @@ const Routes = () => {
                             </LoginRoute>
                             <LoginRoute path="/order/detail/:Id" exact>
                                 <LayoutComponent content={<ActiveConsultationDetail/>}/>
+                            </LoginRoute>
+                            <LoginRoute path="/success" exact>
+                                <LayoutComponent content={<CompleteSuccess/>}/>
                             </LoginRoute>
 
                             {/*Menu*/}

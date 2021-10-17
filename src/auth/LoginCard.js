@@ -6,6 +6,7 @@ import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import {UserContext} from "../components/context/UserContext";
+import {message} from 'antd';
 
 const LoginCard = () => {
     let history = useHistory()
@@ -27,21 +28,26 @@ const LoginCard = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
         console.log(input)
-        axios.post(`http://localhost:8000/api/consultants/login`, {
-            email: input.email,
-            password: input.password
-        }).then((res) => {
-            let token = res.data.access_token
-            let id = res.data.data.id
-            let location = res.data.data.location
 
-            Cookies.set('token', token, {expires: 1})
-            Cookies.set('id', id, {expires: 1})
-            Cookies.set('location', location, {expires: 1})
-            history.push('/')
-        })
+        try {
+            axios.post(`http://localhost:8000/api/consultants/login`, {
+                email: input.email,
+                password: input.password
+            }).then((res) => {
+                let token = res.data.access_token
+                let id = res.data.data.id
+                let location = res.data.data.location
+
+                Cookies.set('token', token, {expires: 1})
+                Cookies.set('id', id, {expires: 1})
+                Cookies.set('location', location, {expires: 1})
+                history.push('/')
+            })
+        }
+        catch(err) {
+            message.error('Email atau password salah', 3);
+        }
     }
 
     function handleShowPassword(e) {
@@ -62,7 +68,6 @@ const LoginCard = () => {
                         <br/>
                         <img className="logo1" src={Logo}/>
                         <br/><br/>
-
                         <p className="label">Masukkan Email Anda</p>
                         <input type="text"
                                placeholder="Email"

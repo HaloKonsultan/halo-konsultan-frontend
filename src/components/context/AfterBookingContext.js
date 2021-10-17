@@ -14,35 +14,51 @@ export const AfterBookingProvider = props => {
         date: [],
         document: []
     })
+    const [prefDate, setPrefDate] = useState({
+        date: []
+    })
+    const [prefTime, setPrefTime] = useState({
+        time: []
+    })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const functionSubmit = (consultation_id) => {
-        console.log(input.conference_link)
-        axios.patch(`http://localhost:8000/api/consultants/consultation/${consultation_id}/send-link`, {
-                link: input.conference_link
+        console.log(input)
+        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/after-book`, {
+                preference: input.preference,
+                price: input.price,
+                date: input.date,
+                document: input.document
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
                 let data = res.data
-                console.log('kauwdhiauwd' + data)
+                console.log(data)
                 setDataAfterBooking([...dataAfterBooking, {
                     id: data.id,
-                    conference_link: data.conference_link
+                    preference: data.preference,
+                    consultation_price: data.price,
+                    consultation_preference_date: data.date,
+                    consultation_document: data.document
                 }])
-                history.push("/")
+                history.push("/success")
             })
     }
 
     const functions = {
-        functionSubmit,
+        functionSubmit
     }
 
     return (
         <AfterBookingContext.Provider value = {{
             dataAfterBooking,
             setDataAfterBooking,
+            prefDate,
+            setPrefDate,
+            prefTime,
+            setPrefTime,
             input,
             setInput,
             currentId,
