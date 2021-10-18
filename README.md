@@ -1,3 +1,46 @@
+WEBSITE - CONSULTANT
+
+Fitur Sprint#1
+
+login 
+validasi email dan password (tidak kosong) 
+jika sukses, redirect ke beranda 
+return user object, simpan ke global state 
+
+register
+validasi nama lengkap, email, password (tidak kosong, format email sesuai)
+jika email sudah terdaftar, tampilkan pesan error email sudah terdaftar
+jika sukses, redirect ke beranda, tampilkan pesan lengkapi profil 
+jika gagal, tampilkan pesan kesalahan 
+
+beranda
+get data konsultasi yang masuk 
+get data konsultasi aktif 
+get data konsultasi menunggu pembayaran 
+get data konsultasi hari ini 
+ketika lihat semua diklik, masuk ke list konsultasi (sesuai status) 
+ketika data konsultasi diklik, masuk detail konsultasi 
+
+list konsultasi
+get data list konsultasi sesuai status 
+pagination 10 data/page 
+
+riwayat
+get data list riwayat konsultasi (selesai || ditolak) 
+paginasi limit 10 data/page 
+ketika data diklik, masuk ke detail konsultasi
+
+konsultasi belum terkonfirmasi
+get data detail konsultasi 
+handle konfirmasi konsultasi 
+handle pembatalan konsultasi 
+validasi preferensi, jadwal, dan dokumen yang dibutuhkan (tidak kosong) 
+
+konsultasi setelah dikonfirmasi 
+get data detail konsultasi (deskripsi, dokumen, jadwal, lokasi) 
+insert link conference 
+handle download dokumen 
+
 Cara menjalankan front-end
 - clone HaloKonsultan-Frontend
 - clone HaloKonsultan-Backend https://github.com/HaloKonsultan/halo-konsultan-backend
