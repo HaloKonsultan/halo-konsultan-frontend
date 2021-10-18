@@ -3,9 +3,9 @@ WEBSITE - CONSULTANT
 Fitur Sprint#1
 
 login 
-validasi email dan password (tidak kosong) 
-jika sukses, redirect ke beranda 
-return user object, simpan ke global state 
+- validasi email dan password (tidak kosong) 
+- jika sukses, redirect ke beranda 
+- return user object, simpan ke global state 
 
 register
 validasi nama lengkap, email, password (tidak kosong, format email sesuai)
