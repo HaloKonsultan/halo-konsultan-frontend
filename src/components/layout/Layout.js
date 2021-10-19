@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 import "../../assets/css/layout.css"
 import Logo from "../../assets/img/logo.png";
 import {MailOutlined, HomeOutlined, UserOutlined, HistoryOutlined} from '@ant-design/icons';
+import Nav from "./Header";
 
 const {SubMenu} = Menu;
 const {Sider, Content} = Layout;

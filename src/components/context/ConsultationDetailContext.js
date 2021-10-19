@@ -78,8 +78,23 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
+    const functionDecline = (consultation_id) => {
+        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/decline`, {
+                confirmed: 0,
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                let data = res.data
+                console.log(data)
+                setDataConsultation([...dataConsultation, {
+                    is_confirmed: data.is_confirmed,
+                }])
+                history.push(`/history`)
+            })
+    }
+
     const functionSubmit = (consultation_id) => {
-        console.log(input.conference_link)
         axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/send-link`, {
                 link: input.conference_link
             },
@@ -87,7 +102,6 @@ export const ConsultationDetailProvider = props => {
         )
             .then((res) => {
                 let data = res.data
-                console.log('kauwdhiauwd' + data)
                 setDataConsultation([...dataConsultation, {
                     id: data.id,
                     conference_link: data.conference_link
@@ -96,40 +110,13 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
-    const functionSubmitDocument = () => {
-        axios.post(`menunggu mas backend`, {
-                id: input.id,
-                consultations_document : [{
-                    name: input.name,
-                    description: input.description
-                }]
-        },
+    const functionUpdateStatus = (consultation_id) => {
+        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/end`, {
+            },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
-                let data = res.data
-                setDataConsultation([...dataConsultation, {
-                    id: data.id,
-                    title: data.title,
-                    description: data.description,
-                    preference: data.preference,
-                    location: data.location,
-                    status: data.status,
-                    consultation_price: data.consultation_price,
-                    is_confirmed: data.is_confirmed,
-                    date: data.date,
-                    conference_link: data.conference_link,
-                    consultations_pref_date:[{
-                        id: data.id,
-                        date:data.date
-                    }],
-                    consultations_document:[{
-                        id: data.id,
-                        name: data.name,
-                        description: data.description,
-                        file: data.file
-                    }]
-                }])
+                history.push("/")
             })
     }
 
@@ -137,7 +124,8 @@ export const ConsultationDetailProvider = props => {
         fetchDataById,
         functionAccept,
         functionSubmit,
-        functionSubmitDocument
+        functionDecline,
+        functionUpdateStatus
     }
 
     return (

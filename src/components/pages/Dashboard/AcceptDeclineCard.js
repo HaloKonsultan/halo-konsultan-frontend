@@ -12,7 +12,7 @@ const AcceptDeclineCard = () => {
     console.log(Id)
 
     const { input, setInput, currentId, setCurrentId, functions } = useContext(ConsultationDetailContext)
-    const { fetchDataById, functionAccept } = functions
+    const { fetchDataById, functionAccept, functionDecline } = functions
 
     useEffect(() => {
         if( Id !== undefined ){
@@ -25,6 +25,9 @@ const AcceptDeclineCard = () => {
             title: 'Apakah Anda yakin menolak permintaan Konsultasi ini ?',
             okText: 'Batalkan',
             cancelText: 'Tolak Permintaan',
+            onCancel() {
+                functionDecline(Id);
+            },
         });
     }
 

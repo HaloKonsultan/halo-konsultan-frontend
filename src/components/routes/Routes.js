@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
+    useLocation
 } from "react-router-dom"
 import Cookies from 'js-cookie';
 import {Layout} from 'antd';
@@ -11,6 +12,13 @@ import Login from "../../auth/Login";
 import Register from "../../auth/Register";
 import {UserProvider} from "../context/UserContext";
 import {IncomingOrderProvider} from "../context/IncomingOrderContext"
+import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
+import {OrderProvider} from "../context/ActiveOrderContext";
+import {HistoryProvider} from "../context/HistoryContext";
+import {WaitingPaymentProvider} from "../context/WaitingPaymentContext";
+import {TodayOrderProvider} from "../context/TodayOrderContext";
+import {ProfileProvider} from "../context/ProfileContext";
+import {AfterBookingProvider} from "../context/AfterBookingContext";
 import LayoutComponent from "../layout/Layout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Message from "../pages/Message";
@@ -22,16 +30,10 @@ import IncomingConsultationDetail from "../pages/Dashboard/pages/IncomingConsult
 import EditProfile from "../pages/Profile/EditProfile";
 import EditBiodata from "../pages/Profile/EditBiodata";
 import Profile from "../pages/Profile/Profile";
-import {ConsultationDetailProvider} from "../context/ConsultationDetailContext";
 import ActiveConsultationDetail from "../pages/Dashboard/pages/ActiveConsultationDetail";
-import {OrderProvider} from "../context/ActiveOrderContext";
-import {HistoryProvider} from "../context/HistoryContext";
 import ConsultationHistoryDetail from "../pages/history/pages/ConsultationHistoryDetail";
 import History from "../pages/history/History";
-import {WaitingPaymentProvider} from "../context/WaitingPaymentContext";
-import {TodayOrderProvider} from "../context/TodayOrderContext";
-import {ProfileProvider} from "../context/ProfileContext";
-import {AfterBookingProvider} from "../context/AfterBookingContext";
+
 import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
 
 const Routes = () => {
@@ -57,7 +59,7 @@ const Routes = () => {
                     <ProfileProvider>
                     <AfterBookingProvider>
                         <Switch>
-                            <LoginRoute path="/" exact>
+                            <LoginRoute path="/" search="Dashboard" exact>
                                 <LayoutComponent content={<Dashboard/>}/>
                             </LoginRoute>
 
@@ -95,8 +97,8 @@ const Routes = () => {
                                 <LayoutComponent content={<CompleteSuccess/>}/>
                             </LoginRoute>
 
-                            {/*Menu*/}
-                            <LoginRoute path="/message" exact>
+                            {/*Message*/}
+                            <LoginRoute path="/message" search="Pesan" exact>
                                 <LayoutComponent content={<Message/>}/>
                             </LoginRoute>
 
