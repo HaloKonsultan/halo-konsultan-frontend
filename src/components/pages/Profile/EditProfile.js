@@ -44,16 +44,31 @@ const EditProfile = () => {
                         onCancel={handleCancel}
                         footer={null}
                     >
+                        <form id="2">
                         <h4 style={{color: "gray"}}>Nama Bank</h4>
-                        <Input style={{borderRadius: 8}} value={input.bank}/><br/><br/>
+                        <Input 
+                        style={{borderRadius: 8}} 
+                        prefix={input.bank}/><br/><br/>
+
                         <h4 style={{color: "gray"}}>Nomor Rekening</h4>
-                        <Input style={{borderRadius: 8}} value={input.card_number}/><br/><br/>
+                        <Input 
+                        style={{borderRadius: 8}} 
+                        prefix={input.card_number}/><br/><br/>
+
                         <h4 style={{color: "gray"}}>Nama Pemegang Rekening</h4>
-                        <Input style={{borderRadius: 8}} value={input.name}/><br/><br/>
-                        <Button size="large" className="button" type="primary" block
-                                style={{borderRadius: 8, backgroundColor: "#3B85FA"}}>
+                        <Input 
+                        style={{borderRadius: 8}} 
+                        prefix={input.name}/><br/><br/>
+
+                        <Button size="large" 
+                        className="button" 
+                        type="primary" 
+                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                        htmlType="submit"
+                        form="2">
                             Tambahkan Bidang Keahlian
                         </Button>
+                        </form>
                     </Modal>
 
                     <br/>
@@ -74,12 +89,14 @@ const EditProfile = () => {
                     </Row> <br/>
 
                     <h4 style={{color: "gray"}}>Harga Jasa Diskusi</h4>
-                    <Input style={{borderRadius: 8, height: 48}} placeholder="Harga Jasa Diskusi" value={input.chat_price}/>
-                    <br/><br/>
+                    <Input style={{borderRadius: 8, height: 48}} 
+                    placeholder="Harga Jasa Diskusi" 
+                    prefix={input.chat_price}/><br/><br/>
 
                     <h4 style={{color: "gray"}}>Harga Jasa Konsultasi</h4>
-                    <Input style={{borderRadius: 8, height: 48}} placeholder="Harga Jasa Konsultasi" value={input.consultant_price}/>
-                    <br/><br/>
+                    <Input style={{borderRadius: 8, height: 48}} 
+                    placeholder="Harga Jasa Konsultasi" 
+                    prefix={input.comsultant_price}/><br/><br/>
 
                     <Row>
                         <Col span={12}><p style={{color: "gray"}}>Dokumentasi Kerja</p></Col>
@@ -88,11 +105,16 @@ const EditProfile = () => {
                         </Col>
                     </Row><br/>
 
-
-                    <Link to="/profil-empty"> <Button size="large" className="button" type="primary" block
-                                                      style={{borderRadius: 8, backgroundColor: "#3B85FA"}}>
+                    <form id="2">
+                    <Button size="large"
+                     className="button" 
+                     type="primary" 
+                     block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                     htmlType="submit"
+                     form="2">
                         Simpan
-                    </Button></Link>
+                    </Button>
+                    </form>
                 </Card>
             </div>
         </>

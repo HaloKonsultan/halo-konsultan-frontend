@@ -1,6 +1,8 @@
 import React, {createContext, useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router";
+import Cookies from "js-cookie";
+
 
 export const ProfileContext = createContext()
 
@@ -42,7 +44,7 @@ export const ProfileProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
-        let result = await axios.get(`menunggu api`)
+        let result = await axios.get(`http://localhost:8000/api/consultants/profile/${Cookies.get('id')}`)
         let data = result.data
         console.log(data)
         setDataProfile(data.map((e) => {
@@ -85,6 +87,18 @@ export const ProfileProvider = props => {
             }
         }))
     }
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault()
+    //     console.log(input)
+    //     axios.post(`http://localhost:8000/api/consultants/register`, {
+    //         name: input.name,
+    //         email: input.email,
+    //         password: input.password
+    //     }).then(() => {
+    //         history.push(`/`)
+    //     })
+    // }
 
     const functionEditBiodata = () => {
         history.push(`/edit-biodata`)

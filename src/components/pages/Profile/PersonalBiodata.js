@@ -90,7 +90,7 @@ const PersonalBiodata = () => {
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
-                                <Text strong>{input.skills}{input.end_year}</Text>
+                                <Text strong>{input.skills}</Text>
                             </Space>
                         </Space>
                     </Col>
