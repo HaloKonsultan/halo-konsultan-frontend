@@ -4,11 +4,11 @@ import IncomingOrderTable from "./table/IncomingOrderTable";
 import ActiveOrderTable from "./table/ActiveOrderTable";
 import WaitingPaymentTable from "./table/WaitingPaymentTable";
 import TodayOrder from "./table/TodayOrder";
+import ProfileNotifications from "./ProfileNotifications";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie";
-import ProfileNotifications from "./ProfileNotifications";
 
 function Dashboard() {
     let page = 'Dashboard';

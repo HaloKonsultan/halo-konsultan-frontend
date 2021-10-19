@@ -13,7 +13,7 @@ const ConsultationActive = () => {
     console.log(Id)
 
     const {dataConsultation, input, setInput, functions} = useContext(ConsultationDetailContext)
-    const {fetchDataById, functionSubmit} = functions
+    const {fetchDataById, functionSubmit, functionUpdateStatus} = functions
 
     useEffect(() => {
         if (Id !== undefined) {
@@ -32,8 +32,12 @@ const ConsultationActive = () => {
         event.preventDefault()
         console.log(input)
 
-        // functionSubmit(Id)
+        functionSubmit(Id)
     };
+
+    const handleStatus = () => {
+        functionUpdateStatus(Id)
+    }
 
     return (
         <>
@@ -66,17 +70,25 @@ const ConsultationActive = () => {
                         )}
                 </Card>
                 <br/>
-                <form onSubmit={handleSubmit}>
-                    <Space direction="vertical">
-                        <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
-                        <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
-                               name="conference_link"
-                               value={input.conference_link} onChange={handleChange}/>
-                        <Button style={{borderRadius: 8}} value={input.id} type="primary" htmlType="submit">
-                            Kirim Link ke Klien<ArrowRightOutlined/>
-                        </Button>
+                <form id="1" onSubmit={handleSubmit}>
+                    <Space size={24} direction="vertical">
+                        <Space size={8} direction="vertical">
+                            <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
+                            <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                   name="conference_link"
+                                   value={input.conference_link} onChange={handleChange}/>
+                        </Space>
                     </Space>
                 </form>
+                <br/>
+                <Space direction="horizontal">
+                    <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
+                        Kirim Link ke Klien<ArrowRightOutlined/>
+                    </Button>
+                    <Button style={{borderRadius: 8}} type="danger" onClick={handleStatus}>
+                        Akhiri Konsultasi
+                    </Button>
+                </Space>
             </div>
         </>
     )

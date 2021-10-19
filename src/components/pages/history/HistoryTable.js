@@ -36,10 +36,13 @@ const HistoryTable = () => {
             title: 'Status',
             key: 'status',
             dataIndex: 'status',
-            render: (status, is_confirmed) => {
-                let color = status === 'done' && is_confirmed === true ? '#F63131' : '#3B85FA';
-                let fontColor = status === 'done' && is_confirmed === true ? '#FDD6D6' : '#D8E7FE';
-                let consultationStatus = status === 'done' ? 'Selesai' : 'Ditolak'
+            render: (status, data) => {
+                let color = status === 'done' && data.is_confirmed === 1 ?  '#3B85FA' : '#F63131';
+                let fontColor = status === 'done' && data.is_confirmed === 1 ? '#FDD6D6' : '#D8E7FE';
+                let consultationStatus = status === 'done' && data.is_confirmed === 1 ? 'Selesai' : 'Ditolak'
+                {console.log(status)}
+                {console.log("confirm dibawah")}
+                {console.log(data.is_confirmed)}
                 return (
                     <>
                         <Tag style={{borderRadius: 20, fontWeight: "bold"}} color={color}>

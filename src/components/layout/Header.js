@@ -1,6 +1,7 @@
 import React, {useContext} from "react"
 import {useHistory} from "react-router-dom"
 import {Button, Layout, PageHeader} from 'antd';
+import {useLocation} from 'react-router-dom'
 import Cookies from "js-cookie";
 import {UserContext} from "../context/UserContext";
 import {LogoutOutlined} from '@ant-design/icons';
@@ -10,6 +11,9 @@ const {Header, Content, Footer} = Layout;
 const Nav = () => {
     let history = useHistory()
     const {loginStatus, setLoginStatus} = useContext(UserContext)
+    const location = useLocation();
+
+    console.log(location)
 
     const handleLogout = () => {
         setLoginStatus(false)
