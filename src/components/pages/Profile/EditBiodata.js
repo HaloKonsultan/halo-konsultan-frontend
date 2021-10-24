@@ -1,25 +1,20 @@
 import React, {useState, useParams, useContext, useEffect} from "react";
-import {Row, Col, Space} from 'antd';
-import {Card, Modal} from 'antd';
-import {Input} from 'antd';
-import {Button} from 'antd';
-import {Radio} from 'antd';
-import {Link} from "react-router-dom";
-import {DatePicker} from 'antd';
+import {Row, Col, Space, Form, Card, Typography, Modal, Input, Button, Radio, DatePicker} from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
-import {Typography} from 'antd';
+import {CloseOutlined} from "@ant-design/icons";
 import {ProfileContext} from "../../context/ProfileContext";
 
+const {Meta} = Card;
 const {Title, Text} = Typography;
 
 const EditBiodata = () => {
-    const {input, functions} = useContext(ProfileContext)
+    const {input, setInput, functions} = useContext(ProfileContext)
     const {fetchData, functionEditBiodata} = functions
 
-    useEffect(() => {
-        fetchData()
-    }, [])
+    // useEffect(() => {
+    //     fetchData()
+    // }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
@@ -44,6 +39,7 @@ const EditBiodata = () => {
     };
 
     const [value, setValue] = React.useState(1);
+    
     const onChange = e => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);
@@ -58,6 +54,27 @@ const EditBiodata = () => {
         // setInput({ ...input, [name]: typeOfValue })
     };
   
+    const onFinish = (values) => {
+        console.log('Success:', values);
+        let documentInput = input.document.push(values)
+        setInput({...input, documentInput})
+
+        console.log(input)
+        setIsExperienceVisible(false);
+    };
+
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+    const deleteInput = (event) => {
+        let title = parseInt(event.currentTarget.value)
+        var index = input.document.indexOf(title);
+
+        input.document.splice(index, 1);
+        console.log(input)
+    }
+
     const {TextArea} = Input;
 
     return (
@@ -144,6 +161,40 @@ const EditBiodata = () => {
                             </Button>
                         </Col>
                     </Row>
+                    {/* {
+                        input.skills !== null && (
+                            <>
+                                {input.skills.map((e, index) => {
+                                    return (
+                                        <>
+                                            <Card
+                                                // onClick={() => {
+                                                //     handleDetail(e.id)
+                                                // }}
+                                                style={{
+                                                    width: 438,
+                                                    borderRadius: 8,
+                                                    boxShadow: "0 0 0 1px #CED4DA"
+                                                }}
+                                                type="inner"
+                                            >
+                                                <Meta
+                                                    title={
+                                                        <>
+                                                            <Text>{e.title}</Text>
+                                                            <Button value={e.title} onClick={deleteInput}
+                                                                    style={{color: "#3B85FA"}}
+                                                                    type="text"><CloseOutlined/>
+                                                            </Button>
+                                                        </>
+                                                    }/>
+                                            </Card>
+                                        </>
+                                    )
+                                })}
+                            </>
+                        )} */}
+                        <br/>
                     <Row>
                         <Col span={13}><h4 style={{color: "gray"}}>Pendidikan</h4><br/></Col>
                         <Col span={11}>
@@ -187,24 +238,50 @@ const EditBiodata = () => {
                         </form>
                     </Modal>
 
-                    <Modal
-                        className="profile-modal"
-                        title="Tambahkan Bidang Keahlian"
-                        visible={isSkillVisible}
-                        onCancel={handleCancel}
-                        footer={null}
+                    
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambah Bidang Keahlian"
+                visible={isSkillVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={onFinish}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Titel bidang keahlian"
+                        name="description"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input document description!',
+                            },
+                        ]}
                     >
-                        <form id="2">
-                        <h4 style={{color: "gray"}}>Titel Bidang Keahlian</h4>
-                        <Input style={{borderRadius: 8}} value={input.skills}/><br/><br/>
-                        <Button size="large" className="button" type="primary" block
-                                style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                htmlType="submit"
-                                form="2">
+                        <TextArea style={{borderRadius: 8}} rows={4} name="description"/>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            className="button"
+                            type="primary" block
+                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            htmlType="submit">
                             Tambahkan Bidang Keahlian
                         </Button>
-                        </form>
-                    </Modal>
+                    </Form.Item>
+                </Form>
+            </Modal>
                 
                     <Modal
                         className="profile-modal"
