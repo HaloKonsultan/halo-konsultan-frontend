@@ -5,6 +5,7 @@ import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import { ProfileContext } from "../../context/ProfileContext";
+import {FileTextOutlined} from "@ant-design/icons";
 
 const {Title, Text, Link} = Typography;
 
@@ -79,14 +80,33 @@ const PersonalBiodata = () => {
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pendidikan</Text>
-                                <Row>
-                                    <Col span={12}>
-                                        <Text strong>University Up and Down</Text>
-                                    </Col>
-                                    <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>{input.start_year}{input.end_year}</Text>
-                                    </Col>
-                                </Row>
+                                {
+                                    input.consultant_education !== null && (
+                                        <>
+                                            {input.consultant_education.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Row>
+                                                            <Col span={12}>
+                                                                <Text strong>{e.institution_name}</Text>
+                                                            </Col>
+                                                            <Col style={{display: "flex", justifyContent: "right"}} span={12}>
+                                                                <Text strong>{e.start_year} - {e.end_year}</Text>
+                                                            </Col>
+                                                        </Row>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                                {/*<Row>*/}
+                                {/*    <Col span={12}>*/}
+                                {/*        <Text strong>University Up and Down</Text>*/}
+                                {/*    </Col>*/}
+                                {/*    <Col style={{display: "flex", justifyContent: "right"}} span={12}>*/}
+                                {/*        <Text strong>{input.start_year}{input.end_year}</Text>*/}
+                                {/*    </Col>*/}
+                                {/*</Row>*/}
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>

@@ -2,7 +2,7 @@ import React, {createContext, useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router";
 import Cookies from "js-cookie";
-
+import API from "./API"
 
 export const ProfileContext = createContext()
 
@@ -13,6 +13,7 @@ export const ProfileProvider = props => {
         name: "",
         email: "",
         photo: "",
+        position: "",
         gender: "",
         location: "",
         description: "",
@@ -44,48 +45,58 @@ export const ProfileProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
-        let result = await axios.get(`http://localhost:8000/api/consultants/profile/${Cookies.get('id')}`)
-        let data = result.data
+        let result = await API.get(`consultants/profile/${Cookies.get('id')}`,
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
+        let data = result.data.data
         console.log(data)
-        setDataProfile(data.map((e) => {
-            return {
-                id: e.id,
-                name: e.name,
-                email: e.email,
-                photo: e.photo,
-                gender: e.gender,
-                location: e.location,
-                description: e.description,
-                chat_price: e.chat_price,
-                consultant_price: e.consultant_price,
-                consultant_doc: [{
-                    consultant_id: e.consultant_id,
-                    photo: e.photo,
-                }],
-                consultant_experience: [{
-                    consultant_id: e.consultant_id,
-                    position: e.position,
-                    start_year: e.start_year,
-                    end_year: e.end_year
-                }],
-                consultant_educations: [{
-                    consultant_id: e.consultant_id,
-                    institution_name: e.institution_name,
-                    major: e.major,
-                    start_year: e.start_year,
-                    end_year: e.end_year
-                }],
-                consultant_skills: [{
-                    consultant_id: e.consultant_id,
-                    skills: e.skills,
-                }],
-                consultant_virtual_account: [{
-                    consultant_id: e.consultant_id,
-                    card_number: e.card_number,
-                    bank: e.bank
-                }]
-            }
-        }))
+        setInput({
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            photo: data.photo,
+            position: data.position,
+            gender: data.gender,
+            location: data.location,
+            description: data.description,
+            chat_price: data.chat_price,
+            consultant_price: data.consultant_price,
+            consultant_doc: [{
+                consultant_id: data.consultant_id,
+                photo: data.photo,
+            }],
+            consultant_experience: data.consultant_experience.map(key => {
+                return {
+                    id: key.id,
+                    position: key.position,
+                    start_year: key.start_year,
+                    end_year: key.end_year
+                }
+            }),
+            consultant_education: data.consultant_education.map(key => {
+                return {
+                    id: key.id,
+                    institution_name: key.institution_name,
+                    major: key.major,
+                    start_year: key.start_year,
+                    end_year: key.end_year
+                }
+            }),
+            consultant_skill: data.consultant_skill.map(key => {
+                return {
+                    id: key.id,
+                    skills: key.skills,
+                }
+            }),
+            consultant_virtual_accounts: data.consultant_virtual_accounts.map(key => {
+                return {
+                    id: key.id,
+                    card_number: data.card_number,
+                    bank: data.bank
+                }
+            }),
+        })
+        console.log("ini profil " + JSON.stringify(input))
+        setCurrentId(data.id)
     }
 
     // const handleSubmit = (event) => {
@@ -124,5 +135,4 @@ export const ProfileProvider = props => {
             {props.children}
         </ProfileContext.Provider>
     )
-
 }
