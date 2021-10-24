@@ -2,6 +2,7 @@ import React, { useState, createContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
+import API from "./API"
 
 export const ConsultationDetailContext = createContext()
 
@@ -10,6 +11,7 @@ export const ConsultationDetailProvider = props => {
     const [dataConsultation, setDataConsultation] = useState([])
     const [input, setInput] = useState({
         title: "",
+        name: "",
         description: "",
         preference: "",
         location: "",
@@ -33,12 +35,13 @@ export const ConsultationDetailProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchDataById = async (consultation_id) => {
-        let result = await axios.get(`http://localhost:8000/api/consultants/consultations/${consultation_id}`,
+        let result = await API.get(`consultants/consultations/${consultation_id}`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data
         setInput({
             id: data.id,
             title: data.title,
+            name: data.name,
             description: data.description,
             preference: data.preference,
             location: data.location,
@@ -58,12 +61,12 @@ export const ConsultationDetailProvider = props => {
                     file: key.file}
             })
         })
-        console.log("tes cetak " + JSON.stringify(input))
+        console.log("ini detail konsultasi " + JSON.stringify(input))
         setCurrentId(data.id)
     }
 
     const functionAccept = (consultation_id) => {
-        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/accept`, {
+        API.patch(`consultants/consultations/${consultation_id}/accept`, {
                 confirmed: 1,
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
@@ -79,7 +82,7 @@ export const ConsultationDetailProvider = props => {
     }
 
     const functionDecline = (consultation_id) => {
-        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/decline`, {
+        API.patch(`consultants/consultations/${consultation_id}/decline`, {
                 confirmed: 0,
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
@@ -95,7 +98,7 @@ export const ConsultationDetailProvider = props => {
     }
 
     const functionSubmit = (consultation_id) => {
-        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/send-link`, {
+        API.patch(`consultants/consultations/${consultation_id}/send-link`, {
                 link: input.conference_link
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
@@ -111,7 +114,7 @@ export const ConsultationDetailProvider = props => {
     }
 
     const functionUpdateStatus = (consultation_id) => {
-        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/end`, {
+        API.patch(`consultants/consultations/${consultation_id}/end`, {
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )

@@ -2,6 +2,7 @@ import React, {useState, createContext} from "react";
 import axios from "axios";
 import {useHistory} from "react-router-dom"
 import Cookies from "js-cookie";
+import API from "./API"
 
 export const HistoryContext = createContext()
 
@@ -19,8 +20,8 @@ export const HistoryProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
-        let result = await axios.get(
-            `http://localhost:8000/api/consultants/${Cookies.get('id')}/history`,
+        let result = await API.get(
+            `consultants/${Cookies.get('id')}/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
@@ -37,8 +38,8 @@ export const HistoryProvider = props => {
     }
 
     const fetchDataById = async (id) => {
-        let result = await axios.get(
-            `http://localhost:8000/api/consultants/history`,
+        let result = await API.get(
+            `consultants/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data
         setInput({

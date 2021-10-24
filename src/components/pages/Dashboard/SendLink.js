@@ -5,10 +5,11 @@ import {useParams} from "react-router-dom";
 import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
 import {Row, Col} from 'antd';
 import {ArrowRightOutlined, FileTextOutlined} from '@ant-design/icons';
+import Cookies from "js-cookie";
 
 const {Title, Link, Text} = Typography;
 
-const ConsultationActive = () => {
+const SendLink = () => {
     let {Id} = useParams()
     console.log(Id)
 
@@ -82,16 +83,29 @@ const ConsultationActive = () => {
                 </form>
                 <br/>
                 <Space direction="horizontal">
-                    <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
-                        Kirim Link ke Klien<ArrowRightOutlined/>
-                    </Button>
-                    <Button style={{borderRadius: 8}} type="danger" onClick={handleStatus}>
-                        Akhiri Konsultasi
-                    </Button>
+                    {
+                        input.conference_link === null &&
+                        <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
+                            Kirim Link ke Klien<ArrowRightOutlined/>
+                        </Button>
+                    }
+                    {
+                        input.conference_link !== null &&
+                        <>
+                            <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary"
+                                    htmlType="submit">
+                                Masuk Conference
+                            </Button>
+
+                            <Button style={{borderRadius: 8}} type="danger" onClick={handleStatus}>
+                                Akhiri Konsultasi
+                            </Button>
+                        </>
+                    }
                 </Space>
             </div>
         </>
     )
 }
 
-export default ConsultationActive
+export default SendLink

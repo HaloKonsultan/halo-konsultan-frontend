@@ -2,6 +2,7 @@ import React, { useState, createContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
+import API from "./API"
 
 export const WaitingPaymentContext = createContext()
 
@@ -18,8 +19,8 @@ export const WaitingPaymentProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
-        let result = await axios.get(
-            `http://localhost:8000/api/consultants/consultations/user/${Cookies.get('id')}/waiting`,
+        let result = await API.get(
+            `consultants/consultations/user/${Cookies.get('id')}/waiting`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)

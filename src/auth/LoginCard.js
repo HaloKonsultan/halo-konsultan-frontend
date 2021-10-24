@@ -29,6 +29,7 @@ const LoginCard = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(input)
+        let inOneHours = new Date(new Date().getTime() + 60 * 60 * 1000);
 
         try {
             axios.post(`http://localhost:8000/api/consultants/login`, {
@@ -39,9 +40,9 @@ const LoginCard = () => {
                 let id = res.data.data.id
                 let location = res.data.data.location
 
-                Cookies.set('token', token, {expires: 1})
-                Cookies.set('id', id, {expires: 1})
-                Cookies.set('location', location, {expires: 1})
+                Cookies.set('token', token, {expires: inOneHours})
+                Cookies.set('id', id, {expires: inOneHours})
+                Cookies.set('location', location, {expires: inOneHours})
                 history.push('/')
             })
         }
