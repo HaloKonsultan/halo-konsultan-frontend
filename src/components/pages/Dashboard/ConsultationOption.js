@@ -98,9 +98,11 @@ const ConsultationOption = () => {
     };
 
     const deleteInput = (event) => {
-        let title = parseInt(event.currentTarget.value)
-        var index = input.document.indexOf(title);
+        let title = event.target.name
+        console.log(title)
+        let index = input.document.indexOf(title);
 
+        console.log(index)
         input.document.splice(index, 1);
         console.log(input)
     }
@@ -123,32 +125,32 @@ const ConsultationOption = () => {
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 1)}
-                                    placeholder="Jadwal Kosong #1"/>
+                                    placeholder="Jadwal Kosong #1" required/>
                                 <TimePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                     name="date[0].time"
                                     onChange={(date, dateString) => onChangeTime(date, dateString, 1)}
-                                    picker="Waktu"/>
+                                    picker="Waktu" required/>
                             </Space>
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
-                                    placeholder="Jadwal Kosong #2"/>
+                                    placeholder="Jadwal Kosong #2" required/>
                                 <TimePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                     onChange={(date, dateString) => onChangeTime(date, dateString, 2)}
-                                    picker="Waktu"/>
+                                    picker="Waktu" required/>
                             </Space>
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
-                                    placeholder="Jadwal Kosong #3"/>
+                                    placeholder="Jadwal Kosong #3" required/>
                                 <TimePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                     onChange={(date, dateString) => onChangeTime(date, dateString, 3)}
-                                    picker="Waktu"/>
+                                    picker="Waktu" required/>
                             </Space>
                         </Space>
                         <Space size={2} direction="vertical">
@@ -157,7 +159,7 @@ const ConsultationOption = () => {
                                 Anda
                                 cantumkan di profil.</Text>
                             <Input style={{width: 438, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
-                                   type="text" name="price" onChange={handleChange}/>
+                                   type="text" name="price" onChange={handleChange} required/>
                         </Space>
                     </Space>
                 </form>
@@ -180,9 +182,6 @@ const ConsultationOption = () => {
                                     return (
                                         <>
                                             <Card
-                                                // onClick={() => {
-                                                //     handleDetail(e.id)
-                                                // }}
                                                 style={{
                                                     width: 438,
                                                     borderRadius: 8,
@@ -194,7 +193,9 @@ const ConsultationOption = () => {
                                                     title={
                                                         <>
                                                             <Text>{e.title}</Text>
-                                                            <Button value={e.title} onClick={deleteInput}
+                                                            <Button onClick={deleteInput}
+                                                                    value={e.title}
+                                                                    name={e.title}
                                                                     style={{color: "#3B85FA"}}
                                                                     type="text"><CloseOutlined/>
                                                             </Button>

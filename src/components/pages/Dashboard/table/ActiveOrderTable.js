@@ -23,13 +23,18 @@ const ActiveOrderTable = () => {
             key: 'title',
         },
         {
+            title: 'Nama Klien',
+            key: 'name',
+            dataIndex: 'name',
+        },
+        {
             title: '',
             dataIndex: 'conference_link',
             key: 'conference_link',
             align: 'right',
             render: (conference_link) => {
                 console.log(conference_link)
-                if (conference_link === ""){
+                if (conference_link === null){
                     return (
                         <>
                             <Tag style={{borderRadius: 20, color: "#F63131", fontWeight: "bold"}} color='#FDD6D6'>
@@ -44,7 +49,14 @@ const ActiveOrderTable = () => {
             title: 'Tanggal Konsultasi',
             key: 'date',
             dataIndex: 'date',
+            sorter: (a, b) => new Date(a.date) - new Date(b.date),
+            defaultSortOrder: 'descend'
         },
+        {
+            title: 'Waktu Konsultasi',
+            key: 'time',
+            dataIndex: 'time'
+        }
     ];
 
     const data = dataOrder;

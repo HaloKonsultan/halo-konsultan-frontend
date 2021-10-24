@@ -2,7 +2,7 @@ import React from "react"
 import { Row, Col } from 'antd';
 import Detail from "../Detail";
 import Nav from "../../../layout/Header";
-import ConsultationActive from "../ConsultationActive";
+import SendLink from "../SendLink";
 
 const ActiveConsultationDetail = () => {
 
@@ -11,7 +11,7 @@ const ActiveConsultationDetail = () => {
             <Nav/>
             <Row className="center">
                 <Col span={13}><Detail /></Col>
-                <Col span={11}><ConsultationActive /></Col>
+                <Col span={11}><SendLink /></Col>
             </Row>
         </>
     )

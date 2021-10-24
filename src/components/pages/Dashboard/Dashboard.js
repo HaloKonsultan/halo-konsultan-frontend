@@ -1,5 +1,5 @@
 import React from "react"
-import {Row, Col, Button, PageHeader} from 'antd';
+import {Row, Col, Button, PageHeader, Badge} from 'antd';
 import IncomingOrderTable from "./table/IncomingOrderTable";
 import ActiveOrderTable from "./table/ActiveOrderTable";
 import WaitingPaymentTable from "./table/WaitingPaymentTable";
@@ -9,6 +9,9 @@ import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie";
+import {Typography} from 'antd';
+
+const {Title} = Typography;
 
 function Dashboard() {
     let page = 'Dashboard';
@@ -26,7 +29,8 @@ function Dashboard() {
                         <PageHeader
                             style={{backgroundColor: "transparent", padding: 0}}
                             ghost={false}
-                            title="Konsultasi Masuk"
+                            title={<Title level={4}>Konsultasi Masuk <Badge style={{backgroundColor: '#3B85FA'}}
+                                                                            count={5}/></Title>}
                             extra={[
                                 <Link to="/incoming-order"><Button style={{color: "#3B85FA"}} type="text">
                                     <b>Lihat Semua</b>
@@ -38,7 +42,7 @@ function Dashboard() {
                         <PageHeader
                             style={{backgroundColor: "transparent", padding: 0}}
                             ghost={false}
-                            title="Konsultasi Aktif"
+                            title={<Title level={4}>Konsultasi Aktif</Title>}
                             extra={[
                                 <Link to="/order"><Button style={{color: "#3B85FA"}} type="text">
                                     <b>Lihat Semua</b>
@@ -50,7 +54,7 @@ function Dashboard() {
                         <PageHeader
                             style={{backgroundColor: "transparent", padding: 0}}
                             ghost={false}
-                            title="Menunggu Pembayaran"
+                            title={<Title level={4}>Menunggu Pembayaran</Title>}
                             extra={[
                                 <Link to="/waiting-payment"><Button style={{color: "#3B85FA"}} type="text">
                                     <b>Lihat Semua</b>

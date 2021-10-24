@@ -2,6 +2,7 @@ import React, { useState, createContext } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
+import API from "./API"
 
 export const AfterBookingContext = createContext()
 
@@ -25,7 +26,7 @@ export const AfterBookingProvider = props => {
 
     const functionSubmit = (consultation_id) => {
         console.log(input)
-        axios.patch(`http://localhost:8000/api/consultants/consultations/${consultation_id}/after-book`, {
+        API.patch(`consultants/consultations/${consultation_id}/after-book`, {
                 preference: input.preference,
                 price: input.price,
                 date: input.date,
