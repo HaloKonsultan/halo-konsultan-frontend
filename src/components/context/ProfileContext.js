@@ -19,27 +19,11 @@ export const ProfileProvider = props => {
         description: "",
         chat_price: "",
         consultation_price: "",
-        consultant_doc: [{
-            consultant_id: "",
-            photo: "",
-        }],
-        consultant_experience: [{
-            consultant_id: "",
-            position: "",
-            start_year: "",
-            end_year: ""
-        }],
-        consultant_educations: [{
-            consultant_id: "",
-            institution_name: "",
-            major: "",
-            start_year: "",
-            end_year: ""
-        }],
-        consultant_skills: [{
-            consultant_id: "",
-            skills: "",
-        }],
+        consultant_doc: [],
+        consultant_experience: [],
+        consultant_education: [],
+        consultant_skill: [],
+        consultant_virtual_accounts:[]
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)

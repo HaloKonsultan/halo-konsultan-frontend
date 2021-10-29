@@ -6,12 +6,10 @@ import ConsultationProfile from "./ConsultationProfile";
 import Cookies from "js-cookie";
 
 const Profile = () => {
-    let page = 'Profil';
-    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
-        <Nav/>
+        <Nav title="Profil"/>
             <Row className="center">
                 <Col span={11}>
                     <div className="container-profile">   

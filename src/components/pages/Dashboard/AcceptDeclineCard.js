@@ -4,6 +4,8 @@ import {Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
 import {Link, useParams} from "react-router-dom";
 import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import ButtonDanger from "../../global/ButtonDanger";
+import PrimaryButton from "../../global/ButtonPrimary";
 
 const {Title} = Typography;
 
@@ -60,10 +62,13 @@ const AcceptDeclineCard = () => {
                     <Space direction="vertical">
                         <Title level={5}>Apakah Anda Menerima Permintaan Konsultasi ini ?</Title>
                         <Space size={24}>
-                            <Button onClick={handleAccept} value={Id} style={{height: 44, width: 188, borderRadius: 8}}
-                                    type="primary"><CheckOutlined/> <b>Terima Permintaan</b></Button>
-                            <Button onClick={showDeclineModal} style={{height: 44, borderRadius: 8}} danger><b>Tolak
-                                Permintaan</b></Button>
+                            <PrimaryButton onClick={handleAccept}
+                                           value={Id}
+                                           text={<>
+                                               <CheckOutlined/> <b>Terima Permintaan</b>
+                                           </>}
+                            />
+                            <ButtonDanger onClick={showDeclineModal} text={<b>Tolak Permintaan</b>}/>
                         </Space>
                     </Space>
                 </Card>
@@ -103,28 +108,12 @@ const AcceptDeclineCard = () => {
                         <Row>
                             <Col span={12}>
                                 <div style={{marginRight: 4}}>
-                                    <Button
-                                        block
-                                        onClick={handleCancel}
-                                        size="large"
-                                        className="button"
-                                        type="primary"
-                                        style={{borderRadius: 8, height: 44, backgroundColor: "#3B85FA"}}
-                                        htmlType="submit">
-                                        Batalkan
-                                    </Button>
+                                    <PrimaryButton onClick={handleCancel} htmlType="submit" text="Batalkan"/>
                                 </div>
                             </Col>
                             <Col span={12}>
                                 <div style={{marginLeft: 4}}>
-                                    <Button
-                                        block
-                                        size="large"
-                                        className="button"
-                                        type="default"
-                                        style={{height: 44, borderRadius: 8}} danger>
-                                        Tolak Permintaan
-                                    </Button>
+                                    <ButtonDanger text="Tolak Permintaan"/>
                                 </div>
                             </Col>
                         </Row>

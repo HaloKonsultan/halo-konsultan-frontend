@@ -14,12 +14,10 @@ import {Typography} from 'antd';
 const {Title} = Typography;
 
 function Dashboard() {
-    let page = 'Dashboard';
-    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
-            <Nav/>
+            <Nav title="Dashboard"/>
             <Row>
                 <Col span={14}>
                     <div className="incoming-order-table">

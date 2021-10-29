@@ -7,7 +7,7 @@ import {UserContext} from "../context/UserContext";
 
 const {Header, Content, Footer} = Layout;
 
-const Nav = () => {
+const Nav = (props) => {
     let history = useHistory()
     const {loginStatus, setLoginStatus} = useContext(UserContext)
     const location = useLocation();
@@ -28,8 +28,9 @@ const Nav = () => {
                 {
                     Cookies.get('token') !== undefined &&
                     <PageHeader
+                        onBack={props.onBack}
                         style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
-                        title={Cookies.get('page')}
+                        title={props.title}
                         extra={[
                             <Button key="1" size="large" type="link" onClick={handleLogout} danger>
                                 <b>

@@ -119,6 +119,7 @@ const ConsultationOption = () => {
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    format={'DD-MM-YYYY'}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 1)}
                                     placeholder="Jadwal Kosong #1" required/>
                                 <TimePicker
@@ -130,6 +131,7 @@ const ConsultationOption = () => {
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    format={'DD-MM-YYYY'}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
                                     placeholder="Jadwal Kosong #2" required/>
                                 <TimePicker
@@ -140,6 +142,7 @@ const ConsultationOption = () => {
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    format={'DD-MM-YYYY'}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
                                     placeholder="Jadwal Kosong #3" required/>
                                 <TimePicker

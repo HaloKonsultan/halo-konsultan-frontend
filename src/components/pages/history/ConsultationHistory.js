@@ -45,7 +45,6 @@ const ConsultationHistory = () => {
                                    message="Konsultasi ini ditolak"
                                    type="error"
                                    showIcon/>
-                            <br/>
                             <Card style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #EA3A3A"}}>
                                 <>
                                     <Title level={4}>Alasan Penolakan Konsultasi</Title>
@@ -60,7 +59,7 @@ const ConsultationHistory = () => {
                             <>
                                 <Space size={20} direction="vertical">
                                     <ConsultationDocument/>
-                                    <SendLink/>
+                                    <SendLink disabled={true}/>
                                 </Space>
                             </>
                         )
