@@ -1,5 +1,5 @@
 import React, {useState, useParams, useContext, useEffect} from "react";
-import {Row, Col, Space, Form, Card, Typography, Modal, Input, Button, Radio, DatePicker} from 'antd';
+import {Row, Col, Space, Form, Card, Typography, Modal, Input, Button, Radio, DatePicker, Select, PageHeader} from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import {CloseOutlined} from "@ant-design/icons";
@@ -7,10 +7,10 @@ import {ProfileContext} from "../../context/ProfileContext";
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
-
+const { Option } = Select;
 const EditBiodata = () => {
     const {input, setInput, functions} = useContext(ProfileContext)
-    const {fetchData, functionEditBiodata} = functions
+    const {fetchData, functionEditBiodata, provinces} = functions
 
     // useEffect(() => {
     //     fetchData()
@@ -74,7 +74,30 @@ const EditBiodata = () => {
         input.document.splice(index, 1);
         console.log(input)
     }
+    const deleteInputData = (event) => {
+        let title = event.target.name
+        console.log(title)
+        let index = input.document.indexOf(title);
 
+        console.log(index)
+        input.document.splice(index, 1);
+        console.log(input)
+    }
+    //   function onChange(value) {
+    //     console.log(`selected ${value}`);
+    //   }
+      
+      function onBlur() {
+        console.log('blur');
+      }
+      
+      function onFocus() {
+        console.log('focus');
+      }
+      
+      function onSearch(val) {
+        console.log('search:', val);
+      }
     const {TextArea} = Input;
 
     return (
@@ -130,10 +153,40 @@ const EditBiodata = () => {
                     prefix={input.position}/>
 
                     <br/><br/>
+                    <h4 style={{color: "gray"}}>Provinsi</h4>
+                    {/* <Select
+                        showSearch
+                        style={{ width: 200 }}
+                        placeholder="Provinsi"
+                        optionFilterProp="children"
+                        rows={6}
+                         onChange={onChange}
+                         onFocus={onFocus}
+                         onBlur={onBlur}
+                        onSearch={onSearch}
+                          filterOption={(input, option) =>
+                       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                       
+                     }
+                >{
+                    input.provinces !== null && (
+                        <>
+                            {input.provinces.map((e, index) => {
+                                return (
+                                    <>
+                                        <Option value={e.name}>{e.name}</Option>
+                                    </>
+                                )
+                            })}
+                        </>
+                    )}
+                </Select> */}
+
+                    <br/><br/>
                     <h4 style={{color: "gray"}}>Kota</h4>
-                    <TextArea style={{borderRadius: 8}} 
+                    <Select defaultValue="Surabaya" style={{borderRadius: 8, width: 480}}  onChange={handleChange}
                     rows={6} placeholder="Lokasi/Kota"
-                    prefix={input.location}/>
+                    prefix={input.location}/>           
 
                     <br/><br/>
 
@@ -150,29 +203,27 @@ const EditBiodata = () => {
                     <h6 style={{color: "gray"}}>
                         Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
                         konsultasi</h6>
-                    <Row>
-                        <Col span={13}>
-                            <h4 style={{color: "gray"}}>Bidang Keahlian</h4>
-                        </Col>
-                        <Col span={11}>
-                            <Button onClick={showSkillModal} 
-                            type="link">
-                                + Tambah Bidang Keahlian
-                            </Button>
-                        </Col>
-                    </Row>
-                    {/* {
-                        input.skills !== null && (
+                        
+                    <PageHeader
+                    style={{backgroundColor: "transparent", padding: 0, width: 450}}
+                    ghost={false}
+                    subTitle={<Text type="secondary">Bidang Keahlian</Text>}
+                    extra={[
+                        <Button onClick={showSkillModal} style={{color: "#3B85FA"}}
+                                type="text"> + Tambah Bidang Keahlian
+                        </Button>,
+                    ]}/>
+                <Space size={8} direction="vertical">
+                    {
+                        input.consultant_skills !== null && (
                             <>
-                                {input.skills.map((e, index) => {
+                                {input.consultant_skills.map((e, index) => {
                                     return (
                                         <>
                                             <Card
-                                                // onClick={() => {
-                                                //     handleDetail(e.id)
-                                                // }}
                                                 style={{
-                                                    width: 438,
+                                                    width: 480,
+                                                    height: 48,
                                                     borderRadius: 8,
                                                     boxShadow: "0 0 0 1px #CED4DA"
                                                 }}
@@ -182,7 +233,9 @@ const EditBiodata = () => {
                                                     title={
                                                         <>
                                                             <Text>{e.title}</Text>
-                                                            <Button value={e.title} onClick={deleteInput}
+                                                            <Button onClick={deleteInputData}
+                                                                    value={e.skills}
+                                                                    name={e.skills}
                                                                     style={{color: "#3B85FA"}}
                                                                     type="text"><CloseOutlined/>
                                                             </Button>
@@ -193,8 +246,8 @@ const EditBiodata = () => {
                                     )
                                 })}
                             </>
-                        )} */}
-                        <br/>
+                        )}
+                     </Space>
                     <Row>
                         <Col span={13}><h4 style={{color: "gray"}}>Pendidikan</h4><br/></Col>
                         <Col span={11}>
@@ -204,6 +257,7 @@ const EditBiodata = () => {
                             </Button>
                         </Col>
                     </Row>
+                    
 
                     <Modal
                         className="profile-modal"
@@ -267,7 +321,7 @@ const EditBiodata = () => {
                             },
                         ]}
                     >
-                        <TextArea style={{borderRadius: 8}} rows={4} name="description"/>
+                        <Input style={{borderRadius: 8}}/>
                     </Form.Item>
 
                     <Form.Item>

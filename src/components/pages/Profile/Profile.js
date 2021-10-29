@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from 'antd';
+import { Row, Col, List} from 'antd';
 import Nav from "../../layout/Header";
 import PersonalBiodata from "./PersonalBiodata";
 import ConsultationProfile from "./ConsultationProfile";
@@ -13,12 +13,22 @@ const Profile = () => {
         <>
         <Nav/>
             <Row className="center">
-                <Col span={12}>
+                <Col span={11}>
                     <div className="container-profile">   
                         <PersonalBiodata/>
                     </div>
+                    {/* <List
+          grid={{
+            gutter: 16,
+            xs: 1,
+            sm: 1,
+            md: 3,
+            lg: 3,
+            xl: 3,
+            xxl: 3,
+          }}/>  */}
                 </Col>
-                <Col span={12}>
+                <Col span={11}>
                     <div className="container-profile">
                         <ConsultationProfile/>
                     </div>

@@ -67,6 +67,10 @@ const PersonalBiodata = () => {
                                 <Text strong>{input.location}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
+                                <Text type="secondary">Provinsi</Text>
+                                <Text strong>{input.location}</Text>
+                            </Space>
+                            <Space size={4} direction="vertical">
                                 <Text type="secondary">Pengalaman Kerja</Text>
                                 <Row>
                                     <Col span={12}>

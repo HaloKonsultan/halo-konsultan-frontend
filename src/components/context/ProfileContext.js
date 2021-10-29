@@ -115,9 +115,16 @@ export const ProfileProvider = props => {
         history.push(`/edit-biodata`)
     }
 
+    const provinces = () => {
+        fetch(`http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`)
+        .then(response => response.json())
+        .then(provinces => console.log(provinces));
+    }
+
     const functions = {
         fetchData,
-        functionEditBiodata
+        functionEditBiodata,
+        provinces
     }
 
     return (
