@@ -1,13 +1,17 @@
 import React, {useState, useParams, useContext, useEffect} from "react";
-import {Row, Col, Space, Form, Card, Typography, Modal, Input, Button, Radio, DatePicker, Select, PageHeader} from 'antd';
+import {Row, Col, Space, Form, Card, Typography, Modal, Input, Button, Radio, DatePicker, Select, PageHeader, Upload, message} from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import {CloseOutlined} from "@ant-design/icons";
 import {ProfileContext} from "../../context/ProfileContext";
 
+
 const {Meta} = Card;
 const {Title, Text} = Typography;
-const { Option } = Select;
+// const { Option } = Select;
+// const { uploading, fileList } = this.state;  
+const {TextArea} = Input;
+
 const EditBiodata = () => {
     const {input, setInput, functions} = useContext(ProfileContext)
     const {fetchData, functionEditBiodata, provinces} = functions
@@ -87,18 +91,37 @@ const EditBiodata = () => {
     //     console.log(`selected ${value}`);
     //   }
       
-      function onBlur() {
-        console.log('blur');
-      }
+    //   function onBlur() {
+    //     console.log('blur');
+    //   }
       
-      function onFocus() {
-        console.log('focus');
-      }
+    //   function onFocus() {
+    //     console.log('focus');
+    //   }
       
-      function onSearch(val) {
-        console.log('search:', val);
+    //   function onSearch(val) {
+    //     console.log('search:', val);
+    //   }
+
+   
+const props = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    headers: {
+      authorization: 'authorization-text',
+    },
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
       }
-    const {TextArea} = Input;
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
+  
 
     return (
         <>
@@ -114,9 +137,18 @@ const EditBiodata = () => {
                                 style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
                         </Col>
                         <Col span={16}>
-                            <Button style={{borderRadius: 4}}>Edit Profile</Button>
+                        <Upload {...props}>
+                                <Button style={{borderRadius: 4}}>Edit Profile</Button>
+                        </Upload>
                             <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
-                            <Button style={{borderRadius: 8}} type="primary">Upload file</Button>
+                            {/* <Button
+                                type="primary"
+                                onClick={this.handleUpload}
+                                disabled={fileList.length === 0}
+                                loading={uploading}
+                                style={{ marginTop: 16, borderRadius: 8 }} >
+                            {uploading ? 'Uploading' : 'Upload File'}
+                            </Button> */}
                         </Col>
                     </Row>
 
@@ -232,13 +264,13 @@ const EditBiodata = () => {
                                                 <Meta
                                                     title={
                                                         <>
-                                                            <Text>{e.title}</Text>
-                                                            <Button onClick={deleteInputData}
+                                                            <Text>{e.skills}</Text>
+                                                            {/* <Button onClick={deleteInputData}
                                                                     value={e.skills}
                                                                     name={e.skills}
                                                                     style={{color: "#3B85FA"}}
                                                                     type="text"><CloseOutlined/>
-                                                            </Button>
+                                                            </Button> */}
                                                         </>
                                                     }/>
                                             </Card>

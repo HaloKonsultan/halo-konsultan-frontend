@@ -69,6 +69,10 @@ const PersonalBiodata = () => {
                                 <Text strong>{input.position}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
+                                <Text type="secondary">Provinsi</Text>
+                                <Text strong>{input.location}</Text>
+                            </Space>
+                            <Space size={4} direction="vertical">
                                 <Text type="secondary">Kota</Text>
                                 <Text strong>{input.location}</Text>
                             </Space>
@@ -83,7 +87,7 @@ const PersonalBiodata = () => {
                                     </Col>
                                 </Row>
                             </Space>
-                            <Space size={4} direction="vertical">
+                            {/* <Space size={4} direction="vertical">
                                 <Text type="secondary">Pendidikan</Text>
                                 {
                                     input.consultant_education !== null && (
@@ -106,7 +110,7 @@ const PersonalBiodata = () => {
                                         </>
                                     )
                                 }
-                            </Space>
+                            </Space> */}
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
                                 <Text strong>{input.skills}</Text>
