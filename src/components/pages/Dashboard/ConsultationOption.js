@@ -33,7 +33,6 @@ const ConsultationOption = () => {
             date: dateString
         })
         setPrefDate({...prefDate, dateInput})
-        // console.log(prefDate.date);
     }
 
     function onChangeTime(time, timeString, id) {
@@ -45,7 +44,6 @@ const ConsultationOption = () => {
             time: timeString
         })
         setPrefTime({...prefTime, timeInput})
-        // console.log(prefTime.time);
     }
 
     const onChangePreference = e => {
@@ -54,14 +52,11 @@ const ConsultationOption = () => {
         let name = "preference"
 
         setInput({...input, [name]: typeOfValue})
-        // console.log("input" + JSON.stringify(input))
     };
 
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
         let name = event.target.name
-        // console.log("tesvalue " + typeOfValue)
-        // console.log("tesname " + name)
 
         setInput({...input, [name]: typeOfValue})
     };

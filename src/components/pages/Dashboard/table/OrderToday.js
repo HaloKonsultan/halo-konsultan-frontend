@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import {TodayOrderContext} from "../../../context/TodayOrderContext";
 
 const {Meta} = Card;
-const TodayOrder = () => {
+const OrderToday = () => {
     const {dataTodayOrder, functions} = useContext(TodayOrderContext)
     const {fetchData, functionDetail} = functions
     const today = format(new Date(), 'dd-MM-yyy ')
@@ -66,4 +66,4 @@ const TodayOrder = () => {
     )
 }
 
-export default TodayOrder
+export default OrderToday

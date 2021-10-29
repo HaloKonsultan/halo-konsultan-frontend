@@ -2,7 +2,7 @@ import React, {useEffect, useContext} from "react"
 import {Table} from 'antd';
 import {WaitingPaymentContext} from "../../../context/WaitingPaymentContext";
 
-const WaitingPaymentTable = () => {
+const OrderTableWaiting = () => {
     const {dataPayment, functions} = useContext(WaitingPaymentContext)
     const {fetchData, functionDetail} = functions
 
@@ -52,4 +52,4 @@ const WaitingPaymentTable = () => {
     )
 }
 
-export default WaitingPaymentTable
+export default OrderTableWaiting

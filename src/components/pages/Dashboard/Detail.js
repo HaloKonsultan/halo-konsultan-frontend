@@ -23,7 +23,7 @@ const ConsultationDetail = () => {
             <div className="dashboard-container">
                 <Space direction="vertical">
                     <Title level={3}>{input.title}</Title>
-                    <Text type="secondary">Pengirim : {input.name}</Text>
+                    <Text type="secondary">Pengirim : {input.user_name}</Text>
                     <Paragraph>
                         {input.description}
                     </Paragraph>

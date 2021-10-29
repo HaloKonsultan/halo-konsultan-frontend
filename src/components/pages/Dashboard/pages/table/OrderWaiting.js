@@ -1,6 +1,6 @@
 import React from "react"
-import IncomingOrderTable from "../table/IncomingOrderTable";
-import Nav from "../../../layout/Header";
+import Nav from "../../../../layout/Header";
+import OrderTableWaiting from "../../table/OrderTableWaiting";
 
 function IncomingOrder() {
 
@@ -8,7 +8,7 @@ function IncomingOrder() {
         <>
             <Nav/>
             <div className="incoming-order-table">
-                <IncomingOrderTable/>
+                <OrderTableWaiting/>
             </div>
         </>
     )

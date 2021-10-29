@@ -22,15 +22,15 @@ import {AfterBookingProvider} from "../context/AfterBookingContext";
 import LayoutComponent from "../layout/Layout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Message from "../pages/Message";
-import IncomingOrder from "../pages/Dashboard/pages/IncomingOrder";
-import ActiveOrder from "../pages/Dashboard/pages/ActiveOrder";
-import WaitingPayment from "../pages/Dashboard/pages/WaitingPayment";
-import ConsultationRequest from "../pages/Dashboard/pages/ConsultationRequest";
-import IncomingConsultationDetail from "../pages/Dashboard/pages/IncomingConsultationDetail";
+import OrderIncoming from "../pages/Dashboard/pages/table/OrderIncoming";
+import OrderActive from "../pages/Dashboard/pages/table/OrderActive";
+import WaitingPayment from "../pages/Dashboard/pages/table/OrderWaiting";
+import ConsultationRequest from "../pages/Dashboard/pages/ConsultationIncoming";
+import ConsultationAfterBooking from "../pages/Dashboard/pages/ConsultationAfterBooking";
 import EditProfile from "../pages/Profile/EditProfile";
 import EditBiodata from "../pages/Profile/EditBiodata";
 import Profile from "../pages/Profile/Profile";
-import ActiveConsultationDetail from "../pages/Dashboard/pages/ActiveConsultationDetail";
+import ConsultationActiveDetail from "../pages/Dashboard/pages/ConsultationActiveDetail";
 import ConsultationHistoryDetail from "../pages/history/pages/ConsultationHistoryDetail";
 import History from "../pages/history/History";
 
@@ -72,10 +72,10 @@ const Routes = () => {
 
                             {/*Dashboard Table*/}
                             <LoginRoute path="/incoming-order" exact>
-                                <LayoutComponent content={<IncomingOrder/>}/>
+                                <LayoutComponent content={<OrderIncoming/>}/>
                             </LoginRoute>
                             <LoginRoute path="/order" exact>
-                                <LayoutComponent content={<ActiveOrder/>}/>
+                                <LayoutComponent content={<OrderActive/>}/>
                             </LoginRoute>
                             <LoginRoute path="/waiting-payment" exact>
                                 <LayoutComponent content={<WaitingPayment/>}/>
@@ -88,10 +88,10 @@ const Routes = () => {
                                 <LayoutComponent content={<ConsultationRequest/>}/>
                             </LoginRoute>
                             <LoginRoute path="/incoming-order/detail/accept/:Id" exact>
-                                <LayoutComponent content={<IncomingConsultationDetail/>}/>
+                                <LayoutComponent content={<ConsultationAfterBooking/>}/>
                             </LoginRoute>
                             <LoginRoute path="/order/detail/:Id" exact>
-                                <LayoutComponent content={<ActiveConsultationDetail/>}/>
+                                <LayoutComponent content={<ConsultationActiveDetail/>}/>
                             </LoginRoute>
                             <LoginRoute path="/success" exact>
                                 <LayoutComponent content={<CompleteSuccess/>}/>

@@ -11,7 +11,7 @@ export const ConsultationDetailProvider = props => {
     const [dataConsultation, setDataConsultation] = useState([])
     const [input, setInput] = useState({
         title: "",
-        name: "",
+        user_name: "",
         description: "",
         preference: "",
         location: "",
@@ -41,7 +41,7 @@ export const ConsultationDetailProvider = props => {
         setInput({
             id: data.id,
             title: data.title,
-            name: data.name,
+            user_name: data.user_name,
             description: data.description,
             preference: data.preference,
             location: data.location,

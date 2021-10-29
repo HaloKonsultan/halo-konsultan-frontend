@@ -2,7 +2,7 @@ import React, {useEffect, useContext} from "react"
 import {Table, Button} from 'antd';
 import {IncomingOrderContext} from "../../../context/IncomingOrderContext";
 
-const IncomingOrderTable = () => {
+const OrderTableIncoming = () => {
     const {dataIncomingOrder, functions} = useContext(IncomingOrderContext)
     const {fetchData, functionDetail} = functions
 
@@ -56,4 +56,4 @@ const IncomingOrderTable = () => {
     )
 }
 
-export default IncomingOrderTable
+export default OrderTableIncoming

@@ -6,6 +6,7 @@ import {ConsultationDetailContext} from "../../context/ConsultationDetailContext
 import {Row, Col} from 'antd';
 import {ArrowRightOutlined, FileTextOutlined} from '@ant-design/icons';
 import Cookies from "js-cookie";
+import ConsultationDocument from "./ConsultationDocument";
 
 const {Title, Link, Text} = Typography;
 
@@ -42,68 +43,59 @@ const SendLink = () => {
 
     return (
         <>
-            <div className="dashboard-container">
-                <Card title={<Title style={{color: "black", margin: 0}} level={4}>Dokumen Klien</Title>}
-                      style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
-                    {
-                        input.consultation_document !== null && (
-                            <>
-                                {input.consultation_document.map((e, index) => {
-                                    return (
-                                        <>
-                                            <Row>
-                                                <Col span={12}>
-                                                    <p>
-                                                        <FileTextOutlined style={{fontSize: '20px', paddingRight: 16}}/>
-                                                        {e.name}</p>
-                                                </Col>
-                                                <Col span={12}>
-                                                    <Link
-                                                        style={{display: "flex", float: "right"}}
-                                                        href={e.file}>
-                                                        Download</Link>
-                                                </Col>
-                                            </Row>
-                                        </>
-                                    )
-                                })}
-                            </>
-                        )}
-                </Card>
-                <br/>
-                <form id="1" onSubmit={handleSubmit}>
-                    <Space size={24} direction="vertical">
-                        <Space size={8} direction="vertical">
-                            <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
-                            <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
-                                   name="conference_link"
-                                   value={input.conference_link} onChange={handleChange}/>
+            {
+                input.preference !== "offline" &&
+                <>
+                    <form id="1" onSubmit={handleSubmit}>
+                        <Space size={24} direction="vertical">
+                            <Space size={8} direction="vertical">
+                                <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
+                                <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                       name="conference_link"
+                                       value={input.conference_link} onChange={handleChange}/>
+                            </Space>
                         </Space>
-                    </Space>
-                </form>
-                <br/>
-                <Space direction="horizontal">
-                    {
-                        input.conference_link === null &&
-                        <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
-                            Kirim Link ke Klien<ArrowRightOutlined/>
-                        </Button>
-                    }
-                    {
-                        input.conference_link !== null &&
-                        <>
-                            <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary"
-                                    htmlType="submit">
+                    </form>
+                    <br/>
+                </>
+            }
+            <Space direction="horizontal">
+                {
+                    input.conference_link !== null && input.preference !== "offline" &&
+                    <>
+                        <Link href={input.conference_link} target="_blank">
+                            <Button
+                                block
+                                size="large"
+                                className="button"
+                                type="primary"
+                                style={{borderRadius: 8, height: 44, backgroundColor: "#3B85FA"}}>
                                 Masuk Conference
                             </Button>
-
-                            <Button style={{borderRadius: 8}} type="danger" onClick={handleStatus}>
-                                Akhiri Konsultasi
-                            </Button>
-                        </>
-                    }
-                </Space>
-            </div>
+                        </Link>
+                    </>
+                }
+                {
+                    input.conference_link === null &&
+                    <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
+                        Kirim Link ke Klien<ArrowRightOutlined/>
+                    </Button>
+                }
+                {
+                    input.conference_link !== null &&
+                    <>
+                        <Button
+                            block
+                            onClick={handleStatus}
+                            size="large"
+                            className="button"
+                            type="default"
+                            style={{height: 44, borderRadius: 8}} danger>
+                            Akhiri Konsultasi
+                        </Button>
+                    </>
+                }
+            </Space>
         </>
     )
 }

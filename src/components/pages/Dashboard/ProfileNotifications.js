@@ -20,19 +20,15 @@ function ProfileNotifications() {
         history.push(`/profile`)
     }
 
-    const cek = () => {
-        console.log(input.description)
-    }
-
     return (
         <>
             {
-                input.description !== null &&
+                input.description === null &&
 
                 <Card style={{borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA", width: 416, backgroundColor: "#112A44"}}>
                     <Title level={5} style={{color: "white"}}><ExclamationCircleOutlined/> Silakan lengkapi profil anda
                         terlebih dahulu.</Title>
-                    <Button onClick={cek} ghost style={{width: 336, borderRadius: 8}}>Pergi ke Profil</Button>
+                    <Button onClick={handleDetail} ghost style={{width: 336, borderRadius: 8}}>Pergi ke Profil</Button>
                 </Card>
             }
         </>
