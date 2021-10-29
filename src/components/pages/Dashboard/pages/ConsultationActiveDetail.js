@@ -1,5 +1,5 @@
 import React from "react"
-import {Row, Col, Space} from 'antd';
+import {Row, Col, Space, PageHeader} from 'antd';
 import Detail from "../Detail";
 import Nav from "../../../layout/Header";
 import SendLink from "../SendLink";
@@ -9,7 +9,7 @@ const ConsultationActiveDetail = () => {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Detail Konsultasi" onBack={() => window.history.back()}/>
             <Row className="center">
                 <Col span={13}><Detail/></Col>
                 <Col span={11}>

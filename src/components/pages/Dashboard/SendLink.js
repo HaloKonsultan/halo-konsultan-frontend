@@ -10,7 +10,7 @@ import ConsultationDocument from "./ConsultationDocument";
 
 const {Title, Link, Text} = Typography;
 
-const SendLink = () => {
+const SendLink = (props) => {
     let {Id} = useParams()
     console.log(Id)
 
@@ -52,6 +52,7 @@ const SendLink = () => {
                                 <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
                                 <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                        name="conference_link"
+                                       disabled={props.disabled}
                                        value={input.conference_link} onChange={handleChange}/>
                             </Space>
                         </Space>
