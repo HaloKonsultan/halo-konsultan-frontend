@@ -87,7 +87,7 @@ const PersonalBiodata = () => {
                                     </Col>
                                 </Row>
                             </Space>
-                            {/* <Space size={4} direction="vertical">
+                            <Space size={4} direction="vertical">
                                 <Text type="secondary">Pendidikan</Text>
                                 {
                                     input.consultant_education !== null && (
@@ -110,7 +110,7 @@ const PersonalBiodata = () => {
                                         </>
                                     )
                                 }
-                            </Space> */}
+                            </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
                                 <Text strong>{input.skills}</Text>
