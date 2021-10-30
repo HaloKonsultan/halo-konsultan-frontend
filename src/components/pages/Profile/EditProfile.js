@@ -1,14 +1,15 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Row, Col, PageHeader, Form, Space, Upload, message, Button, Card, Modal, Input, Typography} from 'antd';
 import Nav from "../../layout/Header";
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
 import { Select } from 'antd';
+import PrimaryButton from "../../global/ButtonPrimary";
 
 const { Option } = Select;
 const {Text} = Typography;
 
 const EditProfile = () => {
-    const {input, setInput, functions} = useContext(ProfileContext)
+    const {input, setInput, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
@@ -16,24 +17,6 @@ const EditProfile = () => {
     useEffect(() => {
         fetchData()
     }, [])
-
-
-    //dropdown nama bank
-    function onChange(value) {
-        console.log(`selected ${value}`);
-    }
-
-    function onBlur() {
-        console.log('blur');
-    }
-
-    function onFocus() {
-        console.log('focus');
-    }
-
-    function onSearch(val) {
-        console.log('search:', val);
-    }
 
     //upload rekening
     const onFinish = (values) => {
@@ -217,10 +200,6 @@ const EditProfile = () => {
                             style={{ borderRadius: 8 }}
                             placeholder="Select a person"
                             optionFilterProp="children"
-                            onChange={onChange}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            onSearch={onSearch}
                             filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                             }
@@ -258,14 +237,7 @@ const EditProfile = () => {
                     </Form.Item>
 
                     <Form.Item>
-                        <Button
-                            size="large"
-                            className="button"
-                            type="primary" block
-                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                            htmlType="submit">
-                            Tambahkan Rekening
-                        </Button>
+                        <PrimaryButton htmlType="submit" text="Tambahkan Rekening"/>
                     </Form.Item>
                 </Form>
             </Modal>

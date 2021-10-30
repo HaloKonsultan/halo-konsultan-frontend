@@ -4,14 +4,14 @@ import {Card, Input} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
 import {FileTextOutlined} from "@ant-design/icons";
 
 const {Title, Text, Link} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()
-    const {input, functions} = useContext(ProfileContext)
+    const {input, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
 
     useEffect(() => {
@@ -90,7 +90,7 @@ const PersonalBiodata = () => {
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pendidikan</Text>
                                 {
-                                    input.consultant_education !== null && (
+                                    input.consultant_education && (
                                         <>
                                             {input.consultant_education.map((e, index) => {
                                                 return (

@@ -5,14 +5,14 @@ import axios from "axios"
 import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
-import {UserContext} from "../components/context/UserContext";
+import {ContextUser} from "../components/context/ContextUser";
 import {message} from 'antd';
 
 const LoginCard = () => {
     let history = useHistory()
     let showPassword = document.getElementById("password");
 
-    const {setLoginStatus} = useContext(UserContext)
+    const {setLoginStatus} = useContext(ContextUser)
 
     const [input, setInput] = useState({
         email: "",

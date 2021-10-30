@@ -2,14 +2,14 @@ import React, {useContext, useEffect} from "react"
 import {useParams} from "react-router-dom"
 import {Typography, Space} from 'antd';
 import {Input} from 'antd';
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 
 const {Title, Paragraph, Text} = Typography;
 
 const ConsultationDetail = () => {
     let {Id} = useParams()
 
-    const {input, functions} = useContext(ConsultationDetailContext)
+    const {input, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById} = functions
 
     useEffect(() => {

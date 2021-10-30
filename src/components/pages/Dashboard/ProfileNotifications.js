@@ -2,14 +2,14 @@ import React, {useContext, useEffect} from "react"
 import {Button, Card} from 'antd';
 import {Typography} from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
 import {useHistory} from "react-router";
 
 const {Title} = Typography;
 
 function ProfileNotifications() {
     let history = useHistory()
-    const {input, functions} = useContext(ProfileContext)
+    const {input, functions} = useContext(ContextProfile)
     const {fetchData} = functions
 
     useEffect(() => {

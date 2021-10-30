@@ -4,7 +4,7 @@ import {useHistory} from "react-router";
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const ProfileContext = createContext()
+export const ContextProfile = createContext()
 
 export const ProfileProvider = props => {
     let history = useHistory()
@@ -107,7 +107,7 @@ export const ProfileProvider = props => {
     }
 
     return (
-        <ProfileContext.Provider value={{
+        <ContextProfile.Provider value={{
             dataProfile,
             setDataProfile,
             input,
@@ -119,6 +119,6 @@ export const ProfileProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </ProfileContext.Provider>
+        </ContextProfile.Provider>
     )
 }

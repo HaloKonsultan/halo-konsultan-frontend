@@ -19,7 +19,7 @@ import {
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import {CloseOutlined} from "@ant-design/icons";
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
 
 
 const {Meta} = Card;
@@ -29,7 +29,7 @@ const {Title, Text} = Typography;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
-    const {input, setInput, functions} = useContext(ProfileContext)
+    const {input, setInput, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata, provinces} = functions
 
     // useEffect(() => {
