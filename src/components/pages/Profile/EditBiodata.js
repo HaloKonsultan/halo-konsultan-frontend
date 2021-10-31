@@ -20,6 +20,7 @@ import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import {CloseOutlined} from "@ant-design/icons";
 import {ProfileContext} from "../../context/ProfileContext";
+import { size } from "lodash";
 
 
 const {Meta} = Card;
@@ -74,10 +75,28 @@ const EditBiodata = () => {
         // setInput({ ...input, [name]: typeOfValue })
     };
 
-    const onFinish = (values) => {
+    const onFinishSkill = (values) => {
         console.log('Success:', values);
-        let documentInput = input.document.push(values)
-        setInput({...input, documentInput})
+        let consultant_skillInput = input.consultant_skill.push(values)
+        setInput({...input, consultant_skillInput})
+
+        console.log(input)
+        setIsExperienceVisible(false);
+    };
+
+    const onFinishHistory = (values) => {
+        console.log('Success:', values);
+        let consultant_educationInput = input.consultant_education.push(values)
+        setInput({...input, consultant_educationInput})
+
+        console.log(input)
+        setIsHistoryVisible(false);
+    };
+
+    const onFinishExperience = (values) => {
+        console.log('Success:', values);
+        let coconsultant_experienceInput = input.consultant_experience.push(values)
+        setInput({...input, coconsultant_experienceInput})
 
         console.log(input)
         setIsExperienceVisible(false);
@@ -97,10 +116,10 @@ const EditBiodata = () => {
     const deleteInputData = (event) => {
         let title = event.target.name
         console.log(title)
-        let index = input.document.indexOf(title);
+        let index = input.consultant_skill.indexOf(title);
 
         console.log(index)
-        input.document.splice(index, 1);
+        input.consultant_skill.splice(index, 1);
         console.log(input)
     }
     //   function onChange(value) {
@@ -238,19 +257,48 @@ const EditBiodata = () => {
 
                         <br/><br/>
 
-                        <Row>
-                            <Col span={13}><h4 style={{color: "gray"}}>Pengalaman Kerja</h4></Col>
-                            <Col span={11}>
-                                <Button onClick={showExperienceModal}
-                                        type="link">
-                                    + Tambah Pengalaman kerja
-                                </Button>
-                            </Col>
-                        </Row>
-
-                        <h6 style={{color: "gray"}}>
+                        <PageHeader
+                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
+                            ghost={false}
+                            subTitle={<Text type="secondary">Pengalaman Kerja</Text>}
+                            extra={[
+                                <Button onClick={showExperienceModal} style={{color: "#3B85FA"}}
+                                        type="text"> + Tambah Pengalaman Kerja
+                                </Button>,
+                            ]}/>
+                            <h6 style={{color: "gray"}}>
                             Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
                             konsultasi</h6>
+                        <Space size={8} direction="vertical">
+                            {
+                                input.consultant_experience !== null && (
+                                    <>
+                                        {input.consultant_experience.map((e, index) => {
+                                            return (
+                                                <>
+                                                    <Card
+                                                        style={{
+                                                            width: 480,
+                                                            height: 48,
+                                                            borderRadius: 8,
+                                                            boxShadow: "0 0 0 1px #CED4DA"
+                                                            
+                                                        }}
+                                                        type="inner"
+                                                        title={ <>
+                                                            <Text>{e.position}</Text>
+                                                             <br/>
+                                                            <Text style={{fontSize:14}} type="secondary">{e.start_year} - {e.end_year}</Text>
+                                                        </>
+                                                    }    
+                                                    >
+                                                    </Card>
+                                                </>
+                                            )
+                                        })}
+                                    </>
+                                )}
+                        </Space>
 
                         <PageHeader
                             style={{backgroundColor: "transparent", padding: 0, width: 450}}
@@ -276,19 +324,12 @@ const EditBiodata = () => {
                                                             boxShadow: "0 0 0 1px #CED4DA"
                                                         }}
                                                         type="inner"
+                                                        title={
+                                                            <>
+                                                                <Text>{e.skills}</Text>
+                                                            </>
+                                                        }
                                                     >
-                                                        <Meta
-                                                            title={
-                                                                <>
-                                                                    <Text>{e.skills}</Text>
-                                                                    {/* <Button onClick={deleteInputData}
-                                                                    value={e.skills}
-                                                                    name={e.skills}
-                                                                    style={{color: "#3B85FA"}}
-                                                                    type="text"><CloseOutlined/>
-                                                            </Button> */}
-                                                                </>
-                                                            }/>
                                                     </Card>
                                                 </>
                                             )
@@ -296,48 +337,127 @@ const EditBiodata = () => {
                                     </>
                                 )}
                         </Space>
-                        <Row>
-                            <Col span={13}><h4 style={{color: "gray"}}>Pendidikan</h4><br/></Col>
-                            <Col span={11}>
-                                <Button onClick={showHistoryModal}
-                                        type="link">
-                                    + Tambah Riwayat Pendidikan
-                                </Button>
-                            </Col>
-                        </Row>
+
+                        <PageHeader
+                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
+                            ghost={false}
+                            subTitle={<Text type="secondary">Pendidikan</Text>}
+                            extra={[
+                                <Button onClick={showHistoryModal} style={{color: "#3B85FA"}}
+                                        type="text"> + Tambah Riwayat Pendidikan
+                                </Button>,
+                            ]}/>
+                        <Space size={8} direction="vertical">
+                            {
+                                input.consultant_education !== null && (
+                                    <>
+                                        {input.consultant_education.map((e, index) => {
+                                            return (
+                                                <>
+                                                    <Card
+                                                        style={{
+                                                            width: 480,
+                                                            height: 48,
+                                                            borderRadius: 8,
+                                                            boxShadow: "0 0 0 1px #CED4DA"
+                                                        }}
+                                                        type="inner"
+                                                        title={
+                                                            <> 
+                                                            <Text style={{marginLeft:10, marginTop:2}}>{e.institution_name}</Text>
+                                                             <br/>
+                                                            <Text type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                            </>
+                                                        }
+                                                    >
+                                                    </Card>
+                                                </>
+                                            )
+                                        })}
+                                    </>
+                                )}
+                        </Space>
 
 
                         <Modal
+                            destroyOnClose={true}
                             className="profile-modal"
-                            title="Tambahkan Pengalaman Kerja"
+                            title="Tambahkan Pengalaman kerja"
                             visible={isExperienceVisible}
                             onCancel={handleCancel}
                             footer={null}
                         >
-                            <form id="2">
-                                <h4 style={{color: "gray"}}>Titel Pengalaman Kerja</h4>
-                                <Input style={{borderRadius: 8}} value={input.position}/><br/><br/>
+                            <Form
+                                name="basic"
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                layout="vertical"
+                                onFinish={onFinishExperience}
+                                onFinishFailed={onFinishFailed}
+                                autoComplete="off"
+                            >
+                                <Form.Item
+                                    label="Titel Pengalaman Kerja"
+                                    name="position"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input position!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8}}/>
+                                </Form.Item>
+
                                 <Row>
-                                    <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
-                                        <DatePicker style={{width: 215, borderRadius: 8}}
-                                                    picker="year" value={input.start_year}/>
+                                    <Col span={12}>
+                                    <Form.Item
+                                    label="Tahun Mulai"
+                                    name="start_year"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input start year!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8, width : 215}}/>
+                                </Form.Item>
                                     </Col>
                                     <Col span={11} offset={1}>
-                                        <h4 style={{color: "gray"}}>Tahun Selesai</h4>
-                                        <DatePicker style={{width: 215, borderRadius: 8}}
-                                                    picker="year" value={input.end_year}/><br/><br/>
+                                    <Form.Item
+                                    label="Tahun Selesai"
+                                    name="end_year"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input end year!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8, width : 215}}/>
+                                </Form.Item>
                                     </Col>
                                 </Row>
 
-                                <Button size="large"
+                                <Form.Item>
+                                    <Button
+                                        size="large"
                                         className="button"
-                                        type="primary"
-                                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                        htmlType="submit"
-                                        form="2">
-                                    Tambahkan Pengalaman Kerja
-                                </Button>
-                            </form>
+                                        type="primary" block
+                                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                        htmlType="submit">
+                                        Tambahkan Riwayat Pendidikan
+                                    </Button>
+                                </Form.Item>
+                            </Form>
                         </Modal>
 
                         <Modal
@@ -354,17 +474,17 @@ const EditBiodata = () => {
                                     remember: true,
                                 }}
                                 layout="vertical"
-                                onFinish={onFinish}
+                                onFinish={onFinishSkill}
                                 onFinishFailed={onFinishFailed}
                                 autoComplete="off"
                             >
                                 <Form.Item
                                     label="Titel bidang keahlian"
-                                    name="description"
+                                    name="skills"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Please input document description!',
+                                            message: 'Please input consultant skills!',
                                         },
                                     ]}
                                 >
@@ -385,36 +505,102 @@ const EditBiodata = () => {
                         </Modal>
 
                         <Modal
+                            destroyOnClose={true}
                             className="profile-modal"
-                            title="Tambahkan Riwayat Pendidikan"
+                            title="Tambah Riwayat Pendidikan"
                             visible={isHistoryVisible}
                             onCancel={handleCancel}
                             footer={null}
                         >
-                            <form id="2">
-                                <h4 style={{color: "gray"}}>Nama Instansi</h4>
-                                <Input style={{borderRadius: 8}} value={input.institution_name}/><br/><br/>
-                                <h4 style={{color: "gray"}}>Titel</h4>
-                                <Input style={{borderRadius: 8}} value={input.major}/><br/><br/>
+                            <Form
+                                name="basic"
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                layout="vertical"
+                                onFinish={onFinishHistory}
+                                onFinishFailed={onFinishFailed}
+                                autoComplete="off"
+                            >
+                                <Form.Item
+                                    label="Nama Instansi"
+                                    name="institution_name"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input institution name!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8}}/>
+                                </Form.Item>
+
+                                <Form.Item
+                                    label="Titel"
+                                    name="major"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input major!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8}}/>
+                                </Form.Item>
+
                                 <Row>
-                                    <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
-                                        <Input style={{borderRadius: 8}} value={input.start_year}/><br/><br/></Col>
+                                    <Col span={12}>
+                                    <Form.Item
+                                    label="Tahun Mulai"
+                                    name="start_year"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input start year!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8, width : 215}}/>
+                                </Form.Item>
+                                    </Col>
                                     <Col span={11} offset={1}>
-                                        <h4 style={{color: "gray"}}>Tahun Selesai</h4>
-                                        <Input style={{borderRadius: 8}} value={input.end_year}/><br/><br/>
+                                    <Form.Item
+                                    label="Tahun Selesai"
+                                    name="end_year"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input end year!',
+                                        },
+                                    ]}
+                                    
+                                >
+                                    
+                                    <Input style={{borderRadius: 8, width : 215}}/>
+                                </Form.Item>
                                     </Col>
                                 </Row>
-                                <Button size="large"
+
+                                <Form.Item>
+                                    <Button
+                                        size="large"
                                         className="button"
-                                        type="primary"
-                                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                        htmlType="submit"
-                                        form="2">
-                                    Tambahkan Riwayat Pendidikan
-                                </Button>
-                            </form>
+                                        type="primary" block
+                                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                        htmlType="submit">
+                                        Tambahkan Riwayat Pendidikan
+                                    </Button>
+                                </Form.Item>
+                            </Form>
                         </Modal>
 
+                        <br/><br/>
                         <Button
                             size="large"
                             className="button"

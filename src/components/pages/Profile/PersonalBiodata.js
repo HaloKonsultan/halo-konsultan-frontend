@@ -92,7 +92,7 @@ const PersonalBiodata = () => {
                                 {
                                     input.consultant_education !== null && (
                                         <>
-                                            {input.consultant_education.map((e, index) => {
+                               g             {input.consultant_education.map((e, index) => {
                                                 return (
                                                     <>
                                                         <Row>
