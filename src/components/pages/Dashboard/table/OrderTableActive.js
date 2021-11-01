@@ -1,9 +1,9 @@
 import React, {useEffect, useContext} from "react"
 import {Table, Tag} from 'antd';
-import {ActiveOrderContext} from "../../../context/ActiveOrderContext";
+import {ContextOrderActive} from "../../../context/ContextOrderActive";
 
-const ActiveOrderTable = () => {
-    const {dataOrder, functions} = useContext(ActiveOrderContext)
+const OrderTableActive = () => {
+    const {dataOrder, functions} = useContext(ContextOrderActive)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
@@ -46,16 +46,11 @@ const ActiveOrderTable = () => {
             },
         },
         {
-            title: 'Tanggal Konsultasi',
-            key: 'date',
-            dataIndex: 'date',
-            sorter: (a, b) => new Date(a.date) - new Date(b.date),
-            defaultSortOrder: 'descend'
-        },
-        {
             title: 'Waktu Konsultasi',
-            key: 'time',
-            dataIndex: 'time'
+            dataIndex: ['time', 'date'],
+            sorter: (a, b) => new Date(a.date) - new Date(b.date),
+            defaultSortOrder: 'descend',
+            render: (text,row) => <div >{row["date"]} {row["time"]}</div>,
         }
     ];
 
@@ -77,9 +72,12 @@ const ActiveOrderTable = () => {
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
                 rowKey={"active"}
-                columns={columns} dataSource={data} pagination={false}/>
+                columns={columns}
+                dataSource={data.slice(-5)}
+                pagination={false}
+                />
         </>
     )
 }
 
-export default ActiveOrderTable
+export default OrderTableActive

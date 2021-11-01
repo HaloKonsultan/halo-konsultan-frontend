@@ -4,7 +4,7 @@ import {useHistory} from "react-router";
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const ProfileContext = createContext()
+export const ContextProfile = createContext()
 
 export const ProfileProvider = props => {
     let history = useHistory()
@@ -18,28 +18,12 @@ export const ProfileProvider = props => {
         location: "",
         description: "",
         chat_price: "",
-        consultant_price: "",
-        consultant_doc: [{
-            consultant_id: "",
-            photo: "",
-        }],
-        consultant_experience: [{
-            consultant_id: "",
-            position: "",
-            start_year: "",
-            end_year: ""
-        }],
-        consultant_educations: [{
-            consultant_id: "",
-            institution_name: "",
-            major: "",
-            start_year: "",
-            end_year: ""
-        }],
-        consultant_skills: [{
-            consultant_id: "",
-            skills: "",
-        }],
+        consultation_price: "",
+        consultant_doc: [],
+        consultant_experience: [],
+        consultant_education: [],
+        consultant_skill: [],
+        consultant_virtual_accounts:[]
     })
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
@@ -59,11 +43,13 @@ export const ProfileProvider = props => {
             location: data.location,
             description: data.description,
             chat_price: data.chat_price,
-            consultant_price: data.consultant_price,
-            consultant_doc: [{
-                consultant_id: data.consultant_id,
-                photo: data.photo,
-            }],
+            consultation_price: data.consultation_price,
+            consultant_documentation: data.consultant_documentation.map(key => {
+                return {
+                    id: key.id,
+                    photo: key.photo,
+                }
+            }),
             consultant_experience: data.consultant_experience.map(key => {
                 return {
                     id: key.id,
@@ -90,8 +76,8 @@ export const ProfileProvider = props => {
             consultant_virtual_accounts: data.consultant_virtual_accounts.map(key => {
                 return {
                     id: key.id,
-                    card_number: data.card_number,
-                    bank: data.bank
+                    card_number: key.card_number,
+                    bank: key.bank
                 }
             }),
         })
@@ -121,7 +107,7 @@ export const ProfileProvider = props => {
     }
 
     return (
-        <ProfileContext.Provider value={{
+        <ContextProfile.Provider value={{
             dataProfile,
             setDataProfile,
             input,
@@ -133,6 +119,6 @@ export const ProfileProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </ProfileContext.Provider>
+        </ContextProfile.Provider>
     )
 }

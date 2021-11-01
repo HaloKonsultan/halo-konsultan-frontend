@@ -4,12 +4,10 @@ import HistoryTable from "./HistoryTable";
 import Cookies from "js-cookie";
 
 function History() {
-    let page = 'Riwayat';
-    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
-            <Nav/>
+            <Nav title="Riwayat"/>
             <div className="incoming-order-table">
                 <HistoryTable/>
             </div>

@@ -1,16 +1,36 @@
 import React, {useState, useParams, useContext, useEffect} from "react";
-import {Row, Col, Space, Form, Card, Typography, Modal, Input, Button, Radio, DatePicker} from 'antd';
+import {
+    Row,
+    Col,
+    Space,
+    Form,
+    Card,
+    Typography,
+    Modal,
+    Input,
+    Button,
+    Radio,
+    DatePicker,
+    Select,
+    PageHeader,
+    Upload,
+    message
+} from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import {CloseOutlined} from "@ant-design/icons";
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
+
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
+// const { Option } = Select;
+// const { uploading, fileList } = this.state;  
+const {TextArea} = Input;
 
 const EditBiodata = () => {
-    const {input, setInput, functions} = useContext(ProfileContext)
-    const {fetchData, functionEditBiodata} = functions
+    const {input, setInput, functions} = useContext(ContextProfile)
+    const {fetchData, functionEditBiodata, provinces} = functions
 
     // useEffect(() => {
     //     fetchData()
@@ -39,11 +59,11 @@ const EditBiodata = () => {
     };
 
     const [value, setValue] = React.useState(1);
-    
+
     const onChange = e => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);
-      };   
+    };
 
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
@@ -53,7 +73,7 @@ const EditBiodata = () => {
 
         // setInput({ ...input, [name]: typeOfValue })
     };
-  
+
     const onFinish = (values) => {
         console.log('Success:', values);
         let documentInput = input.document.push(values)
@@ -74,255 +94,336 @@ const EditBiodata = () => {
         input.document.splice(index, 1);
         console.log(input)
     }
+    const deleteInputData = (event) => {
+        let title = event.target.name
+        console.log(title)
+        let index = input.document.indexOf(title);
 
-    const {TextArea} = Input;
+        console.log(index)
+        input.document.splice(index, 1);
+        console.log(input)
+    }
+    //   function onChange(value) {
+    //     console.log(`selected ${value}`);
+    //   }
+
+    //   function onBlur() {
+    //     console.log('blur');
+    //   }
+
+    //   function onFocus() {
+    //     console.log('focus');
+    //   }
+
+    //   function onSearch(val) {
+    //     console.log('search:', val);
+    //   }
+
+
+    const props = {
+        name: 'file',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
+
 
     return (
         <>
             <Nav/>
             <div className="container-profile">
                 <Card title="Edit Profil Diri" style={{width: 528, borderRadius: 8}}>
-                <form id="2">
-                    <Row>
-                        <Col span={8}>
-                            <img
-                                src="https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg"
-                                alt="profile-picture"
-                                style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
-                        </Col>
-                        <Col span={16}>
-                            <Button style={{borderRadius: 4}}>Edit Profile</Button>
-                            <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
-                            <Button style={{borderRadius: 8}} type="primary">Upload file</Button>
-                        </Col>
-                    </Row>
-
-                    <Space size={24} direction="vertical">
-
-                    </Space>
-                    <br/><br/>
-                    <h4 style={{color: "gray"}}>Nama Lengkap</h4>
-                    <Input 
-                    style={{borderRadius: 8, height: 48}} 
-                    placeholder="Nama lengkap" 
-                    prefix={input.name} 
-                    onChange={handleChange}/>
-                    
-                    <br/><br/>
-                    <h4 style={{color: "gray"}}>Deskripsi tentang Anda</h4>
-                    <TextArea 
-                    style={{borderRadius: 8}} 
-                    rows={6} 
-                    placeholder="Deskripsi"
-                    prefix={input.description}/>
-
-                    <br/><br/>
-                    <h4 style={{color: "gray"}}>Jenis Kelamin</h4>
-                    <Radio.Group onChange={onChange} value={value}> 
-                    <Radio value={1}>Laki - Laki </Radio>
-                    <Radio value={2}>Perempuan</Radio>
-                    </Radio.Group>
-
-                    <br/><br/>
-                    <h4 style={{color: "gray"}}>Bidang Konsultasi</h4>
-                    <Input style={{borderRadius: 8, height: 48}} 
-                    placeholder="Bidang Konsultasi" 
-                    prefix={input.position}/>
-
-                    <br/><br/>
-                    <h4 style={{color: "gray"}}>Kota</h4>
-                    <TextArea style={{borderRadius: 8}} 
-                    rows={6} placeholder="Lokasi/Kota"
-                    prefix={input.location}/>
-
-                    <br/><br/>
-
-                    <Row>
-                        <Col span={13}><h4 style={{color: "gray"}}>Pengalaman Kerja</h4></Col>
-                        <Col span={11}>
-                            <Button onClick={showExperienceModal} 
-                            type="link">
-                                + Tambah Pengalaman kerja
-                            </Button>
-                        </Col>
-                    </Row>
-
-                    <h6 style={{color: "gray"}}>
-                        Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
-                        konsultasi</h6>
-                    <Row>
-                        <Col span={13}>
-                            <h4 style={{color: "gray"}}>Bidang Keahlian</h4>
-                        </Col>
-                        <Col span={11}>
-                            <Button onClick={showSkillModal} 
-                            type="link">
-                                + Tambah Bidang Keahlian
-                            </Button>
-                        </Col>
-                    </Row>
-                    {/* {
-                        input.skills !== null && (
-                            <>
-                                {input.skills.map((e, index) => {
-                                    return (
-                                        <>
-                                            <Card
-                                                // onClick={() => {
-                                                //     handleDetail(e.id)
-                                                // }}
-                                                style={{
-                                                    width: 438,
-                                                    borderRadius: 8,
-                                                    boxShadow: "0 0 0 1px #CED4DA"
-                                                }}
-                                                type="inner"
-                                            >
-                                                <Meta
-                                                    title={
-                                                        <>
-                                                            <Text>{e.title}</Text>
-                                                            <Button value={e.title} onClick={deleteInput}
-                                                                    style={{color: "#3B85FA"}}
-                                                                    type="text"><CloseOutlined/>
-                                                            </Button>
-                                                        </>
-                                                    }/>
-                                            </Card>
-                                        </>
-                                    )
-                                })}
-                            </>
-                        )} */}
-                        <br/>
-                    <Row>
-                        <Col span={13}><h4 style={{color: "gray"}}>Pendidikan</h4><br/></Col>
-                        <Col span={11}>
-                            <Button onClick={showHistoryModal} 
-                            type="link">
-                                + Tambah Riwayat Pendidikan
-                            </Button>
-                        </Col>
-                    </Row>
-
-                    <Modal
-                        className="profile-modal"
-                        title="Tambahkan Pengalaman Kerja"
-                        visible={isExperienceVisible}
-                        onCancel={handleCancel}
-                        footer={null}   
-                    >
-                        <form id="2">
-                        <h4 style={{color: "gray"}}>Titel Pengalaman Kerja</h4>
-                        <Input style={{borderRadius: 8}} value={input.position}/><br/><br/>
+                    <form id="2">
                         <Row>
-                            <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
-                                <DatePicker style={{width: 215, borderRadius: 8}} 
-                                picker="year" value={input.start_year}/>
+                            <Col span={8}>
+                                <img
+                                    src="https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg"
+                                    alt="profile-picture"
+                                    style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
                             </Col>
-                            <Col span={11} offset={1}>
-                                <h4 style={{color: "gray"}}>Tahun Selesai</h4>
-                                <DatePicker style={{width: 215, borderRadius: 8}}
-                                picker="year" value={input.end_year}/><br/><br/>
+                            <Col span={16}>
+                                <Upload {...props}>
+                                    <Button style={{borderRadius: 4}}>Edit Profile</Button>
+                                </Upload>
+                                <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
+                                {/* <Button
+                                type="primary"
+                                onClick={this.handleUpload}
+                                disabled={fileList.length === 0}
+                                loading={uploading}
+                                style={{ marginTop: 16, borderRadius: 8 }} >
+                            {uploading ? 'Uploading' : 'Upload File'}
+                            </Button> */}
                             </Col>
                         </Row>
-                        
-                        <Button size="large" 
-                        className="button" 
-                        type="primary" 
-                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                        htmlType="submit"
-                        form="2">
-                            Tambahkan Pengalaman Kerja
-                        </Button>
-                        </form>
-                    </Modal>
 
-                    
-            <Modal
-                destroyOnClose={true}
-                className="profile-modal"
-                title="Tambah Bidang Keahlian"
-                visible={isSkillVisible}
-                onCancel={handleCancel}
-                footer={null}
-            >
-                <Form
-                    name="basic"
-                    initialValues={{
-                        remember: true,
-                    }}
-                    layout="vertical"
-                    onFinish={onFinish}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="Titel bidang keahlian"
-                        name="description"
-                        rules={[
+                        <Space size={24} direction="vertical">
+
+                        </Space>
+                        <br/><br/>
+                        <h4 style={{color: "gray"}}>Nama Lengkap</h4>
+                        <Input
+                            style={{borderRadius: 8, height: 48}}
+                            placeholder="Nama lengkap"
+                            prefix={input.name}
+                            onChange={handleChange}/>
+
+                        <br/><br/>
+                        <h4 style={{color: "gray"}}>Deskripsi tentang Anda</h4>
+                        <TextArea
+                            style={{borderRadius: 8}}
+                            rows={6}
+                            placeholder="Deskripsi"
+                            prefix={input.description}/>
+
+                        <br/><br/>
+                        <h4 style={{color: "gray"}}>Jenis Kelamin</h4>
+                        <Radio.Group onChange={onChange} value={value}>
+                            <Radio value={1}>Laki - Laki </Radio>
+                            <Radio value={2}>Perempuan</Radio>
+                        </Radio.Group>
+
+                        <br/><br/>
+                        <h4 style={{color: "gray"}}>Bidang Konsultasi</h4>
+                        <Input style={{borderRadius: 8, height: 48}}
+                               placeholder="Bidang Konsultasi"
+                               prefix={input.position}/>
+
+                        <br/><br/>
+                        <h4 style={{color: "gray"}}>Provinsi</h4>
+                        {/* <Select
+                        showSearch
+                        style={{ width: 200 }}
+                        placeholder="Provinsi"
+                        optionFilterProp="children"
+                        rows={6}
+                         onChange={onChange}
+                         onFocus={onFocus}
+                         onBlur={onBlur}
+                        onSearch={onSearch}
+                          filterOption={(input, option) =>
+                       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                       
+                     }
+                >{
+                    input.provinces !== null && (
+                        <>
+                            {input.provinces.map((e, index) => {
+                                return (
+                                    <>
+                                        <Option value={e.name}>{e.name}</Option>
+                                    </>
+                                )
+                            })}
+                        </>
+                    )}
+                </Select> */}
+
+                        <br/><br/>
+                        <h4 style={{color: "gray"}}>Kota</h4>
+                        <Select defaultValue="Surabaya" style={{borderRadius: 8, width: 480}} onChange={handleChange}
+                                rows={6} placeholder="Lokasi/Kota"
+                                prefix={input.location}/>
+
+                        <br/><br/>
+
+                        <Row>
+                            <Col span={13}><h4 style={{color: "gray"}}>Pengalaman Kerja</h4></Col>
+                            <Col span={11}>
+                                <Button onClick={showExperienceModal}
+                                        type="link">
+                                    + Tambah Pengalaman kerja
+                                </Button>
+                            </Col>
+                        </Row>
+
+                        <h6 style={{color: "gray"}}>
+                            Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
+                            konsultasi</h6>
+
+                        <PageHeader
+                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
+                            ghost={false}
+                            subTitle={<Text type="secondary">Bidang Keahlian</Text>}
+                            extra={[
+                                <Button onClick={showSkillModal} style={{color: "#3B85FA"}}
+                                        type="text"> + Tambah Bidang Keahlian
+                                </Button>,
+                            ]}/>
+                        <Space size={8} direction="vertical">
                             {
-                                required: true,
-                                message: 'Please input document description!',
-                            },
-                        ]}
-                    >
-                        <TextArea style={{borderRadius: 8}} rows={4} name="description"/>
-                    </Form.Item>
+                                input.consultant_skill !== null && (
+                                    <>
+                                        {input.consultant_skill.map((e, index) => {
+                                            return (
+                                                <>
+                                                    <Card
+                                                        style={{
+                                                            width: 480,
+                                                            height: 48,
+                                                            borderRadius: 8,
+                                                            boxShadow: "0 0 0 1px #CED4DA"
+                                                        }}
+                                                        type="inner"
+                                                    >
+                                                        <Meta
+                                                            title={
+                                                                <>
+                                                                    <Text>{e.skills}</Text>
+                                                                    {/* <Button onClick={deleteInputData}
+                                                                    value={e.skills}
+                                                                    name={e.skills}
+                                                                    style={{color: "#3B85FA"}}
+                                                                    type="text"><CloseOutlined/>
+                                                            </Button> */}
+                                                                </>
+                                                            }/>
+                                                    </Card>
+                                                </>
+                                            )
+                                        })}
+                                    </>
+                                )}
+                        </Space>
+                        <Row>
+                            <Col span={13}><h4 style={{color: "gray"}}>Pendidikan</h4><br/></Col>
+                            <Col span={11}>
+                                <Button onClick={showHistoryModal}
+                                        type="link">
+                                    + Tambah Riwayat Pendidikan
+                                </Button>
+                            </Col>
+                        </Row>
 
-                    <Form.Item>
+
+                        <Modal
+                            className="profile-modal"
+                            title="Tambahkan Pengalaman Kerja"
+                            visible={isExperienceVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                        >
+                            <form id="2">
+                                <h4 style={{color: "gray"}}>Titel Pengalaman Kerja</h4>
+                                <Input style={{borderRadius: 8}} value={input.position}/><br/><br/>
+                                <Row>
+                                    <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
+                                        <DatePicker style={{width: 215, borderRadius: 8}}
+                                                    picker="year" value={input.start_year}/>
+                                    </Col>
+                                    <Col span={11} offset={1}>
+                                        <h4 style={{color: "gray"}}>Tahun Selesai</h4>
+                                        <DatePicker style={{width: 215, borderRadius: 8}}
+                                                    picker="year" value={input.end_year}/><br/><br/>
+                                    </Col>
+                                </Row>
+
+                                <Button size="large"
+                                        className="button"
+                                        type="primary"
+                                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                        htmlType="submit"
+                                        form="2">
+                                    Tambahkan Pengalaman Kerja
+                                </Button>
+                            </form>
+                        </Modal>
+
+                        <Modal
+                            destroyOnClose={true}
+                            className="profile-modal"
+                            title="Tambah Bidang Keahlian"
+                            visible={isSkillVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                        >
+                            <Form
+                                name="basic"
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                layout="vertical"
+                                onFinish={onFinish}
+                                onFinishFailed={onFinishFailed}
+                                autoComplete="off"
+                            >
+                                <Form.Item
+                                    label="Titel bidang keahlian"
+                                    name="description"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input document description!',
+                                        },
+                                    ]}
+                                >
+                                    <Input style={{borderRadius: 8}}/>
+                                </Form.Item>
+
+                                <Form.Item>
+                                    <Button
+                                        size="large"
+                                        className="button"
+                                        type="primary" block
+                                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                        htmlType="submit">
+                                        Tambahkan Bidang Keahlian
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </Modal>
+
+                        <Modal
+                            className="profile-modal"
+                            title="Tambahkan Riwayat Pendidikan"
+                            visible={isHistoryVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                        >
+                            <form id="2">
+                                <h4 style={{color: "gray"}}>Nama Instansi</h4>
+                                <Input style={{borderRadius: 8}} value={input.institution_name}/><br/><br/>
+                                <h4 style={{color: "gray"}}>Titel</h4>
+                                <Input style={{borderRadius: 8}} value={input.major}/><br/><br/>
+                                <Row>
+                                    <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
+                                        <Input style={{borderRadius: 8}} value={input.start_year}/><br/><br/></Col>
+                                    <Col span={11} offset={1}>
+                                        <h4 style={{color: "gray"}}>Tahun Selesai</h4>
+                                        <Input style={{borderRadius: 8}} value={input.end_year}/><br/><br/>
+                                    </Col>
+                                </Row>
+                                <Button size="large"
+                                        className="button"
+                                        type="primary"
+                                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                        htmlType="submit"
+                                        form="2">
+                                    Tambahkan Riwayat Pendidikan
+                                </Button>
+                            </form>
+                        </Modal>
+
                         <Button
                             size="large"
                             className="button"
                             type="primary" block
                             style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                            htmlType="submit">
-                            Tambahkan Bidang Keahlian
+                            htmlType="submit"
+                            form="2">
+                            Simpan
                         </Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
-                
-                    <Modal
-                        className="profile-modal"
-                        title="Tambahkan Riwayat Pendidikan"
-                        visible={isHistoryVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                    >
-                        <form id="2">
-                        <h4 style={{color: "gray"}}>Nama Instansi</h4>
-                        <Input style={{borderRadius: 8}} value={input.institution_name}/><br/><br/>
-                        <h4 style={{color: "gray"}}>Titel</h4>
-                        <Input style={{borderRadius: 8}} value={input.major}/><br/><br/>
-                        <Row>
-                            <Col span={12}><h4 style={{color: "gray"}}>Tahun Mulai</h4>
-                                <Input style={{borderRadius: 8}}  value={input.start_year}/><br/><br/></Col>
-                            <Col span={11} offset={1}>
-                                <h4 style={{color: "gray"}}>Tahun Selesai</h4>
-                                <Input style={{borderRadius: 8}} value={input.end_year}/><br/><br/>
-                            </Col>
-                        </Row>
-                        <Button size="large" 
-                        className="button" 
-                        type="primary" 
-                        block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                        htmlType="submit"
-                        form="2">
-                            Tambahkan Riwayat Pendidikan
-                        </Button>
-                        </form>
-                    </Modal>
-
-                    <Button
-                        size="large"
-                        className="button"
-                        type="primary" block
-                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                        htmlType="submit"
-                        form="2">
-                        Simpan
-                    </Button>
                     </form>
                 </Card>
             </div>

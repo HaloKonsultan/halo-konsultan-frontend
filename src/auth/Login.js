@@ -10,8 +10,12 @@ const Login = () => {
     return (
         <>
             <Row className="center">
-                <Col span={15}><Onboard/></Col>
-                <Col span={9}><LoginCard/></Col>
+                <Col span={15} xs={24} lg={15}><Onboard/></Col>
+                <Col span={9} xs={24} lg={9}>
+                    <div>
+                        <LoginCard/>
+                    </div>
+                </Col>
             </Row>
         </>
     )

@@ -1,9 +1,9 @@
 import React from "react"
 import {Row, Col, Button, PageHeader, Badge} from 'antd';
-import IncomingOrderTable from "./table/IncomingOrderTable";
-import ActiveOrderTable from "./table/ActiveOrderTable";
-import WaitingPaymentTable from "./table/WaitingPaymentTable";
-import TodayOrder from "./table/TodayOrder";
+import OrderTableIncoming from "./table/OrderTableIncoming";
+import OrderTableActive from "./table/OrderTableActive";
+import OrderTableWaiting from "./table/OrderTableWaiting";
+import OrderToday from "./table/OrderToday";
 import ProfileNotifications from "./ProfileNotifications";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
@@ -14,12 +14,10 @@ import {Typography} from 'antd';
 const {Title} = Typography;
 
 function Dashboard() {
-    let page = 'Dashboard';
-    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
-            <Nav/>
+            <Nav title="Dashboard"/>
             <Row>
                 <Col span={14}>
                     <div className="incoming-order-table">
@@ -36,7 +34,7 @@ function Dashboard() {
                                     <b>Lihat Semua</b>
                                 </Button></Link>,
                             ]}/>
-                        <IncomingOrderTable/>
+                        <OrderTableIncoming/>
                     </div>
                     <div className="order-table">
                         <PageHeader
@@ -48,7 +46,7 @@ function Dashboard() {
                                     <b>Lihat Semua</b>
                                 </Button></Link>,
                             ]}/>
-                        <ActiveOrderTable/>
+                        <OrderTableActive/>
                     </div>
                     <div className="waiting-for-payment-table">
                         <PageHeader
@@ -60,12 +58,12 @@ function Dashboard() {
                                     <b>Lihat Semua</b>
                                 </Button></Link>,
                             ]}/>
-                        <WaitingPaymentTable/>
+                        <OrderTableWaiting/>
                     </div>
                 </Col>
                 <Col span={10}>
                     <div className="schedule">
-                        <TodayOrder/>
+                        <OrderToday/>
                     </div>
                 </Col>
             </Row>

@@ -3,13 +3,13 @@ import {useHistory, useLocation} from "react-router-dom"
 import {Button, Layout, PageHeader, Row, Col} from 'antd';
 import {SignOut} from "phosphor-react";
 import Cookies from "js-cookie";
-import {UserContext} from "../context/UserContext";
+import {ContextUser} from "../context/ContextUser";
 
 const {Header, Content, Footer} = Layout;
 
-const Nav = () => {
+const Nav = (props) => {
     let history = useHistory()
-    const {loginStatus, setLoginStatus} = useContext(UserContext)
+    const {loginStatus, setLoginStatus} = useContext(ContextUser)
     const location = useLocation();
 
     console.log(location)
@@ -28,8 +28,9 @@ const Nav = () => {
                 {
                     Cookies.get('token') !== undefined &&
                     <PageHeader
+                        onBack={props.onBack}
                         style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
-                        title={Cookies.get('page')}
+                        title={props.title}
                         extra={[
                             <Button key="1" size="large" type="link" onClick={handleLogout} danger>
                                 <b>

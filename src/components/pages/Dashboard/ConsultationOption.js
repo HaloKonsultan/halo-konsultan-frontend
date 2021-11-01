@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react"
 import {Radio, Space, DatePicker, TimePicker, Button, Input, Modal, Typography, Card, Form, PageHeader} from 'antd';
 import {useParams} from "react-router-dom";
 import {ArrowRightOutlined, FileTextOutlined, DeleteOutlined, CloseOutlined} from "@ant-design/icons";
-import {AfterBookingContext} from "../../context/AfterBookingContext";
+import {ContextAfterBooking} from "../../context/ContextAfterBooking";
 import {message} from 'antd';
 
 const {Meta} = Card;
@@ -13,7 +13,7 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(AfterBookingContext)
+    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(ContextAfterBooking)
     const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
 
     // useEffect(() => {
@@ -33,7 +33,6 @@ const ConsultationOption = () => {
             date: dateString
         })
         setPrefDate({...prefDate, dateInput})
-        // console.log(prefDate.date);
     }
 
     function onChangeTime(time, timeString, id) {
@@ -45,7 +44,6 @@ const ConsultationOption = () => {
             time: timeString
         })
         setPrefTime({...prefTime, timeInput})
-        // console.log(prefTime.time);
     }
 
     const onChangePreference = e => {
@@ -54,14 +52,11 @@ const ConsultationOption = () => {
         let name = "preference"
 
         setInput({...input, [name]: typeOfValue})
-        // console.log("input" + JSON.stringify(input))
     };
 
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
         let name = event.target.name
-        // console.log("tesvalue " + typeOfValue)
-        // console.log("tesname " + name)
 
         setInput({...input, [name]: typeOfValue})
     };
@@ -124,6 +119,7 @@ const ConsultationOption = () => {
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    format={'DD-MM-YYYY'}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 1)}
                                     placeholder="Jadwal Kosong #1" required/>
                                 <TimePicker
@@ -135,6 +131,7 @@ const ConsultationOption = () => {
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    format={'DD-MM-YYYY'}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
                                     placeholder="Jadwal Kosong #2" required/>
                                 <TimePicker
@@ -145,6 +142,7 @@ const ConsultationOption = () => {
                             <Space>
                                 <DatePicker
                                     style={{width: 211, height: 48, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    format={'DD-MM-YYYY'}
                                     onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
                                     placeholder="Jadwal Kosong #3" required/>
                                 <TimePicker

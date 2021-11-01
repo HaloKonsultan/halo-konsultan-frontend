@@ -4,11 +4,11 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const TodayOrderContext = createContext()
+export const ContextOrderActive = createContext()
 
-export const TodayOrderProvider = props => {
+export const OrderProvider = props => {
     let history = useHistory()
-    const [dataTodayOrder, setDataTodayOrder] = useState([])
+    const [dataOrder, setDataOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
         date: "",
@@ -20,16 +20,19 @@ export const TodayOrderProvider = props => {
 
     const fetchData = async () => {
         let result = await API.get(
-            `consultants/consultations/user/${Cookies.get('id')}/today`,
+            `consultants/consultations/user/${Cookies.get('id')}/active`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
-        setDataTodayOrder(data.map((e) => {
+        console.log(data)
+        setDataOrder(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
+                name: e.name,
                 date: e.date,
                 time: e.time,
-                status: e.status
+                status: e.status,
+                conference_link: e.conference_link
             }
         }))
     }
@@ -44,9 +47,9 @@ export const TodayOrderProvider = props => {
     }
 
     return (
-        <TodayOrderContext.Provider value = {{
-            dataTodayOrder,
-            setDataTodayOrder,
+        <ContextOrderActive.Provider value = {{
+            dataOrder,
+            setDataOrder,
             input,
             setInput,
             currentId,
@@ -56,7 +59,6 @@ export const TodayOrderProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </TodayOrderContext.Provider>
+        </ContextOrderActive.Provider>
     )
-
 }
