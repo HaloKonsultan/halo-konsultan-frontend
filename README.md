@@ -57,8 +57,9 @@ Cara menjalankan Backend
 - nyalakan xampp untuk apache dan MySQL
 - buka phpmyadmin dan buat database baru
 - ganti DB_DATABASE(line 12) dengan nama database yang dibuat di phpmyadmin
+- php artisan key:generate
 - php artisan jwt:secret
-- php artisan migrate:fresh --seed
+- php artisan migrate: --seed
 - untuk menjalankan backend, gunakan perintah "php artisan serve"
 
 Tambahan :
