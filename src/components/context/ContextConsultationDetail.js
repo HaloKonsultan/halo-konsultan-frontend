@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const ConsultationDetailContext = createContext()
+export const ContextConsultationDetail = createContext()
 
 export const ConsultationDetailProvider = props => {
     let history = useHistory()
@@ -132,7 +132,7 @@ export const ConsultationDetailProvider = props => {
     }
 
     return (
-        <ConsultationDetailContext.Provider value = {{
+        <ContextConsultationDetail.Provider value = {{
             dataConsultation,
             setDataConsultation,
             input,
@@ -144,6 +144,6 @@ export const ConsultationDetailProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </ConsultationDetailContext.Provider>
+        </ContextConsultationDetail.Provider>
     )
 }

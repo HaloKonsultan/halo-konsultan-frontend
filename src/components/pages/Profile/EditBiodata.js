@@ -18,19 +18,19 @@ import {
 } from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
-import {CloseOutlined} from "@ant-design/icons";
-import {ProfileContext} from "../../context/ProfileContext";
+import {EditOutlined} from "@ant-design/icons";
+import {ContextProfile} from "../../context/ContextProfile";
 import { size } from "lodash";
 
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
-// const { Option } = Select;
+const { Option } = Select;
 // const { uploading, fileList } = this.state;  
 const {TextArea} = Input;
 
 const EditBiodata = () => {
-    const {input, setInput, functions} = useContext(ProfileContext)
+    const {input, setInput, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata, provinces} = functions
 
     // useEffect(() => {
@@ -45,12 +45,42 @@ const EditBiodata = () => {
         setIsExperienceVisible(true);
     };
 
+    // Tambah Pengalaman Kerja
+    const onFinishExperience = (values) => {
+        console.log('Success:', values);
+        let coconsultant_experienceInput = input.consultant_experience.push(values)
+        setInput({...input, coconsultant_experienceInput})
+
+        console.log(input)
+        setIsExperienceVisible(false);
+    };
+
+    // Tambah Bidang Keahlian
     const showSkillModal = () => {
         setIsSkillVisible(true);
     };
 
+    const onFinishSkill = (values) => {
+        console.log('Success:', values);
+        let consultant_skillInput = input.consultant_skill.push(values)
+        setInput({...input, consultant_skillInput})
+
+        console.log(input)
+        setIsExperienceVisible(false);
+    };
+
+    // Tambah Riwayat Pendidikan
     const showHistoryModal = () => {
         setIsHistoryVisible(true);
+    };
+
+    const onFinishHistory = (values) => {
+        console.log('Success:', values);
+        let consultant_educationInput = input.consultant_education.push(values)
+        setInput({...input, consultant_educationInput})
+
+        console.log(input)
+        setIsHistoryVisible(false);
     };
 
     const handleCancel = () => {
@@ -75,33 +105,6 @@ const EditBiodata = () => {
         // setInput({ ...input, [name]: typeOfValue })
     };
 
-    const onFinishSkill = (values) => {
-        console.log('Success:', values);
-        let consultant_skillInput = input.consultant_skill.push(values)
-        setInput({...input, consultant_skillInput})
-
-        console.log(input)
-        setIsExperienceVisible(false);
-    };
-
-    const onFinishHistory = (values) => {
-        console.log('Success:', values);
-        let consultant_educationInput = input.consultant_education.push(values)
-        setInput({...input, consultant_educationInput})
-
-        console.log(input)
-        setIsHistoryVisible(false);
-    };
-
-    const onFinishExperience = (values) => {
-        console.log('Success:', values);
-        let coconsultant_experienceInput = input.consultant_experience.push(values)
-        setInput({...input, coconsultant_experienceInput})
-
-        console.log(input)
-        setIsExperienceVisible(false);
-    };
-
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
@@ -113,30 +116,22 @@ const EditBiodata = () => {
         input.document.splice(index, 1);
         console.log(input)
     }
-    const deleteInputData = (event) => {
-        let title = event.target.name
-        console.log(title)
-        let index = input.consultant_skill.indexOf(title);
 
-        console.log(index)
-        input.consultant_skill.splice(index, 1);
-        console.log(input)
-    }
-    //   function onChange(value) {
-    //     console.log(`selected ${value}`);
-    //   }
+      function onChanged(value) {
+        console.log(`selected ${value}`);
+      }
 
-    //   function onBlur() {
-    //     console.log('blur');
-    //   }
+      function onBlur() {
+        console.log('blur');
+      }
 
-    //   function onFocus() {
-    //     console.log('focus');
-    //   }
+      function onFocus() {
+        console.log('focus');
+      }
 
-    //   function onSearch(val) {
-    //     console.log('search:', val);
-    //   }
+      function onSearch(val) {
+        console.log('search:', val);
+      }
 
 
     const props = {
@@ -156,8 +151,6 @@ const EditBiodata = () => {
             }
         },
     };
-
-
     return (
         <>
             <Nav/>
@@ -221,21 +214,22 @@ const EditBiodata = () => {
 
                         <br/><br/>
                         <h4 style={{color: "gray"}}>Provinsi</h4>
-                        {/* <Select
-                        showSearch
-                        style={{ width: 200 }}
-                        placeholder="Provinsi"
-                        optionFilterProp="children"
-                        rows={6}
-                         onChange={onChange}
-                         onFocus={onFocus}
-                         onBlur={onBlur}
-                        onSearch={onSearch}
-                          filterOption={(input, option) =>
+                        <Select
+                          showSearch
+                          style={{ width: 480 }}
+                          placeholder="Provinsi"
+                          optionFilterProp="children"
+                          rows={6}
+                          onChange={onChanged}
+                          onFocus={onFocus}
+                          onBlur={onBlur}
+                          onSearch={onSearch}
+                         filterOption={(input, option) =>
                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                       
-                     }
-                >{
+                      }
+                >
+                    
+                {/* {
                     input.provinces !== null && (
                         <>
                             {input.provinces.map((e, index) => {
@@ -246,15 +240,42 @@ const EditBiodata = () => {
                                 )
                             })}
                         </>
-                    )}
-                </Select> */}
+                    )} */}
 
-                        <br/><br/>
+                </Select>
+                    
+                    <br/><br/>
                         <h4 style={{color: "gray"}}>Kota</h4>
-                        <Select defaultValue="Surabaya" style={{borderRadius: 8, width: 480}} onChange={handleChange}
-                                rows={6} placeholder="Lokasi/Kota"
-                                prefix={input.location}/>
-
+                        <Select
+                          showSearch
+                          style={{ width: 480 }}
+                          placeholder="Kota"
+                          optionFilterProp="children"
+                          rows={6}
+                          onChange={onChanged}
+                          onFocus={onFocus}
+                          onBlur={onBlur}
+                          onSearch={onSearch}
+                         filterOption={(input, option) =>
+                       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                      }
+                >
+                      <Option value="Surabaya">Surabaya</Option>
+                      <Option value="Sidoarjo">Sidoarjo</Option>
+                      <Option value="Malang">Malang</Option>
+                {/* {
+                    input.location !== null && (
+                        <>
+                            {input.location.map((e, index) => {
+                                return (
+                                    <>
+                                        <Option value={e.name}>{e.name}</Option>
+                                    </>
+                                )
+                            })}
+                        </>
+                )} */}
+                </Select>
                         <br/><br/>
 
                         <PageHeader
@@ -279,17 +300,24 @@ const EditBiodata = () => {
                                                     <Card
                                                         style={{
                                                             width: 480,
-                                                            height: 48,
-                                                            borderRadius: 8,
-                                                            boxShadow: "0 0 0 1px #CED4DA"
-                                                            
+                                                            height: 68,
+                                                            borderRadius: 8
                                                         }}
                                                         type="inner"
                                                         title={ <>
                                                             <Text>{e.position}</Text>
                                                              <br/>
-                                                            <Text style={{fontSize:14}} type="secondary">{e.start_year} - {e.end_year}</Text>
+                                                            <Row>
+                                                                <Col span={21}>
+                                                                <Text style={{fontSize:14}} type="secondary">{e.start_year} - {e.end_year}</Text>
+                                                                </Col>
+                                                                <Button onClick={showExperienceModal} type="text">
+                                                                    <EditOutlined/> 
+                                                                </Button>
+                                                                {/* {input.consultant_experience.map(e, index)}     */}
+                                                            </Row>   
                                                         </>
+                                                        
                                                     }    
                                                     >
                                                     </Card>
@@ -320,13 +348,19 @@ const EditBiodata = () => {
                                                         style={{
                                                             width: 480,
                                                             height: 48,
-                                                            borderRadius: 8,
-                                                            boxShadow: "0 0 0 1px #CED4DA"
+                                                            borderRadius: 8
                                                         }}
                                                         type="inner"
                                                         title={
                                                             <>
+                                                            <Row>
+                                                                <Col span={21}>
                                                                 <Text>{e.skills}</Text>
+                                                                </Col>
+                                                                <Button onClick={showSkillModal} type="text">
+                                                                    <EditOutlined/> 
+                                                                </Button>
+                                                            </Row>   
                                                             </>
                                                         }
                                                     >
@@ -357,16 +391,22 @@ const EditBiodata = () => {
                                                     <Card
                                                         style={{
                                                             width: 480,
-                                                            height: 48,
-                                                            borderRadius: 8,
-                                                            boxShadow: "0 0 0 1px #CED4DA"
+                                                            height: 68,
+                                                            borderRadius: 8
                                                         }}
                                                         type="inner"
                                                         title={
                                                             <> 
-                                                            <Text style={{marginLeft:10, marginTop:2}}>{e.institution_name}</Text>
+                                                            <Text>{e.institution_name}</Text>
                                                              <br/>
-                                                            <Text type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                             <Row>
+                                                                <Col span={21}>
+                                                                <Text type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                                </Col>
+                                                                <Button onClick={showHistoryModal} type="text">
+                                                                    <EditOutlined/> 
+                                                                </Button>
+                                                            </Row>   
                                                             </>
                                                         }
                                                     >
@@ -479,16 +519,18 @@ const EditBiodata = () => {
                                 autoComplete="off"
                             >
                                 <Form.Item
-                                    label="Titel bidang keahlian"
+                                    label="Titel Bidang Keahlian"
                                     name="skills"
                                     rules={[
                                         {
                                             required: true,
-                                            message: 'Please input consultant skills!',
+                                            message: 'Please input skills!',
                                         },
                                     ]}
+                                    
                                 >
-                                    <Input style={{borderRadius: 8}}/>
+                                    
+                                    <Input style={{borderRadius: 8}} />
                                 </Form.Item>
 
                                 <Form.Item>

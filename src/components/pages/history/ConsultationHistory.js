@@ -3,7 +3,7 @@ import {Card, Input} from 'antd';
 import 'antd/dist/antd.css';
 import {Typography, Space} from 'antd';
 import {useParams} from "react-router-dom";
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import {Row, Col} from 'antd';
 import {FileTextOutlined} from '@ant-design/icons';
 import {Alert} from 'antd';
@@ -16,7 +16,7 @@ const ConsultationHistory = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {dataConsultation, input, setInput, functions} = useContext(ConsultationDetailContext)
+    const {dataConsultation, input, setInput, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById} = functions
 
     useEffect(() => {

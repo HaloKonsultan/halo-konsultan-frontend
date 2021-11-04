@@ -4,11 +4,11 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const WaitingPaymentContext = createContext()
+export const ContextOrderIncoming = createContext()
 
-export const WaitingPaymentProvider = props => {
+export const IncomingOrderProvider = props => {
     let history = useHistory()
-    const [dataPayment, setDataPayment] = useState([])
+    const [dataIncomingOrder, setDataIncomingOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
         date: "",
@@ -20,11 +20,11 @@ export const WaitingPaymentProvider = props => {
 
     const fetchData = async () => {
         let result = await API.get(
-            `consultants/consultations/user/${Cookies.get('id')}/waiting`,
+            `consultants/consultations/user/${Cookies.get('id')}/incoming`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
-        setDataPayment(data.map((e) => {
+        setDataIncomingOrder(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
@@ -35,8 +35,8 @@ export const WaitingPaymentProvider = props => {
         }))
     }
 
-    const functionDetail = (consultation_id) => {
-        history.push(`/incoming-order/detail/accept/${consultation_id}`)
+    const functionDetail = (idClient) => {
+        history.push(`/incoming-order/detail/${idClient}`)
     }
 
     const functions = {
@@ -45,9 +45,9 @@ export const WaitingPaymentProvider = props => {
     }
 
     return (
-        <WaitingPaymentContext.Provider value = {{
-            dataPayment,
-            setDataPayment,
+        <ContextOrderIncoming.Provider value = {{
+            dataIncomingOrder,
+            setDataIncomingOrder,
             input,
             setInput,
             currentId,
@@ -57,7 +57,7 @@ export const WaitingPaymentProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </WaitingPaymentContext.Provider>
+        </ContextOrderIncoming.Provider>
     )
 
 }

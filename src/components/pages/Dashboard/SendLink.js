@@ -2,11 +2,12 @@ import React, {useContext, useEffect, useState} from "react"
 import {Button, Card, Space, Typography, Input} from 'antd';
 import 'antd/dist/antd.css';
 import {useParams} from "react-router-dom";
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import {Row, Col} from 'antd';
 import {ArrowRightOutlined, FileTextOutlined} from '@ant-design/icons';
 import Cookies from "js-cookie";
 import ConsultationDocument from "./ConsultationDocument";
+import ButtonDanger from "../../global/ButtonDanger";
 
 const {Title, Link, Text} = Typography;
 
@@ -14,7 +15,7 @@ const SendLink = (props) => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {dataConsultation, input, setInput, functions} = useContext(ConsultationDetailContext)
+    const {dataConsultation, input, setInput, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById, functionSubmit, functionUpdateStatus} = functions
 
     useEffect(() => {
@@ -85,15 +86,16 @@ const SendLink = (props) => {
                 {
                     input.conference_link !== null &&
                     <>
-                        <Button
-                            block
-                            onClick={handleStatus}
-                            size="large"
-                            className="button"
-                            type="default"
-                            style={{height: 44, borderRadius: 8}} danger>
-                            Akhiri Konsultasi
-                        </Button>
+                        <ButtonDanger onClick={handleStatus} text="Akhiri Konsultasi"/>
+                        {/*<Button*/}
+                        {/*    block*/}
+                        {/*    onClick={handleStatus}*/}
+                        {/*    size="large"*/}
+                        {/*    className="button"*/}
+                        {/*    type="default"*/}
+                        {/*    style={{height: 44, borderRadius: 8}} danger>*/}
+                        {/*    Akhiri Konsultasi*/}
+                        {/*</Button>*/}
                     </>
                 }
             </Space>

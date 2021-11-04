@@ -4,14 +4,14 @@ import {Card} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
 
 const {Title, Text, Link} = Typography;
 
 const ConsultationProfile = () => {
     let history = useHistory()
 
-    const {input, functions} = useContext(ProfileContext)
+    const {input, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const ConsultationProfile = () => {
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Rekening</Text>
                         {
-                            input.consultant_virtual_accounts !== null && (
+                            input.consultant_virtual_accounts && (
                                 <>
                                     {input.consultant_virtual_accounts.map((e, index) => {
                                         return (
@@ -75,7 +75,7 @@ const ConsultationProfile = () => {
                         <ul>
                             <Space size={[8, 8]} wrap>
                                 {
-                                    input.consultant_documentation !== null && (
+                                    input.consultant_documentation && (
                                         <>
                                             {input.consultant_documentation.map((e, index) => {
                                                 return (

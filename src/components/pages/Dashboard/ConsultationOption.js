@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react"
 import {Radio, Space, DatePicker, TimePicker, Button, Input, Modal, Typography, Card, Form, PageHeader} from 'antd';
 import {useParams} from "react-router-dom";
 import {ArrowRightOutlined, FileTextOutlined, DeleteOutlined, CloseOutlined} from "@ant-design/icons";
-import {AfterBookingContext} from "../../context/AfterBookingContext";
+import {ContextAfterBooking} from "../../context/ContextAfterBooking";
 import {message} from 'antd';
 
 const {Meta} = Card;
@@ -13,7 +13,7 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(AfterBookingContext)
+    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(ContextAfterBooking)
     const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
 
     // useEffect(() => {

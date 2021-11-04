@@ -3,7 +3,7 @@ import {Card, Button, Space, Modal, Form, Row, Col, Input} from 'antd';
 import {Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
 import {Link, useParams} from "react-router-dom";
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import ButtonDanger from "../../global/ButtonDanger";
 import PrimaryButton from "../../global/ButtonPrimary";
 
@@ -13,7 +13,7 @@ const AcceptDeclineCard = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, setInput, currentId, setCurrentId, functions} = useContext(ConsultationDetailContext)
+    const {input, setInput, currentId, setCurrentId, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById, functionAccept, functionDecline} = functions
     const [isDeclineVisible, setIsDeclineVisible] = useState(false);
 

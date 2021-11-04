@@ -2,11 +2,11 @@ import React, {useContext, useEffect} from "react";
 import {Card, Space} from 'antd';
 import Title from "antd/es/typography/Title";
 import { format } from 'date-fns';
-import {TodayOrderContext} from "../../../context/TodayOrderContext";
+import {ContextOrderToday} from "../../../context/ContextOrderToday";
 
 const {Meta} = Card;
 const OrderToday = () => {
-    const {dataTodayOrder, functions} = useContext(TodayOrderContext)
+    const {dataTodayOrder, functions} = useContext(ContextOrderToday)
     const {fetchData, functionDetail} = functions
     const today = format(new Date(), 'dd-MM-yyy ')
 

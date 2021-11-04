@@ -1,9 +1,9 @@
 import React, {useEffect, useContext} from "react"
 import {Table, Tag} from 'antd';
-import {ActiveOrderContext} from "../../../context/ActiveOrderContext";
+import {ContextOrderActive} from "../../../context/ContextOrderActive";
 
 const OrderTableActive = () => {
-    const {dataOrder, functions} = useContext(ActiveOrderContext)
+    const {dataOrder, functions} = useContext(ContextOrderActive)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {

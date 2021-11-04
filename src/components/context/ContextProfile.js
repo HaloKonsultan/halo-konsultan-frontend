@@ -4,7 +4,7 @@ import {useHistory} from "react-router";
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const ProfileContext = createContext()
+export const ContextProfile = createContext()
 
 export const ProfileProvider = props => {
     let history = useHistory()
@@ -97,17 +97,28 @@ export const ProfileProvider = props => {
     //     })
     // }
 
+    const dataProvinces = (event) => {
+        event.preventDefault()
+        console.log(input)
+        axios.get(`http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`, {
+            name: input.name,
+        })
+        .then(response => response.json())
+        .then(provinces => console.log(provinces));
+    }
+
     const functionEditBiodata = () => {
         history.push(`/edit-biodata`)
     }
 
     const functions = {
         fetchData,
-        functionEditBiodata
+        functionEditBiodata,
+        dataProvinces
     }
 
     return (
-        <ProfileContext.Provider value={{
+        <ContextProfile.Provider value={{
             dataProfile,
             setDataProfile,
             input,
@@ -119,6 +130,6 @@ export const ProfileProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </ProfileContext.Provider>
+        </ContextProfile.Provider>
     )
 }

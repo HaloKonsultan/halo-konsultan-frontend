@@ -3,13 +3,13 @@ import {useHistory, useLocation} from "react-router-dom"
 import {Button, Layout, PageHeader, Row, Col} from 'antd';
 import {SignOut} from "phosphor-react";
 import Cookies from "js-cookie";
-import {UserContext} from "../context/UserContext";
+import {ContextUser} from "../context/ContextUser";
 
 const {Header, Content, Footer} = Layout;
 
 const Nav = (props) => {
     let history = useHistory()
-    const {loginStatus, setLoginStatus} = useContext(UserContext)
+    const {loginStatus, setLoginStatus} = useContext(ContextUser)
     const location = useLocation();
 
     console.log(location)

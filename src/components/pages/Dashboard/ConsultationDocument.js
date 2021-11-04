@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from "react"
 import {Card, Typography} from 'antd';
 import 'antd/dist/antd.css';
 import {useParams} from "react-router-dom";
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import {Row, Col} from 'antd';
 import {FileTextOutlined} from '@ant-design/icons';
 
@@ -12,7 +12,7 @@ const SendLink = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, functions} = useContext(ConsultationDetailContext)
+    const {input, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById} = functions
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const SendLink = () => {
     return (
         <>
             {
-                input.consultation_document !== null && (
+                input.consultation_document && (
                     <>
                         <Card title={<Title style={{color: "black", margin: 0}} level={4}>Dokumen Klien</Title>}
                               style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>

@@ -11,22 +11,12 @@ const Profile = () => {
         <>
         <Nav title="Profil"/>
             <Row className="center">
-                <Col span={11}>
+                <Col span={12}>
                     <div className="container-profile">   
                         <PersonalBiodata/>
                     </div>
-                    {/* <List
-          grid={{
-            gutter: 16,
-            xs: 1,
-            sm: 1,
-            md: 3,
-            lg: 3,
-            xl: 3,
-            xxl: 3,
-          }}/>  */}
                 </Col>
-                <Col span={11}>
+                <Col span={12}>
                     <div className="container-profile">
                         <ConsultationProfile/>
                     </div>
