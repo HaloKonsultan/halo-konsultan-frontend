@@ -97,14 +97,33 @@ export const ProfileProvider = props => {
     //     })
     // }
 
-    const dataProvinces = (event) => {
-        event.preventDefault()
-        console.log(input)
-        axios.get(`http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json`, {
-            name: input.name,
+    const dataProvinces =  async () => {
+        let result = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/provinsi`)
+        let data = result.data.provinsi
+        console.log(data)
+        setInput({
+            provinces: data.map(key => {
+                return {
+                    id: key.id,
+                    name: key.nama,
+                }
+            }),
         })
-        .then(response => response.json())
-        .then(provinces => console.log(provinces));
+    }
+
+    const dataCity =  async () => {
+        let resultCity = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=32`)
+        let data = resultCity.data.kota_kabupaten
+        console.log(data)
+        setInput({
+            city: data.map(key => {
+                return {
+                    id: key.id,
+                    id_provinces: key.id_provinsi,
+                    name: key.nama,
+                }
+            }),
+        })
     }
 
     const functionEditBiodata = () => {
@@ -114,7 +133,8 @@ export const ProfileProvider = props => {
     const functions = {
         fetchData,
         functionEditBiodata,
-        dataProvinces
+        dataProvinces,
+        dataCity
     }
 
     return (

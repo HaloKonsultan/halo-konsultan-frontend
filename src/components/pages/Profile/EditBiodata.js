@@ -31,11 +31,12 @@ const {TextArea} = Input;
 
 const EditBiodata = () => {
     const {input, setInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata, provinces} = functions
+    const {fetchData, functionEditBiodata, dataProvinces, dataCity} = functions
 
-    // useEffect(() => {
-    //     fetchData()
-    // }, [])
+    useEffect(() => {
+        dataProvinces();
+        dataCity();
+    }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
@@ -229,8 +230,8 @@ const EditBiodata = () => {
                       }
                 >
                     
-                {/* {
-                    input.provinces !== null && (
+                {
+                    input.provinces && (
                         <>
                             {input.provinces.map((e, index) => {
                                 return (
@@ -240,7 +241,7 @@ const EditBiodata = () => {
                                 )
                             })}
                         </>
-                    )} */}
+                    )}
 
                 </Select>
                     
@@ -260,13 +261,10 @@ const EditBiodata = () => {
                        option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                       }
                 >
-                      <Option value="Surabaya">Surabaya</Option>
-                      <Option value="Sidoarjo">Sidoarjo</Option>
-                      <Option value="Malang">Malang</Option>
-                {/* {
-                    input.location !== null && (
+                {
+                    input.city  && (
                         <>
-                            {input.location.map((e, index) => {
+                            {input.city.map((e, index) => {
                                 return (
                                     <>
                                         <Option value={e.name}>{e.name}</Option>
@@ -274,7 +272,7 @@ const EditBiodata = () => {
                                 )
                             })}
                         </>
-                )} */}
+                )}
                 </Select>
                         <br/><br/>
 
@@ -292,7 +290,7 @@ const EditBiodata = () => {
                             konsultasi</h6>
                         <Space size={8} direction="vertical">
                             {
-                                input.consultant_experience !== null && (
+                                input.consultant_experience && (
                                     <>
                                         {input.consultant_experience.map((e, index) => {
                                             return (
@@ -339,7 +337,7 @@ const EditBiodata = () => {
                             ]}/>
                         <Space size={8} direction="vertical">
                             {
-                                input.consultant_skill !== null && (
+                                input.consultant_skill  && (
                                     <>
                                         {input.consultant_skill.map((e, index) => {
                                             return (
@@ -383,7 +381,7 @@ const EditBiodata = () => {
                             ]}/>
                         <Space size={8} direction="vertical">
                             {
-                                input.consultant_education !== null && (
+                                input.consultant_education  && (
                                     <>
                                         {input.consultant_education.map((e, index) => {
                                             return (
