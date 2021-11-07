@@ -22,11 +22,9 @@ import {EditOutlined} from "@ant-design/icons";
 import {ContextProfile} from "../../context/ContextProfile";
 import { size } from "lodash";
 
-
 const {Meta} = Card;
 const {Title, Text} = Typography;
 const { Option } = Select;
-// const { uploading, fileList } = this.state;  
 const {TextArea} = Input;
 
 const EditBiodata = () => {
@@ -34,6 +32,7 @@ const EditBiodata = () => {
     const {fetchData, functionEditBiodata, dataProvinces, dataCity} = functions
 
     useEffect(() => {
+        fetchData();
         dataProvinces();
         dataCity();
     }, [])
@@ -42,32 +41,32 @@ const EditBiodata = () => {
     const [isSkillVisible, setIsSkillVisible] = useState(false);
     const [isHistoryVisible, setIsHistoryVisible] = useState(false);
 
+    // Tambah Pengalaman Kerja
     const showExperienceModal = () => {
         setIsExperienceVisible(true);
     };
 
-    // Tambah Pengalaman Kerja
-    const onFinishExperience = (values) => {
+    const handleExperience = (values) => {
         console.log('Success:', values);
-        let coconsultant_experienceInput = input.consultant_experience.push(values)
-        setInput({...input, coconsultant_experienceInput})
+        let experience = input.consultant_experience.push(values)
+        setInput({...input, experience})
 
         console.log(input)
         setIsExperienceVisible(false);
-    };
+    }
 
     // Tambah Bidang Keahlian
     const showSkillModal = () => {
         setIsSkillVisible(true);
     };
 
-    const onFinishSkill = (values) => {
+    const handleSkill = (values) => {
         console.log('Success:', values);
         let consultant_skillInput = input.consultant_skill.push(values)
         setInput({...input, consultant_skillInput})
 
         console.log(input)
-        setIsExperienceVisible(false);
+        setIsSkillVisible(false);
     };
 
     // Tambah Riwayat Pendidikan
@@ -75,7 +74,7 @@ const EditBiodata = () => {
         setIsHistoryVisible(true);
     };
 
-    const onFinishHistory = (values) => {
+    const handleEducation = (values) => {
         console.log('Success:', values);
         let consultant_educationInput = input.consultant_education.push(values)
         setInput({...input, consultant_educationInput})
@@ -152,6 +151,7 @@ const EditBiodata = () => {
             }
         },
     };
+
     return (
         <>
             <Nav/>
@@ -431,7 +431,7 @@ const EditBiodata = () => {
                                     remember: true,
                                 }}
                                 layout="vertical"
-                                onFinish={onFinishExperience}
+                                onFinish={handleExperience}
                                 onFinishFailed={onFinishFailed}
                                 autoComplete="off"
                             >
@@ -512,7 +512,7 @@ const EditBiodata = () => {
                                     remember: true,
                                 }}
                                 layout="vertical"
-                                onFinish={onFinishSkill}
+                                onFinish={handleSkill}
                                 onFinishFailed={onFinishFailed}
                                 autoComplete="off"
                             >
@@ -558,7 +558,7 @@ const EditBiodata = () => {
                                     remember: true,
                                 }}
                                 layout="vertical"
-                                onFinish={onFinishHistory}
+                                onFinish={handleEducation}
                                 onFinishFailed={onFinishFailed}
                                 autoComplete="off"
                             >
