@@ -1,8 +1,9 @@
 import React, {useEffect, useContext} from "react"
 import {Table} from 'antd';
 import {ContextOrderWaiting} from "../../../context/ContextOrderWaiting";
+import OrderTable from "../../../global/OrderTable";
 
-const OrderTableWaiting = () => {
+const OrderTableWaiting = (props) => {
     const {dataPayment, functions} = useContext(ContextOrderWaiting)
     const {fetchData, functionDetail} = functions
 
@@ -23,6 +24,11 @@ const OrderTableWaiting = () => {
             key: 'title',
         },
         {
+            title: 'Nama Klien',
+            key: 'name',
+            dataIndex: 'name',
+        },
+        {
             title: 'Tanggal Pesanan Masuk',
             key: 'date',
             dataIndex: 'date',
@@ -31,9 +37,13 @@ const OrderTableWaiting = () => {
 
     const data = dataPayment;
 
+    let emptyTable = {
+        emptyText: 'Tidak ada konsultasi masuk',
+    };
+
     return (
         <>
-            <Table
+            <OrderTable
                 onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
@@ -41,13 +51,7 @@ const OrderTableWaiting = () => {
                         }, // click row
                     };
                 }}
-                style={{
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    boxShadow: "0 0 0 1px #CED4DA"
-                }}
-                rowKey={"waiting"}
-                columns={columns} dataSource={data} pagination={false}/>
+                columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
 }

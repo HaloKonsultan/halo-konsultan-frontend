@@ -11,6 +11,7 @@ export const IncomingOrderProvider = props => {
     const [dataIncomingOrder, setDataIncomingOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
+        name:"",
         date: "",
         time: "",
         status: ""
@@ -28,6 +29,7 @@ export const IncomingOrderProvider = props => {
             return {
                 id: e.id,
                 title: e.title,
+                name: e.name,
                 date: e.date,
                 time: e.time,
                 status: e.status

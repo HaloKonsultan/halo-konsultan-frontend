@@ -1,21 +1,9 @@
-.incoming-order-table  {
-    margin: 40px;
-}
-
-.order-table {
-    margin: 40px;
-}
-
-.waiting-for-payment-table {
-    margin: 40px;
-}
-
-.schedule {
-    margin: 40px;
+.table  {
+    margin: 10px;
 }
 
 .dashboard-container {
-    margin: 40px;
+    padding: 40px;
 }
 
 .schedule-card .ant-card-head {

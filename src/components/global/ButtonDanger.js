@@ -12,6 +12,7 @@ function ButtonDanger(props) {
                 size="large"
                 className="button"
                 type="default"
+                htmlType={props.htmlType}
                 style={{height: 44, borderRadius: 8}} danger>
                 {props.text}
             </Button>

@@ -48,8 +48,7 @@ const ConsultationHistory = () => {
                             <Card style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #EA3A3A"}}>
                                 <>
                                     <Title level={4}>Alasan Penolakan Konsultasi</Title>
-                                    <Text>Kami menolak Konsultasi Anda karena ya kami pengen aja nolak konsultasi
-                                        Anda.</Text>
+                                    <Text>{input.message}</Text>
                                 </>
                             </Card>
                         </>

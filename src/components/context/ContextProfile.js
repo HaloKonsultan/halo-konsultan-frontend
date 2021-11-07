@@ -9,22 +9,11 @@ export const ContextProfile = createContext()
 export const ProfileProvider = props => {
     let history = useHistory()
     const [dataProfile, setDataProfile] = useState([])
-    const [input, setInput] = useState({
-        name: "",
-        email: "",
-        photo: "",
-        position: "",
-        gender: "",
-        location: "",
-        description: "",
-        chat_price: "",
-        consultation_price: "",
-        consultant_doc: [],
-        consultant_experience: [],
-        consultant_education: [],
-        consultant_skill: [],
-        consultant_virtual_accounts:[]
+    const [arrayInput, setArrayInput] = useState({
+        consultant_virtual_account: [],
+        consultant_documentation: []
     })
+    const [input, setInput] = useState([])
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -40,7 +29,6 @@ export const ProfileProvider = props => {
             photo: data.photo,
             position: data.position,
             gender: data.gender,
-            location: data.location,
             description: data.description,
             chat_price: data.chat_price,
             consultation_price: data.consultation_price,
@@ -73,29 +61,33 @@ export const ProfileProvider = props => {
                     skills: key.skills,
                 }
             }),
-            consultant_virtual_accounts: data.consultant_virtual_accounts.map(key => {
+            consultant_virtual_account: data.consultant_virtual_account.map(key => {
                 return {
                     id: key.id,
+                    name: key.name,
                     card_number: key.card_number,
                     bank: key.bank
                 }
             }),
         })
-        console.log("ini profil " + JSON.stringify(input))
         setCurrentId(data.id)
     }
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault()
-    //     console.log(input)
-    //     axios.post(`http://localhost:8000/api/consultants/register`, {
-    //         name: input.name,
-    //         email: input.email,
-    //         password: input.password
-    //     }).then(() => {
-    //         history.push(`/`)
-    //     })
-    // }
+    const functionEditProfile = () => {
+        console.log("input save")
+        API.put(`consultants/profile/consultation/${Cookies.get('id')}`, {
+                chat_price: input.chat_price,
+                consultation_price: input.consultation_price,
+                consultation_virtual_account: input.consultant_virtual_account,
+                consultation_doc: input.consultant_documentation
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                console.log(res)
+                history.push(`/profile`)
+            })
+    }
 
     const dataProvinces =  async () => {
         let result = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/provinsi`)
@@ -133,6 +125,7 @@ export const ProfileProvider = props => {
     const functions = {
         fetchData,
         functionEditBiodata,
+        functionEditProfile,
         dataProvinces,
         dataCity
     }
@@ -143,6 +136,8 @@ export const ProfileProvider = props => {
             setDataProfile,
             input,
             setInput,
+            arrayInput,
+            setArrayInput,
             currentId,
             setCurrentId,
             functions,

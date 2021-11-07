@@ -79,7 +79,7 @@ const ConsultationOption = () => {
         functionSubmit(Id)
     };
 
-    const onFinish = (values) => {
+    const handleSubmitDocument = (values) => {
         console.log('Success:', values);
         let documentInput = input.document.push(values)
         setInput({...input, documentInput})
@@ -92,14 +92,17 @@ const ConsultationOption = () => {
         console.log('Failed:', errorInfo);
     };
 
-    const deleteInput = (event) => {
-        let title = event.target.name
-        console.log(title)
-        let index = input.document.indexOf(title);
+    const deleteDocument = (event) => {
+        console.log(event)
+        let index = input.document.findIndex(x => x.title === event.currentTarget.value);
 
         console.log(index)
         input.document.splice(index, 1);
         console.log(input)
+    }
+
+    const updateDocument = () => {
+
     }
 
     return (
@@ -191,7 +194,13 @@ const ConsultationOption = () => {
                                                     title={
                                                         <>
                                                             <Text>{e.title}</Text>
-                                                            <Button onClick={deleteInput}
+                                                            <Button onClick={updateDocument}
+                                                                    value={e.title}
+                                                                    name={e.title}
+                                                                    style={{color: "#3B85FA"}}
+                                                                    type="text">update
+                                                            </Button>
+                                                            <Button onClick={deleteDocument}
                                                                     value={e.title}
                                                                     name={e.title}
                                                                     style={{color: "#3B85FA"}}
@@ -226,7 +235,7 @@ const ConsultationOption = () => {
                         remember: true,
                     }}
                     layout="vertical"
-                    onFinish={onFinish}
+                    onFinish={handleSubmitDocument}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                 >

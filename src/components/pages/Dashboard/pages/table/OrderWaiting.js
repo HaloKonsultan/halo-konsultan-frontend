@@ -6,7 +6,7 @@ function IncomingOrder() {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Menunggu Pembayaran"/>
             <div className="incoming-order-table">
                 <OrderTableWaiting/>
             </div>

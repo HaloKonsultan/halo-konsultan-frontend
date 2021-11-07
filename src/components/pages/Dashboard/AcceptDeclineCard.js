@@ -31,12 +31,8 @@ const AcceptDeclineCard = () => {
         setIsDeclineVisible(false);
     };
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-        setInput({...input, values})
-
-        console.log(input)
-        setIsDeclineVisible(false);
+    const onFinish = () => {
+        functionDecline(Id)
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -48,6 +44,13 @@ const AcceptDeclineCard = () => {
 
         functionAccept(idClient)
     }
+
+    const handleChange = (event) => {
+        let typeOfValue = event.currentTarget.value
+        let name = event.target.name
+
+        setInput({...input, [name]: typeOfValue})
+    };
 
     return (
         <>
@@ -101,19 +104,19 @@ const AcceptDeclineCard = () => {
                             },
                         ]}
                     >
-                        <Input.TextArea style={{height: 144, borderRadius: 8}}/>
+                        <Input.TextArea onChange={handleChange} name="message" style={{height: 144, borderRadius: 8}}/>
                     </Form.Item>
 
                     <Form.Item>
                         <Row>
                             <Col span={12}>
                                 <div style={{marginRight: 4}}>
-                                    <PrimaryButton onClick={handleCancel} htmlType="submit" text="Batalkan"/>
+                                    <PrimaryButton onClick={handleCancel} text="Batalkan"/>
                                 </div>
                             </Col>
                             <Col span={12}>
                                 <div style={{marginLeft: 4}}>
-                                    <ButtonDanger text="Tolak Permintaan"/>
+                                    <ButtonDanger htmlType="submit" text="Tolak Permintaan"/>
                                 </div>
                             </Col>
                         </Row>

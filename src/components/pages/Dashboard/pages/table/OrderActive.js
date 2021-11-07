@@ -6,9 +6,9 @@ function OrderActive() {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Konsultasi Aktif"/>
             <div className="incoming-order-table">
-                <OrderTableActive />
+                <OrderTableActive dataLimit="tes123" />
             </div>
         </>
     )

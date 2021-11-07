@@ -70,7 +70,7 @@ const Routes = () => {
                                 <LayoutComponent content={<Register/>}/>
                             </Route>
 
-                            {/*Dashboard Table*/}
+                            {/*Dashboard OrderTable*/}
                             <LoginRoute path="/incoming-order" exact>
                                 <LayoutComponent content={<OrderIncoming/>}/>
                             </LoginRoute>

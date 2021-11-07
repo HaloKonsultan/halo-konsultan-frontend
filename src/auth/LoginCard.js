@@ -31,11 +31,11 @@ const LoginCard = () => {
         console.log(input)
         let inOneHours = new Date(new Date().getTime() + 60 * 60 * 1000);
 
-        try {
-            axios.post(`http://localhost:8000/api/consultants/login`, {
-                email: input.email,
-                password: input.password
-            }).then((res) => {
+        axios.post(`http://localhost:8000/api/consultants/login`, {
+            email: input.email,
+            password: input.password
+        })
+            .then((res) => {
                 let token = res.data.access_token
                 let id = res.data.data.id
                 let location = res.data.data.location
@@ -45,15 +45,14 @@ const LoginCard = () => {
                 Cookies.set('location', location, {expires: inOneHours})
                 history.push('/')
             })
-        }
-        catch(err) {
-            message.error('Email atau password salah', 3);
-        }
+            .catch(err => {
+                message.error('Email atau password salah', 3);
+            })
     }
 
     function handleShowPassword(e) {
         console.log(`checked = ${e.target.checked}`);
-        if ( e.target.checked === true ) {
+        if (e.target.checked === true) {
             showPassword.type = "text";
         } else {
             showPassword.type = "password";

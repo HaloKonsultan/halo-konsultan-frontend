@@ -39,16 +39,16 @@ const ConsultationProfile = () => {
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Rekening</Text>
                         {
-                            input.consultant_virtual_accounts && (
+                            input.consultant_virtual_account && (
                                 <>
-                                    {input.consultant_virtual_accounts.map((e, index) => {
+                                    {input.consultant_virtual_account.map((e, index) => {
                                         return (
                                             <>
                                                 <Row>
                                                     <Col span={4}>logo kak</Col>
-                                                    <Col span={1}/>
-                                                    <Col span={19}>
-                                                        <Text strong>{input.name}</Text>
+                                                    <Col span={2}/>
+                                                    <Col span={18}>
+                                                        <Text strong>{e.name}</Text>
                                                         <br/>
                                                         <Text type="secondary">{e.bank} - {e.card_number}</Text>
                                                     </Col>
@@ -59,8 +59,6 @@ const ConsultationProfile = () => {
                                 </>
                             )
                         }
-                        {/*<Text strong>{input.name}</Text>*/}
-                        {/*<Text type="secondary">BNI - 72121217233</Text>*/}
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Harga Jasa Diskusi</Text>

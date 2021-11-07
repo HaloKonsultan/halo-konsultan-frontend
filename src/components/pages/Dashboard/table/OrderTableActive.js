@@ -1,20 +1,16 @@
 import React, {useEffect, useContext} from "react"
 import {Table, Tag} from 'antd';
 import {ContextOrderActive} from "../../../context/ContextOrderActive";
+import OrderTable from "../../../global/OrderTable";
+import ButtonDanger from "../../../global/ButtonDanger";
 
-const OrderTableActive = () => {
+function OrderTableActive(props) {
     const {dataOrder, functions} = useContext(ContextOrderActive)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
         fetchData()
     }, [])
-
-    const handleDetail = (event) => {
-        let idClient = event
-
-        functionDetail(idClient)
-    }
 
     const columns = [
         {
@@ -56,9 +52,20 @@ const OrderTableActive = () => {
 
     const data = dataOrder;
 
+    const handleCheck = () => {
+        console.log("ahoy")
+        console.log(props.dataLimit)
+    }
+
+    const handleDetail = (event) => {
+        let idClient = event
+
+        functionDetail(idClient)
+    }
+
     return (
         <>
-            <Table
+            <OrderTable
                 onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
@@ -66,16 +73,7 @@ const OrderTableActive = () => {
                         }, // click row
                     };
                 }}
-                style={{
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    boxShadow: "0 0 0 1px #CED4DA"
-                }}
-                rowKey={"active"}
-                columns={columns}
-                dataSource={data.slice(-5)}
-                pagination={false}
-                />
+                columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
 }

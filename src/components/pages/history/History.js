@@ -8,8 +8,10 @@ function History() {
     return (
         <>
             <Nav title="Riwayat"/>
-            <div className="incoming-order-table">
-                <HistoryTable/>
+            <div className="dashboard-container">
+                <div className="table">
+                    <HistoryTable/>
+                </div>
             </div>
         </>
     )

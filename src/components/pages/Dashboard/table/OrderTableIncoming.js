@@ -1,8 +1,9 @@
 import React, {useEffect, useContext} from "react"
 import {Table, Button} from 'antd';
 import {ContextOrderIncoming} from "../../../context/ContextOrderIncoming";
+import OrderTable from "../../../global/OrderTable";
 
-const OrderTableIncoming = () => {
+const OrderTableIncoming = (props) => {
     const {dataIncomingOrder, functions} = useContext(ContextOrderIncoming)
     const {fetchData, functionDetail} = functions
 
@@ -21,6 +22,11 @@ const OrderTableIncoming = () => {
             title: 'Judul Konsultasi',
             dataIndex: 'title',
             key: 'title',
+        },
+        {
+            title: 'Nama Klien',
+            key: 'name',
+            dataIndex: 'name',
         },
         {
             title: 'Tanggal Masuk',
@@ -42,16 +48,13 @@ const OrderTableIncoming = () => {
 
     const data = dataIncomingOrder;
 
+    let emptyTable = {
+        emptyText: 'Tidak ada konsultasi masuk',
+    };
+
     return (
         <>
-            <Table
-                style={{
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    boxShadow: "0 0 0 1px #CED4DA"
-                }}
-                rowKey={"incoming"}
-                columns={columns} dataSource={data} pagination={false}/>
+            <OrderTable columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
 }
