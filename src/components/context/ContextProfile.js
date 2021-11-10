@@ -61,14 +61,14 @@ export const ProfileProvider = props => {
                     skills: key.skills,
                 }
             }),
-            consultant_virtual_account: data.consultant_virtual_account.map(key => {
-                return {
-                    id: key.id,
-                    name: key.name,
-                    card_number: key.card_number,
-                    bank: key.bank
-                }
-            }),
+            // consultant_virtual_account: data.consultant_virtual_account.map(key => {
+            //     return {
+            //         id: key.id,
+            //         name: key.name,
+            //         card_number: key.card_number,
+            //         bank: key.bank
+            //     }
+            // }),
         })
         setCurrentId(data.id)
     }
@@ -80,6 +80,27 @@ export const ProfileProvider = props => {
                 consultation_price: input.consultation_price,
                 consultation_virtual_account: input.consultant_virtual_account,
                 consultation_doc: input.consultant_documentation
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                console.log(res)
+                history.push(`/profile`)
+            })
+    }
+
+    const functionEditBiodata = () => {
+         console.log("input save")
+        API.put(`consultants/profile/consultation/${Cookies.get('id')}`, {
+                name: input.name,
+                description: input.description,
+                photo : input.photo,
+                city : input.city,
+                gender: input.gender,
+                position: input.position,
+                consultant_experience: input.consultant_experience,
+                consultant_skill: input.consultant_skill,
+                consultant_education:input.consultant_education
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
@@ -116,10 +137,6 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-    }
-
-    const functionEditBiodata = () => {
-        history.push(`/edit-biodata`)
     }
 
     const functions = {

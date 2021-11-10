@@ -10,8 +10,8 @@ const Profile = () => {
     return (
         <>
         <Nav title="Profil"/>
-            <Row className="center">
-                <Col span={12}>
+            <Row className="center"> 
+            <Col span={12}>
                     <div className="container-profile">   
                         <PersonalBiodata/>
                     </div>

@@ -32,9 +32,9 @@ const EditBiodata = () => {
     const {fetchData, functionEditBiodata, dataProvinces, dataCity} = functions
 
     useEffect(() => {
-        fetchData();
-        dataProvinces();
-        dataCity();
+        fetchData()
+        // dataProvinces();
+        // dataCity();
     }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
@@ -89,6 +89,15 @@ const EditBiodata = () => {
         setIsHistoryVisible(false);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log("input bang")
+        console.log(input)
+        console.log("================")
+
+        functionEditBiodata()
+    }
+
     const [value, setValue] = React.useState(1);
 
     const onChange = e => {
@@ -102,7 +111,7 @@ const EditBiodata = () => {
         console.log("tesvalue " + typeOfValue)
         console.log("tesname " + name)
 
-        // setInput({ ...input, [name]: typeOfValue })
+        setInput({ ...input, [name]: typeOfValue })
     };
 
     const onFinishFailed = (errorInfo) => {
@@ -166,9 +175,9 @@ const EditBiodata = () => {
                                     style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
                             </Col>
                             <Col span={16}>
-                                <Upload {...props}>
+                                {/* <Upload {...props}>
                                     <Button style={{borderRadius: 4}}>Edit Profile</Button>
-                                </Upload>
+                                </Upload> */}
                                 <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
                                 {/* <Button
                                 type="primary"
@@ -179,42 +188,41 @@ const EditBiodata = () => {
                             {uploading ? 'Uploading' : 'Upload File'}
                             </Button> */}
                             </Col>
-                        </Row>
-
-                        <Space size={24} direction="vertical">
-
-                        </Space>
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Nama Lengkap</h4>
-                        <Input
-                            style={{borderRadius: 8, height: 48}}
-                            placeholder="Nama lengkap"
-                            prefix={input.name}
-                            onChange={handleChange}/>
-
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Deskripsi tentang Anda</h4>
+                        </Row><br/><br/>
+                        
+                        <form id="1" method="post" onSubmit={handleSubmit}>
+                        <Text type="secondary">Nama Lengkap</Text>
+                        <Input style={{borderRadius: 8, height: 48}}
+                               name="name"
+                               onChange={handleChange}
+                               placeholder="Nama lengkap"
+                               value={input.name}/><br/><br/>
+            
+                        <Text type="secondary">Deskripsi</Text>
                         <TextArea
                             style={{borderRadius: 8}}
                             rows={6}
+                            name = "description"
                             placeholder="Deskripsi"
-                            prefix={input.description}/>
+                            onChange={handleChange}
+                            value={input.description}/>
+                        <br/>
 
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Jenis Kelamin</h4>
+                        <Text type="secondary">jenis Kelamin</Text><br/>
                         <Radio.Group onChange={onChange} value={value}>
                             <Radio value={1}>Laki - Laki </Radio>
                             <Radio value={2}>Perempuan</Radio>
-                        </Radio.Group>
+                        </Radio.Group><br/><br/>
 
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Bidang Konsultasi</h4>
+                        <Text type="secondary">Bidang Keahlian</Text>
                         <Input style={{borderRadius: 8, height: 48}}
-                               placeholder="Bidang Konsultasi"
-                               prefix={input.position}/>
+                               name="position"
+                               onChange={handleChange}
+                               placeholder="Bidang Keahlian"
+                               value={input.position}/><br/><br/>
+                        </form><br/>
 
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Provinsi</h4>
+                        <Text type="secondary">Provinsi</Text>
                         <Select
                           showSearch
                           style={{ width: 480 }}
@@ -243,10 +251,8 @@ const EditBiodata = () => {
                         </>
                     )}
 
-                </Select>
-                    
-                    <br/><br/>
-                        <h4 style={{color: "gray"}}>Kota</h4>
+                </Select><br/><br/>
+                        <Text type="secondary">Kota</Text>
                         <Select
                           showSearch
                           style={{ width: 480 }}
@@ -416,7 +422,7 @@ const EditBiodata = () => {
                                 )}
                         </Space>
 
-
+              {/*MODAL HERE*/}
                         <Modal
                             destroyOnClose={true}
                             className="profile-modal"
@@ -641,15 +647,14 @@ const EditBiodata = () => {
                         </Modal>
 
                         <br/><br/>
-                        <Button
-                            size="large"
+                        <Button size="large"
                             className="button"
-                            type="primary" block
-                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            type="primary"
+                            block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
                             htmlType="submit"
-                            form="2">
-                            Simpan
-                        </Button>
+                            form="1">
+                        Simpan
+                    </Button>
                     </form>
                 </Card>
             </div>

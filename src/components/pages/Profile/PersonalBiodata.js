@@ -11,6 +11,7 @@ const {Title, Text, Link} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()
+
     const {input, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
 
@@ -54,7 +55,7 @@ const PersonalBiodata = () => {
                         <Space size={24} direction="vertical">
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>
-                                <Text strong> {input.name}</Text>
+                                <Text strong>{input.name}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Deskripsi Tentang Anda</Text>
