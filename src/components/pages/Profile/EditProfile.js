@@ -71,6 +71,7 @@ const EditProfile = () => {
     return (
         <>
             <Nav/>
+            <Col sm={{span: 24, order: 1}}>
             <div className="container-profile">
                 <Card title="Edit Profil Konsultasi"
                       style={{width: "41%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
@@ -257,6 +258,7 @@ const EditProfile = () => {
                     </Form.Item>
                 </Form>
             </Modal>
+            </Col>
         </>
     )
 }
