@@ -1,9 +1,25 @@
 import React, {useContext, useEffect, useState} from "react"
-import {Radio, Space, DatePicker, TimePicker, Button, Input, Modal, Typography, Card, Form, PageHeader} from 'antd';
+import {
+    Radio,
+    Space,
+    DatePicker,
+    TimePicker,
+    Button,
+    Input,
+    Modal,
+    Typography,
+    Card,
+    Form,
+    PageHeader,
+    Row,
+    Col
+} from 'antd';
 import {useParams} from "react-router-dom";
 import {ArrowRightOutlined, FileTextOutlined, DeleteOutlined, CloseOutlined} from "@ant-design/icons";
 import {ContextAfterBooking} from "../../context/ContextAfterBooking";
 import {message} from 'antd';
+import {Pencil, X} from "phosphor-react";
+import ModalAddDocument from "../../global/ModalAddDocument";
 
 const {Meta} = Card;
 const {Link, Text} = Typography;
@@ -13,7 +29,17 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(ContextAfterBooking)
+    const {
+        input,
+        setInput,
+        prefTime,
+        setPrefTime,
+        prefDate,
+        setPrefDate,
+        inputDocument,
+        setInputDocument,
+        functions
+    } = useContext(ContextAfterBooking)
     const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
 
     // useEffect(() => {
@@ -93,7 +119,7 @@ const ConsultationOption = () => {
     };
 
     const deleteDocument = (event) => {
-        console.log(event)
+        console.log(input.document)
         let index = input.document.findIndex(x => x.title === event.currentTarget.value);
 
         console.log(index)
@@ -101,8 +127,12 @@ const ConsultationOption = () => {
         console.log(input)
     }
 
-    const updateDocument = () => {
+    const updateDocument = (title, description) => {
+        let index = input.document.findIndex(x => x.title === title);
 
+        setInput({...input, title: title, description: description})
+        setIsExperienceVisible(true);
+        input.document.splice(index, 1);
     }
 
     return (
@@ -193,19 +223,27 @@ const ConsultationOption = () => {
                                                 <Meta
                                                     title={
                                                         <>
-                                                            <Text>{e.title}</Text>
-                                                            <Button onClick={updateDocument}
-                                                                    value={e.title}
-                                                                    name={e.title}
-                                                                    style={{color: "#3B85FA"}}
-                                                                    type="text">update
-                                                            </Button>
-                                                            <Button onClick={deleteDocument}
-                                                                    value={e.title}
-                                                                    name={e.title}
-                                                                    style={{color: "#3B85FA"}}
-                                                                    type="text"><CloseOutlined/>
-                                                            </Button>
+                                                            <Row>
+                                                                <Col span={21} style={{padding: 0, paddingTop: 8}}>
+                                                                    <Text style={{
+                                                                        padding: 0,
+                                                                        paddingTop: 8
+                                                                    }}>{e.title}</Text>
+                                                                </Col>
+                                                                <Col span={3}>
+                                                                    <Button value={e.title}
+                                                                            style={{padding: 0, paddingTop: 8}}
+                                                                            type="link"><Pencil
+                                                                        onClick={() => updateDocument(e.title, e.description)}
+                                                                        size={24} weight="fill"/>
+                                                                    </Button>
+                                                                    <Button value={e.title}
+                                                                            style={{padding: 0, paddingTop: 8}}
+                                                                            onClick={deleteDocument} type="link"><X
+                                                                        size={24}/>
+                                                                    </Button>
+                                                                </Col>
+                                                            </Row>
                                                         </>
                                                     }/>
                                             </Card>
@@ -214,69 +252,77 @@ const ConsultationOption = () => {
                                 })}
                             </>
                         )}
-                        <br/>
+                    <br/>
                     <Button style={{borderRadius: 8}} type="primary" form="1" htmlType="submit">
                         Kirim ke Klien<ArrowRightOutlined/>
                     </Button>
                 </Space>
             </div>
 
-            <Modal
-                destroyOnClose={true}
-                className="profile-modal"
-                title="Tambahkan Dokumen"
+            <ModalAddDocument
                 visible={isExperienceVisible}
                 onCancel={handleCancel}
-                footer={null}
-            >
-                <Form
-                    name="basic"
-                    initialValues={{
-                        remember: true,
-                    }}
-                    layout="vertical"
-                    onFinish={handleSubmitDocument}
-                    onFinishFailed={onFinishFailed}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="Judul Dokumen"
-                        name="title"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input document title!',
-                            },
-                        ]}
-                    >
-                        <Input style={{borderRadius: 8}}/>
-                    </Form.Item>
+                onFinish={handleSubmitDocument}
+                onFinishFailed={onFinishFailed}
+                name={input.title}
+                description={input.description}/>
 
-                    <Form.Item
-                        label="Deskripsi Dokumen"
-                        name="description"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input document description!',
-                            },
-                        ]}
-                    >
-                        <TextArea style={{borderRadius: 8}} rows={4} name="description"/>
-                    </Form.Item>
+            {/*<Modal*/}
+            {/*    destroyOnClose={true}*/}
+            {/*    className="profile-modal"*/}
+            {/*    title="Tambahkan Dokumen"*/}
+            {/*    visible={isExperienceVisible}*/}
+            {/*    onCancel={handleCancel}*/}
+            {/*    footer={null}*/}
+            {/*>*/}
+            {/*    <Form*/}
+            {/*        name="basic"*/}
+            {/*        initialValues={{*/}
+            {/*            remember: true,*/}
+            {/*        }}*/}
+            {/*        layout="vertical"*/}
+            {/*        onFinish={handleSubmitDocument}*/}
+            {/*        onFinishFailed={onFinishFailed}*/}
+            {/*        autoComplete="off"*/}
+            {/*    >*/}
+            {/*        <Form.Item*/}
+            {/*            label="Judul Dokumen"*/}
+            {/*            name="title"*/}
+            {/*            rules={[*/}
+            {/*                {*/}
+            {/*                    required: true,*/}
+            {/*                    message: 'Please input document title!',*/}
+            {/*                },*/}
+            {/*            ]}*/}
+            {/*        >*/}
+            {/*            <Input style={{borderRadius: 8}}/>*/}
+            {/*        </Form.Item>*/}
 
-                    <Form.Item>
-                        <Button
-                            size="large"
-                            className="button"
-                            type="primary" block
-                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                            htmlType="submit">
-                            Tambahkan Dokumen
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
+            {/*        <Form.Item*/}
+            {/*            label="Deskripsi Dokumen"*/}
+            {/*            name="description"*/}
+            {/*            rules={[*/}
+            {/*                {*/}
+            {/*                    required: true,*/}
+            {/*                    message: 'Please input document description!',*/}
+            {/*                },*/}
+            {/*            ]}*/}
+            {/*        >*/}
+            {/*            <TextArea style={{borderRadius: 8}} rows={4} name="description"/>*/}
+            {/*        </Form.Item>*/}
+
+            {/*        <Form.Item>*/}
+            {/*            <Button*/}
+            {/*                size="large"*/}
+            {/*                className="button"*/}
+            {/*                type="primary" block*/}
+            {/*                style={{borderRadius: 8, backgroundColor: "#3B85FA"}}*/}
+            {/*                htmlType="submit">*/}
+            {/*                Tambahkan Dokumen*/}
+            {/*            </Button>*/}
+            {/*        </Form.Item>*/}
+            {/*    </Form>*/}
+            {/*</Modal>*/}
         </>
     )
 }

@@ -71,11 +71,11 @@ const PersonalBiodata = () => {
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Provinsi</Text>
-                                <Text strong>{input.location}</Text>
+                                <Text strong>{input.province}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Kota</Text>
-                                <Text strong>{input.location}</Text>
+                                <Text strong>{input.city}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pengalaman Kerja</Text>
@@ -93,7 +93,7 @@ const PersonalBiodata = () => {
                                 {
                                     input.consultant_education && (
                                         <>
-                               g             {input.consultant_education.map((e, index) => {
+                                            {input.consultant_education.map((e, index) => {
                                                 return (
                                                     <>
                                                         <Row>
@@ -114,7 +114,19 @@ const PersonalBiodata = () => {
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
-                                <Text strong>{input.skills}</Text>
+                                {
+                                    input.consultant_skill && (
+                                        <>
+                                            {input.consultant_skill.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Text strong>{e.skills}</Text>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )
+                                }
                             </Space>
                         </Space>
                     </Col>

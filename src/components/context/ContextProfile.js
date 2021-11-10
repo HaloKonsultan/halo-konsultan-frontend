@@ -2,6 +2,7 @@ import React, {createContext, useState} from "react";
 import axios from "axios";
 import {useHistory} from "react-router";
 import Cookies from "js-cookie";
+import {message} from "antd";
 import API from "./API"
 
 export const ContextProfile = createContext()
@@ -9,10 +10,6 @@ export const ContextProfile = createContext()
 export const ProfileProvider = props => {
     let history = useHistory()
     const [dataProfile, setDataProfile] = useState([])
-    const [arrayInput, setArrayInput] = useState({
-        consultant_virtual_account: [],
-        consultant_documentation: []
-    })
     const [input, setInput] = useState([])
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
@@ -21,12 +18,13 @@ export const ProfileProvider = props => {
         let result = await API.get(`consultants/profile/${Cookies.get('id')}`,
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
         let data = result.data.data
-        console.log(data)
         setInput({
             id: data.id,
             name: data.name,
             email: data.email,
             photo: data.photo,
+            city: data.city,
+            province: data.province,
             position: data.position,
             gender: data.gender,
             description: data.description,
@@ -61,31 +59,95 @@ export const ProfileProvider = props => {
                     skills: key.skills,
                 }
             }),
-            // consultant_virtual_account: data.consultant_virtual_account.map(key => {
-            //     return {
-            //         id: key.id,
-            //         name: key.name,
-            //         card_number: key.card_number,
-            //         bank: key.bank
-            //     }
-            // }),
+            consultant_virtual_account: data.consultant_virtual_account.map(key => {
+                return {
+                    id: key.id,
+                    name: key.name,
+                    card_number: key.card_number,
+                    bank: key.bank
+                }
+            }),
         })
-        setCurrentId(data.id)
+        console.log(result)
     }
 
     const functionEditProfile = () => {
-        console.log("input save")
         API.put(`consultants/profile/consultation/${Cookies.get('id')}`, {
                 chat_price: input.chat_price,
                 consultation_price: input.consultation_price,
                 consultation_virtual_account: input.consultant_virtual_account,
                 consultation_doc: input.consultant_documentation
             },
-            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
                 console.log(res)
-                history.push(`/profile`)
+                let data = res.data.data
+                setInput({
+                    name: input.name,
+                    email: input.email,
+                    photo: input.photo,
+                    city: input.city,
+                    province: input.province,
+                    position: input.position,
+                    gender: input.gender,
+                    description: input.description,
+                    chat_price: input.chat_price,
+                    consultation_price: input.consultation_price,
+                    consultant_documentation: input.consultant_documentation.map(key => {
+                        return {
+                            id: key.id,
+                            photo: key.photo,
+                        }
+                    }),
+                    consultant_experience: input.consultant_experience.map(key => {
+                        return {
+                            id: key.id,
+                            position: key.position,
+                            start_year: key.start_year,
+                            end_year: key.end_year
+                        }
+                    }),
+                    consultant_education: input.consultant_education.map(key => {
+                        return {
+                            id: key.id,
+                            institution_name: key.institution_name,
+                            major: key.major,
+                            start_year: key.start_year,
+                            end_year: key.end_year
+                        }
+                    }),
+                    consultant_skill: input.consultant_skill.map(key => {
+                        return {
+                            id: key.id,
+                            skills: key.skills,
+                        }
+                    }),
+                    consultant_virtual_account: data.consultant_virtual_account.map(key => {
+                        return {
+                            id: key.id,
+                            name: key.name,
+                            card_number: key.card_number,
+                            bank: key.bank
+                        }
+                    }),
+                })
+            })
+    }
+
+    const functionDeleteVirtualAccount = (idVA) => {
+        API.delete(`consultants/profile/virtual_account/${idVA}`, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('token')
+            }
+        })
+            .then(() => {
+                setInput({
+                    ...input, consultant_virtual_account: input.consultant_virtual_account.filter((res) => {
+                        return res.id !== idVA
+                    }),
+                })
+                message.success('Data telah dihapus!', 3);
             })
     }
 
@@ -95,7 +157,8 @@ export const ProfileProvider = props => {
                 name: input.name,
                 description: input.description,
                 photo : input.photo,
-                city : input.city,
+                city: input.city,
+                province: input.province,
                 gender: input.gender,
                 position: input.position,
                 consultant_experience: input.consultant_experience,
@@ -129,7 +192,7 @@ export const ProfileProvider = props => {
         let data = resultCity.data.kota_kabupaten
         console.log(data)
         setInput({
-            city: data.map(key => {
+            cities: data.map(key => {
                 return {
                     id: key.id,
                     id_provinces: key.id_provinsi,
@@ -143,6 +206,7 @@ export const ProfileProvider = props => {
         fetchData,
         functionEditBiodata,
         functionEditProfile,
+        functionDeleteVirtualAccount,
         dataProvinces,
         dataCity
     }
@@ -153,8 +217,6 @@ export const ProfileProvider = props => {
             setDataProfile,
             input,
             setInput,
-            arrayInput,
-            setArrayInput,
             currentId,
             setCurrentId,
             functions,

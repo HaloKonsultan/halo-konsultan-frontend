@@ -3,14 +3,18 @@ import {Row, Col, PageHeader, Form, Space, Upload, message, Button, Card, Modal,
 import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Select} from 'antd';
-import PrimaryButton from "../../global/ButtonPrimary";
+import {useHistory} from "react-router";
+import {X, Pencil} from "phosphor-react";
+import ModalVirtualAccount from "../../global/ModalVirtualAccount";
 
 const {Option} = Select;
 const {Text} = Typography;
 
 const EditProfile = () => {
-    const {input, setInput, arrayInput, setArrayInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditProfile} = functions
+    let history = useHistory()
+
+    const {input, setInput, functions} = useContext(ContextProfile)
+    const {fetchData, functionEditProfile, functionDeleteVirtualAccount} = functions
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
     useEffect(() => {
@@ -28,10 +32,12 @@ const EditProfile = () => {
 
     //upload rekening
     const handleVirtualAccount = (values) => {
+        values["id"] = -1
         let virtualAccountInput = input.consultant_virtual_account.push(values)
         setInput({...input, virtualAccountInput})
 
         setIsAccountVisible(false);
+        functionEditProfile()
     };
 
     const handleVirtualAccountError = (errorInfo) => {
@@ -42,12 +48,15 @@ const EditProfile = () => {
     const props = {
         onChange({file}) {
             if (file.status !== 'uploading') {
-                const arrayTemp = {
+                const values = {
+                    id: -1,
                     photo: file.name
                 };
-                let documentationInput = input.consultant_documentation.push(arrayTemp)
+                let documentationInput = input.consultant_documentation.push(values)
 
-                setInput({...input, documentationInput})
+                console.log("ini documentation input")
+                console.log(values)
+                //setInput({...input, documentationInput})
             }
         },
     };
@@ -66,15 +75,22 @@ const EditProfile = () => {
         console.log("================")
 
         functionEditProfile()
+        history.push(`/profile`)
+    }
+
+    const handleDeleteVirtualAccount = (event) => {
+        let idVA = parseInt(event.currentTarget.value)
+
+        functionDeleteVirtualAccount(idVA)
     }
 
     return (
         <>
             <Nav/>
-            <Col sm={{span: 24, order: 1}}>
             <div className="container-profile">
                 <Card title="Edit Profil Konsultasi"
                       style={{width: "41%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
+
                     <PageHeader
                         style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                         ghost={false}
@@ -98,10 +114,21 @@ const EditProfile = () => {
                                             <Row>
                                                 <Col span={4}>logo kak</Col>
                                                 <Col span={1}/>
-                                                <Col span={19}>
+                                                <Col span={15}>
                                                     <Text strong>{e.name}</Text>
                                                     <br/>
                                                     <Text type="secondary">{e.bank} - {e.card_number}</Text>
+                                                </Col>
+                                                <Col span={4}>
+                                                    <Space>
+                                                        <Button value={e.id}
+                                                                style={{padding: 0, paddingTop: 10}} type="link"><Pencil
+                                                            size={24} weight="fill"/></Button>
+                                                        <Button value={e.id}
+                                                                style={{padding: 0, paddingTop: 10}}
+                                                                onClick={handleDeleteVirtualAccount} type="link"><X
+                                                            size={24}/></Button>
+                                                    </Space>
                                                 </Col>
                                             </Row>
                                             <p/>
@@ -128,13 +155,12 @@ const EditProfile = () => {
                                placeholder="Harga Jasa Konsultasi"
                                value={input.consultation_price}/><br/><br/>
                     </form>
-
                     <PageHeader
                         style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                         ghost={false}
                         subTitle={<Text type="secondary">Dokumentasi Kerja</Text>}
                         extra={[
-                            <Upload {...props}>
+                            <Upload {...props} response={false}>
                                 <Button
                                     style={{
                                         color: "#3B85FA"
@@ -184,81 +210,87 @@ const EditProfile = () => {
             </div>
 
             {/*MODAL HERE*/}
-            <Modal
-                className="profile-modal"
-                title="Tambahkan Rekening"
+            <ModalVirtualAccount
                 visible={isAccountVisible}
                 onCancel={handleCancel}
-                footer={null}
-            >
-                <Form
-                    name="basic"
-                    initialValues={{
-                        remember: true,
-                    }}
-                    layout="vertical"
-                    onFinish={handleVirtualAccount}
-                    onFinishFailed={handleVirtualAccountError}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="Nama Bank"
-                        name="bank"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input bank name!',
-                            },
-                        ]}
-                    >
-                        <Select
-                            block
-                            showSearch
-                            style={{borderRadius: 8}}
-                            placeholder="Pilih bank"
-                            optionFilterProp="children"
-                            filterOption={(input, option) =>
-                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                            }
-                        >
-                            <Option value="BRI">BRI</Option>
-                            <Option value="BNI">BNI</Option>
-                            <Option value="BCA">BCA</Option>
-                        </Select>
-                    </Form.Item>
+                onFinish={handleVirtualAccount}
+                onFinishFailed={handleVirtualAccountError}
+            />
 
-                    <Form.Item
-                        label="Nomor Rekening"
-                        name="card_number"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input rekening number!',
-                            },
-                        ]}
-                    >
-                        <Input style={{borderRadius: 8}}/>
-                    </Form.Item>
+            {/*<Modal*/}
+            {/*    className="profile-modal"*/}
+            {/*    title="Tambahkan Rekening"*/}
+            {/*    visible={isAccountVisible}*/}
+            {/*    onCancel={handleCancel}*/}
+            {/*    footer={null}*/}
+            {/*>*/}
+            {/*    <Form*/}
+            {/*        name="basic"*/}
+            {/*        initialValues={{*/}
+            {/*            remember: true,*/}
+            {/*        }}*/}
+            {/*        layout="vertical"*/}
+            {/*        onFinish={handleVirtualAccount}*/}
+            {/*        onFinishFailed={handleVirtualAccountError}*/}
+            {/*        autoComplete="off"*/}
+            {/*    >*/}
+            {/*        <Form.Item*/}
+            {/*            label="Nama Bank"*/}
+            {/*            name="bank"*/}
+            {/*            rules={[*/}
+            {/*                {*/}
+            {/*                    required: true,*/}
+            {/*                    message: 'Please input bank name!',*/}
+            {/*                },*/}
+            {/*            ]}*/}
+            {/*        >*/}
+            {/*            <Select*/}
+            {/*                block*/}
+            {/*                showSearch*/}
+            {/*                style={{borderRadius: 8}}*/}
+            {/*                placeholder="Pilih bank"*/}
+            {/*                optionFilterProp="children"*/}
+            {/*                filterOption={(input, option) =>*/}
+            {/*                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0*/}
+            {/*                }*/}
+            {/*            >*/}
+            {/*                <Option value="BRI">BRI</Option>*/}
+            {/*                <Option value="BNI">BNI</Option>*/}
+            {/*                <Option value="BCA">BCA</Option>*/}
+            {/*            </Select>*/}
+            {/*        </Form.Item>*/}
 
-                    <Form.Item
-                        label="Nama Pemegang Rekening"
-                        name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input rekening name!',
-                            },
-                        ]}
-                    >
-                        <Input style={{borderRadius: 8}}/>
-                    </Form.Item>
+            {/*        <Form.Item*/}
+            {/*            label="Nomor Rekening"*/}
+            {/*            name="card_number"*/}
+            {/*            rules={[*/}
+            {/*                {*/}
+            {/*                    required: true,*/}
+            {/*                    message: 'Please input rekening number!',*/}
+            {/*                },*/}
+            {/*            ]}*/}
+            {/*        >*/}
+            {/*            <Input style={{borderRadius: 8}}/>*/}
+            {/*        </Form.Item>*/}
 
-                    <Form.Item>
-                        <PrimaryButton htmlType="submit" text="Tambahkan Rekening"/>
-                    </Form.Item>
-                </Form>
-            </Modal>
-            </Col>
+            {/*        <Form.Item*/}
+            {/*            label="Nama Pemegang Rekening"*/}
+            {/*            name="name"*/}
+            {/*            rules={[*/}
+            {/*                {*/}
+            {/*                    required: true,*/}
+            {/*                    message: 'Please input rekening name!',*/}
+            {/*                },*/}
+            {/*            ]}*/}
+            {/*        >*/}
+            {/*            <Input style={{borderRadius: 8}}/>*/}
+            {/*        </Form.Item>*/}
+
+            {/*        <Form.Item>*/}
+            {/*            <PrimaryButton htmlType="submit" text="Tambahkan Rekening"/>*/}
+            {/*        </Form.Item>*/}
+            {/*    </Form>*/}
+            {/*</Modal>*/}
         </>
     )
 }
