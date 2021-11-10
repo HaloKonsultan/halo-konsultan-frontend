@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from "react";
 import {Card, Space} from 'antd';
 import Title from "antd/es/typography/Title";
-import { format } from 'date-fns';
-import {TodayOrderContext} from "../../../context/TodayOrderContext";
+import {format} from 'date-fns';
+import {ContextOrderToday} from "../../../context/ContextOrderToday";
+import {Typography} from 'antd';
 
+const {Text, Link} = Typography;
 const {Meta} = Card;
-const TodayOrder = () => {
-    const {dataTodayOrder, functions} = useContext(TodayOrderContext)
+const OrderToday = () => {
+    const {dataTodayOrder, functions} = useContext(ContextOrderToday)
     const {fetchData, functionDetail} = functions
     const today = format(new Date(), 'dd-MM-yyy ')
 
@@ -34,7 +36,19 @@ const TodayOrder = () => {
             >
                 <>
                     {
-                        dataTodayOrder !== null && (
+                        dataTodayOrder.length === 0 &&
+                        <Text type="secondary" style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
+                            {console.log("today orde")}
+                            {console.log(dataTodayOrder)}
+                            Tidak ada konsultasi hari ini
+                        </Text>
+                    }
+                    {
+                        dataTodayOrder && (
                             <>
                                 {dataTodayOrder.map((e, index) => {
                                     return (
@@ -44,6 +58,7 @@ const TodayOrder = () => {
                                                     handleDetail(e.id)
                                                 }}
                                                 style={{
+                                                    marginBottom: 20,
                                                     width: 407,
                                                     borderRadius: 8,
                                                     boxShadow: "0 0 0 1px #CED4DA"
@@ -66,4 +81,4 @@ const TodayOrder = () => {
     )
 }
 
-export default TodayOrder
+export default OrderToday

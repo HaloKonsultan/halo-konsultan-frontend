@@ -4,13 +4,14 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const ActiveOrderContext = createContext()
+export const ContextOrderWaiting = createContext()
 
-export const OrderProvider = props => {
+export const WaitingPaymentProvider = props => {
     let history = useHistory()
-    const [dataOrder, setDataOrder] = useState([])
+    const [dataPayment, setDataPayment] = useState([])
     const [input, setInput] = useState({
         title: "",
+        name: "",
         date: "",
         time: "",
         status: ""
@@ -20,25 +21,24 @@ export const OrderProvider = props => {
 
     const fetchData = async () => {
         let result = await API.get(
-            `consultants/consultations/user/${Cookies.get('id')}/active`,
+            `consultants/consultations/user/${Cookies.get('id')}/waiting`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
         console.log(data)
-        setDataOrder(data.map((e) => {
+        setDataPayment(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
                 name: e.name,
                 date: e.date,
                 time: e.time,
-                status: e.status,
-                conference_link: e.conference_link
+                status: e.status
             }
         }))
     }
 
-    const functionDetail = (idClient) => {
-        history.push(`/order/detail/${idClient}`)
+    const functionDetail = (consultation_id) => {
+        history.push(`/incoming-order/detail/accept/${consultation_id}`)
     }
 
     const functions = {
@@ -47,9 +47,9 @@ export const OrderProvider = props => {
     }
 
     return (
-        <ActiveOrderContext.Provider value = {{
-            dataOrder,
-            setDataOrder,
+        <ContextOrderWaiting.Provider value = {{
+            dataPayment,
+            setDataPayment,
             input,
             setInput,
             currentId,
@@ -59,6 +59,7 @@ export const OrderProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </ActiveOrderContext.Provider>
+        </ContextOrderWaiting.Provider>
     )
+
 }

@@ -4,20 +4,21 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const ConsultationDetailContext = createContext()
+export const ContextConsultationDetail = createContext()
 
 export const ConsultationDetailProvider = props => {
     let history = useHistory()
     const [dataConsultation, setDataConsultation] = useState([])
     const [input, setInput] = useState({
         title: "",
-        name: "",
+        user_name: "",
         description: "",
         preference: "",
         location: "",
         status: "",
         consultation_price: "",
         is_confirmed: "",
+        message: "",
         date: "",
         conference_link: "",
         consultation_preference_date: [{
@@ -41,10 +42,11 @@ export const ConsultationDetailProvider = props => {
         setInput({
             id: data.id,
             title: data.title,
-            name: data.name,
+            user_name: data.user_name,
             description: data.description,
             preference: data.preference,
             location: data.location,
+            message: data.message,
             status: data.status,
             consultation_price: data.consultation_price,
             is_confirmed: data.is_confirmed,
@@ -84,14 +86,17 @@ export const ConsultationDetailProvider = props => {
     const functionDecline = (consultation_id) => {
         API.patch(`consultants/consultations/${consultation_id}/decline`, {
                 confirmed: 0,
+                message: input.message
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
                 let data = res.data
+                console.log("data di api decline")
                 console.log(data)
                 setDataConsultation([...dataConsultation, {
                     is_confirmed: data.is_confirmed,
+                    message: data.message
                 }])
                 history.push(`/history`)
             })
@@ -132,7 +137,7 @@ export const ConsultationDetailProvider = props => {
     }
 
     return (
-        <ConsultationDetailContext.Provider value = {{
+        <ContextConsultationDetail.Provider value = {{
             dataConsultation,
             setDataConsultation,
             input,
@@ -144,6 +149,6 @@ export const ConsultationDetailProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </ConsultationDetailContext.Provider>
+        </ContextConsultationDetail.Provider>
     )
 }

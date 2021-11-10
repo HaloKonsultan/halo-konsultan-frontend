@@ -4,14 +4,14 @@ import {Card} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
-import {ProfileContext} from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
 
 const {Title, Text, Link} = Typography;
 
 const ConsultationProfile = () => {
     let history = useHistory()
 
-    const {input, functions} = useContext(ProfileContext)
+    const {input, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
 
     useEffect(() => {
@@ -38,10 +38,27 @@ const ConsultationProfile = () => {
                 <Space size={24} direction="vertical">
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Rekening</Text>
-                        <Text strong>{input.name}</Text>
-                        <Text type="secondary">BNI - 72121217233</Text>
-                        <Text strong>Fatih Khoiri</Text>
-                        <Text type="secondary">BCA - 81726781233</Text>
+                        {
+                            input.consultant_virtual_account && (
+                                <>
+                                    {input.consultant_virtual_account.map((e, index) => {
+                                        return (
+                                            <>
+                                                <Row>
+                                                    <Col span={4}>logo kak</Col>
+                                                    <Col span={2}/>
+                                                    <Col span={18}>
+                                                        <Text strong>{e.name}</Text>
+                                                        <br/>
+                                                        <Text type="secondary">{e.bank} - {e.card_number}</Text>
+                                                    </Col>
+                                                </Row>
+                                            </>
+                                        )
+                                    })}
+                                </>
+                            )
+                        }
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Harga Jasa Diskusi</Text>
@@ -49,28 +66,34 @@ const ConsultationProfile = () => {
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Harga Jasa Konsultasi</Text>
-                        <Text strong>{input.consultant_price}</Text>
+                        <Text strong>{input.consultation_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <Text type="secondary">Dokumentasi Kerja</Text>
                         <ul>
                             <Space size={[8, 8]} wrap>
-                                <li>
-                                    <img src="https://bagianpbj.kutaibaratkab.go.id/wp-content/uploads/2020/07/1.png"
-                                         alt="" style={{width: 168, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
-                                </li>
-                                <li>
-                                    <img src="https://bagianpbj.kutaibaratkab.go.id/wp-content/uploads/2020/07/1.png"
-                                         alt="" style={{width: 168, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
-                                </li>
-                                <li>
-                                    <img src="https://bagianpbj.kutaibaratkab.go.id/wp-content/uploads/2020/07/1.png"
-                                         alt="" style={{width: 168, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
-                                </li>
-                                <li>
-                                    <img src="https://bagianpbj.kutaibaratkab.go.id/wp-content/uploads/2020/07/1.png"
-                                         alt="" style={{width: 168, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
-                                </li>
+                                {
+                                    input.consultant_documentation && (
+                                        <>
+                                            {input.consultant_documentation.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <li>
+                                                            <img src={e.photo}
+                                                                 alt="" style={{
+                                                                width: 168,
+                                                                height: 168,
+                                                                objectFit: "cover",
+                                                                borderRadius: 8,
+                                                                boxShadow: "0 0 0 1px #CED4DA"
+                                                            }}/>
+                                                        </li>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )
+                                }
                             </Space>
                         </ul>
                     </Space>

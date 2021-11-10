@@ -4,13 +4,14 @@ import {Card, Input} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
-import { ProfileContext } from "../../context/ProfileContext";
+import {ContextProfile} from "../../context/ContextProfile";
+import {FileTextOutlined} from "@ant-design/icons";
 
 const {Title, Text, Link} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()
-    const {input, functions} = useContext(ProfileContext)
+    const {input, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
 
     useEffect(() => {
@@ -39,9 +40,15 @@ const PersonalBiodata = () => {
                 <Row>
                     <Col span={12}>
                         <img
-                            src="https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg"
+                            src={input.photo}
                             alt="profile-picture"
-                            style={{width: 200, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
+                            style={{
+                                width: 200,
+                                height: 200,
+                                objectFit: "cover",
+                                borderRadius: 8,
+                                boxShadow: "0 0 0 1px #CED4DA"
+                            }}/>
                     </Col>
                     <Col span={12}>
                         <Space size={24} direction="vertical">
@@ -62,6 +69,10 @@ const PersonalBiodata = () => {
                                 <Text strong>{input.position}</Text>
                             </Space>
                             <Space size={4} direction="vertical">
+                                <Text type="secondary">Provinsi</Text>
+                                <Text strong>{input.location}</Text>
+                            </Space>
+                            <Space size={4} direction="vertical">
                                 <Text type="secondary">Kota</Text>
                                 <Text strong>{input.location}</Text>
                             </Space>
@@ -75,29 +86,40 @@ const PersonalBiodata = () => {
                                         <Text strong>{input.start_year}{input.end_year}</Text>
                                     </Col>
                                 </Row>
-
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pendidikan</Text>
-                                <Row>
-                                    <Col span={12}>
-                                        <Text strong>University Up and Down</Text>
-                                    </Col>
-                                    <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>{input.start_year}{input.end_year}</Text>
-                                    </Col>
-                                </Row>
+                                {
+                                    input.consultant_education && (
+                                        <>
+                               g             {input.consultant_education.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Row>
+                                                            <Col span={12}>
+                                                                <Text strong>{e.institution_name}</Text>
+                                                            </Col>
+                                                            <Col style={{display: "flex", justifyContent: "right"}}
+                                                                 span={12}>
+                                                                <Text strong>{e.start_year} - {e.end_year}</Text>
+                                                            </Col>
+                                                        </Row>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )
+                                }
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Bidang Keahlian</Text>
-                                <Text strong>{input.skills}{input.end_year}</Text>
+                                <Text strong>{input.skills}</Text>
                             </Space>
                         </Space>
                     </Col>
                 </Row>
             </Card>
         </>
-
     )
 }
 

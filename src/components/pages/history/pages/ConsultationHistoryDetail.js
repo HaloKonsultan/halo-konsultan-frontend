@@ -8,9 +8,9 @@ const ConsultationHistoryDetail = () => {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Detail Konsultasi" onBack={() => window.history.back()}/>
             <Row className="center">
-                <Col span={13}><br/><Detail /></Col>
+                <Col span={13}><Detail /></Col>
                 <Col span={11}><ConsultationHistory /></Col>
             </Row>
         </>
