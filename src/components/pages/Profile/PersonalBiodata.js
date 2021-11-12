@@ -41,7 +41,7 @@ const PersonalBiodata = () => {
                 <Row>
                     <Col span={12}>
                         <img
-                            src={input.photo !== null}
+                            src={input.photo}
                             alt="profile-picture"
                             style={{
                                 width: 200,

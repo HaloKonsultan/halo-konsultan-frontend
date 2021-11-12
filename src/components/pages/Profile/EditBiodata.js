@@ -179,15 +179,10 @@ const EditBiodata = () => {
     const props = {
         onChange({file}) {
             if (file.status !== 'uploading') {
-                const values = {
-                    id: -1,
-                    photo: file.name
-                };
-                //let documentationInput = input.consultant_documentation.push(values)
+                let typeOfValue = file.name
+                let name = "photo"
 
-                // console.log("ini documentation input")
-                // console.log(values)
-                //setInput({...input, documentationInput})
+                setInput({...input, [name]: typeOfValue})
             }
         },
     };
@@ -198,14 +193,12 @@ const EditBiodata = () => {
         functionEditBiodata()
     }
 
-    
-    
     return (
         <>
             <Nav/>
             <div className="container-profile">
                 <Card title="Edit Profil Diri" style={{width: 528, borderRadius: 8}}>
-                    <Space size={24} direction="vertical">
+                    <Space size={24} direction="vertical" style={{width: "100%"}}>
                         <Row>
                             <Col span={8}>
                                 <img src={input.photo} alt="profile-picture"
