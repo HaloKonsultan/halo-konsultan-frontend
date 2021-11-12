@@ -27,8 +27,8 @@ const {Option} = Select;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
-    const {input, setInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata} = functions
+    const {input, setInput, inputProvince, setInputProvince, functions} = useContext(ContextProfile)
+    const {fetchData, functionEditBiodata, dataCity} = functions
     const [value, setValue] = React.useState(1);
 
     useEffect(() => {
@@ -39,6 +39,33 @@ const EditBiodata = () => {
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
     const [isHistoryVisible, setIsHistoryVisible] = useState(false);
+
+    const onChangeGender = e => {
+        console.log('radio checked', e.target.value);
+        let typeOfValue = e.target.value
+        let name = "gender"
+        setInput({...input, [name]: typeOfValue})
+    };
+
+    const handleProvinceChange = (value) => {
+        console.log(value[1])
+        console.log(value[0])
+
+        let typeOfValue = value[0]
+        let name = "province"
+
+        setInput({...input, [name]: typeOfValue})
+        dataCity(value[1])
+    }
+
+    const handleCityChange = (value) => {
+        console.log(value)
+
+        let typeOfValue = value
+        let name = "city"
+
+        setInput({...input, [name]: typeOfValue})
+    }
 
     const showExperienceModal = () => {
         setIsExperienceVisible(true);
@@ -83,11 +110,6 @@ const EditBiodata = () => {
         setIsExperienceVisible(false);
         setIsSkillVisible(false);
         setIsHistoryVisible(false);
-    };
-
-    const onChange = e => {
-        console.log('radio checked', e.target.value);
-        setValue(e.target.value);
     };
 
     const handleChange = (event) => {
@@ -162,9 +184,9 @@ const EditBiodata = () => {
                                 value={input.description}/><br/><br/>
 
                             <Text type="secondary">Jenis Kelamin</Text><br/>
-                            <Radio.Group onChange={onChange} value={value}>
-                                <Radio value={1}>Laki - Laki </Radio>
-                                <Radio value={2}>Perempuan</Radio>
+                            <Radio.Group onChange={onChangeGender}>
+                                <Radio value="Pria">Pria </Radio>
+                                <Radio value="Wanita">Wanita</Radio>
                             </Radio.Group><br/><br/>
 
                             <Text type="secondary">Bidang Keahlian</Text>
@@ -178,6 +200,7 @@ const EditBiodata = () => {
                             <Text type="secondary">Provinsi</Text>
                             <Select
                                 defaultValue={input.province}
+                                onChange={handleProvinceChange}
                                 showSearch
                                 bordered={false}
                                 style={{
@@ -193,12 +216,12 @@ const EditBiodata = () => {
                                 }
                             >
                                 {
-                                    input.provinces && (
+                                    inputProvince.province && (
                                         <>
-                                            {input.provinces.map((e, index) => {
+                                            {inputProvince.province.map((e, index) => {
                                                 return (
                                                     <>
-                                                        <Option value={e.name}>{e.name}</Option>
+                                                        <Option value={[e.name, e.id]}>{e.name}</Option>
                                                     </>
                                                 )
                                             })}
@@ -211,6 +234,7 @@ const EditBiodata = () => {
                             <Text type="secondary">Kota</Text>
                             <Select
                                 defaultValue={input.city}
+                                onChange={handleCityChange}
                                 showSearch
                                 bordered={false}
                                 style={{
@@ -226,9 +250,9 @@ const EditBiodata = () => {
                                 }
                             >
                                 {
-                                    input.cities && (
+                                    inputProvince.cities && (
                                         <>
-                                            {input.cities.map((e, index) => {
+                                            {inputProvince.cities.map((e, index) => {
                                                 return (
                                                     <>
                                                         <Option value={e.name}>{e.name}</Option>

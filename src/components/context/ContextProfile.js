@@ -10,7 +10,25 @@ export const ContextProfile = createContext()
 export const ProfileProvider = props => {
     let history = useHistory()
     const [dataProfile, setDataProfile] = useState([])
-    const [input, setInput] = useState([])
+    const [input, setInput] = useState({
+        id: "",
+        name: "",
+        email: "",
+        photo: "",
+        city: "",
+        province: "",
+        position: "",
+        gender: "",
+        description: "",
+        chat_price: "",
+        consultation_price: "",
+        consultant_documentation: [],
+        consultant_experience: [],
+        consultant_education: [],
+        consultant_skill: [],
+        consultant_virtual_account: [],
+    })
+    const [inputProvince, setInputProvince] = useState([])
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -70,6 +88,7 @@ export const ProfileProvider = props => {
         })
         console.log("input di profil")
         console.log(input)
+        await dataProvinces()
     }
 
     const functionEditProfile = () => {
@@ -125,7 +144,7 @@ export const ProfileProvider = props => {
 
     const functionEditBiodata = () => {
         console.log("input save")
-        console.log(input.name)
+        console.log(input.city)
         API.put(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -143,33 +162,34 @@ export const ProfileProvider = props => {
             .then((res) => {
                 let result = res.data.data
                 console.log(res)
-                // history.push(`/profile`)
+                history.push(`/profile`)
             })
     }
 
     const dataProvinces = async () => {
         let result = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/provinsi`)
         let data = result.data.provinsi
-        console.log(data)
-        setInput({
-            provinces: data.map(key => {
+        setInputProvince({
+            province: data.map(key => {
                 return {
                     id: key.id,
                     name: key.nama,
                 }
             }),
         })
+        console.log(inputProvince)
     }
 
-    const dataCity = async () => {
-        let resultCity = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=32`)
+    const dataCity = async (id) => {
+        let resultCity = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${id}`)
         let data = resultCity.data.kota_kabupaten
         console.log(data)
-        setInput({
+        setInputProvince({
+            ...inputProvince,
             cities: data.map(key => {
                 return {
                     id: key.id,
-                    id_provinces: key.id_provinsi,
+                    id_province: key.id_provinsi,
                     name: key.nama,
                 }
             }),
@@ -191,6 +211,8 @@ export const ProfileProvider = props => {
             setDataProfile,
             input,
             setInput,
+            inputProvince,
+            setInputProvince,
             currentId,
             setCurrentId,
             functions,

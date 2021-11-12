@@ -5,6 +5,7 @@ import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
+import noProfile from "../../../assets/img/noprofile.png"
 
 const {Title, Text, Link} = Typography;
 
@@ -40,7 +41,7 @@ const PersonalBiodata = () => {
                 <Row>
                     <Col span={12}>
                         <img
-                            src={input.photo}
+                            src={input.photo !== null}
                             alt="profile-picture"
                             style={{
                                 width: 200,
