@@ -153,17 +153,17 @@ export const ProfileProvider = props => {
 
     const functionEditBiodata = () => {
          console.log("input save")
-        API.put(`consultants/profile/consultation/${Cookies.get('id')}`, {
-                name: input.name,
-                description: input.description,
-                photo : input.photo,
-                city: input.city,
-                province: input.province,
-                gender: input.gender,
-                position: input.position,
-                consultant_experience: input.consultant_experience,
-                consultant_skill: input.consultant_skill,
-                consultant_education:input.consultant_education
+        API.patch(`consultants/profile/consultation/${Cookies.get('id')}`, {
+            name: input.name,
+            description: input.description,
+            photo: input.photo,
+            gender: input.gender,
+            province: input.province,
+            city: input.city,
+            consultant_type: input.position,
+            consultant_experience: input.consultant_experience,
+            consultant_skills: input.consultant_skill,
+            consultant_educations: input.consultant_education
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
