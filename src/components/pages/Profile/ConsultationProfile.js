@@ -6,13 +6,13 @@ import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
 
-const {Title, Text, Link} = Typography;
+const {Title, Text} = Typography;
 
 const ConsultationProfile = () => {
     let history = useHistory()
 
     const {input, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata} = functions
+    const {fetchData} = functions
 
     useEffect(() => {
         fetchData()

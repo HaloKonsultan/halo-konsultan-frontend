@@ -29,17 +29,7 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {
-        input,
-        setInput,
-        prefTime,
-        setPrefTime,
-        prefDate,
-        setPrefDate,
-        inputDocument,
-        setInputDocument,
-        functions
-    } = useContext(ContextAfterBooking)
+    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, inputDocument, setInputDocument, functions} = useContext(ContextAfterBooking)
     const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
 
     // useEffect(() => {
@@ -51,7 +41,6 @@ const ConsultationOption = () => {
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
 
     function onChangeDate(date, dateString, id) {
-        // console.log("ini tanggal " + dateString);
         const index = prefDate.date.map(e => e.id).indexOf(id);
         if (index !== -1) prefDate.date.splice(index, 1)
         let dateInput = prefDate.date.push({

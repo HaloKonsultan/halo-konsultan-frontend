@@ -68,7 +68,8 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        console.log(result)
+        console.log("input di profil")
+        console.log(input)
     }
 
     const functionEditProfile = () => {
@@ -81,46 +82,17 @@ export const ProfileProvider = props => {
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
-                console.log(res)
                 let data = res.data.data
                 setInput({
                     name: input.name,
-                    email: input.email,
                     photo: input.photo,
-                    city: input.city,
-                    province: input.province,
                     position: input.position,
-                    gender: input.gender,
-                    description: input.description,
                     chat_price: input.chat_price,
                     consultation_price: input.consultation_price,
-                    consultant_documentation: input.consultant_documentation.map(key => {
+                    consultant_documentation: data.consultant_documentation.map(key => {
                         return {
                             id: key.id,
                             photo: key.photo,
-                        }
-                    }),
-                    consultant_experience: input.consultant_experience.map(key => {
-                        return {
-                            id: key.id,
-                            position: key.position,
-                            start_year: key.start_year,
-                            end_year: key.end_year
-                        }
-                    }),
-                    consultant_education: input.consultant_education.map(key => {
-                        return {
-                            id: key.id,
-                            institution_name: key.institution_name,
-                            major: key.major,
-                            start_year: key.start_year,
-                            end_year: key.end_year
-                        }
-                    }),
-                    consultant_skill: input.consultant_skill.map(key => {
-                        return {
-                            id: key.id,
-                            skills: key.skills,
                         }
                     }),
                     consultant_virtual_account: data.consultant_virtual_account.map(key => {
@@ -152,28 +124,30 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
-         console.log("input save")
-        API.put(`consultants/profile/consultation/${Cookies.get('id')}`, {
+        console.log("input save")
+        console.log(input.name)
+        API.put(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
-                photo : input.photo,
-                city: input.city,
-                province: input.province,
+                photo: input.photo,
                 gender: input.gender,
-                position: input.position,
+                province: input.province,
+                city: input.city,
+                consultant_type: input.position,
                 consultant_experience: input.consultant_experience,
-                consultant_skill: input.consultant_skill,
-                consultant_education:input.consultant_education
+                consultant_skills: input.consultant_skill,
+                consultant_educations: input.consultant_education
             },
-            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
-        )
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
+            )
             .then((res) => {
+                let result = res.data.data
                 console.log(res)
-                history.push(`/profile`)
+                // history.push(`/profile`)
             })
     }
 
-    const dataProvinces =  async () => {
+    const dataProvinces = async () => {
         let result = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/provinsi`)
         let data = result.data.provinsi
         console.log(data)
@@ -187,7 +161,7 @@ export const ProfileProvider = props => {
         })
     }
 
-    const dataCity =  async () => {
+    const dataCity = async () => {
         let resultCity = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=32`)
         let data = resultCity.data.kota_kabupaten
         console.log(data)
