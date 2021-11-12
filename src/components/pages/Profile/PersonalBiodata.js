@@ -1,11 +1,10 @@
 import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router";
-import {Card, Input} from 'antd';
+import {Card} from 'antd';
 import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
-import {FileTextOutlined} from "@ant-design/icons";
 
 const {Title, Text, Link} = Typography;
 
@@ -13,7 +12,7 @@ const PersonalBiodata = () => {
     let history = useHistory()
 
     const {input, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata} = functions
+    const {fetchData} = functions
 
     useEffect(() => {
         fetchData()

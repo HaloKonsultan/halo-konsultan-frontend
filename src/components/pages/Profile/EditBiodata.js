@@ -1,4 +1,4 @@
-import React, {useState, useParams, useContext, useEffect} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {
     Row,
     Col,
@@ -28,12 +28,12 @@ const {TextArea} = Input;
 
 const EditBiodata = () => {
     const {input, setInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata, dataProvinces, dataCity} = functions
+    const {fetchData, functionEditBiodata} = functions
+    const [value, setValue] = React.useState(1);
 
     useEffect(() => {
         fetchData()
-        // dataProvinces();
-        // dataCity();
+
     }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
@@ -136,8 +136,6 @@ const EditBiodata = () => {
         setIsHistoryVisible(false);
     };
 
-    const [value, setValue] = React.useState(1);
-
     const onChange = e => {
         console.log('radio checked', e.target.value);
         setValue(e.target.value);
@@ -163,10 +161,10 @@ const EditBiodata = () => {
                     id: -1,
                     photo: file.name
                 };
-                let documentationInput = input.consultant_documentation.push(values)
+                //let documentationInput = input.consultant_documentation.push(values)
 
-                console.log("ini documentation input")
-                console.log(values)
+                // console.log("ini documentation input")
+                // console.log(values)
                 //setInput({...input, documentationInput})
             }
         },
@@ -174,9 +172,6 @@ const EditBiodata = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log("input bang")
-        console.log(input)
-        console.log("================")
 
         functionEditBiodata()
     }
@@ -202,7 +197,7 @@ const EditBiodata = () => {
                             </Col>
                         </Row>
 
-                        <form id="1" method="post" onSubmit={handleSubmit}>
+                        <div>
                             <Text type="secondary">Nama Lengkap</Text>
                             <Input style={{borderRadius: 8, height: 48}}
                                    name="name"
@@ -231,7 +226,7 @@ const EditBiodata = () => {
                                    onChange={handleChange}
                                    placeholder="Bidang Keahlian"
                                    value={input.position}/>
-                        </form>
+                        </div>
                         <Space direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Provinsi</Text>
                             <Select
@@ -502,237 +497,236 @@ const EditBiodata = () => {
                                 className="button"
                                 type="primary"
                                 block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                htmlType="submit"
-                                form="1">
+                                onClick={handleSubmit}>
                             Simpan
                         </Button>
                     </Space>
-
-                    {/*MODAL HERE*/}
-                    <Modal
-                        destroyOnClose={true}
-                        className="profile-modal"
-                        title="Tambahkan Pengalaman kerja"
-                        visible={isExperienceVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                    >
-                        <Form
-                            name="basic"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            layout="vertical"
-                            onFinish={handleExperience}
-                            onFinishFailed={onFinishFailed}
-                            autoComplete="off"
-                        >
-                            <Form.Item
-                                label="Titel Pengalaman Kerja"
-                                name="position"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input position!',
-                                    },
-                                ]}
-
-                            >
-
-                                <Input style={{borderRadius: 8}}/>
-                            </Form.Item>
-
-                            <Row>
-                                <Col span={12}>
-                                    <Form.Item
-                                        label="Tahun Mulai"
-                                        name="start_year"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Please input start year!',
-                                            },
-                                        ]}
-
-                                    >
-
-                                        <Input style={{borderRadius: 8, width: 215}}/>
-                                    </Form.Item>
-                                </Col>
-                                <Col span={11} offset={1}>
-                                    <Form.Item
-                                        label="Tahun Selesai"
-                                        name="end_year"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Please input end year!',
-                                            },
-                                        ]}
-
-                                    >
-
-                                        <Input style={{borderRadius: 8, width: 215}}/>
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-
-                            <Form.Item>
-                                <Button
-                                    size="large"
-                                    className="button"
-                                    type="primary" block
-                                    style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                    htmlType="submit">
-                                    Tambahkan Riwayat Pendidikan
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
-
-                    <Modal
-                        destroyOnClose={true}
-                        className="profile-modal"
-                        title="Tambah Bidang Keahlian"
-                        visible={isSkillVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                    >
-                        <Form
-                            name="basic"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            layout="vertical"
-                            onFinish={handleSkill}
-                            onFinishFailed={onFinishFailed}
-                            autoComplete="off"
-                        >
-                            <Form.Item
-                                label="Titel Bidang Keahlian"
-                                name="skills"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input skills!',
-                                    },
-                                ]}
-
-                            >
-
-                                <Input style={{borderRadius: 8}}/>
-                            </Form.Item>
-
-                            <Form.Item>
-                                <Button
-                                    size="large"
-                                    className="button"
-                                    type="primary" block
-                                    style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                    htmlType="submit">
-                                    Tambahkan Bidang Keahlian
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
-
-                    <Modal
-                        destroyOnClose={true}
-                        className="profile-modal"
-                        title="Tambah Riwayat Pendidikan"
-                        visible={isHistoryVisible}
-                        onCancel={handleCancel}
-                        footer={null}
-                    >
-                        <Form
-                            name="basic"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            layout="vertical"
-                            onFinish={handleEducation}
-                            onFinishFailed={onFinishFailed}
-                            autoComplete="off"
-                        >
-                            <Form.Item
-                                label="Nama Instansi"
-                                name="institution_name"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input institution name!',
-                                    },
-                                ]}
-
-                            >
-
-                                <Input style={{borderRadius: 8}}/>
-                            </Form.Item>
-
-                            <Form.Item
-                                label="Titel"
-                                name="major"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input major!',
-                                    },
-                                ]}
-
-                            >
-
-                                <Input style={{borderRadius: 8}}/>
-                            </Form.Item>
-
-                            <Row>
-                                <Col span={12}>
-                                    <Form.Item
-                                        label="Tahun Mulai"
-                                        name="start_year"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Please input start year!',
-                                            },
-                                        ]}
-
-                                    >
-
-                                        <Input style={{borderRadius: 8, width: 215}}/>
-                                    </Form.Item>
-                                </Col>
-                                <Col span={11} offset={1}>
-                                    <Form.Item
-                                        label="Tahun Selesai"
-                                        name="end_year"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message: 'Please input end year!',
-                                            },
-                                        ]}
-
-                                    >
-
-                                        <Input style={{borderRadius: 8, width: 215}}/>
-                                    </Form.Item>
-                                </Col>
-                            </Row>
-
-                            <Form.Item>
-                                <Button
-                                    size="large"
-                                    className="button"
-                                    type="primary" block
-                                    style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                    htmlType="submit">
-                                    Tambahkan Riwayat Pendidikan
-                                </Button>
-                            </Form.Item>
-                        </Form>
-                    </Modal>
                 </Card>
             </div>
+
+            {/*MODAL HERE*/}
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambahkan Pengalaman kerja"
+                visible={isExperienceVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={handleExperience}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Titel Pengalaman Kerja"
+                        name="position"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input position!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item
+                                label="Tahun Mulai"
+                                name="start_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input start year!',
+                                    },
+                                ]}
+
+                            >
+
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={11} offset={1}>
+                            <Form.Item
+                                label="Tahun Selesai"
+                                name="end_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input end year!',
+                                    },
+                                ]}
+
+                            >
+
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            className="button"
+                            type="primary" block
+                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            htmlType="submit">
+                            Tambahkan Riwayat Pendidikan
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambah Bidang Keahlian"
+                visible={isSkillVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={handleSkill}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Titel Bidang Keahlian"
+                        name="skills"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input skills!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            className="button"
+                            type="primary" block
+                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            htmlType="submit">
+                            Tambahkan Bidang Keahlian
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambah Riwayat Pendidikan"
+                visible={isHistoryVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={handleEducation}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Nama Instansi"
+                        name="institution_name"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input institution name!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Titel"
+                        name="major"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input major!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item
+                                label="Tahun Mulai"
+                                name="start_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input start year!',
+                                    },
+                                ]}
+
+                            >
+
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={11} offset={1}>
+                            <Form.Item
+                                label="Tahun Selesai"
+                                name="end_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input end year!',
+                                    },
+                                ]}
+
+                            >
+
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            className="button"
+                            type="primary" block
+                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            htmlType="submit">
+                            Tambahkan Riwayat Pendidikan
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
         </>
     )
 }
