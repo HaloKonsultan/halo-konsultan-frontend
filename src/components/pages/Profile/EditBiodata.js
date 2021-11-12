@@ -106,6 +106,57 @@ const EditBiodata = () => {
         setIsHistoryVisible(false);
     };
 
+    const updateExperience = (position, start_year, end_year) => {
+        let index = input.consultant_experience.findIndex(x => x.position === position);
+
+        setInput({...input, position: position, start_year: start_year, end_year: end_year})
+        setIsExperienceVisible(true);
+        input.consultant_experience.splice(index, 1);
+    }
+  
+    const updateSkill = (skills) => {
+        let index = input.consultant_skill.findIndex(x => x.skills === skills);
+
+        setInput({...input, skills: skills})
+        setIsSkillVisible(true);
+        input.consultant_skill.splice(index, 1);
+    }
+
+    const updateEducation = (institution_name, major, start_year, end_year) => {
+        let index = input.consultant_education.findIndex(x => x.institution_name === institution_name);
+
+        setInput({...input, institution_name: institution_name, major: major, start_year: start_year, end_year: end_year})
+        setIsHistoryVisible(true);
+        input.consultant_education.splice(index, 1);
+    }
+
+    const deleteSkill = (event) => {
+        console.log(input.consultant_skill)
+        let index = input.consultant_skill.findIndex(x => x.skills === event.currentTarget.value);
+
+        console.log(index)
+        input.consultant_skill.splice(index, 1);
+        console.log(input)
+    }
+
+    const deleteExperience = (event) => {
+        console.log(input.consultant_experience)
+        let index = input.consultant_experience.findIndex(x => x.position === event.currentTarget.value);
+
+        console.log(index)
+        input.consultant_experience.splice(index, 1);
+        console.log(input)
+    }
+
+    const deleteEducation= (event) => {
+        console.log(input.consultant_education)
+        let index = input.consultant_education.findIndex(x => x.institution_name === event.currentTarget.value);
+
+        console.log(index)
+        input.consultant_education.splice(index, 1);
+        console.log(input)
+    }
+
     const handleCancel = () => {
         setIsExperienceVisible(false);
         setIsSkillVisible(false);
@@ -147,6 +198,8 @@ const EditBiodata = () => {
         functionEditBiodata()
     }
 
+    
+    
     return (
         <>
             <Nav/>
@@ -308,13 +361,13 @@ const EditBiodata = () => {
                                                                 <Col span={3}>
                                                                     <Space>
                                                                         <Button value={e.id}
-                                                                                onClick={showExperienceModal}
                                                                                 style={{padding: 0, paddingTop: 10}}
                                                                                 type="link"><Pencil
+                                                                                onClick={() => updateExperience(e.position, e.start_year, e.end_year)}
                                                                             size={24} weight="fill"/></Button>
                                                                         <Button value={e.id}
                                                                                 style={{padding: 0, paddingTop: 10}}
-                                                                                type="link"><X
+                                                                                onClick={deleteExperience} type="link"><X
                                                                             size={24}/></Button>
                                                                     </Space>
                                                                 </Col>
@@ -368,18 +421,18 @@ const EditBiodata = () => {
                                                                     <Col span={3}>
                                                                         <Space>
                                                                             <Button value={e.id}
-                                                                                    onClick={showSkillModal}
                                                                                     style={{
                                                                                         padding: 0,
                                                                                         paddingBottom: 10
                                                                                     }} type="link"><Pencil
+                                                                                    onClick={() => updateSkill(e.skills)}
                                                                                 size={24} weight="fill"/></Button>
                                                                             <Button value={e.id}
                                                                                     style={{
                                                                                         padding: 0,
                                                                                         paddingBottom: 10
                                                                                     }}
-                                                                                    type="link"><X
+                                                                                    onClick={deleteSkill} type="link"><X
                                                                                 size={24}/></Button>
                                                                         </Space>
                                                                     </Col>
@@ -437,19 +490,19 @@ const EditBiodata = () => {
                                                                     <Col span={3}>
                                                                         <Space>
                                                                             <Button value={e.id}
-                                                                                    onClick={showEducationModal}
                                                                                     style={{
                                                                                         padding: 0,
                                                                                         paddingTop: 10
                                                                                     }}
                                                                                     type="link"><Pencil
+                                                                                    onClick={() => updateEducation(e.institution_name, e.major, e.start_year, e.end_year)}
                                                                                 size={24} weight="fill"/></Button>
                                                                             <Button value={e.id}
                                                                                     style={{
                                                                                         padding: 0,
                                                                                         paddingTop: 10
                                                                                     }}
-                                                                                    type="link"><X
+                                                                                    onClick={deleteEducation} type="link"><X
                                                                                 size={24}/></Button>
                                                                         </Space>
                                                                     </Col>
