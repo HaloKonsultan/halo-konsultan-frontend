@@ -10,25 +10,9 @@ export const ContextProfile = createContext()
 export const ProfileProvider = props => {
     let history = useHistory()
     const [dataProfile, setDataProfile] = useState([])
-    const [input, setInput] = useState({
-        id: "",
-        name: "",
-        email: "",
-        photo: "",
-        city: "",
-        province: "",
-        position: "",
-        gender: "",
-        description: "",
-        chat_price: "",
-        consultation_price: "",
-        consultant_documentation: [],
-        consultant_experience: [],
-        consultant_education: [],
-        consultant_skill: [],
-        consultant_virtual_account: [],
-    })
+    const [input, setInput] = useState([])
     const [inputProvince, setInputProvince] = useState([])
+    const [inputCategories, setInputCategories] = useState([])
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -86,9 +70,8 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        console.log("input di profil")
-        console.log(input)
         await dataProvinces()
+        await dataCategories()
     }
 
     const functionEditProfile = () => {
@@ -144,7 +127,7 @@ export const ProfileProvider = props => {
 
     const functionEditBiodata = () => {
         console.log("input save")
-        console.log(input.city)
+        console.log(input.position)
         API.put(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -161,9 +144,27 @@ export const ProfileProvider = props => {
             )
             .then((res) => {
                 let result = res.data.data
+                console.log("simpan biodata")
                 console.log(res)
                 history.push(`/profile`)
             })
+            .catch(err => {
+                message.error('Mohon isi semua data', 3);
+            })
+    }
+
+    const dataCategories = async () => {
+        let result = await API.get(`consultants/categories`,
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
+        let data = result.data.data
+        setInputCategories({
+            categories: data.map(key => {
+                return {
+                    id: key.id,
+                    name: key.name,
+                }
+            }),
+        })
     }
 
     const dataProvinces = async () => {
@@ -177,13 +178,11 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        console.log(inputProvince)
     }
 
     const dataCity = async (id) => {
         let resultCity = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${id}`)
         let data = resultCity.data.kota_kabupaten
-        console.log(data)
         setInputProvince({
             ...inputProvince,
             cities: data.map(key => {
@@ -213,6 +212,8 @@ export const ProfileProvider = props => {
             setInput,
             inputProvince,
             setInputProvince,
+            inputCategories,
+            setInputCategories,
             currentId,
             setCurrentId,
             functions,

@@ -1,12 +1,12 @@
 import React, {useContext, useState} from "react"
-import {Card, Button, Checkbox} from 'antd';
+import {Card, Button, Checkbox, Input} from 'antd';
 import Cookies from "js-cookie"
 import axios from "axios"
 import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import {ContextUser} from "../components/context/ContextUser";
-import {message} from 'antd';
+import {message, Space} from 'antd';
 
 const LoginCard = () => {
     let history = useHistory()
@@ -65,36 +65,40 @@ const LoginCard = () => {
             <div className="container">
                 <Card className="card">
                     <form onSubmit={handleSubmit}>
-                        <br/>
-                        <img className="logo1" src={Logo}/>
-                        <br/><br/>
-                        <p className="label">Masukkan Email Anda</p>
-                        <input type="text"
-                               placeholder="Email"
-                               className="input"
-                               name="email"
-                               value={input.email}
-                               onChange={handleChange} required/>
+                        <Space size={24} direction="vertical" style={{width: "100%"}}>
+                            <br/>
+                            <img className="logo1" src={Logo}/>
+                            <br/>
+                            <Space size={1} direction="vertical" style={{width: "100%"}}>
+                                <p>Masukkan Email Anda</p>
+                                <Input style={{borderRadius: 8, height: 48}}
+                                       name="email"
+                                       onChange={handleChange}
+                                       placeholder="Email"
+                                       required/>
+                            </Space>
+                            <Space size={1} direction="vertical" style={{width: "100%"}}>
+                                <p>Masukkan Password Anda</p>
+                                <Input style={{borderRadius: 8, height: 48}}
+                                       name="password"
+                                       type="password"
+                                       onChange={handleChange}
+                                       placeholder="Password"
+                                       id="password"
+                                       required/>
+                                <Checkbox style={{marginTop: 12}} onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
+                            </Space>
 
-                        <p className="label">Masukkan Password Anda</p>
-                        <input type="password"
-                               placeholder="Password"
-                               className="input-password"
-                               id="password"
-                               name="password" value={input.password}
-                               onChange={handleChange} required/>
-                        <Checkbox onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
-
-                        <Button style={{
-                            borderRadius: 8,
-                            height: 44,
-                            backgroundColor: "#3B85FA",
-                            marginTop: 40,
-                            marginBottom: 32,
-                        }} size="large" className="button" type="primary" htmlType="submit" block>
-                            Masuk
-                        </Button>
-                        <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p></Link>
+                            <Button style={{
+                                borderRadius: 8,
+                                height: 44,
+                                backgroundColor: "#3B85FA",
+                            }} size="large" className="button" type="primary" htmlType="submit" block>
+                                Masuk
+                            </Button>
+                            <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p>
+                            </Link>
+                        </Space>
                     </form>
                 </Card>
             </div>

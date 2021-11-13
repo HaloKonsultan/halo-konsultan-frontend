@@ -27,7 +27,7 @@ const {Option} = Select;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
-    const {input, setInput, inputProvince, setInputProvince, functions} = useContext(ContextProfile)
+    const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata, dataCity} = functions
     const [value, setValue] = React.useState(1);
 
@@ -46,6 +46,16 @@ const EditBiodata = () => {
         let name = "gender"
         setInput({...input, [name]: typeOfValue})
     };
+
+    const handleCategorieChange = (value) => {
+        console.log(value[1])
+        console.log(value[0])
+
+        let typeOfValue = value[1]
+        let name = "position"
+
+        setInput({...input, [name]: typeOfValue})
+    }
 
     const handleProvinceChange = (value) => {
         console.log(value[1])
@@ -236,11 +246,41 @@ const EditBiodata = () => {
                             </Radio.Group><br/><br/>
 
                             <Text type="secondary">Bidang Keahlian</Text>
-                            <Input style={{borderRadius: 8, height: 48}}
-                                   name="position"
-                                   onChange={handleChange}
-                                   placeholder="Bidang Keahlian"
-                                   value={input.position}/>
+                            <Select
+                                defaultValue={input.position}
+                                onChange={handleCategorieChange}
+                                showSearch
+                                bordered={false}
+                                style={{
+                                    borderRadius: 8,
+                                    overflow: "hidden",
+                                    border: "solid 1px #CED4DA",
+                                    width: "100%"
+                                }}
+                                placeholder="Provinsi"
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {
+                                    inputCategories.categories && (
+                                        <>
+                                            {inputCategories.categories.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                            </Select>
+                            {/*<Input style={{borderRadius: 8, height: 48}}*/}
+                            {/*       name="position"*/}
+                            {/*       onChange={handleChange}*/}
+                            {/*       placeholder="Bidang Keahlian"*/}
+                            {/*       value={input.position}/>*/}
                         </div>
                         <Space direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Provinsi</Text>

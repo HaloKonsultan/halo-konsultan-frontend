@@ -7,8 +7,6 @@ import OrderToday from "./table/OrderToday";
 import ProfileNotifications from "./ProfileNotifications";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
-import {Link} from "react-router-dom";
-import Cookies from "js-cookie";
 import {Typography} from 'antd';
 import TableHeader from "../../global/TableHeader";
 

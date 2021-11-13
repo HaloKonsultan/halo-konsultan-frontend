@@ -98,7 +98,8 @@ const PersonalBiodata = () => {
                                                     <>
                                                         <Row>
                                                             <Col span={12}>
-                                                                <Text strong>{e.institution_name}</Text>
+                                                                <Text strong>{e.institution_name}</Text><br/>
+                                                                <Text type="secondary">{e.major}</Text>
                                                             </Col>
                                                             <Col style={{display: "flex", justifyContent: "right"}}
                                                                  span={12}>

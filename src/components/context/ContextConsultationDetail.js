@@ -21,6 +21,9 @@ export const ConsultationDetailProvider = props => {
         message: "",
         date: "",
         conference_link: "",
+        bank_name: "",
+        card_name: "",
+        card_number: "",
         consultation_preference_date: [{
             id: "",
             date: ""
@@ -48,6 +51,9 @@ export const ConsultationDetailProvider = props => {
             location: data.location,
             message: data.message,
             status: data.status,
+            bank_name: "",
+            card_name: "",
+            card_number: "",
             consultation_price: data.consultation_price,
             is_confirmed: data.is_confirmed,
             date: data.date,
@@ -118,8 +124,22 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
-    const functionUpdateStatus = (consultation_id) => {
-        API.patch(`consultants/consultations/${consultation_id}/end`, {
+    // const functionUpdateStatus = (consultation_id) => {
+    //     API.patch(`consultants/consultations/${consultation_id}/end`, {
+    //
+    //         },
+    //         { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+    //     )
+    //         .then((res) => {
+    //             history.push("/")
+    //         })
+    // }
+
+    const funtionEndConsultation = (consultation_id) => {
+        API.post(`consultants/transaction/withdraw/${consultation_id}`, {
+                bank_code: input.bank_name,
+                account_holder_name: input.card_name,
+                account_number: input.card_number
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
@@ -133,7 +153,7 @@ export const ConsultationDetailProvider = props => {
         functionAccept,
         functionSubmit,
         functionDecline,
-        functionUpdateStatus
+        funtionEndConsultation
     }
 
     return (
