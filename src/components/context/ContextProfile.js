@@ -28,6 +28,7 @@ export const ProfileProvider = props => {
             city: data.city,
             province: data.province,
             position: data.position,
+            category_id: data.category_id,
             gender: data.gender,
             description: data.description,
             chat_price: data.chat_price,
@@ -70,6 +71,7 @@ export const ProfileProvider = props => {
                 }
             }),
         })
+        console.log(input)
         await dataProvinces()
         await dataCategories()
     }
@@ -126,16 +128,14 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
-        console.log("input save")
-        console.log(input.position)
-        API.put(`consultants/profile/biodata/${Cookies.get('id')}`, {
+        API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
                 photo: input.photo,
                 gender: input.gender,
                 province: input.province,
                 city: input.city,
-                consultant_type: input.position,
+                consultant_type: input.category_id,
                 consultant_experience: input.consultant_experience,
                 consultant_skills: input.consultant_skill,
                 consultant_educations: input.consultant_education
@@ -144,7 +144,6 @@ export const ProfileProvider = props => {
             )
             .then((res) => {
                 let result = res.data.data
-                console.log("simpan biodata")
                 console.log(res)
                 history.push(`/profile`)
             })
@@ -154,8 +153,7 @@ export const ProfileProvider = props => {
     }
 
     const dataCategories = async () => {
-        let result = await API.get(`consultants/categories`,
-            {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
+        let result = await API.get(`consultants/categories`)
         let data = result.data.data
         setInputCategories({
             categories: data.map(key => {

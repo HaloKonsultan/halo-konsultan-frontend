@@ -79,14 +79,27 @@ const PersonalBiodata = () => {
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pengalaman Kerja</Text>
-                                <Row>
-                                    <Col span={12}>
-                                        <Text strong>{input.position}</Text>
-                                    </Col>
-                                    <Col style={{display: "flex", justifyContent: "right"}} span={12}>
-                                        <Text strong>{input.start_year}{input.end_year}</Text>
-                                    </Col>
-                                </Row>
+                                {
+                                    input.consultant_experience && (
+                                        <>
+                                            {input.consultant_experience.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Row>
+                                                            <Col span={12}>
+                                                                <Text strong>{e.position}</Text><br/>
+                                                            </Col>
+                                                            <Col style={{display: "flex", justifyContent: "right"}}
+                                                                 span={12}>
+                                                                <Text strong>{e.start_year} - {e.end_year}</Text>
+                                                            </Col>
+                                                        </Row>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )
+                                }
                             </Space>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Pendidikan</Text>

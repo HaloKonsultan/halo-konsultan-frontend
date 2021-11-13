@@ -52,7 +52,7 @@ const EditBiodata = () => {
         console.log(value[0])
 
         let typeOfValue = value[1]
-        let name = "position"
+        let name = "category_id"
 
         setInput({...input, [name]: typeOfValue})
     }
@@ -215,6 +215,11 @@ const EditBiodata = () => {
                                      style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
                             </Col>
                             <Col span={16}>
+                                {/*<Input style={{borderRadius: 8, height: 48}}*/}
+                                {/*       name="photo"*/}
+                                {/*       onChange={handleChange}*/}
+                                {/*       placeholder="Link Foto"*/}
+                                {/*       />*/}
                                 <Upload {...props}>
                                     <Button style={{borderRadius: 4}}>Edit Profile</Button>
                                 </Upload>
@@ -257,7 +262,7 @@ const EditBiodata = () => {
                                     border: "solid 1px #CED4DA",
                                     width: "100%"
                                 }}
-                                placeholder="Provinsi"
+                                placeholder="Bidang Kategori"
                                 optionFilterProp="children"
                                 filterOption={(input, option) =>
                                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
