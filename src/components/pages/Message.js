@@ -4,12 +4,10 @@ import Cookies from "js-cookie";
 import Nav from "../layout/Header";
 
 function Message() {
-    let page = 'Pesan';
-    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
-            <Nav/>
+            <Nav title="Pesan"/>
             <Result
                 status="403"
                 title="403"

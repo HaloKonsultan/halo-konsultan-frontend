@@ -1,74 +1,52 @@
 import React from "react"
 import {Row, Col, Button, PageHeader, Badge} from 'antd';
-import IncomingOrderTable from "./table/IncomingOrderTable";
-import ActiveOrderTable from "./table/ActiveOrderTable";
-import WaitingPaymentTable from "./table/WaitingPaymentTable";
-import TodayOrder from "./table/TodayOrder";
+import OrderTableIncoming from "./table/OrderTableIncoming";
+import OrderTableActive from "./table/OrderTableActive";
+import OrderTableWaiting from "./table/OrderTableWaiting";
+import OrderToday from "./table/OrderToday";
 import ProfileNotifications from "./ProfileNotifications";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
-import {Link} from "react-router-dom";
-import Cookies from "js-cookie";
 import {Typography} from 'antd';
+import TableHeader from "../../global/TableHeader";
 
 const {Title} = Typography;
 
 function Dashboard() {
-    let page = 'Dashboard';
-    Cookies.set('page', page, {expires: 1})
 
     return (
         <>
-            <Nav/>
-            <Row>
-                <Col span={14}>
-                    <div className="incoming-order-table">
-                        <ProfileNotifications/>
-                    </div>
-                    <div className="incoming-order-table">
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0}}
-                            ghost={false}
-                            title={<Title level={4}>Konsultasi Masuk <Badge style={{backgroundColor: '#3B85FA'}}
-                                                                            count={5}/></Title>}
-                            extra={[
-                                <Link to="/incoming-order"><Button style={{color: "#3B85FA"}} type="text">
-                                    <b>Lihat Semua</b>
-                                </Button></Link>,
-                            ]}/>
-                        <IncomingOrderTable/>
-                    </div>
-                    <div className="order-table">
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0}}
-                            ghost={false}
-                            title={<Title level={4}>Konsultasi Aktif</Title>}
-                            extra={[
-                                <Link to="/order"><Button style={{color: "#3B85FA"}} type="text">
-                                    <b>Lihat Semua</b>
-                                </Button></Link>,
-                            ]}/>
-                        <ActiveOrderTable/>
-                    </div>
-                    <div className="waiting-for-payment-table">
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0}}
-                            ghost={false}
-                            title={<Title level={4}>Menunggu Pembayaran</Title>}
-                            extra={[
-                                <Link to="/waiting-payment"><Button style={{color: "#3B85FA"}} type="text">
-                                    <b>Lihat Semua</b>
-                                </Button></Link>,
-                            ]}/>
-                        <WaitingPaymentTable/>
-                    </div>
-                </Col>
-                <Col span={10}>
-                    <div className="schedule">
-                        <TodayOrder/>
-                    </div>
-                </Col>
-            </Row>
+            <Nav title="Dashboard"/>
+            <div className="dashboard-container">
+                <Row>
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 14, order: 1}}>
+                        <div className="table">
+                            <ProfileNotifications/>
+                        </div>
+                        <div className="table">
+                            <TableHeader link="/incoming-order"
+                                         title="Konsultasi Masuk "
+                                         badge={<Badge style={{backgroundColor: '#3B85FA'}} count={5}/>}/>
+                            <OrderTableIncoming/>
+                        </div>
+                        <div className="table">
+                            <TableHeader link="/order"
+                                         title="Konsultasi Aktif"/>
+                            <OrderTableActive/>
+                        </div>
+                        <div className="table">
+                            <TableHeader link="/waiting-payment"
+                                         title="Menunggu Pembayaran"/>
+                            <OrderTableWaiting/>
+                        </div>
+                    </Col>
+                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 10}}>
+                        <div className="table" style={{alignItems: "center", justifyContent: "center", display: "flex"}}>
+                            <OrderToday/>
+                        </div>
+                    </Col>
+                </Row>
+            </div>
         </>
     )
 }

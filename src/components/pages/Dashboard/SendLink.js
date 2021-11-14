@@ -1,26 +1,40 @@
 import React, {useContext, useEffect, useState} from "react"
-import {Button, Card, Space, Typography, Input} from 'antd';
+import {Button, Card, Space, Typography, Input, Form, Select, Modal} from 'antd';
 import 'antd/dist/antd.css';
 import {useParams} from "react-router-dom";
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import {Row, Col} from 'antd';
 import {ArrowRightOutlined, FileTextOutlined} from '@ant-design/icons';
 import Cookies from "js-cookie";
+import ConsultationDocument from "./ConsultationDocument";
+import ButtonDanger from "../../global/ButtonDanger";
+import PrimaryButton from "../../global/ButtonPrimary";
+import ModalChooseAccount from "../../global/ModalChooseAccount";
 
+const {Option} = Select;
 const {Title, Link, Text} = Typography;
 
-const SendLink = () => {
+const SendLink = (props) => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {dataConsultation, input, setInput, functions} = useContext(ConsultationDetailContext)
-    const {fetchDataById, functionSubmit, functionUpdateStatus} = functions
+    const {input, setInput, functions} = useContext(ContextConsultationDetail)
+    const {fetchDataById, functionSubmit, funtionEndConsultation} = functions
+    const [isAccountVisible, setIsAccountVisible] = useState(false);
 
     useEffect(() => {
         if (Id !== undefined) {
             fetchDataById(Id)
         }
     }, []);
+
+    const showAccountModal = () => {
+        setIsAccountVisible(true);
+    };
+
+    const handleCancel = () => {
+        setIsAccountVisible(false);
+    };
 
     const handleChange = (event) => {
         let typeOfValue = event.target.value
@@ -29,6 +43,26 @@ const SendLink = () => {
         setInput({...input, [name]: typeOfValue})
     };
 
+    // const handleStatus = () => {
+    //     functionUpdateStatus(Id)
+    // }
+
+    const handleVirtualAccount = () => {
+        funtionEndConsultation(Id)
+        setIsAccountVisible(false);
+    };
+
+    const handleVirtualAccountError = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+
+    const handleAccount = (value) => {
+        console.log(value[0])
+
+        setInput({...input, bank_name: value[0], card_name: value[1], card_number: value[2]})
+        console.log(input)
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(input)
@@ -36,74 +70,62 @@ const SendLink = () => {
         functionSubmit(Id)
     };
 
-    const handleStatus = () => {
-        functionUpdateStatus(Id)
-    }
-
     return (
         <>
-            <div className="dashboard-container">
-                <Card title={<Title style={{color: "black", margin: 0}} level={4}>Dokumen Klien</Title>}
-                      style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
-                    {
-                        input.consultation_document !== null && (
-                            <>
-                                {input.consultation_document.map((e, index) => {
-                                    return (
-                                        <>
-                                            <Row>
-                                                <Col span={12}>
-                                                    <p>
-                                                        <FileTextOutlined style={{fontSize: '20px', paddingRight: 16}}/>
-                                                        {e.name}</p>
-                                                </Col>
-                                                <Col span={12}>
-                                                    <Link
-                                                        style={{display: "flex", float: "right"}}
-                                                        href={e.file}>
-                                                        Download</Link>
-                                                </Col>
-                                            </Row>
-                                        </>
-                                    )
-                                })}
-                            </>
-                        )}
-                </Card>
-                <br/>
-                <form id="1" onSubmit={handleSubmit}>
-                    <Space size={24} direction="vertical">
-                        <Space size={8} direction="vertical">
-                            <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
-                            <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
-                                   name="conference_link"
-                                   value={input.conference_link} onChange={handleChange}/>
+            {
+                input.preference !== "offline" &&
+                <>
+                    <form id="1" onSubmit={handleSubmit}>
+                        <Space size={24} direction="vertical">
+                            <Space size={8} direction="vertical">
+                                <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
+                                <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                       name="conference_link"
+                                       disabled={props.disabled}
+                                       value={input.conference_link} onChange={handleChange}/>
+                            </Space>
                         </Space>
-                    </Space>
-                </form>
-                <br/>
-                <Space direction="horizontal">
-                    {
-                        input.conference_link === null &&
-                        <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
-                            Kirim Link ke Klien<ArrowRightOutlined/>
-                        </Button>
-                    }
-                    {
-                        input.conference_link !== null &&
-                        <>
-                            <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary"
-                                    htmlType="submit">
+                    </form>
+                    <br/>
+                </>
+            }
+            <Space direction="horizontal">
+                {
+                    input.conference_link !== null && input.preference !== "offline" &&
+                    <>
+                        <Link href={input.conference_link} target="_blank">
+                            <Button
+                                block
+                                size="large"
+                                className="button"
+                                type="primary"
+                                style={{borderRadius: 8, height: 44, backgroundColor: "#3B85FA"}}>
                                 Masuk Conference
                             </Button>
+                        </Link>
+                    </>
+                }
+                {
+                    input.conference_link === null &&
+                    <Button style={{borderRadius: 8}} value={input.id} form="1" type="primary" htmlType="submit">
+                        Kirim Link ke Klien<ArrowRightOutlined/>
+                    </Button>
+                }
+                {
+                    input.conference_link !== null &&
+                    <>
+                        <ButtonDanger onClick={showAccountModal} text="Akhiri Konsultasi"/>
+                    </>
+                }
+            </Space>
 
-                            <Button style={{borderRadius: 8}} type="danger" onClick={handleStatus}>
-                                Akhiri Konsultasi
-                            </Button>
-                        </>
-                    }
-                </Space>
-            </div>
+            <ModalChooseAccount
+                visible={isAccountVisible}
+                onCancel={handleCancel}
+                onFinish={handleVirtualAccount}
+                onFinishFailed={handleVirtualAccountError}
+                onChange={handleAccount}
+            />
         </>
     )
 }

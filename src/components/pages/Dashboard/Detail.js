@@ -2,14 +2,14 @@ import React, {useContext, useEffect} from "react"
 import {useParams} from "react-router-dom"
 import {Typography, Space} from 'antd';
 import {Input} from 'antd';
-import {ConsultationDetailContext} from "../../context/ConsultationDetailContext";
+import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 
 const {Title, Paragraph, Text} = Typography;
 
 const ConsultationDetail = () => {
     let {Id} = useParams()
 
-    const {input, functions} = useContext(ConsultationDetailContext)
+    const {input, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById} = functions
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const ConsultationDetail = () => {
             <div className="dashboard-container">
                 <Space direction="vertical">
                     <Title level={3}>{input.title}</Title>
-                    <Text type="secondary">Pengirim : {input.name}</Text>
+                    <Text type="secondary">Pengirim : {input.user_name}</Text>
                     <Paragraph>
                         {input.description}
                     </Paragraph>

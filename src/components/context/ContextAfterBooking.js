@@ -4,12 +4,18 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 
-export const AfterBookingContext = createContext()
+export const ContextAfterBooking = createContext()
 
 export const AfterBookingProvider = props => {
     let history = useHistory()
     const [dataAfterBooking, setDataAfterBooking] = useState([])
+    const [inputDocument, setInputDocument] = useState({
+        title: "",
+        description: ""
+    })
     const [input, setInput] = useState({
+        title: "",
+        description: "",
         preference: "",
         price: "",
         date: [],
@@ -53,7 +59,7 @@ export const AfterBookingProvider = props => {
     }
 
     return (
-        <AfterBookingContext.Provider value = {{
+        <ContextAfterBooking.Provider value = {{
             dataAfterBooking,
             setDataAfterBooking,
             prefDate,
@@ -62,6 +68,8 @@ export const AfterBookingProvider = props => {
             setPrefTime,
             input,
             setInput,
+            inputDocument,
+            setInputDocument,
             currentId,
             setCurrentId,
             functions,
@@ -69,6 +77,6 @@ export const AfterBookingProvider = props => {
             setFetchStatus
         }}>
             {props.children}
-        </AfterBookingContext.Provider>
+        </ContextAfterBooking.Provider>
     )
 }

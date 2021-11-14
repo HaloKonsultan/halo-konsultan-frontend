@@ -1,20 +1,16 @@
 import React, {useEffect, useContext} from "react"
 import {Table, Tag} from 'antd';
-import {ActiveOrderContext} from "../../../context/ActiveOrderContext";
+import {ContextOrderActive} from "../../../context/ContextOrderActive";
+import OrderTable from "../../../global/OrderTable";
+import ButtonDanger from "../../../global/ButtonDanger";
 
-const ActiveOrderTable = () => {
-    const {dataOrder, functions} = useContext(ActiveOrderContext)
+function OrderTableActive(props) {
+    const {dataOrder, functions} = useContext(ContextOrderActive)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
         fetchData()
     }, [])
-
-    const handleDetail = (event) => {
-        let idClient = event
-
-        functionDetail(idClient)
-    }
 
     const columns = [
         {
@@ -46,24 +42,30 @@ const ActiveOrderTable = () => {
             },
         },
         {
-            title: 'Tanggal Konsultasi',
-            key: 'date',
-            dataIndex: 'date',
-            sorter: (a, b) => new Date(a.date) - new Date(b.date),
-            defaultSortOrder: 'descend'
-        },
-        {
             title: 'Waktu Konsultasi',
-            key: 'time',
-            dataIndex: 'time'
+            dataIndex: ['time', 'date'],
+            sorter: (a, b) => new Date(a.date) - new Date(b.date),
+            defaultSortOrder: 'descend',
+            render: (text,row) => <div >{row["date"]} {row["time"]}</div>,
         }
     ];
 
     const data = dataOrder;
 
+    const handleCheck = () => {
+        console.log("ahoy")
+        console.log(props.dataLimit)
+    }
+
+    const handleDetail = (event) => {
+        let idClient = event
+
+        functionDetail(idClient)
+    }
+
     return (
         <>
-            <Table
+            <OrderTable
                 onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
@@ -71,15 +73,9 @@ const ActiveOrderTable = () => {
                         }, // click row
                     };
                 }}
-                style={{
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    boxShadow: "0 0 0 1px #CED4DA"
-                }}
-                rowKey={"active"}
-                columns={columns} dataSource={data} pagination={false}/>
+                columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
 }
 
-export default ActiveOrderTable
+export default OrderTableActive

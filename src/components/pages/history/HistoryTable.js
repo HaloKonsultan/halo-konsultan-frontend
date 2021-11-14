@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from 'react';
 import {Table, Tag} from 'antd';
-import {HistoryContext} from "../../context/HistoryContext";
+import {ContextHistory} from "../../context/ContextHistory";
 
 const HistoryTable = () => {
-    const {dataHistory, functions} = useContext(HistoryContext)
+    const {dataHistory, functions} = useContext(ContextHistory)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {

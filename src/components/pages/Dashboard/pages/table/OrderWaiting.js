@@ -1,14 +1,14 @@
 import React from "react"
-import IncomingOrderTable from "../table/IncomingOrderTable";
-import Nav from "../../../layout/Header";
+import Nav from "../../../../layout/Header";
+import OrderTableWaiting from "../../table/OrderTableWaiting";
 
 function IncomingOrder() {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Menunggu Pembayaran"/>
             <div className="incoming-order-table">
-                <IncomingOrderTable/>
+                <OrderTableWaiting/>
             </div>
         </>
     )
