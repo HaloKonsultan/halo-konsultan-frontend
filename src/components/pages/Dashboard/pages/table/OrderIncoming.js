@@ -7,7 +7,7 @@ function OrderIncoming() {
     return (
         <>
             <Nav title="Pesanan Masuk"/>
-            <div className="incoming-order-table">
+            <div className="dashboard-container">
                 <OrderTableIncoming/>
             </div>
         </>
