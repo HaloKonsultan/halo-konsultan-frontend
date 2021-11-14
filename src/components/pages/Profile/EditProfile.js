@@ -116,9 +116,9 @@ const EditProfile = () => {
                                                 </Col>
                                                 <Col span={4}>
                                                     <Space>
-                                                        <Button value={e.id}
-                                                                style={{padding: 0, paddingTop: 10}} type="link"><Pencil
-                                                            size={24} weight="fill"/></Button>
+                                                        {/*<Button value={e.id}*/}
+                                                        {/*        style={{padding: 0, paddingTop: 10}} type="link"><Pencil*/}
+                                                        {/*    size={24} weight="fill"/></Button>*/}
                                                         <Button value={e.id}
                                                                 style={{padding: 0, paddingTop: 10}}
                                                                 onClick={handleDeleteVirtualAccount} type="link"><X

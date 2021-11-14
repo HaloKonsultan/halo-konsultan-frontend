@@ -20,6 +20,7 @@ import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Pencil, X} from "phosphor-react";
+import {useHistory} from "react-router";
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
@@ -27,8 +28,9 @@ const {Option} = Select;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
+    let history = useHistory()
     const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata, dataCity} = functions
+    const {fetchData, functionEditBiodata, dataCity, functionDeleteExperience, functionDeleteSkill, functionDeleteEducation} = functions
     const [value, setValue] = React.useState(1);
 
     useEffect(() => {
@@ -90,81 +92,74 @@ const EditBiodata = () => {
     };
 
     const handleExperience = (values) => {
-        console.log('Success:', values);
+        values["id"] = -1
         let experience = input.consultant_experience.push(values)
         setInput({...input, experience})
 
-        console.log(input)
         setIsExperienceVisible(false);
+        functionEditBiodata()
     }
 
     const handleSkill = (values) => {
-        console.log('Success:', values);
+        values["id"] = -1
         let skill = input.consultant_skill.push(values)
         setInput({...input, skill})
 
-        console.log(input)
         setIsSkillVisible(false);
+        functionEditBiodata()
     };
 
     const handleEducation = (values) => {
-        console.log('Success:', values);
+        values["id"] = -1
         let education = input.consultant_education.push(values)
         setInput({...input, education})
 
-        console.log(input)
         setIsHistoryVisible(false);
+        functionEditBiodata()
     };
 
-    const updateExperience = (position, start_year, end_year) => {
-        let index = input.consultant_experience.findIndex(x => x.position === position);
-
-        setInput({...input, position: position, start_year: start_year, end_year: end_year})
-        setIsExperienceVisible(true);
-        input.consultant_experience.splice(index, 1);
-    }
-  
-    const updateSkill = (skills) => {
-        let index = input.consultant_skill.findIndex(x => x.skills === skills);
-
-        setInput({...input, skills: skills})
-        setIsSkillVisible(true);
-        input.consultant_skill.splice(index, 1);
-    }
-
-    const updateEducation = (institution_name, major, start_year, end_year) => {
-        let index = input.consultant_education.findIndex(x => x.institution_name === institution_name);
-
-        setInput({...input, institution_name: institution_name, major: major, start_year: start_year, end_year: end_year})
-        setIsHistoryVisible(true);
-        input.consultant_education.splice(index, 1);
-    }
+    // const updateExperience = (id, position, start_year, end_year) => {
+    //     let index = input.consultant_experience.findIndex(x => x.position === position);
+    //
+    //     setInput({...input, position: position, start_year: start_year, end_year: end_year})
+    //     setIsExperienceVisible(true);
+    //     input.consultant_experience.splice(index, 1);
+    // }
+    //
+    // const updateSkill = (id, skills) => {
+    //     console.log("ini id skill")
+    //     console.log(id)
+    //     let index = input.consultant_skill.findIndex(x => x.skills === skills);
+    //
+    //     setInput({...input, id: id, skills: skills})
+    //     setIsSkillVisible(true);
+    //     input.consultant_skill.splice(index, 1);
+    // }
+    //
+    // const updateEducation = (id, institution_name, major, start_year, end_year) => {
+    //     let index = input.consultant_education.findIndex(x => x.institution_name === institution_name);
+    //
+    //     setInput({...input, id: id, institution_name: institution_name, major: major, start_year: start_year, end_year: end_year})
+    //     setIsHistoryVisible(true);
+    //     input.consultant_education.splice(index, 1);
+    // }
 
     const deleteSkill = (event) => {
-        console.log(input.consultant_skill)
-        let index = input.consultant_skill.findIndex(x => x.skills === event.currentTarget.value);
+        let id = parseInt(event.currentTarget.value)
 
-        console.log(index)
-        input.consultant_skill.splice(index, 1);
-        console.log(input)
+        functionDeleteSkill(id)
     }
 
     const deleteExperience = (event) => {
-        console.log(input.consultant_experience)
-        let index = input.consultant_experience.findIndex(x => x.position === event.currentTarget.value);
+        let id = parseInt(event.currentTarget.value)
 
-        console.log(index)
-        input.consultant_experience.splice(index, 1);
-        console.log(input)
+        functionDeleteExperience(id)
     }
 
     const deleteEducation= (event) => {
-        console.log(input.consultant_education)
-        let index = input.consultant_education.findIndex(x => x.institution_name === event.currentTarget.value);
+        let id = parseInt(event.currentTarget.value)
 
-        console.log(index)
-        input.consultant_education.splice(index, 1);
-        console.log(input)
+        functionDeleteEducation(id)
     }
 
     const handleCancel = () => {
@@ -201,6 +196,7 @@ const EditBiodata = () => {
         event.preventDefault()
 
         functionEditBiodata()
+        history.push(`/profile`)
     }
 
     return (
@@ -281,11 +277,6 @@ const EditBiodata = () => {
                                         </>
                                     )}
                             </Select>
-                            {/*<Input style={{borderRadius: 8, height: 48}}*/}
-                            {/*       name="position"*/}
-                            {/*       onChange={handleChange}*/}
-                            {/*       placeholder="Bidang Keahlian"*/}
-                            {/*       value={input.position}/>*/}
                         </div>
                         <Space direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Provinsi</Text>
@@ -398,11 +389,11 @@ const EditBiodata = () => {
                                                                 </Col>
                                                                 <Col span={3}>
                                                                     <Space>
-                                                                        <Button value={e.id}
-                                                                                style={{padding: 0, paddingTop: 10}}
-                                                                                type="link"><Pencil
-                                                                                onClick={() => updateExperience(e.position, e.start_year, e.end_year)}
-                                                                            size={24} weight="fill"/></Button>
+                                                                        {/*<Button value={e.id}*/}
+                                                                        {/*        style={{padding: 0, paddingTop: 10}}*/}
+                                                                        {/*        type="link"><Pencil*/}
+                                                                        {/*        onClick={() => updateExperience(e.id, e.position, e.start_year, e.end_year)}*/}
+                                                                        {/*    size={24} weight="fill"/></Button>*/}
                                                                         <Button value={e.id}
                                                                                 style={{padding: 0, paddingTop: 10}}
                                                                                 onClick={deleteExperience} type="link"><X
@@ -458,13 +449,13 @@ const EditBiodata = () => {
                                                                     </Col>
                                                                     <Col span={3}>
                                                                         <Space>
-                                                                            <Button value={e.id}
-                                                                                    style={{
-                                                                                        padding: 0,
-                                                                                        paddingBottom: 10
-                                                                                    }} type="link"><Pencil
-                                                                                    onClick={() => updateSkill(e.skills)}
-                                                                                size={24} weight="fill"/></Button>
+                                                                            {/*<Button value={e.id}*/}
+                                                                            {/*        style={{*/}
+                                                                            {/*            padding: 0,*/}
+                                                                            {/*            paddingBottom: 10*/}
+                                                                            {/*        }} type="link"><Pencil*/}
+                                                                            {/*        onClick={() => updateSkill(e.id, e.skills)}*/}
+                                                                            {/*    size={24} weight="fill"/></Button>*/}
                                                                             <Button value={e.id}
                                                                                     style={{
                                                                                         padding: 0,
@@ -527,14 +518,14 @@ const EditBiodata = () => {
                                                                     </Col>
                                                                     <Col span={3}>
                                                                         <Space>
-                                                                            <Button value={e.id}
-                                                                                    style={{
-                                                                                        padding: 0,
-                                                                                        paddingTop: 10
-                                                                                    }}
-                                                                                    type="link"><Pencil
-                                                                                    onClick={() => updateEducation(e.institution_name, e.major, e.start_year, e.end_year)}
-                                                                                size={24} weight="fill"/></Button>
+                                                                            {/*<Button value={e.id}*/}
+                                                                            {/*        style={{*/}
+                                                                            {/*            padding: 0,*/}
+                                                                            {/*            paddingTop: 10*/}
+                                                                            {/*        }}*/}
+                                                                            {/*        type="link"><Pencil*/}
+                                                                            {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
+                                                                            {/*    size={24} weight="fill"/></Button>*/}
                                                                             <Button value={e.id}
                                                                                     style={{
                                                                                         padding: 0,

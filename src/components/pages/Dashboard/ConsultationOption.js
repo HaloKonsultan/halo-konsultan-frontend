@@ -114,6 +114,7 @@ const ConsultationOption = () => {
         console.log(index)
         input.document.splice(index, 1);
         console.log(input)
+        setInput({...input})
     }
 
     const updateDocument = (title, description) => {

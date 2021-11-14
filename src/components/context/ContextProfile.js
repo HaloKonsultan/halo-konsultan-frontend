@@ -141,14 +141,91 @@ export const ProfileProvider = props => {
                 consultant_educations: input.consultant_education
             },
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
-            )
+        )
             .then((res) => {
-                let result = res.data.data
-                console.log(res)
-                history.push(`/profile`)
+                let data = res.data.data
+                setInput({
+                    name: input.name,
+                    description: input.description,
+                    photo: input.photo,
+                    gender: input.gender,
+                    province: input.province,
+                    city: input.city,
+                    consultant_experience: data.consultant_experience.map(key => {
+                        return {
+                            id: key.id,
+                            position: key.position,
+                            start_year: key.start_year,
+                            end_year: key.end_year
+                        }
+                    }),
+                    consultant_education: data.consultant_education.map(key => {
+                        return {
+                            id: key.id,
+                            institution_name: key.institution_name,
+                            major: key.major,
+                            start_year: key.start_year,
+                            end_year: key.end_year
+                        }
+                    }),
+                    consultant_skill: data.consultant_skill.map(key => {
+                        return {
+                            id: key.id,
+                            skills: key.skills,
+                        }
+                    }),
+                })
             })
             .catch(err => {
                 message.error('Mohon isi semua data', 3);
+            })
+    }
+
+    const functionDeleteExperience = (idVA) => {
+        API.delete(`consultants/profile/experience/${idVA}`, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('token')
+            }
+        })
+            .then(() => {
+                setInput({
+                    ...input, consultant_experience: input.consultant_experience.filter((res) => {
+                        return res.id !== idVA
+                    }),
+                })
+                message.success('Data telah dihapus!', 3);
+            })
+    }
+
+    const functionDeleteSkill = (idVA) => {
+        API.delete(`consultants/profile/skill/${idVA}`, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('token')
+            }
+        })
+            .then(() => {
+                setInput({
+                    ...input, consultant_skill: input.consultant_skill.filter((res) => {
+                        return res.id !== idVA
+                    }),
+                })
+                message.success('Data telah dihapus!', 3);
+            })
+    }
+
+    const functionDeleteEducation = (idVA) => {
+        API.delete(`consultants/profile/education/${idVA}`, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('token')
+            }
+        })
+            .then(() => {
+                setInput({
+                    ...input, consultant_education: input.consultant_education.filter((res) => {
+                        return res.id !== idVA
+                    }),
+                })
+                message.success('Data telah dihapus!', 3);
             })
     }
 
@@ -198,6 +275,9 @@ export const ProfileProvider = props => {
         functionEditBiodata,
         functionEditProfile,
         functionDeleteVirtualAccount,
+        functionDeleteExperience,
+        functionDeleteSkill,
+        functionDeleteEducation,
         dataProvinces,
         dataCity
     }
