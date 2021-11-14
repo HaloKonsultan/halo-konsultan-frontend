@@ -56,6 +56,10 @@ function ModalVirtualAccount(props) {
                             <Option value="BRI">BRI</Option>
                             <Option value="BNI">BNI</Option>
                             <Option value="BCA">BCA</Option>
+                            <Option value="BSI">BSI</Option>
+                            <Option value="MANDIRI">MANDIRI</Option>
+                            <Option value="MAYBANK">MAYBANK</Option>
+                            <Option value="CITIBANK">CITIBANK</Option>
                         </Select>
                     </Form.Item>
 
