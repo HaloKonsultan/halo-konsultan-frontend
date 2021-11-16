@@ -41,16 +41,58 @@ konsultasi setelah dikonfirmasi (http://localhost:3000/incoming-order/detail/acc
 - insert link conference 
 - handle download dokumen 
 
+
+Fitur Sprint#2
+
+Dashboard
+- pagination tabel pesanan masuk 
+- pagination tabel pesanan aktif 
+- pagination tabel menunggu pembayaran 
+- konsultasi belum terkonfirmasi
+- handle pembatalan konsultasi 
+- detail konsultasi
+- get nama klien 
+
+Riwayat
+- get data pesan konsultasi sukses/ditolak 
+- tampilkan pesan konsultasi sukses 
+- tampilkan pesan konsultasi ditolak
+
+Profil konsultasi
+- get data profil konsultasi 
+- ketika edit profile diklik, masuk edit profile 
+- edit profil konsultasi
+- validasi semua input (tidak kosong, format sesuai) 
+- tambah rekening
+- tambah dokumentasi kerja
+- alert konfirmasi simpan 
+
+Biodata
+- get data biodata 
+- ketika edit biodata diklik, masuk edit biodata
+
+Edit biodata 
+- validasi semua input (tidak kosong, format sesuai)
+- tambah pengalaman kerja
+- tambah keahlihan
+- tambah pendidikan
+- alert konfirmasi simpan
+
+Sidebar
+- get data profil   
+- payment
+- menerima pembayaran
+
+====================================================================================================
+
 Cara menjalankan front-end 
 - clone HaloKonsultan-Frontend
 - clone HaloKonsultan-Backend https://github.com/HaloKonsultan/halo-konsultan-backend
 - npm start
 - pastikan backend telah berjalan
 
-
-
 Cara menjalankan Backend
-- clone Halokonsultan-Backend
+- clone Halokonsultan-Backend https://github.com/HaloKonsultan/halo-konsultan-backend
 - composer install
 - composer update
 - buat .env file di HaloKonsultan-backend, yang isinya diambil dari .env.example
@@ -64,6 +106,8 @@ Cara menjalankan Backend
 
 Tambahan :
 - untuk login dapat menggunakan email yang ada di table consultant yang telah di generate di database phpmyadmin dan password "password"
+
+
 
 # Getting Started with Create React App
 
