@@ -83,7 +83,7 @@ Sidebar
 - payment
 - menerima pembayaran
 
-====================================================================================================
+=========================================================
 
 Cara menjalankan front-end 
 - clone HaloKonsultan-Frontend
