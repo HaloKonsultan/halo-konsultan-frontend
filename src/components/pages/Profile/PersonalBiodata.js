@@ -24,13 +24,13 @@ const PersonalBiodata = () => {
 
     return (
         <>
-            <Card style={{boxShadow: "0 0 0 1px #CED4DA", borderRadius: 8, width: 528}} title={
+            <Card style={{boxShadow: "0 0 0 1px #CED4DA", borderRadius: 8, width: "100%"}} title={
                 <>
                     <Row>
-                        <Col span={17}>
+                        <Col span={12}>
                             <Title level={4}> Biodata Diri </Title>
                         </Col>
-                        <Col span={25}>
+                        <Col span={12}>
                             <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8}}>Edit Biodata
                                 Diri</Button>
                         </Col>
@@ -38,7 +38,7 @@ const PersonalBiodata = () => {
                 </>
             }>
                 <Row>
-                    <Col span={12}>
+                    <Col  xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
                         <img
                             src={input.photo}
                             alt="profile-picture"
@@ -47,10 +47,12 @@ const PersonalBiodata = () => {
                                 height: 200,
                                 objectFit: "cover",
                                 borderRadius: 8,
-                                boxShadow: "0 0 0 1px #CED4DA"
+                                boxShadow: "0 0 0 1px #CED4DA",
+                                position: "relative"
+                                
                             }}/>
                     </Col>
-                    <Col span={12}>
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 6, order: 2}}>
                         <Space size={24} direction="vertical">
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>
@@ -92,7 +94,7 @@ const PersonalBiodata = () => {
                                 {
                                     input.consultant_education && (
                                         <>
-                               g             {input.consultant_education.map((e, index) => {
+                                            {input.consultant_education.map((e, index) => {
                                                 return (
                                                     <>
                                                         <Row>

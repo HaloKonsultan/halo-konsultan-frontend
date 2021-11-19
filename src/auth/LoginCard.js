@@ -62,7 +62,7 @@ const LoginCard = () => {
 
     return (
         <>
-            <div className="container">
+            <div className="container" style={{padding: 20}}>
                 <Card className="card">
                     <form onSubmit={handleSubmit}>
                         <br/>
