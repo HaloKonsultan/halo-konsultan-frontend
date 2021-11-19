@@ -16,7 +16,6 @@ const LayoutComponent = (props) => {
     const {input, setInput, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
 
-    console.log(input)
     useEffect(() => {
         fetchData()
     }, [])
@@ -31,12 +30,13 @@ const LayoutComponent = (props) => {
                            style={{border: "solid 1px lightgrey"}}
                            breakpoint="xs"
                            collapsedWidth="0"
-                           onBreakpoint={broken => {
-                               console.log(broken);
-                           }}
-                           onCollapse={(collapsed, type) => {
-                               console.log(collapsed, type);
-                           }}>
+                           // onBreakpoint={broken => {
+                           //     console.log(broken);
+                           // }}
+                           // onCollapse={(collapsed, type) => {
+                           //     console.log(collapsed, type);
+                           // }}
+                        >
                         <div>
                             <img src={Logo}  className="logo" alt=""/>
                         </div>

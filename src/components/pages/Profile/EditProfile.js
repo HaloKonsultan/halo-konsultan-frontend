@@ -3,21 +3,24 @@ import {Row, Col, PageHeader, Form, Space, Upload, message, Button, Card, Modal,
 import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Select} from 'antd';
-import PrimaryButton from "../../global/ButtonPrimary";
+import {useHistory} from "react-router";
+import {X, Pencil} from "phosphor-react";
+import ModalVirtualAccount from "../../global/ModalVirtualAccount";
 
 const {Option} = Select;
 const {Text} = Typography;
 
 const EditProfile = () => {
-    const {input, setInput, arrayInput, setArrayInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditProfile} = functions
+    let history = useHistory()
+
+    const {input, setInput, functions} = useContext(ContextProfile)
+    const {fetchData, functionEditProfile, functionDeleteVirtualAccount} = functions
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
     useEffect(() => {
         fetchData()
     }, [])
 
-    //upload rekening bank
     const showAccountModal = () => {
         setIsAccountVisible(true);
     };
@@ -26,12 +29,13 @@ const EditProfile = () => {
         setIsAccountVisible(false);
     };
 
-    //upload rekening
     const handleVirtualAccount = (values) => {
+        values["id"] = -1
         let virtualAccountInput = input.consultant_virtual_account.push(values)
         setInput({...input, virtualAccountInput})
 
         setIsAccountVisible(false);
+        functionEditProfile()
     };
 
     const handleVirtualAccountError = (errorInfo) => {
@@ -42,12 +46,15 @@ const EditProfile = () => {
     const props = {
         onChange({file}) {
             if (file.status !== 'uploading') {
-                const arrayTemp = {
+                const values = {
+                    id: -1,
                     photo: file.name
                 };
-                let documentationInput = input.consultant_documentation.push(arrayTemp)
+                let documentationInput = input.consultant_documentation.push(values)
 
-                setInput({...input, documentationInput})
+                console.log("ini documentation input")
+                console.log(values)
+                //setInput({...input, documentationInput})
             }
         },
     };
@@ -61,11 +68,41 @@ const EditProfile = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log("input bang")
-        console.log(input)
-        console.log("================")
 
         functionEditProfile()
+        history.push(`/profile`)
+    }
+
+    const handleDeleteVirtualAccount = (event) => {
+        let idVA = parseInt(event.currentTarget.value)
+
+        functionDeleteVirtualAccount(idVA)
+    }
+
+    const handleLogo = (bank) => {
+        switch (bank) {
+            case "BRI":
+                return ("https://i.pinimg.com/originals/f8/0a/ac/f80aac3c5591e45f0d1da6b07a801b7c.png")
+                break;
+            case "BNI":
+                return ("https://i.pinimg.com/originals/36/38/43/36384348ef9d7bfff66da6da9e975d56.png")
+                break;
+            case "BCA":
+                return ("https://pngimage.net/wp-content/uploads/2018/05/bank-bca-png-4.png")
+                break;
+            case "BSI":
+                return ("https://1.bp.blogspot.com/-4qkYYe_sQoI/YBvH0NmYCjI/AAAAAAAAab0/DpiJkew5pPg2kZeoYp3uLqAuoBs7wwldwCLcBGAsYHQ/s1280/Download%2BLogo%2BBANK%2BSYARIAH%2BINDONESIA%2BCDR%2Bdan%2BPNG.png")
+                break;
+            case "MANDIRI":
+                return ("https://kinetic.id/wp-content/uploads/2018/07/mandiri.png")
+                break;
+            case "MAYBANK":
+                return ("https://images.squarespace-cdn.com/content/v1/5c756c67e5f7d15021008390/1563961660176-L5DY9LBJBNI1ET9VFMD2/ke17ZwdGBToddI8pDm48kJK4Mm1kch8SFO9ZNkN1NT97gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmN9YSRtfoTLg6dUq-6F17A0FFZK5fArcnK1IqGweyunyWChwIwkIJ_P7MaZif-uMs/03-Maybank.png")
+                break;
+            case "CITIBANK":
+                return ("https://lh3.googleusercontent.com/proxy/cz7GXD75bzQngamG_qvKJH2v7nC5mqZi5wLQPiRk8iOvGj5iOrR5rTjehImWCYK6hGrDa8XpKU6AUWNCkJDQOxsDyT1eaEw_ZOgCTWTIR5GF")
+                break;
+        }
     }
 
     return (
@@ -95,12 +132,30 @@ const EditProfile = () => {
                                     return (
                                         <>
                                             <Row>
-                                                <Col md={12} sm={8}>logo kak</Col>
-                                                <Col  md={12} sm={8}/>
-                                                <Col  md={12} sm={8}>
+                                                <Col span={2} md={12} sm={8}>
+                                                    <img src={handleLogo(e.bank)} alt="" style={{
+                                                        width: 40,
+                                                        height: 40,
+                                                        objectFit: "cover",
+                                                        borderRadius: 4,
+                                                    }}/>
+                                                </Col>
+                                                <Col span={1} md={12} sm={8}/>
+                                                <Col span={17} md={12} sm={8}>
                                                     <Text strong>{e.name}</Text>
                                                     <br/>
                                                     <Text type="secondary">{e.bank} - {e.card_number}</Text>
+                                                </Col>
+                                                <Col span={4}>
+                                                    <Space>
+                                                        {/*<Button value={e.id}*/}
+                                                        {/*        style={{padding: 0, paddingTop: 10}} type="link"><Pencil*/}
+                                                        {/*    size={24} weight="fill"/></Button>*/}
+                                                        <Button value={e.id}
+                                                                style={{padding: 0, paddingTop: 10}}
+                                                                onClick={handleDeleteVirtualAccount} type="link"><X
+                                                            size={24}/></Button>
+                                                    </Space>
                                                 </Col>
                                             </Row>
                                             <p/>
@@ -127,13 +182,12 @@ const EditProfile = () => {
                                placeholder="Harga Jasa Konsultasi"
                                value={input.consultation_price}/><br/><br/>
                     </form>
-
                     <PageHeader
                         style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                         ghost={false}
                         subTitle={<Text type="secondary">Dokumentasi Kerja</Text>}
                         extra={[
-                            <Upload {...props}>
+                            <Upload {...props} response={false}>
                                 <Button
                                     style={{
                                         color: "#3B85FA"
@@ -182,81 +236,12 @@ const EditProfile = () => {
                 <br/>
             </div>
 
-            {/*MODAL HERE*/}
-            <Modal
-                className="profile-modal"
-                title="Tambahkan Rekening"
+            <ModalVirtualAccount
                 visible={isAccountVisible}
                 onCancel={handleCancel}
-                footer={null}
-            >
-                <Form
-                    name="basic"
-                    initialValues={{
-                        remember: true,
-                    }}
-                    layout="vertical"
-                    onFinish={handleVirtualAccount}
-                    onFinishFailed={handleVirtualAccountError}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="Nama Bank"
-                        name="bank"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input bank name!',
-                            },
-                        ]}
-                    >
-                        <Select
-                            block
-                            showSearch
-                            style={{borderRadius: 8}}
-                            placeholder="Pilih bank"
-                            optionFilterProp="children"
-                            filterOption={(input, option) =>
-                                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                            }
-                        >
-                            <Option value="BRI">BRI</Option>
-                            <Option value="BNI">BNI</Option>
-                            <Option value="BCA">BCA</Option>
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Nomor Rekening"
-                        name="card_number"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input rekening number!',
-                            },
-                        ]}
-                    >
-                        <Input style={{borderRadius: 8}}/>
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Nama Pemegang Rekening"
-                        name="name"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input rekening name!',
-                            },
-                        ]}
-                    >
-                        <Input style={{borderRadius: 8}}/>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <PrimaryButton htmlType="submit" text="Tambahkan Rekening"/>
-                    </Form.Item>
-                </Form>
-            </Modal>
+                onFinish={handleVirtualAccount}
+                onFinishFailed={handleVirtualAccountError}
+            />
         </>
     )
 }

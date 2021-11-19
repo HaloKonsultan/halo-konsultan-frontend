@@ -7,7 +7,7 @@ function OrderActive() {
     return (
         <>
             <Nav title="Konsultasi Aktif"/>
-            <div className="incoming-order-table">
+            <div className="dashboard-container">
                 <OrderTableActive dataLimit="tes123" />
             </div>
         </>

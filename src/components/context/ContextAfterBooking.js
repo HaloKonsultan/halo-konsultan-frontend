@@ -9,7 +9,13 @@ export const ContextAfterBooking = createContext()
 export const AfterBookingProvider = props => {
     let history = useHistory()
     const [dataAfterBooking, setDataAfterBooking] = useState([])
+    const [inputDocument, setInputDocument] = useState({
+        title: "",
+        description: ""
+    })
     const [input, setInput] = useState({
+        title: "",
+        description: "",
         preference: "",
         price: "",
         date: [],
@@ -62,6 +68,8 @@ export const AfterBookingProvider = props => {
             setPrefTime,
             input,
             setInput,
+            inputDocument,
+            setInputDocument,
             currentId,
             setCurrentId,
             functions,

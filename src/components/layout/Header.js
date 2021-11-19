@@ -12,8 +12,6 @@ const Nav = (props) => {
     const {loginStatus, setLoginStatus} = useContext(ContextUser)
     const location = useLocation();
 
-    console.log(location)
-
     const handleLogout = () => {
         setLoginStatus(false)
         Cookies.remove('token')

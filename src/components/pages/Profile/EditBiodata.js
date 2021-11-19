@@ -1,4 +1,4 @@
-import React, {useState, useParams, useContext, useEffect} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import {
     Row,
     Col,
@@ -18,82 +18,154 @@ import {
 } from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
-import {EditOutlined} from "@ant-design/icons";
 import {ContextProfile} from "../../context/ContextProfile";
-import { size } from "lodash";
+import {Pencil, X} from "phosphor-react";
+import {useHistory} from "react-router";
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
-const { Option } = Select;
+const {Option} = Select;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
-    const {input, setInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata, dataProvinces, dataCity} = functions
+    let history = useHistory()
+    const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
+    const {fetchData, functionEditBiodata, dataCity, functionDeleteExperience, functionDeleteSkill, functionDeleteEducation} = functions
+    const [value, setValue] = React.useState(1);
 
     useEffect(() => {
-        fetchData();
-        dataProvinces();
-        dataCity();
+        fetchData()
+
     }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
     const [isHistoryVisible, setIsHistoryVisible] = useState(false);
 
-    // Tambah Pengalaman Kerja
+    const onChangeGender = e => {
+        console.log('radio checked', e.target.value);
+        let typeOfValue = e.target.value
+        let name = "gender"
+        setInput({...input, [name]: typeOfValue})
+    };
+
+    const handleCategorieChange = (value) => {
+        console.log(value[1])
+        console.log(value[0])
+
+        let typeOfValue = value[1]
+        let name = "category_id"
+
+        setInput({...input, [name]: typeOfValue})
+    }
+
+    const handleProvinceChange = (value) => {
+        console.log(value[1])
+        console.log(value[0])
+
+        let typeOfValue = value[0]
+        let name = "province"
+
+        setInput({...input, [name]: typeOfValue})
+        dataCity(value[1])
+    }
+
+    const handleCityChange = (value) => {
+        console.log(value)
+
+        let typeOfValue = value
+        let name = "city"
+
+        setInput({...input, [name]: typeOfValue})
+    }
+
     const showExperienceModal = () => {
         setIsExperienceVisible(true);
     };
 
-    const handleExperience = (values) => {
-        console.log('Success:', values);
-        let experience = input.consultant_experience.push(values)
-        setInput({...input, experience})
-
-        console.log(input)
-        setIsExperienceVisible(false);
-    }
-
-    // Tambah Bidang Keahlian
     const showSkillModal = () => {
         setIsSkillVisible(true);
     };
 
-    const handleSkill = (values) => {
-        console.log('Success:', values);
-        let consultant_skillInput = input.consultant_skill.push(values)
-        setInput({...input, consultant_skillInput})
-
-        console.log(input)
-        setIsSkillVisible(false);
-    };
-
-    // Tambah Riwayat Pendidikan
-    const showHistoryModal = () => {
+    const showEducationModal = () => {
         setIsHistoryVisible(true);
     };
 
-    const handleEducation = (values) => {
-        console.log('Success:', values);
-        let consultant_educationInput = input.consultant_education.push(values)
-        setInput({...input, consultant_educationInput})
+    const handleExperience = (values) => {
+        values["id"] = -1
+        let experience = input.consultant_experience.push(values)
+        setInput({...input, experience})
 
-        console.log(input)
-        setIsHistoryVisible(false);
+        setIsExperienceVisible(false);
+        functionEditBiodata()
+    }
+
+    const handleSkill = (values) => {
+        values["id"] = -1
+        let skill = input.consultant_skill.push(values)
+        setInput({...input, skill})
+
+        setIsSkillVisible(false);
+        functionEditBiodata()
     };
+
+    const handleEducation = (values) => {
+        values["id"] = -1
+        let education = input.consultant_education.push(values)
+        setInput({...input, education})
+
+        setIsHistoryVisible(false);
+        functionEditBiodata()
+    };
+
+    // const updateExperience = (id, position, start_year, end_year) => {
+    //     let index = input.consultant_experience.findIndex(x => x.position === position);
+    //
+    //     setInput({...input, position: position, start_year: start_year, end_year: end_year})
+    //     setIsExperienceVisible(true);
+    //     input.consultant_experience.splice(index, 1);
+    // }
+    //
+    // const updateSkill = (id, skills) => {
+    //     console.log("ini id skill")
+    //     console.log(id)
+    //     let index = input.consultant_skill.findIndex(x => x.skills === skills);
+    //
+    //     setInput({...input, id: id, skills: skills})
+    //     setIsSkillVisible(true);
+    //     input.consultant_skill.splice(index, 1);
+    // }
+    //
+    // const updateEducation = (id, institution_name, major, start_year, end_year) => {
+    //     let index = input.consultant_education.findIndex(x => x.institution_name === institution_name);
+    //
+    //     setInput({...input, id: id, institution_name: institution_name, major: major, start_year: start_year, end_year: end_year})
+    //     setIsHistoryVisible(true);
+    //     input.consultant_education.splice(index, 1);
+    // }
+
+    const deleteSkill = (event) => {
+        let id = parseInt(event.currentTarget.value)
+
+        functionDeleteSkill(id)
+    }
+
+    const deleteExperience = (event) => {
+        let id = parseInt(event.currentTarget.value)
+
+        functionDeleteExperience(id)
+    }
+
+    const deleteEducation= (event) => {
+        let id = parseInt(event.currentTarget.value)
+
+        functionDeleteEducation(id)
+    }
 
     const handleCancel = () => {
         setIsExperienceVisible(false);
         setIsSkillVisible(false);
         setIsHistoryVisible(false);
-    };
-
-    const [value, setValue] = React.useState(1);
-
-    const onChange = e => {
-        console.log('radio checked', e.target.value);
-        setValue(e.target.value);
     };
 
     const handleChange = (event) => {
@@ -102,193 +174,198 @@ const EditBiodata = () => {
         console.log("tesvalue " + typeOfValue)
         console.log("tesname " + name)
 
-        // setInput({ ...input, [name]: typeOfValue })
+        setInput({...input, [name]: typeOfValue})
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const deleteInput = (event) => {
-        let title = parseInt(event.currentTarget.value)
-        var index = input.document.indexOf(title);
-
-        input.document.splice(index, 1);
-        console.log(input)
-    }
-
-      function onChanged(value) {
-        console.log(`selected ${value}`);
-      }
-
-      function onBlur() {
-        console.log('blur');
-      }
-
-      function onFocus() {
-        console.log('focus');
-      }
-
-      function onSearch(val) {
-        console.log('search:', val);
-      }
-
-
     const props = {
-        name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-            authorization: 'authorization-text',
-        },
-        onChange(info) {
-            if (info.file.status !== 'uploading') {
-                console.log(info.file, info.fileList);
-            }
-            if (info.file.status === 'done') {
-                message.success(`${info.file.name} file uploaded successfully`);
-            } else if (info.file.status === 'error') {
-                message.error(`${info.file.name} file upload failed.`);
+        onChange({file}) {
+            if (file.status !== 'uploading') {
+                let typeOfValue = file.name
+                let name = "photo"
+
+                setInput({...input, [name]: typeOfValue})
             }
         },
     };
+
+    const handleSubmit = (event) => {
+        event.preventDefault()
+
+        functionEditBiodata()
+        history.push(`/profile`)
+    }
 
     return (
         <>
             <Nav/>
             <div className="container-profile">
                 <Card title="Edit Profil Diri" style={{width: 528, borderRadius: 8}}>
-                    <form id="2">
+                    <Space size={24} direction="vertical" style={{width: "100%"}}>
                         <Row>
                             <Col span={8}>
-                                <img
-                                    src="https://t3.ftcdn.net/jpg/03/91/19/22/360_F_391192211_2w5pQpFV1aozYQhcIw3FqA35vuTxJKrB.jpg"
-                                    alt="profile-picture"
-                                    style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
+                                <img src={input.photo} alt="profile-picture"
+                                     style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
                             </Col>
                             <Col span={16}>
+                                {/*<Input style={{borderRadius: 8, height: 48}}*/}
+                                {/*       name="photo"*/}
+                                {/*       onChange={handleChange}*/}
+                                {/*       placeholder="Link Foto"*/}
+                                {/*       />*/}
                                 <Upload {...props}>
                                     <Button style={{borderRadius: 4}}>Edit Profile</Button>
                                 </Upload>
                                 <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
-                                {/* <Button
-                                type="primary"
-                                onClick={this.handleUpload}
-                                disabled={fileList.length === 0}
-                                loading={uploading}
-                                style={{ marginTop: 16, borderRadius: 8 }} >
-                            {uploading ? 'Uploading' : 'Upload File'}
-                            </Button> */}
                             </Col>
                         </Row>
 
-                        <Space size={24} direction="vertical">
+                        <div>
+                            <Text type="secondary">Nama Lengkap</Text>
+                            <Input style={{borderRadius: 8, height: 48}}
+                                   name="name"
+                                   onChange={handleChange}
+                                   placeholder="Nama lengkap"
+                                   value={input.name}/><br/><br/>
 
+                            <Text type="secondary">Deskripsi</Text>
+                            <TextArea
+                                style={{borderRadius: 8}}
+                                rows={6}
+                                name="description"
+                                placeholder="Deskripsi"
+                                onChange={handleChange}
+                                value={input.description}/><br/><br/>
+
+                            <Text type="secondary">Jenis Kelamin</Text><br/>
+                            <Radio.Group onChange={onChangeGender}>
+                                <Radio value="Pria">Pria </Radio>
+                                <Radio value="Wanita">Wanita</Radio>
+                            </Radio.Group><br/><br/>
+
+                            <Text type="secondary">Bidang Keahlian</Text>
+                            <Select
+                                defaultValue={input.position}
+                                onChange={handleCategorieChange}
+                                showSearch
+                                bordered={false}
+                                style={{
+                                    borderRadius: 8,
+                                    overflow: "hidden",
+                                    border: "solid 1px #CED4DA",
+                                    width: "100%"
+                                }}
+                                placeholder="Bidang Kategori"
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {
+                                    inputCategories.categories && (
+                                        <>
+                                            {inputCategories.categories.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                            </Select>
+                        </div>
+                        <Space direction="vertical" style={{width: "100%"}}>
+                            <Text type="secondary">Provinsi</Text>
+                            <Select
+                                defaultValue={input.province}
+                                onChange={handleProvinceChange}
+                                showSearch
+                                bordered={false}
+                                style={{
+                                    borderRadius: 8,
+                                    overflow: "hidden",
+                                    border: "solid 1px #CED4DA",
+                                    width: "100%"
+                                }}
+                                placeholder="Provinsi"
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {
+                                    inputProvince.province && (
+                                        <>
+                                            {inputProvince.province.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                            </Select>
                         </Space>
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Nama Lengkap</h4>
-                        <Input
-                            style={{borderRadius: 8, height: 48}}
-                            placeholder="Nama lengkap"
-                            prefix={input.name}
-                            onChange={handleChange}/>
 
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Deskripsi tentang Anda</h4>
-                        <TextArea
-                            style={{borderRadius: 8}}
-                            rows={6}
-                            placeholder="Deskripsi"
-                            prefix={input.description}/>
+                        <Space direction="vertical" style={{width: "100%"}}>
+                            <Text type="secondary">Kota</Text>
+                            <Select
+                                defaultValue={input.city}
+                                onChange={handleCityChange}
+                                showSearch
+                                bordered={false}
+                                style={{
+                                    borderRadius: 8,
+                                    overflow: "hidden",
+                                    border: "solid 1px #CED4DA",
+                                    width: "100%"
+                                }}
+                                placeholder="Kota"
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                }
+                            >
+                                {
+                                    inputProvince.cities && (
+                                        <>
+                                            {inputProvince.cities.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Option value={e.name}>{e.name}</Option>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                            </Select>
+                        </Space>
 
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Jenis Kelamin</h4>
-                        <Radio.Group onChange={onChange} value={value}>
-                            <Radio value={1}>Laki - Laki </Radio>
-                            <Radio value={2}>Perempuan</Radio>
-                        </Radio.Group>
-
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Bidang Konsultasi</h4>
-                        <Input style={{borderRadius: 8, height: 48}}
-                               placeholder="Bidang Konsultasi"
-                               prefix={input.position}/>
-
-                        <br/><br/>
-                        <h4 style={{color: "gray"}}>Provinsi</h4>
-                        <Select
-                          showSearch
-                          style={{ width: 480 }}
-                          placeholder="Provinsi"
-                          optionFilterProp="children"
-                          rows={6}
-                          onChange={onChanged}
-                          onFocus={onFocus}
-                          onBlur={onBlur}
-                          onSearch={onSearch}
-                         filterOption={(input, option) =>
-                       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                >
-                    
-                {
-                    input.provinces && (
-                        <>
-                            {input.provinces.map((e, index) => {
-                                return (
-                                    <>
-                                        <Option value={e.name}>{e.name}</Option>
-                                    </>
-                                )
-                            })}
-                        </>
-                    )}
-
-                </Select>
-                    
-                    <br/><br/>
-                        <h4 style={{color: "gray"}}>Kota</h4>
-                        <Select
-                          showSearch
-                          style={{ width: 480 }}
-                          placeholder="Kota"
-                          optionFilterProp="children"
-                          rows={6}
-                          onChange={onChanged}
-                          onFocus={onFocus}
-                          onBlur={onBlur}
-                          onSearch={onSearch}
-                         filterOption={(input, option) =>
-                       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                      }
-                >
-                {
-                    input.city  && (
-                        <>
-                            {input.city.map((e, index) => {
-                                return (
-                                    <>
-                                        <Option value={e.name}>{e.name}</Option>
-                                    </>
-                                )
-                            })}
-                        </>
-                )}
-                </Select>
-                        <br/><br/>
-
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
-                            ghost={false}
-                            subTitle={<Text type="secondary">Pengalaman Kerja</Text>}
-                            extra={[
-                                <Button onClick={showExperienceModal} style={{color: "#3B85FA"}}
-                                        type="text"> + Tambah Pengalaman Kerja
-                                </Button>,
-                            ]}/>
+                        <Space direction="vertical" style={{width: "100%"}}>
+                            <PageHeader
+                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                ghost={false}
+                                subTitle={<Text type="secondary">Pengalaman</Text>}
+                                extra={[
+                                    <Button
+                                        onClick={showExperienceModal}
+                                        style={{
+                                            color: "#3B85FA"
+                                        }}
+                                        type="text">
+                                        <b>+ Tambah Pengalaman Kerja</b>
+                                    </Button>,
+                                ]}
+                            />
                             <h6 style={{color: "gray"}}>
-                            Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
-                            konsultasi</h6>
-                        <Space size={8} direction="vertical">
+                                Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
+                                konsultasi
+                            </h6>
                             {
                                 input.consultant_experience && (
                                     <>
@@ -299,24 +376,33 @@ const EditBiodata = () => {
                                                         style={{
                                                             width: 480,
                                                             height: 68,
-                                                            borderRadius: 8
+                                                            borderRadius: 8,
+                                                            overflow: "hidden"
                                                         }}
                                                         type="inner"
-                                                        title={ <>
-                                                            <Text>{e.position}</Text>
-                                                             <br/>
+                                                        title={<>
                                                             <Row>
                                                                 <Col span={21}>
-                                                                <Text style={{fontSize:14}} type="secondary">{e.start_year} - {e.end_year}</Text>
+                                                                    <Text>{e.position}</Text><br/>
+                                                                    <Text style={{fontSize: 14}}
+                                                                          type="secondary">{e.start_year} - {e.end_year}</Text>
                                                                 </Col>
-                                                                <Button onClick={showExperienceModal} type="text">
-                                                                    <EditOutlined/> 
-                                                                </Button>
-                                                                {/* {input.consultant_experience.map(e, index)}     */}
-                                                            </Row>   
+                                                                <Col span={3}>
+                                                                    <Space>
+                                                                        {/*<Button value={e.id}*/}
+                                                                        {/*        style={{padding: 0, paddingTop: 10}}*/}
+                                                                        {/*        type="link"><Pencil*/}
+                                                                        {/*        onClick={() => updateExperience(e.id, e.position, e.start_year, e.end_year)}*/}
+                                                                        {/*    size={24} weight="fill"/></Button>*/}
+                                                                        <Button value={e.id}
+                                                                                style={{padding: 0, paddingTop: 10}}
+                                                                                onClick={deleteExperience} type="link"><X
+                                                                            size={24}/></Button>
+                                                                    </Space>
+                                                                </Col>
+                                                            </Row>
                                                         </>
-                                                        
-                                                    }    
+                                                        }
                                                     >
                                                     </Card>
                                                 </>
@@ -325,19 +411,24 @@ const EditBiodata = () => {
                                     </>
                                 )}
                         </Space>
-
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
-                            ghost={false}
-                            subTitle={<Text type="secondary">Bidang Keahlian</Text>}
-                            extra={[
-                                <Button onClick={showSkillModal} style={{color: "#3B85FA"}}
-                                        type="text"> + Tambah Bidang Keahlian
-                                </Button>,
-                            ]}/>
-                        <Space size={8} direction="vertical">
+                        <Space direction="vertical" style={{width: "100%"}}>
+                            <PageHeader
+                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                ghost={false}
+                                subTitle={<Text type="secondary">Keahlian</Text>}
+                                extra={[
+                                    <Button
+                                        onClick={showSkillModal}
+                                        style={{
+                                            color: "#3B85FA"
+                                        }}
+                                        type="text">
+                                        <b>+ Tambah Bidang Keahlian</b>
+                                    </Button>,
+                                ]}
+                            />
                             {
-                                input.consultant_skill  && (
+                                input.consultant_skill && (
                                     <>
                                         {input.consultant_skill.map((e, index) => {
                                             return (
@@ -346,19 +437,35 @@ const EditBiodata = () => {
                                                         style={{
                                                             width: 480,
                                                             height: 48,
-                                                            borderRadius: 8
+                                                            borderRadius: 8,
+                                                            overflow: "hidden"
                                                         }}
                                                         type="inner"
                                                         title={
                                                             <>
-                                                            <Row>
-                                                                <Col span={21}>
-                                                                <Text>{e.skills}</Text>
-                                                                </Col>
-                                                                <Button onClick={showSkillModal} type="text">
-                                                                    <EditOutlined/> 
-                                                                </Button>
-                                                            </Row>   
+                                                                <Row>
+                                                                    <Col span={21}>
+                                                                        <Text>{e.skills}</Text>
+                                                                    </Col>
+                                                                    <Col span={3}>
+                                                                        <Space>
+                                                                            {/*<Button value={e.id}*/}
+                                                                            {/*        style={{*/}
+                                                                            {/*            padding: 0,*/}
+                                                                            {/*            paddingBottom: 10*/}
+                                                                            {/*        }} type="link"><Pencil*/}
+                                                                            {/*        onClick={() => updateSkill(e.id, e.skills)}*/}
+                                                                            {/*    size={24} weight="fill"/></Button>*/}
+                                                                            <Button value={e.id}
+                                                                                    style={{
+                                                                                        padding: 0,
+                                                                                        paddingBottom: 10
+                                                                                    }}
+                                                                                    onClick={deleteSkill} type="link"><X
+                                                                                size={24}/></Button>
+                                                                        </Space>
+                                                                    </Col>
+                                                                </Row>
                                                             </>
                                                         }
                                                     >
@@ -368,20 +475,27 @@ const EditBiodata = () => {
                                         })}
                                     </>
                                 )}
+
                         </Space>
 
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
-                            ghost={false}
-                            subTitle={<Text type="secondary">Pendidikan</Text>}
-                            extra={[
-                                <Button onClick={showHistoryModal} style={{color: "#3B85FA"}}
-                                        type="text"> + Tambah Riwayat Pendidikan
-                                </Button>,
-                            ]}/>
-                        <Space size={8} direction="vertical">
+                        <Space direction="vertical" style={{width: "100%"}}>
+                            <PageHeader
+                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                ghost={false}
+                                subTitle={<Text type="secondary">Pendidikan</Text>}
+                                extra={[
+                                    <Button
+                                        onClick={showEducationModal}
+                                        style={{
+                                            color: "#3B85FA"
+                                        }}
+                                        type="text">
+                                        <b>+ Tambah Riwayat Pendidikan</b>
+                                    </Button>,
+                                ]}
+                            />
                             {
-                                input.consultant_education  && (
+                                input.consultant_education && (
                                     <>
                                         {input.consultant_education.map((e, index) => {
                                             return (
@@ -390,21 +504,38 @@ const EditBiodata = () => {
                                                         style={{
                                                             width: 480,
                                                             height: 68,
-                                                            borderRadius: 8
+                                                            borderRadius: 8,
+                                                            overflow: "hidden"
                                                         }}
                                                         type="inner"
                                                         title={
-                                                            <> 
-                                                            <Text>{e.institution_name}</Text>
-                                                             <br/>
-                                                             <Row>
-                                                                <Col span={21}>
-                                                                <Text type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
-                                                                </Col>
-                                                                <Button onClick={showHistoryModal} type="text">
-                                                                    <EditOutlined/> 
-                                                                </Button>
-                                                            </Row>   
+                                                            <>
+                                                                <Row>
+                                                                    <Col span={21}>
+                                                                        <Text>{e.institution_name}</Text><br/>
+                                                                        <Text
+                                                                            type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                                    </Col>
+                                                                    <Col span={3}>
+                                                                        <Space>
+                                                                            {/*<Button value={e.id}*/}
+                                                                            {/*        style={{*/}
+                                                                            {/*            padding: 0,*/}
+                                                                            {/*            paddingTop: 10*/}
+                                                                            {/*        }}*/}
+                                                                            {/*        type="link"><Pencil*/}
+                                                                            {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
+                                                                            {/*    size={24} weight="fill"/></Button>*/}
+                                                                            <Button value={e.id}
+                                                                                    style={{
+                                                                                        padding: 0,
+                                                                                        paddingTop: 10
+                                                                                    }}
+                                                                                    onClick={deleteEducation} type="link"><X
+                                                                                size={24}/></Button>
+                                                                        </Space>
+                                                                    </Col>
+                                                                </Row>
                                                             </>
                                                         }
                                                     >
@@ -415,244 +546,240 @@ const EditBiodata = () => {
                                     </>
                                 )}
                         </Space>
+                        <Button size="large"
+                                className="button"
+                                type="primary"
+                                block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                onClick={handleSubmit}>
+                            Simpan
+                        </Button>
+                    </Space>
+                </Card>
+            </div>
 
+            {/*MODAL HERE*/}
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambahkan Pengalaman kerja"
+                visible={isExperienceVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={handleExperience}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Titel Pengalaman Kerja"
+                        name="position"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input position!',
+                            },
+                        ]}
 
-                        <Modal
-                            destroyOnClose={true}
-                            className="profile-modal"
-                            title="Tambahkan Pengalaman kerja"
-                            visible={isExperienceVisible}
-                            onCancel={handleCancel}
-                            footer={null}
-                        >
-                            <Form
-                                name="basic"
-                                initialValues={{
-                                    remember: true,
-                                }}
-                                layout="vertical"
-                                onFinish={handleExperience}
-                                onFinishFailed={onFinishFailed}
-                                autoComplete="off"
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item
+                                label="Tahun Mulai"
+                                name="start_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input start year!',
+                                    },
+                                ]}
+
                             >
-                                <Form.Item
-                                    label="Titel Pengalaman Kerja"
-                                    name="position"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input position!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8}}/>
-                                </Form.Item>
 
-                                <Row>
-                                    <Col span={12}>
-                                    <Form.Item
-                                    label="Tahun Mulai"
-                                    name="start_year"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input start year!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8, width : 215}}/>
-                                </Form.Item>
-                                    </Col>
-                                    <Col span={11} offset={1}>
-                                    <Form.Item
-                                    label="Tahun Selesai"
-                                    name="end_year"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input end year!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8, width : 215}}/>
-                                </Form.Item>
-                                    </Col>
-                                </Row>
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={11} offset={1}>
+                            <Form.Item
+                                label="Tahun Selesai"
+                                name="end_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input end year!',
+                                    },
+                                ]}
 
-                                <Form.Item>
-                                    <Button
-                                        size="large"
-                                        className="button"
-                                        type="primary" block
-                                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                        htmlType="submit">
-                                        Tambahkan Riwayat Pendidikan
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </Modal>
-
-                        <Modal
-                            destroyOnClose={true}
-                            className="profile-modal"
-                            title="Tambah Bidang Keahlian"
-                            visible={isSkillVisible}
-                            onCancel={handleCancel}
-                            footer={null}
-                        >
-                            <Form
-                                name="basic"
-                                initialValues={{
-                                    remember: true,
-                                }}
-                                layout="vertical"
-                                onFinish={handleSkill}
-                                onFinishFailed={onFinishFailed}
-                                autoComplete="off"
                             >
-                                <Form.Item
-                                    label="Titel Bidang Keahlian"
-                                    name="skills"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input skills!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8}} />
-                                </Form.Item>
 
-                                <Form.Item>
-                                    <Button
-                                        size="large"
-                                        className="button"
-                                        type="primary" block
-                                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                        htmlType="submit">
-                                        Tambahkan Bidang Keahlian
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </Modal>
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
 
-                        <Modal
-                            destroyOnClose={true}
-                            className="profile-modal"
-                            title="Tambah Riwayat Pendidikan"
-                            visible={isHistoryVisible}
-                            onCancel={handleCancel}
-                            footer={null}
-                        >
-                            <Form
-                                name="basic"
-                                initialValues={{
-                                    remember: true,
-                                }}
-                                layout="vertical"
-                                onFinish={handleEducation}
-                                onFinishFailed={onFinishFailed}
-                                autoComplete="off"
-                            >
-                                <Form.Item
-                                    label="Nama Instansi"
-                                    name="institution_name"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input institution name!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8}}/>
-                                </Form.Item>
-
-                                <Form.Item
-                                    label="Titel"
-                                    name="major"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input major!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8}}/>
-                                </Form.Item>
-
-                                <Row>
-                                    <Col span={12}>
-                                    <Form.Item
-                                    label="Tahun Mulai"
-                                    name="start_year"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input start year!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8, width : 215}}/>
-                                </Form.Item>
-                                    </Col>
-                                    <Col span={11} offset={1}>
-                                    <Form.Item
-                                    label="Tahun Selesai"
-                                    name="end_year"
-                                    rules={[
-                                        {
-                                            required: true,
-                                            message: 'Please input end year!',
-                                        },
-                                    ]}
-                                    
-                                >
-                                    
-                                    <Input style={{borderRadius: 8, width : 215}}/>
-                                </Form.Item>
-                                    </Col>
-                                </Row>
-
-                                <Form.Item>
-                                    <Button
-                                        size="large"
-                                        className="button"
-                                        type="primary" block
-                                        style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                        htmlType="submit">
-                                        Tambahkan Riwayat Pendidikan
-                                    </Button>
-                                </Form.Item>
-                            </Form>
-                        </Modal>
-
-                        <br/><br/>
+                    <Form.Item>
                         <Button
                             size="large"
                             className="button"
                             type="primary" block
                             style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                            htmlType="submit"
-                            form="2">
-                            Simpan
+                            htmlType="submit">
+                            Tambahkan Riwayat Pendidikan
                         </Button>
-                    </form>
-                </Card>
-            </div>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambah Bidang Keahlian"
+                visible={isSkillVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={handleSkill}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Titel Bidang Keahlian"
+                        name="skills"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input skills!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            className="button"
+                            type="primary" block
+                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            htmlType="submit">
+                            Tambahkan Bidang Keahlian
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
+
+            <Modal
+                destroyOnClose={true}
+                className="profile-modal"
+                title="Tambah Riwayat Pendidikan"
+                visible={isHistoryVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    name="basic"
+                    initialValues={{
+                        remember: true,
+                    }}
+                    layout="vertical"
+                    onFinish={handleEducation}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                >
+                    <Form.Item
+                        label="Nama Instansi"
+                        name="institution_name"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input institution name!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Titel"
+                        name="major"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input major!',
+                            },
+                        ]}
+
+                    >
+
+                        <Input style={{borderRadius: 8}}/>
+                    </Form.Item>
+
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item
+                                label="Tahun Mulai"
+                                name="start_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input start year!',
+                                    },
+                                ]}
+
+                            >
+
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                        <Col span={11} offset={1}>
+                            <Form.Item
+                                label="Tahun Selesai"
+                                name="end_year"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input end year!',
+                                    },
+                                ]}
+
+                            >
+
+                                <Input style={{borderRadius: 8, width: 215}}/>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+
+                    <Form.Item>
+                        <Button
+                            size="large"
+                            className="button"
+                            type="primary" block
+                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                            htmlType="submit">
+                            Tambahkan Riwayat Pendidikan
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Modal>
         </>
     )
 }
