@@ -128,6 +128,8 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
+        console.log("ini edit biodata")
+        console.log(input)
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -143,6 +145,7 @@ export const ProfileProvider = props => {
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
+                console.log(res)
                 let data = res.data.data
                 setInput({
                     name: input.name,

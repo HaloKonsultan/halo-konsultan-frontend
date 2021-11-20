@@ -21,6 +21,7 @@ import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Pencil, X} from "phosphor-react";
 import {useHistory} from "react-router";
+import SelectDropdown from "../../global/SelectDropdown";
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
@@ -29,8 +30,8 @@ const {TextArea} = Input;
 
 const EditBiodata = () => {
     let history = useHistory()
-    const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata, dataCity, functionDeleteExperience, functionDeleteSkill, functionDeleteEducation} = functions
+    const {input, setInput, inputProvince, dataCity, inputCategories, functions} = useContext(ContextProfile)
+    const {fetchData, functionEditBiodata, functionDeleteExperience, functionDeleteSkill, functionDeleteEducation} = functions
     const [value, setValue] = React.useState(1);
 
     useEffect(() => {
@@ -156,7 +157,7 @@ const EditBiodata = () => {
         functionDeleteExperience(id)
     }
 
-    const deleteEducation= (event) => {
+    const deleteEducation = (event) => {
         let id = parseInt(event.currentTarget.value)
 
         functionDeleteEducation(id)
@@ -171,8 +172,6 @@ const EditBiodata = () => {
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
         let name = event.target.name
-        console.log("tesvalue " + typeOfValue)
-        console.log("tesname " + name)
 
         setInput({...input, [name]: typeOfValue})
     };
@@ -211,11 +210,6 @@ const EditBiodata = () => {
                                      style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
                             </Col>
                             <Col span={16}>
-                                {/*<Input style={{borderRadius: 8, height: 48}}*/}
-                                {/*       name="photo"*/}
-                                {/*       onChange={handleChange}*/}
-                                {/*       placeholder="Link Foto"*/}
-                                {/*       />*/}
                                 <Upload {...props}>
                                     <Button style={{borderRadius: 4}}>Edit Profile</Button>
                                 </Upload>
@@ -247,24 +241,11 @@ const EditBiodata = () => {
                             </Radio.Group><br/><br/>
 
                             <Text type="secondary">Bidang Keahlian</Text>
-                            <Select
+                            <SelectDropdown
                                 defaultValue={input.position}
                                 onChange={handleCategorieChange}
-                                showSearch
-                                bordered={false}
-                                style={{
-                                    borderRadius: 8,
-                                    overflow: "hidden",
-                                    border: "solid 1px #CED4DA",
-                                    width: "100%"
-                                }}
                                 placeholder="Bidang Kategori"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                {
+                                option={
                                     inputCategories.categories && (
                                         <>
                                             {inputCategories.categories.map((e, index) => {
@@ -275,29 +256,17 @@ const EditBiodata = () => {
                                                 )
                                             })}
                                         </>
-                                    )}
-                            </Select>
+                                    )
+                                }
+                            />
                         </div>
                         <Space direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Provinsi</Text>
-                            <Select
+                            <SelectDropdown
                                 defaultValue={input.province}
                                 onChange={handleProvinceChange}
-                                showSearch
-                                bordered={false}
-                                style={{
-                                    borderRadius: 8,
-                                    overflow: "hidden",
-                                    border: "solid 1px #CED4DA",
-                                    width: "100%"
-                                }}
                                 placeholder="Provinsi"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                {
+                                option={
                                     inputProvince.province && (
                                         <>
                                             {inputProvince.province.map((e, index) => {
@@ -309,29 +278,16 @@ const EditBiodata = () => {
                                             })}
                                         </>
                                     )}
-                            </Select>
+                            />
                         </Space>
 
                         <Space direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Kota</Text>
-                            <Select
+                            <SelectDropdown
                                 defaultValue={input.city}
                                 onChange={handleCityChange}
-                                showSearch
-                                bordered={false}
-                                style={{
-                                    borderRadius: 8,
-                                    overflow: "hidden",
-                                    border: "solid 1px #CED4DA",
-                                    width: "100%"
-                                }}
                                 placeholder="Kota"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                {
+                                option={
                                     inputProvince.cities && (
                                         <>
                                             {inputProvince.cities.map((e, index) => {
@@ -343,7 +299,7 @@ const EditBiodata = () => {
                                             })}
                                         </>
                                     )}
-                            </Select>
+                            />
                         </Space>
 
                         <Space direction="vertical" style={{width: "100%"}}>
@@ -396,7 +352,8 @@ const EditBiodata = () => {
                                                                         {/*    size={24} weight="fill"/></Button>*/}
                                                                         <Button value={e.id}
                                                                                 style={{padding: 0, paddingTop: 10}}
-                                                                                onClick={deleteExperience} type="link"><X
+                                                                                onClick={deleteExperience}
+                                                                                type="link"><X
                                                                             size={24}/></Button>
                                                                     </Space>
                                                                 </Col>
@@ -531,7 +488,8 @@ const EditBiodata = () => {
                                                                                         padding: 0,
                                                                                         paddingTop: 10
                                                                                     }}
-                                                                                    onClick={deleteEducation} type="link"><X
+                                                                                    onClick={deleteEducation}
+                                                                                    type="link"><X
                                                                                 size={24}/></Button>
                                                                         </Space>
                                                                     </Col>

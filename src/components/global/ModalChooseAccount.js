@@ -34,7 +34,7 @@ function ModalChooseAccount(props) {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Pilih Rekening"
+                        label="Sebelum mengakhiri konsultasi silakan pilih rekening untuk pengiriman pembayaran"
                         name="bank"
                         rules={[
                             {

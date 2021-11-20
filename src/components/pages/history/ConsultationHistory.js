@@ -54,6 +54,17 @@ const ConsultationHistory = () => {
                         </>
                     }
                     {
+                        input.status === 'done' && input.is_confirmed === 1 &&
+                        <>
+                            <Card style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #3B85FA"}}>
+                                <>
+                                    <Title level={4}>Pesan Konsultasi</Title>
+                                    <Text>{input.message}</Text>
+                                </>
+                            </Card>
+                        </>
+                    }
+                    {
                         input.status === 'done' && input.is_confirmed !== 0 && (
                             <>
                                 <Space size={20} direction="vertical">

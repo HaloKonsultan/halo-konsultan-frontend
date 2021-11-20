@@ -29,14 +29,25 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, inputDocument, setInputDocument, functions} = useContext(ContextAfterBooking)
+    const {
+        input,
+        setInput,
+        prefTime,
+        setPrefTime,
+        prefDate,
+        setPrefDate,
+        inputDocument,
+        setInputDocument,
+        functions
+    } = useContext(ContextAfterBooking)
     const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
+    const [preference, setPreference] = useState()
 
-    // useEffect(() => {
-    //     if (Id !== undefined) {
-    //         fetchDataById(Id)
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (Id !== undefined) {
+            fetchDataById(Id)
+        }
+    }, []);
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
 
@@ -66,7 +77,7 @@ const ConsultationOption = () => {
         let typeOfValue = e.target.value
         let name = "preference"
 
-        setInput({...input, [name]: typeOfValue})
+        setPreference(typeOfValue)
     };
 
     const handleChange = (event) => {
@@ -91,7 +102,7 @@ const ConsultationOption = () => {
         console.log(dates)
         console.log(input)
 
-        functionSubmit(Id)
+        functionSubmit(Id, preference)
     };
 
     const handleSubmitDocument = (values) => {
@@ -130,13 +141,16 @@ const ConsultationOption = () => {
             <div className="dashboard-container">
                 <form id="1" method="post" onSubmit={handleSubmit}>
                     <Space size={32} direction="vertical">
-                        <Space size={8} direction="vertical">
-                            <Text type="secondary">Pilih Preferensi Konsultasi</Text>
-                            <Radio.Group onChange={onChangePreference}>
-                                <Radio value="online">Online</Radio>
-                                <Radio value="offline">Offline</Radio>
-                            </Radio.Group>
-                        </Space>
+                        {
+                            input.preference === "online offline" &&
+                            <Space size={8} direction="vertical">
+                                <Text type="secondary">Pilih Preferensi Konsultasi</Text>
+                                <Radio.Group onChange={onChangePreference}>
+                                    <Radio value="online">Online</Radio>
+                                    <Radio value="offline">Offline</Radio>
+                                </Radio.Group>
+                            </Space>
+                        }
                         <Space size={8} direction="vertical">
                             <Text type="secondary">Pilih Jadwal Kosong</Text>
                             <Space>
