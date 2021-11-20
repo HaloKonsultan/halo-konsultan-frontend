@@ -108,9 +108,10 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
-    const functionSubmit = (consultation_id) => {
+    const functionSubmit = (consultation_id, conference_link) => {
+        console.log(conference_link)
         API.patch(`consultants/consultations/${consultation_id}/send-link`, {
-                link: input.conference_link
+                link: conference_link
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
@@ -124,27 +125,29 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
-    // const functionUpdateStatus = (consultation_id) => {
-    //     API.patch(`consultants/consultations/${consultation_id}/end`, {
-    //
-    //         },
-    //         { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
-    //     )
-    //         .then((res) => {
-    //             history.push("/")
-    //         })
-    // }
-
-    const funtionEndConsultation = (consultation_id) => {
-        API.post(`consultants/transaction/withdraw/${consultation_id}`, {
-                bank_code: input.bank_name,
-                account_holder_name: input.card_name,
-                account_number: input.card_number
+    const functionUpdateStatus = (consultation_id) => {
+        console.log("ini pesan")
+        console.log(input.message)
+        API.patch(`consultants/consultations/${consultation_id}/end`, {
+                message: input.message
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
                 history.push("/")
+            })
+    }
+
+    const funtionEndConsultation = (consultation_id) => {
+        API.post(`consultants/transaction/withdraw/${consultation_id}`, {
+                bank_code: String(input.bank_name),
+                account_holder_name: `${input.card_name}`,
+                account_number: `${input.card_number}`
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                functionUpdateStatus(consultation_id)
             })
     }
 

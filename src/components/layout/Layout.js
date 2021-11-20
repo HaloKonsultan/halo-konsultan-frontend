@@ -4,7 +4,6 @@ import Cookies from "js-cookie";
 import {Link} from "react-router-dom"
 import "../../assets/css/layout.css"
 import Logo from "../../assets/img/logo.png";
-import {MailOutlined, HomeOutlined, UserOutlined, HistoryOutlined} from '@ant-design/icons';
 import {ContextProfile} from "../context/ContextProfile";
 import { CirclesFour, ChatCenteredDots, ClockCounterClockwise, User } from "phosphor-react";
 
@@ -28,14 +27,8 @@ const LayoutComponent = (props) => {
 
                     <Sider theme="light" width={266}
                            style={{border: "solid 1px lightgrey"}}
-                           breakpoint="lg"
+                           breakpoint="xs"
                            collapsedWidth="0"
-                           // onBreakpoint={broken => {
-                           //     console.log(broken);
-                           // }}
-                           // onCollapse={(collapsed, type) => {
-                           //     console.log(collapsed, type);
-                           // }}
                         >
                         <div>
                             <img src={Logo}  className="logo" alt=""/>

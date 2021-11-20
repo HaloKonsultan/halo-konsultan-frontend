@@ -1,0 +1,30 @@
+/* Responsive pada layar mobile */
+@media(min-width: 321px) and (max-width: 425px) {
+    section#box-login {
+        width: 90%;
+        height: 630px;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 30px;
+    }
+    .menu-moble {
+        top: 20px;
+        right: 10%;
+        display: inline-block;
+    }
+    nav ul {
+        display: none;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        top: 43px;
+        z-index: 99;
+        background: #fff;
+    }
+    nav ul li{
+        float: unset;
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

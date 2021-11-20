@@ -40,6 +40,10 @@ const ConsultationDetail = () => {
                             input.preference === "offline" &&
                             <Input style={{width: 344, borderRadius: 8}} prefix="Konsultasi Offline" disabled/>
                         }
+                        {
+                            input.preference === "online offline" &&
+                            <Input style={{width: 344, borderRadius: 8}} prefix="Konsultasi Online Offline" disabled/>
+                        }
                     </>
                 }
                 <br/><br/>
