@@ -109,14 +109,7 @@ const EditProfile = () => {
                                     return (
                                         <>
                                             <Row>
-                                                <Col span={2} md={12} sm={8}>
-                                                    <img src={handleLogo(e.bank)} alt="" style={{
-                                                        width: 40,
-                                                        height: 40,
-                                                        objectFit: "cover",
-                                                        borderRadius: 4,
-                                                    }}/>
-                                                </Col>
+                                                <Col span={2} md={12} sm={8}><ImageBank bank={e.bank}/></Col>
                                                 <Col span={1} md={12} sm={8}/>
                                                 <Col span={17} md={12} sm={8}>
                                                     <Text strong>{e.name}</Text>
