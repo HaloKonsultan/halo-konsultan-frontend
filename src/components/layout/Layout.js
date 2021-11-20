@@ -27,7 +27,7 @@ const LayoutComponent = (props) => {
 
                     <Sider theme="light" width={266}
                            style={{border: "solid 1px lightgrey"}}
-                           breakpoint="lg"
+                           breakpoint="xs"
                            collapsedWidth="0"
                         >
                         <div>

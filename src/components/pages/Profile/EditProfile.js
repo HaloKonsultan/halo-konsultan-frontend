@@ -84,10 +84,10 @@ const EditProfile = () => {
     return (
         <>
             <Nav/>
-            <div className="container-profile">
-                <Card title="Edit Profil Konsultasi"
-                      style={{width: "41%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
+            <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
 
+                <Card title="Edit Profil Konsultasi"
+                      style={{width: 528, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
                     <PageHeader
                         style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                         ghost={false}
@@ -109,9 +109,16 @@ const EditProfile = () => {
                                     return (
                                         <>
                                             <Row>
-                                                <Col span={2}><ImageBank bank={e.bank}/></Col>
-                                                <Col span={1}/>
-                                                <Col span={17}>
+                                                <Col span={2} md={12} sm={8}>
+                                                    <img src={handleLogo(e.bank)} alt="" style={{
+                                                        width: 40,
+                                                        height: 40,
+                                                        objectFit: "cover",
+                                                        borderRadius: 4,
+                                                    }}/>
+                                                </Col>
+                                                <Col span={1} md={12} sm={8}/>
+                                                <Col span={17} md={12} sm={8}>
                                                     <Text strong>{e.name}</Text>
                                                     <br/>
                                                     <Text type="secondary">{e.bank} - {e.card_number}</Text>
