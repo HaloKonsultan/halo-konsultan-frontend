@@ -116,9 +116,10 @@ const PersonalBiodata = () => {
                                                                 <Text strong>{e.institution_name}</Text><br/>
                                                                 <Text type="secondary">{e.major}</Text>
                                                             </Col>
-                                                            <Col style={{display: "flex", justifyContent: "right"}}
+                                                            <Col style={{float: "right"}}
                                                                  span={12}>
-                                                                <Text strong>{e.start_year} - {e.end_year}</Text>
+                                                                <Text strong
+                                                                      style={{float: "right"}}>{e.start_year} - {e.end_year}</Text>
                                                             </Col>
                                                         </Row>
                                                     </>

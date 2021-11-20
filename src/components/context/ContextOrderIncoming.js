@@ -24,13 +24,14 @@ export const IncomingOrderProvider = props => {
             `consultants/consultations/user/${Cookies.get('id')}/incoming`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
-        console.log(data)
+        console.log("ini data incoming")
+        console.log(result)
         setDataIncomingOrder(data.map((e) => {
             return {
                 id: e.id,
                 title: e.title,
                 name: e.name,
-                date: e.date,
+                date: e.created_at,
                 time: e.time,
                 status: e.status
             }
