@@ -42,8 +42,6 @@ const OrderToday = () => {
                             justifyContent: "center",
                             alignItems: "center"
                         }}>
-                            {console.log("today orde")}
-                            {console.log(dataTodayOrder)}
                             Tidak ada konsultasi hari ini
                         </Text>
                     }

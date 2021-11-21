@@ -6,6 +6,10 @@ import "../../assets/css/layout.css"
 import Logo from "../../assets/img/logo.png";
 import {ContextProfile} from "../context/ContextProfile";
 import { CirclesFour, ChatCenteredDots, ClockCounterClockwise, User } from "phosphor-react";
+import ReactNotificationComponent from "../pages/notification/ReactNotification";
+import Notifications from "../pages/notification/Notifications";
+import Routes from "../routes/Routes";
+import {onMessageListener} from "../../Firebase";
 
 const {SubMenu} = Menu;
 const {Text} = Typography;
@@ -14,6 +18,21 @@ const {Sider, Content} = Layout;
 const LayoutComponent = (props) => {
     const {input, setInput, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata} = functions
+    const [show, setShow] = useState(false);
+    const [notification, setNotification] = useState({ title: "", body: "" });
+
+    console.log(show, notification);
+
+    onMessageListener()
+        .then((payload) => {
+            setShow(true);
+            setNotification({
+                title: payload.notification.title,
+                body: payload.notification.body,
+            });
+            // console.log(payload);
+        })
+        .catch((err) => console.log("failed: ", err));
 
     useEffect(() => {
         fetchData()
@@ -21,6 +40,17 @@ const LayoutComponent = (props) => {
 
     return (
         <>
+            <div className="App">
+                {show ? (
+                    <ReactNotificationComponent
+                        title={notification.title}
+                        body={notification.body}
+                    />
+                ) : (
+                    <></>
+                )}
+                <Notifications />
+            </div>
             <Layout>
                 {
                     Cookies.get('token') !== undefined &&

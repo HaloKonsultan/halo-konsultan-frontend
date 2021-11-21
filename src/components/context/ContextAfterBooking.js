@@ -42,7 +42,6 @@ export const AfterBookingProvider = props => {
     }
 
     const functionSubmit = (consultation_id, preference) => {
-        console.log(input)
         API.patch(`consultants/consultations/${consultation_id}/after-book`, {
                 preference: preference,
                 price: input.price,
@@ -53,7 +52,6 @@ export const AfterBookingProvider = props => {
         )
             .then((res) => {
                 let data = res.data
-                console.log(data)
                 setDataAfterBooking([...dataAfterBooking, {
                     id: data.id,
                     preference: data.preference,

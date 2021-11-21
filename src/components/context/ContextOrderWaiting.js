@@ -24,8 +24,6 @@ export const WaitingPaymentProvider = props => {
             `consultants/consultations/user/${Cookies.get('id')}/waiting`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
-        console.log("ini data waiting")
-        console.log(data)
         setDataPayment(data.map((e) => {
             return {
                 id: e.id,

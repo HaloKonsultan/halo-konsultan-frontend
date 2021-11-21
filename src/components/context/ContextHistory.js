@@ -24,7 +24,6 @@ export const HistoryProvider = props => {
             `consultants/${Cookies.get('id')}/history`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data.data
-        console.log(data)
         setDataHistory(data.map((e) => {
             return {
                 id: e.id,

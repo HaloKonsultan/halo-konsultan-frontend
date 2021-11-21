@@ -22,7 +22,6 @@ const ReactNotificationComponent = ({ title, body }) => {
     return (
         <ToastContainer
             autoClose={3000}
-            hideProgressBar
             newestOnTop={false}
             closeOnClick
             rtl={false}
@@ -32,11 +31,6 @@ const ReactNotificationComponent = ({ title, body }) => {
         />
     );
 };
-
-// ReactNotificationComponent.defaultProps = {
-//     title: "This is title",
-//     body: "Some body",
-// };
 
 ReactNotificationComponent.propTypes = {
     title: PropTypes.string,

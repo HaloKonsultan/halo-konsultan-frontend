@@ -32,7 +32,6 @@ const EditBiodata = () => {
     let history = useHistory()
     const {input, setInput, inputProvince, dataCity, inputCategories, functions} = useContext(ContextProfile)
     const {fetchData, functionEditBiodata, functionDeleteExperience, functionDeleteSkill, functionDeleteEducation} = functions
-    const [value, setValue] = React.useState(1);
 
     useEffect(() => {
         fetchData()

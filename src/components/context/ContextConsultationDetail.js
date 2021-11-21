@@ -69,7 +69,6 @@ export const ConsultationDetailProvider = props => {
                     file: key.file}
             })
         })
-        console.log("ini detail konsultasi " + JSON.stringify(input))
         setCurrentId(data.id)
     }
 
@@ -81,7 +80,6 @@ export const ConsultationDetailProvider = props => {
         )
             .then((res) => {
                 let data = res.data
-                console.log(data)
                 setDataConsultation([...dataConsultation, {
                     is_confirmed: data.is_confirmed,
                 }])
@@ -98,8 +96,6 @@ export const ConsultationDetailProvider = props => {
         )
             .then((res) => {
                 let data = res.data
-                console.log("data di api decline")
-                console.log(data)
                 setDataConsultation([...dataConsultation, {
                     is_confirmed: data.is_confirmed,
                     message: data.message
@@ -109,7 +105,6 @@ export const ConsultationDetailProvider = props => {
     }
 
     const functionSubmit = (consultation_id, conference_link) => {
-        console.log(conference_link)
         API.patch(`consultants/consultations/${consultation_id}/send-link`, {
                 link: conference_link
             },
@@ -126,8 +121,6 @@ export const ConsultationDetailProvider = props => {
     }
 
     const functionUpdateStatus = (consultation_id) => {
-        console.log("ini pesan")
-        console.log(input.message)
         API.patch(`consultants/consultations/${consultation_id}/end`, {
                 message: input.message
             },
