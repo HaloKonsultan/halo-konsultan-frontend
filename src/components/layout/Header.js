@@ -4,6 +4,7 @@ import {Button, Layout, PageHeader, Row, Col} from 'antd';
 import {SignOut} from "phosphor-react";
 import Cookies from "js-cookie";
 import {ContextUser} from "../context/ContextUser";
+import API from "../context/API";
 
 const {Header, Content, Footer} = Layout;
 
@@ -17,6 +18,11 @@ const Nav = (props) => {
         Cookies.remove('token')
         Cookies.remove('id')
         Cookies.remove('location')
+        API.post(`consultants/logout`, {
+
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
         history.push('/')
     }
 

@@ -1,17 +1,10 @@
-// import './App.css';
 import Routes from "./components/routes/Routes";
-import ReactNotification from "./components/pages/notification/ReactNotification";
-
 import "./App.css";
-import React, { useState } from "react";
-import { onMessageListener } from "./Firebase";
-import Notifications from "./components/pages/notification/Notifications";
-import ReactNotificationComponent from "./components/pages/notification/ReactNotification";
+import React from "react";
 
 function App() {
   return (
       <div className="App">
-          <Notifications />
           <Routes/>
       </div>
   );

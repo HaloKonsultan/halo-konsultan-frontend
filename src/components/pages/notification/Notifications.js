@@ -3,6 +3,7 @@ import { getToken } from "../../../Firebase";
 
 const Notifications = (props) => {
     const [isTokenFound, setTokenFound] = useState(false);
+    const [input, setInput] = useState([]);
 
     console.log("Token found", isTokenFound);
 

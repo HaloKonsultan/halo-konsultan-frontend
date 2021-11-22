@@ -16,6 +16,7 @@ function SelectDropdown(props) {
     return (
         <>
             <Select
+                size="large"
                 defaultValue={props.defaultValue}
                 onChange={props.onChange}
                 showSearch
@@ -24,7 +25,7 @@ function SelectDropdown(props) {
                     borderRadius: 8,
                     overflow: "hidden",
                     border: "solid 1px #CED4DA",
-                    width: "100%"
+                    width: "100%",
                 }}
                 placeholder={props.placeholder}
                 optionFilterProp="children"
@@ -32,9 +33,7 @@ function SelectDropdown(props) {
                     option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
             >
-                {
-                    props.option
-                }
+                {props.option}
             </Select>
         </>
     )

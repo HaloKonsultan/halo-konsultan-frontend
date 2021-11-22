@@ -5,6 +5,7 @@ import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
+import noImage from "../../../assets/img/no-image.png"
 import noProfile from "../../../assets/img/noprofile.png"
 
 const {Title, Text, Link} = Typography;
@@ -27,33 +28,51 @@ const PersonalBiodata = () => {
         <>
             <Card style={{boxShadow: "0 0 0 1px #CED4DA", borderRadius: 8, width: "100%"}} title={
                 <>
-                    <Row>
+                    <Row style={{width: "100%"}}>
                         <Col span={12}>
                             <Title level={4}> Biodata Diri </Title>
                         </Col>
                         <Col span={12}>
-                            <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8}}>Edit Biodata
+                            <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8, float: "right"}}>Edit Biodata
                                 Diri</Button>
                         </Col>
                     </Row>
                 </>
             }>
                 <Row>
-                    <Col  xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
-                        <img
-                            src={input.photo}
-                            alt="profile-picture"
-                            style={{
-                                width: 200,
-                                height: 200,
-                                objectFit: "cover",
-                                borderRadius: 8,
-                                boxShadow: "0 0 0 1px #CED4DA",
-                                position: "relative"
-                                
-                            }}/>
+                    <Col  xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                        {
+                            input.photo === undefined &&
+                            <img
+                                src={noImage}
+                                alt="profile-picture"
+                                style={{
+                                    width: 200,
+                                    height: 200,
+                                    objectFit: "cover",
+                                    borderRadius: 12,
+                                    boxShadow: "0 0 0 1px #CED4DA",
+                                    position: "relative"
+
+                                }}/>
+                        }
+                        {
+                            input.photo &&
+                            <img
+                                src={input.photo}
+                                alt="profile-picture"
+                                style={{
+                                    width: 200,
+                                    height: 200,
+                                    objectFit: "cover",
+                                    borderRadius: 12,
+                                    boxShadow: "0 0 0 1px #CED4DA",
+                                    position: "relative"
+
+                                }}/>
+                        }
                     </Col>
-                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 6, order: 2}}>
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 12, order: 2}}>
                         <Space size={24} direction="vertical">
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>

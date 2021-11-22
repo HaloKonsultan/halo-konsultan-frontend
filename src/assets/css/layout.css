@@ -59,3 +59,8 @@ li {
     float: right;
     margin: 10px 0 auto 0;
 }
+
+.ant-menu-item-selected {
+    background-color: white !important;
+    font-weight: bold;
+}

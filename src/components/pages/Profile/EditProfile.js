@@ -108,10 +108,10 @@ const EditProfile = () => {
                                 {input.consultant_virtual_account.map((e, index) => {
                                     return (
                                         <>
-                                            <Row>
-                                                <Col span={2} md={12} sm={8}><ImageBank bank={e.bank}/></Col>
-                                                <Col span={1} md={12} sm={8}/>
-                                                <Col span={17} md={12} sm={8}>
+                                            <Row style={{width: "100%"}}>
+                                                <Col span={2} md={2} sm={8}><ImageBank bank={e.bank}/></Col>
+                                                <Col span={1} md={1} sm={8}/>
+                                                <Col span={17} md={17} sm={8}>
                                                     <Text strong>{e.name}</Text>
                                                     <br/>
                                                     <Text type="secondary">{e.bank} - {e.card_number}</Text>
@@ -122,7 +122,7 @@ const EditProfile = () => {
                                                         {/*        style={{padding: 0, paddingTop: 10}} type="link"><Pencil*/}
                                                         {/*    size={24} weight="fill"/></Button>*/}
                                                         <Button value={e.id}
-                                                                style={{padding: 0, paddingTop: 10}}
+                                                                style={{padding: 0, paddingTop: 10, float: "right"}}
                                                                 onClick={handleDeleteVirtualAccount} type="link"><X
                                                             size={24}/></Button>
                                                     </Space>

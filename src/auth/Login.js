@@ -10,7 +10,7 @@ const Login = () => {
 
     return (
         <>
-            <Row className="center">
+            <Row className="center" style={{backgroundColor: "white"}}>
                 <Col  xs={{span: 24, order: 2}} sm={{span: 24, order: 2}}  lg={{span: 15, order: 1}}>
                     <Onboard/>
                 </Col>

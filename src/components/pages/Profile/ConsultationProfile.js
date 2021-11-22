@@ -30,7 +30,7 @@ const ConsultationProfile = () => {
                     <Row>
                         <Col span={12}> <Title level={4}> Profil Konsultasi </Title></Col>
                         <Col span={12}>
-                            <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8}}>Edit Profil
+                            <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8, float: "right"}}>Edit Profil
                                 Konsultasi</Button>
                         </Col>
                     </Row>
