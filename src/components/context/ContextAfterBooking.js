@@ -41,9 +41,9 @@ export const AfterBookingProvider = props => {
         setCurrentId(data.id)
     }
 
-    const functionSubmit = (consultation_id, preference) => {
+    const functionSubmit = (consultation_id) => {
         API.patch(`consultants/consultations/${consultation_id}/after-book`, {
-                preference: preference,
+                preference: input.preference,
                 price: input.price,
                 date: input.date,
                 document: input.document
@@ -51,6 +51,8 @@ export const AfterBookingProvider = props => {
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
+                setPrefDate({date: []})
+                setPrefTime({time: []})
                 let data = res.data
                 setDataAfterBooking([...dataAfterBooking, {
                     id: data.id,

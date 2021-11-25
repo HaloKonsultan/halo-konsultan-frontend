@@ -30,18 +30,18 @@ const {TextArea} = Input;
 
 const EditBiodata = () => {
     let history = useHistory()
-    const {input, setInput, inputProvince, dataCity, inputCategories, functions} = useContext(ContextProfile)
+    const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
     const {
         fetchData,
         functionEditBiodata,
         functionDeleteExperience,
         functionDeleteSkill,
-        functionDeleteEducation
+        functionDeleteEducation,
+        dataCity
     } = functions
 
     useEffect(() => {
         fetchData()
-
     }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);

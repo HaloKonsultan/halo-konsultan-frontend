@@ -29,7 +29,7 @@ export const WaitingPaymentProvider = props => {
                 id: e.id,
                 title: e.title,
                 name: e.name,
-                date: e.created_at,
+                date: e.date_created,
                 time: e.time,
                 status: e.status
             }

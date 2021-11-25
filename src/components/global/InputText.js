@@ -12,7 +12,10 @@ function InputText(props) {
                    placeholder={props.placeholder}
                    value={props.value}
                    id={props.id}
-                   required
+                   required={props.required}
+                   validationErrors={{
+                       isDefaultRequiredValue: 'Field is required'
+                   }}
             />
         </>
     )
@@ -20,6 +23,7 @@ function InputText(props) {
 
 InputText.defaultProps = {
     type: 'text',
+    required: true
 };
 
 export default InputText

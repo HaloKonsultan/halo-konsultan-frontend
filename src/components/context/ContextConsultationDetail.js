@@ -46,6 +46,7 @@ export const ConsultationDetailProvider = props => {
             id: data.id,
             title: data.title,
             user_name: data.user_name,
+            user_id: data.user_id,
             description: data.description,
             preference: data.preference,
             location: data.location,

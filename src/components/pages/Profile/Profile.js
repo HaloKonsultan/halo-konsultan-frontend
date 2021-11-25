@@ -17,11 +17,12 @@ const Profile = () => {
                         <PersonalBiodata/>
                     </div>
                 </Col>
-                <Col  xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 12, order: 2}}>
+                <Col  xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10, order: 2}}>
                     <div className="container-profile"  style={{alignItems: "center" }}>
                         <ConsultationProfile/>
                     </div>
-                </Col>
+                </Col >
+                <Col  xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 2, order: 3}}/>
             </Row>
         </>
     )

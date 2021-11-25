@@ -83,12 +83,12 @@ const LoginCard = () => {
                                 <Space direction="vertical" style={{width: "100%"}}>
                                     <Text type="secondary">Masukkan Email Anda</Text>
                                     <InputText placeholder="Email" name="email" value={input.email}
-                                               onChange={handleChange}/>
+                                               onChange={handleChange} required/>
                                 </Space>
                                 <Space direction="vertical" style={{width: "100%"}}>
                                     <Text type="secondary">Masukkan Password Anda</Text>
                                     <InputText id="password" type="password" placeholder="Password" name="password"
-                                               value={input.password} onChange={handleChange}/>
+                                               value={input.password} onChange={handleChange} required />
                                     <Checkbox onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
                                 </Space>
                             </Space>

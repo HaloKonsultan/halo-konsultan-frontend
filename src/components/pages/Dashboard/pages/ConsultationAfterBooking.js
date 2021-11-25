@@ -9,7 +9,7 @@ const ConsultationAfterBooking = () => {
     return (
         <>
             <Nav title="Detail Konsultasi" onBack={() => window.history.back()}/>
-            <Row className="center">
+            <Row>
                 <Col span={13}><Detail /></Col>
                 <Col span={11}><ConsultationOption /></Col>
             </Row>

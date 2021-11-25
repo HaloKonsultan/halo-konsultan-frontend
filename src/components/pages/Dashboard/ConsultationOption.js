@@ -1,27 +1,17 @@
 import React, {useContext, useEffect, useState} from "react"
 import {
-    Radio,
-    Space,
-    DatePicker,
-    TimePicker,
-    Button,
-    Input,
-    Modal,
-    Typography,
-    Card,
-    Form,
-    PageHeader,
-    Row,
-    Col
+    Radio, Space, DatePicker, TimePicker, Button, Input, Typography, Card, PageHeader, Row, Col
 } from 'antd';
 import {useParams} from "react-router-dom";
-import {ArrowRightOutlined, FileTextOutlined, DeleteOutlined, CloseOutlined} from "@ant-design/icons";
+import {ArrowRightOutlined} from "@ant-design/icons";
 import {ContextAfterBooking} from "../../context/ContextAfterBooking";
-import {message} from 'antd';
+import {CalendarBlank, Clock} from "phosphor-react";
 import {Pencil, X} from "phosphor-react";
 import ModalAddDocument from "../../global/ModalAddDocument";
 import InputText from "../../global/InputText";
 import ButtonPrimary from "../../global/ButtonPrimary";
+import "../../../assets/css/dashboard.css"
+import LabelText from "../../global/LabelText";
 
 const {Meta} = Card;
 const {Link, Text} = Typography;
@@ -43,7 +33,12 @@ const ConsultationOption = () => {
         functions
     } = useContext(ContextAfterBooking)
     const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
-    const [preference, setPreference] = useState()
+    const [dateValidation, setDateValidation] = useState({
+        date1: false,
+        date2: false,
+        date3: false
+    })
+    const [preference, setPreference] = useState(input.preference)
 
     useEffect(() => {
         if (Id !== undefined) {
@@ -53,6 +48,14 @@ const ConsultationOption = () => {
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
 
+    const onChangePreference = e => {
+        console.log('radio checked', e.target.value);
+        let typeOfValue = e.target.value
+        let name = "preference"
+
+        setInput({...input, [name]: typeOfValue})
+    };
+
     function onChangeDate(date, dateString, id) {
         const index = prefDate.date.map(e => e.id).indexOf(id);
         if (index !== -1) prefDate.date.splice(index, 1)
@@ -61,6 +64,9 @@ const ConsultationOption = () => {
             date: dateString
         })
         setPrefDate({...prefDate, dateInput})
+        dateValidation.date1 = false
+        dateValidation.date2 = false
+        dateValidation.date3 = false
     }
 
     function onChangeTime(time, timeString, id) {
@@ -73,14 +79,6 @@ const ConsultationOption = () => {
         })
         setPrefTime({...prefTime, timeInput})
     }
-
-    const onChangePreference = e => {
-        console.log('radio checked', e.target.value);
-        let typeOfValue = e.target.value
-        let name = "preference"
-
-        setPreference(typeOfValue)
-    };
 
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
@@ -95,16 +93,6 @@ const ConsultationOption = () => {
 
     const handleCancel = () => {
         setIsExperienceVisible(false);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        let dates = prefDate.date.map((item, i) => Object.assign({}, item, prefTime.time[i]));
-        dates.forEach(date => input.date.push(date))
-        console.log(dates)
-        console.log(input)
-
-        functionSubmit(Id, preference)
     };
 
     const handleSubmitDocument = (values) => {
@@ -138,158 +126,225 @@ const ConsultationOption = () => {
         input.document.splice(index, 1);
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        let found1 = prefDate.date.find(colDef => colDef.id === 1)
+        let found2 = prefDate.date.find(colDef => colDef.id === 2)
+        let found3 = prefDate.date.find(colDef => colDef.id === 3)
+
+        if (found1 === undefined) {
+            setDateValidation({...dateValidation, date1: true})
+        } else if (found2 === undefined) {
+            setDateValidation({...dateValidation, date2: true})
+        } else if (found3 === undefined) {
+            setDateValidation({...dateValidation, date3: true})
+        } else {
+            let dates = prefDate.date.map((item, i) => Object.assign({}, item, prefTime.time[i]));
+            dates.forEach(date => input.date.push(date))
+            console.log(prefDate.date)
+            functionSubmit(Id)
+        }
+    };
+
     return (
         <>
             <div className="dashboard-container">
-                <Space size={32} direction="vertical">
-                    <form id="1" method="post" onSubmit={handleSubmit}>
-                        <Space size={32} direction="vertical">
-                            {
-                                input.preference === "online offline" &&
-                                <Space size={8} direction="vertical">
-                                    <Text type="secondary" style={{fontWeight: 1000}}>Pilih Preferensi Konsultasi</Text>
-                                    <Radio.Group onChange={onChangePreference}>
-                                        <Radio value="online">Online</Radio>
-                                        <Radio value="offline">Offline</Radio>
-                                    </Radio.Group>
+                <Card style={{width: "100%", borderRadius: 8, boxShadow: "0px 5px 10px 0px #F1F2FA", border: "none"}}>
+                    <Space size={32} direction="vertical" style={{width: "100%"}}>
+                        <form id="1" method="post" onSubmit={handleSubmit}>
+                            <Space size={32} direction="vertical" style={{width: "100%"}}>
+                                {
+                                    preference === "online offline" &&
+                                    <Space size={8} direction="vertical">
+                                        <LabelText text="Pilih Preferensi Konsultasi"/>
+                                        <Radio.Group onChange={onChangePreference}>
+                                            <Radio value="online">Online</Radio>
+                                            <Radio value="offline">Offline</Radio>
+                                        </Radio.Group>
+                                    </Space>
+                                }
+                                <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                    <LabelText text="Pilih Jadwal Kosong"/>
+                                    <Space size={16} direction="vertical" style={{width: "100%"}}>
+                                        <Row gutter={[16, 16]}>
+                                            <Col span={12}> <DatePicker
+                                                style={{
+                                                    width: "100%",
+                                                    height: 48,
+                                                    borderRadius: 8,
+                                                    borderColor: dateValidation.date1 ? "red" : "#CED4DA"
+                                                }}
+                                                suffixIcon={<CalendarBlank size={24} weight="fill"/>}
+                                                format={'DD-MM-YYYY'}
+                                                onChange={(date, dateString) => onChangeDate(date, dateString, 1)}
+                                                placeholder="Jadwal Kosong #1" required/>
+                                            </Col>
+                                            <Col span={12}><TimePicker
+                                                style={{
+                                                    width: "100%",
+                                                    height: 48,
+                                                    borderRadius: 8,
+                                                    borderColor: dateValidation.date1 ? "red" : "#CED4DA"
+                                                }}
+                                                suffixIcon={<Clock size={24} weight="fill"/>}
+                                                format={'HH:mm'}
+                                                name="date[0].time"
+                                                onChange={(date, dateString) => onChangeTime(date, dateString, 1)}
+                                                picker="Waktu" required/>
+                                            </Col>
+                                            {
+                                                dateValidation.date1 &&
+                                                    <Col span={24}>
+                                                        <LabelText text="Silahkan melengkapi jadwal konsultasi" fontSize={12}
+                                                                   fontColor="#EA3A3A"/>
+                                                    </Col>
+                                            }
+                                            <Col span={12}><DatePicker
+                                                style={{
+                                                    width: "100%",
+                                                    height: 48,
+                                                    borderRadius: 8,
+                                                    borderColor: dateValidation.date2 ? "red" : "#CED4DA"
+                                                }}
+                                                suffixIcon={<CalendarBlank size={24} weight="fill"/>}
+                                                format={'DD-MM-YYYY'}
+                                                onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
+                                                placeholder="Jadwal Kosong #2" required/>
+                                            </Col>
+                                            <Col span={12}><TimePicker
+                                                style={{
+                                                    width: "100%",
+                                                    height: 48,
+                                                    borderRadius: 8,
+                                                    borderColor: dateValidation.date2 ? "red" : "#CED4DA"
+                                                }}
+                                                format={'HH:mm'}
+                                                suffixIcon={<Clock size={24} weight="fill"/>}
+                                                onChange={(date, dateString) => onChangeTime(date, dateString, 2)}
+                                                picker="Waktu" required/>
+                                            </Col>
+                                            {
+                                                dateValidation.date2 &&
+                                                <Col span={24}>
+                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi" fontSize={12}
+                                                               fontColor="#EA3A3A"/>
+                                                </Col>
+                                            }
+                                            <Col span={12}><DatePicker
+                                                style={{
+                                                    width: "100%",
+                                                    height: 48,
+                                                    borderRadius: 8,
+                                                    borderColor: dateValidation.date3 ? "red" : "#CED4DA"
+                                                }}
+                                                suffixIcon={<CalendarBlank size={24} weight="fill"/>}
+                                                format={'DD-MM-YYYY'}
+                                                onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
+                                                placeholder="Jadwal Kosong #3" required/>
+                                            </Col>
+                                            <Col span={12}><TimePicker
+                                                style={{
+                                                    width: "100%",
+                                                    height: 48,
+                                                    borderRadius: 8,
+                                                    borderColor: dateValidation.date3 ? "red" : "#CED4DA"
+                                                }}
+                                                format={'HH:mm'}
+                                                suffixIcon={<Clock size={24} weight="fill"/>}
+                                                onChange={(date, dateString) => onChangeTime(date, dateString, 3)}
+                                                picker="Waktu" required/>
+                                            </Col>
+                                            {
+                                                dateValidation.date3 &&
+                                                <Col span={24}>
+                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi" fontSize={12}
+                                                               fontColor="#EA3A3A"/>
+                                                </Col>
+                                            }
+                                        </Row>
+                                    </Space>
                                 </Space>
-                            }
-                            <Space size={8} direction="vertical">
-                                <Text type="secondary" style={{fontWeight: 1000}}>Pilih Jadwal Kosong</Text>
-                                <Space size={16} direction="vertical">
-                                    <Space size={16}>
-                                        <DatePicker
-                                            style={{
-                                                width: 211,
-                                                height: 48,
-                                                borderRadius: 8
-                                            }}
-                                            format={'DD-MM-YYYY'}
-                                            onChange={(date, dateString) => onChangeDate(date, dateString, 1)}
-                                            placeholder="Jadwal Kosong #1" required/>
-                                        <TimePicker
-                                            style={{
-                                                width: 211,
-                                                height: 48,
-                                                borderRadius: 8,
-                                            }}
-                                            name="date[0].time"
-                                            onChange={(date, dateString) => onChangeTime(date, dateString, 1)}
-                                            picker="Waktu" required/>
-                                    </Space>
-                                    <Space size={16}>
-                                        <DatePicker
-                                            style={{
-                                                width: 211,
-                                                height: 48,
-                                                borderRadius: 8,
-                                            }}
-                                            format={'DD-MM-YYYY'}
-                                            onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
-                                            placeholder="Jadwal Kosong #2" required/>
-                                        <TimePicker
-                                            style={{
-                                                width: 211,
-                                                height: 48,
-                                                borderRadius: 8,
-                                            }}
-                                            onChange={(date, dateString) => onChangeTime(date, dateString, 2)}
-                                            picker="Waktu" required/>
-                                    </Space>
-                                    <Space size={16}>
-                                        <DatePicker
-                                            style={{
-                                                width: 211,
-                                                height: 48,
-                                                borderRadius: 8,
-                                            }}
-                                            format={'DD-MM-YYYY'}
-                                            onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
-                                            placeholder="Jadwal Kosong #3" required/>
-                                        <TimePicker
-                                            style={{
-                                                width: 211,
-                                                height: 48,
-                                                borderRadius: 8,
-                                            }}
-                                            onChange={(date, dateString) => onChangeTime(date, dateString, 3)}
-                                            picker="Waktu" required/>
-                                    </Space>
+
+                                <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                    <LabelText text="Harga Jasa"/>
+                                    <LabelText fontSize={12} fontColor="#979595"
+                                               text="Harga jasa secara default adalah harga yang Anda cantumkan di profil."/>
+                                    <InputText name="price" onChange={handleChange} placeholder="Harga Jasa"/>
                                 </Space>
                             </Space>
+                        </form>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
+                            <PageHeader
+                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                ghost={false}
+                                subTitle={<LabelText text="Dokumen yang Diperlukan (Opsional)"/>}
+                                extra={[
+                                    <Button onClick={showExperienceModal} style={{color: "#3B85FA", padding: 0}}
+                                            type="text">
+                                        <b>+ Tambah Dokumen</b>
+                                    </Button>,
+                                ]}/>
                             <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                <Text type="secondary" style={{fontWeight: 1000}}>Harga Jasa</Text>
-                                <Text style={{fontSize: 12}} type="secondary">Harga jasa secara default adalah harga
-                                    yang Anda cantumkan di profil.</Text>
-                                <InputText name="price" onChange={handleChange} placeholder="Harga Jasa"/>
+                                {
+                                    input.document !== null && (
+                                        <>
+                                            {input.document.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Card
+                                                            style={{
+                                                                width: "100%",
+                                                                borderRadius: 8
+                                                            }}
+                                                            type="inner"
+                                                        >
+                                                            <Meta
+                                                                title={
+                                                                    <>
+                                                                        <Row>
+                                                                            <Col span={21}
+                                                                                 style={{padding: 0, paddingTop: 8}}>
+                                                                                <Text style={{
+                                                                                    padding: 0,
+                                                                                    paddingTop: 8
+                                                                                }}>{e.title}</Text>
+                                                                            </Col>
+                                                                            <Col span={3}>
+                                                                                <Button value={e.title}
+                                                                                        style={{
+                                                                                            padding: 0,
+                                                                                            paddingTop: 8
+                                                                                        }}
+                                                                                        type="link"><Pencil
+                                                                                    onClick={() => updateDocument(e.title, e.description)}
+                                                                                    size={24} weight="fill"/>
+                                                                                </Button>
+                                                                                <Button value={e.title}
+                                                                                        style={{
+                                                                                            padding: 0,
+                                                                                            paddingTop: 8
+                                                                                        }}
+                                                                                        onClick={deleteDocument}
+                                                                                        type="link"><X
+                                                                                    size={24}/>
+                                                                                </Button>
+                                                                            </Col>
+                                                                        </Row>
+                                                                    </>
+                                                                }/>
+                                                        </Card>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                                <ButtonPrimary
+                                    text={<React.Fragment>Kirim ke Klien <ArrowRightOutlined/></React.Fragment>}
+                                    htmlType="submit" form="1"/>
                             </Space>
-                        </Space>
-                    </form>
-                    <Space size={8} direction="vertical">
-                        <PageHeader
-                            style={{backgroundColor: "transparent", padding: 0, width: 450}}
-                            ghost={false}
-                            subTitle={<Text type="secondary" style={{fontWeight: 1000}}>Dokumen yang Diperlukan
-                                (Opsional)</Text>}
-                            extra={[
-                                <Button onClick={showExperienceModal} style={{color: "#3B85FA"}}
-                                        type="text">
-                                    <b>+ Tambah Dokumen</b>
-                                </Button>,
-                            ]}/>
-                        <Space size={8} direction="vertical">
-                            {
-                                input.document !== null && (
-                                    <>
-                                        {input.document.map((e, index) => {
-                                            return (
-                                                <>
-                                                    <Card
-                                                        style={{
-                                                            width: 438,
-                                                            borderRadius: 8
-                                                        }}
-                                                        type="inner"
-                                                    >
-                                                        <Meta
-                                                            title={
-                                                                <>
-                                                                    <Row>
-                                                                        <Col span={21}
-                                                                             style={{padding: 0, paddingTop: 8}}>
-                                                                            <Text style={{
-                                                                                padding: 0,
-                                                                                paddingTop: 8
-                                                                            }}>{e.title}</Text>
-                                                                        </Col>
-                                                                        <Col span={3}>
-                                                                            <Button value={e.title}
-                                                                                    style={{padding: 0, paddingTop: 8}}
-                                                                                    type="link"><Pencil
-                                                                                onClick={() => updateDocument(e.title, e.description)}
-                                                                                size={24} weight="fill"/>
-                                                                            </Button>
-                                                                            <Button value={e.title}
-                                                                                    style={{padding: 0, paddingTop: 8}}
-                                                                                    onClick={deleteDocument}
-                                                                                    type="link"><X
-                                                                                size={24}/>
-                                                                            </Button>
-                                                                        </Col>
-                                                                    </Row>
-                                                                </>
-                                                            }/>
-                                                    </Card>
-                                                </>
-                                            )
-                                        })}
-                                    </>
-                                )}
-                            <ButtonPrimary text={<React.Fragment>Kirim ke Klien <ArrowRightOutlined/></React.Fragment>}
-                                           htmlType="submit" form="1"/>
                         </Space>
                     </Space>
-                </Space>
+                </Card>
             </div>
 
             <ModalAddDocument
@@ -299,63 +354,6 @@ const ConsultationOption = () => {
                 onFinishFailed={onFinishFailed}
                 name={input.title}
                 description={input.description}/>
-
-            {/*<Modal*/}
-            {/*    destroyOnClose={true}*/}
-            {/*    className="profile-modal"*/}
-            {/*    title="Tambahkan Dokumen"*/}
-            {/*    visible={isExperienceVisible}*/}
-            {/*    onCancel={handleCancel}*/}
-            {/*    footer={null}*/}
-            {/*>*/}
-            {/*    <Form*/}
-            {/*        name="basic"*/}
-            {/*        initialValues={{*/}
-            {/*            remember: true,*/}
-            {/*        }}*/}
-            {/*        layout="vertical"*/}
-            {/*        onFinish={handleSubmitDocument}*/}
-            {/*        onFinishFailed={onFinishFailed}*/}
-            {/*        autoComplete="off"*/}
-            {/*    >*/}
-            {/*        <Form.Item*/}
-            {/*            label="Judul Dokumen"*/}
-            {/*            name="title"*/}
-            {/*            rules={[*/}
-            {/*                {*/}
-            {/*                    required: true,*/}
-            {/*                    message: 'Please input document title!',*/}
-            {/*                },*/}
-            {/*            ]}*/}
-            {/*        >*/}
-            {/*            <Input style={{borderRadius: 8}}/>*/}
-            {/*        </Form.Item>*/}
-
-            {/*        <Form.Item*/}
-            {/*            label="Deskripsi Dokumen"*/}
-            {/*            name="description"*/}
-            {/*            rules={[*/}
-            {/*                {*/}
-            {/*                    required: true,*/}
-            {/*                    message: 'Please input document description!',*/}
-            {/*                },*/}
-            {/*            ]}*/}
-            {/*        >*/}
-            {/*            <TextArea style={{borderRadius: 8}} rows={4} name="description"/>*/}
-            {/*        </Form.Item>*/}
-
-            {/*        <Form.Item>*/}
-            {/*            <Button*/}
-            {/*                size="large"*/}
-            {/*                className="button"*/}
-            {/*                type="primary" block*/}
-            {/*                style={{borderRadius: 8, backgroundColor: "#3B85FA"}}*/}
-            {/*                htmlType="submit">*/}
-            {/*                Tambahkan Dokumen*/}
-            {/*            </Button>*/}
-            {/*        </Form.Item>*/}
-            {/*    </Form>*/}
-            {/*</Modal>*/}
         </>
     )
 }
