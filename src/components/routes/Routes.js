@@ -21,7 +21,7 @@ import {ProfileProvider} from "../context/ContextProfile";
 import {AfterBookingProvider} from "../context/ContextAfterBooking";
 import LayoutComponent from "../layout/Layout";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import Message from "../pages/Message";
+import Message from "../pages/Message/Message";
 import OrderIncoming from "../pages/Dashboard/pages/table/OrderIncoming";
 import OrderActive from "../pages/Dashboard/pages/table/OrderActive";
 import WaitingPayment from "../pages/Dashboard/pages/table/OrderWaiting";
