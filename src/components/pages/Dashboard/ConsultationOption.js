@@ -194,10 +194,11 @@ const ConsultationOption = () => {
                                             </Col>
                                             {
                                                 dateValidation.date1 &&
-                                                    <Col span={24}>
-                                                        <LabelText text="Silahkan melengkapi jadwal konsultasi" fontSize={12}
-                                                                   fontColor="#EA3A3A"/>
-                                                    </Col>
+                                                <Col span={24}>
+                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi"
+                                                               fontSize={12}
+                                                               fontColor="#EA3A3A"/>
+                                                </Col>
                                             }
                                             <Col span={12}><DatePicker
                                                 style={{
@@ -226,7 +227,8 @@ const ConsultationOption = () => {
                                             {
                                                 dateValidation.date2 &&
                                                 <Col span={24}>
-                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi" fontSize={12}
+                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi"
+                                                               fontSize={12}
                                                                fontColor="#EA3A3A"/>
                                                 </Col>
                                             }
@@ -257,7 +259,8 @@ const ConsultationOption = () => {
                                             {
                                                 dateValidation.date3 &&
                                                 <Col span={24}>
-                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi" fontSize={12}
+                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi"
+                                                               fontSize={12}
                                                                fontColor="#EA3A3A"/>
                                                 </Col>
                                             }

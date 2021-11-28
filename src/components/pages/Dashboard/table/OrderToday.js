@@ -10,7 +10,13 @@ const {Meta} = Card;
 const OrderToday = () => {
     const {dataTodayOrder, functions} = useContext(ContextOrderToday)
     const {fetchData, functionDetail} = functions
-    const today = format(new Date(), 'dd-MM-yyy ')
+    let arrbulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+    let arrhari = ["Minggu", "Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+    let date = new Date();
+    let hari = date.getDay();
+    let tanggal = date.getDate();
+    let bulan = date.getMonth();
+    let tahun = date.getFullYear();
 
     useEffect(() => {
         fetchData()
@@ -24,12 +30,12 @@ const OrderToday = () => {
         <>
             <Card
                 className="schedule-card"
-                style={{width: 454, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA", backgroundColor: "#F4F4F4"}}
+                style={{width: "100%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA", backgroundColor: "#F4F4F4"}}
                 title={
                     <>
                         <Meta
                             title={<Title style={{color: "white", margin: 0}} level={4}>Konsultasi hari ini</Title>}
-                            description={<p style={{color: "white", margin: 0}}>{today}</p>}
+                            description={<p style={{color: "white", margin: 0}}>{arrhari[hari]+", "+tanggal+" "+arrbulan[bulan]+" "+tahun}</p>}
                         />
                     </>
                 }
@@ -38,6 +44,7 @@ const OrderToday = () => {
                     {
                         dataTodayOrder.length === 0 &&
                         <Text type="secondary" style={{
+                            minHeight: 100,
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center"
@@ -57,7 +64,7 @@ const OrderToday = () => {
                                                 }}
                                                 style={{
                                                     marginBottom: 20,
-                                                    width: 407,
+                                                    width: "100%",
                                                     borderRadius: 8,
                                                     boxShadow: "0 0 0 1px #CED4DA"
                                                 }}

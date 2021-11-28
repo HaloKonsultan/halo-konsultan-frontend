@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getToken } from "../../../Firebase";
+import Cookies from "js-cookie";
 
 const Notifications = (props) => {
     const [isTokenFound, setTokenFound] = useState(false);
@@ -15,6 +16,7 @@ const Notifications = (props) => {
             data = await getToken(setTokenFound);
             if (data) {
                 console.log("Token is", data);
+                Cookies.set('device_token', data)
             }
             return data;
         }

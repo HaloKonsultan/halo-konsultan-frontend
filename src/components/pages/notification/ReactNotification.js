@@ -8,6 +8,7 @@ const ReactNotificationComponent = ({ title, body }) => {
 
     if (!hideNotif) {
         toast.info(<Display />);
+        console.log("panggil")
     }
 
     function Display() {

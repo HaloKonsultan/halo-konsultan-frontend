@@ -6,6 +6,7 @@ import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
 import ImageBank from "../../global/ImageBank";
+import LabelText from "../../global/LabelText";
 
 const {Title, Text} = Typography;
 
@@ -13,7 +14,7 @@ const ConsultationProfile = () => {
     let history = useHistory()
 
     const {input, functions} = useContext(ContextProfile)
-    const {fetchData} = functions
+    const {fetchData, formatRupiah} = functions
 
     useEffect(() => {
         fetchData()
@@ -25,20 +26,22 @@ const ConsultationProfile = () => {
 
     return (
         <>
-            <Card style={{borderRadius: 8, width: "100%", boxShadow: "0 0 0 1px #CED4DA"}} title={
-                <>
-                    <Row>
-                        <Col span={12}> <Title level={4}> Profil Konsultasi </Title></Col>
-                        <Col span={12}>
-                            <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8, float: "right"}}>Edit Profil
-                                Konsultasi</Button>
-                        </Col>
-                    </Row>
-                </>
-            }>
+            <Card style={{width: "100%", borderRadius: 8, boxShadow: "0px 5px 10px 0px #F1F2FA", border: "none"}}
+                  title={
+                      <>
+                          <Row>
+                              <Col span={12}> <Title level={4}> Profil Konsultasi </Title></Col>
+                              <Col span={12}>
+                                  <Button onClick={handleDetail} type="primary" ghost
+                                          style={{borderRadius: 8, float: "right"}}>Edit Profil
+                                      Konsultasi</Button>
+                              </Col>
+                          </Row>
+                      </>
+                  }>
                 <Space size={24} direction="vertical" style={{width: "100%"}}>
                     <Space size={4} direction="vertical" style={{width: "100%"}}>
-                        <Text type="secondary">Rekening</Text>
+                        <LabelText text="Rekening" />
                         {
                             input.consultant_virtual_account && (
                                 <>
@@ -62,15 +65,15 @@ const ConsultationProfile = () => {
                         }
                     </Space>
                     <Space size={4} direction="vertical">
-                        <Text type="secondary">Harga Jasa Diskusi</Text>
-                        <Text strong>{input.chat_price}</Text>
+                        <LabelText text="Harga Jasa Diskusi" />
+                        <Text strong>{formatRupiah(input.chat_price)}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
-                        <Text type="secondary">Harga Jasa Konsultasi</Text>
-                        <Text strong>{input.consultation_price}</Text>
+                        <LabelText text="Harga Jasa Konsultasi" />
+                        <Text strong>{formatRupiah(input.consultation_price)}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
-                        <Text type="secondary">Dokumentasi Kerja</Text>
+                        <LabelText text="Dokumentasi Kerja" />
                         <ul>
                             <Space size={[8, 8]} wrap>
                                 {

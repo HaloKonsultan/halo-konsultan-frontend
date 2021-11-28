@@ -24,7 +24,7 @@ const LoginCard = () => {
     const [input, setInput] = useState({
         email: "",
         password: "",
-        token: "fEoDXvrLbRi55Tiec6IQto:APA91bHMdZzTNF3mwNF3q8_YD8FMyqm8gFsGNF8iDVbRU9TSjOLfy8VM6pELhs7meGvd41IxQAsOK1ej6_sHGAPY7lTg9GevaS1SO3SNb5set9_DnEbY3cY50qpQAh20V8bncDjrZ_jV"
+        token: Cookies.get('device_token')
     })
 
     const handleChange = (event) => {
