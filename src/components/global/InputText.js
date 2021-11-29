@@ -5,7 +5,7 @@ function InputText(props) {
 
     return (
         <>
-            <Input style={{borderRadius: 8, height: 48, backgroundColor: "#F4F4F4", border: "none"}}
+            <Input style={{borderRadius: 8, height: 48, backgroundColor: "#F4F4F4", border: props.border}}
                    type={props.type}
                    name={props.name}
                    onChange={props.onChange}
@@ -23,7 +23,7 @@ function InputText(props) {
 
 InputText.defaultProps = {
     type: 'text',
-    required: true
+    required: true,
 };
 
 export default InputText

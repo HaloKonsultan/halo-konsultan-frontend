@@ -38,7 +38,7 @@ import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
-        if (Cookies.get('token') !== undefined) {
+        if (Cookies.get('token') === undefined) {
             return <LayoutComponent content={<Login/>}/>
         } else {
             return <Route {...props} />

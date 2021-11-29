@@ -70,7 +70,7 @@ const LayoutComponent = (props) => {
             </div>
             <Layout>
                 {
-                    Cookies.get('token') === undefined &&
+                    Cookies.get('token') !== undefined &&
 
                     <Sider theme="light" width={266}
                            style={{border: "solid 1px lightgrey"}}

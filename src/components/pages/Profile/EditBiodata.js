@@ -37,6 +37,7 @@ const EditBiodata = () => {
         functionDeleteExperience,
         functionDeleteSkill,
         functionDeleteEducation,
+        functionUploadImage,
         dataCity
     } = functions
 
@@ -185,16 +186,33 @@ const EditBiodata = () => {
         console.log('Failed:', errorInfo);
     };
 
-    const props = {
-        onChange({file}) {
-            if (file.status !== 'uploading') {
-                let typeOfValue = file.name
-                let name = "photo"
+    // const props = {
+    //     onChange({file}) {
+    //         if (file.status !== 'uploading') {
+    //             let typeOfValue = file.name
+    //             let name = "photo"
+    //             console.log()
+    //
+    //             //setInput({...input, [name]: typeOfValue})
+    //         }
+    //     },
+    // };
+    //
 
-                setInput({...input, [name]: typeOfValue})
-            }
-        },
-    };
+    const onImageChange = (event) => {
+        let formdata = new FormData()
+
+        if (event.target.files && event.target.files[0]) {
+            let img = event.target.files[0];
+            formdata.append('photo', img)
+
+            functionUploadImage(formdata)
+            setInput({...input, photo: URL.createObjectURL(img)})
+
+            console.log("ini input foto ", formdata)
+            console.log("ini event foto ", event)
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -221,9 +239,10 @@ const EditBiodata = () => {
                             </Col>
                             <Col span={18}>
                                 <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                    <Upload {...props}>
-                                        <Button style={{borderRadius: 4}}>Edit Profile</Button>
-                                    </Upload>
+                                    <input type="file" name="myImage" onChange={onImageChange} />
+                                    {/*<Upload {...props}>*/}
+                                    {/*    <Button style={{borderRadius: 4}}>Edit Profile</Button>*/}
+                                    {/*</Upload>*/}
                                     <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
                                 </Space>
                             </Col>

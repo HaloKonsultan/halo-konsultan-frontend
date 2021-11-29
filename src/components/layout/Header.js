@@ -30,7 +30,7 @@ const Nav = (props) => {
         <>
             <Layout>
                 {
-                    Cookies.get('token') === undefined &&
+                    Cookies.get('token') !== undefined &&
                     <PageHeader
                         onBack={props.onBack}
                         style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
