@@ -1,5 +1,5 @@
 import React, {useContext} from "react"
-import {Table} from "antd";
+import {Table, Spin} from "antd";
 import {ContextOrderActive} from "../context/ContextOrderActive";
 
 function OrderTable(props) {
@@ -19,6 +19,10 @@ function OrderTable(props) {
                     borderRadius: 8,
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
+                }}
+                loading={{
+                    indicator: <div><Spin /></div>,
+                    spinning: false
                 }}
                 rowKey={"active"}
                 columns={props.columns}

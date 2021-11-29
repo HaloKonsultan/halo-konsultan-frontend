@@ -1,77 +1,84 @@
-import React from "react";
-import Nav from "../../layout/Header";
-import { Input, Space, Card, Typography } from 'antd';
-import {SearchOutlined} from '@ant-design/icons';
+import React, {useContext, useEffect, useState} from "react";
+import {Space, Card, Typography} from 'antd';
 import {MagnifyingGlass} from "phosphor-react";
-const { Search } = Input;
-const { Text} = Typography;
-const onSearch = value => console.log(value);
+import InputText from "../../global/InputText";
+import 'antd/dist/antd.css';
+import "../../../assets/css/message.css"
+
+const {Text} = Typography;
 
 const HomeMessage = () => {
+    const [background, setBackground] = useState("white");
 
     return (
         <>
-     <Space size={0} direction="vertical" style={{width: "100%", borderRight: " 1px solid #CED4DA"}}>
-     <Input style={{borderRadius: 8, width:436, height: 48, backgroundColor: "#F4F4F4" }}  
-            prefix={<MagnifyingGlass size={24} color="#979595" />}
-                    placeholder="Cari nama client" /><br/>
-            <Card style={{ width: 436, height:134, borderRadius: 12 }}>
-            <Space size={5} direction="vertical"> 
-                 <Text strong>Muhammad Ridlo</Text>
-                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</Text>
-                 <h5 style={{color: "gray"}}>
-                                Hari ini, 16:45 WIB
-                            </h5>
+            <Space size={16} direction="vertical" style={{width: "100%"}}>
+                <InputText placeholder="Cari nama client"/>
+                <Space size={8} direction="vertical" style={{width: "100%"}}>
+                    <Card style={{width: "100%", borderRadius: 12, border: "none"}}
+                          className="hightlight"
+                          bodyStyle={{padding: 16}}>
+                        <Space size={8} direction="vertical">
+                            <Space size={4} direction="vertical">
+                                <Text strong>Muhammad Ridlo</Text>
+                                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt...</Text>
                             </Space>
-            </Card>
-            <Card style={{ width: 436, height:134, borderRadius: 12 }}>
-            <Space size={5} direction="vertical"> 
-                 <Text strong>Muhammad Ridlo</Text>
-                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</Text>
-                 <h5 style={{color: "gray"}}>
-                                Hari ini, 16:45 WIB
-                            </h5>
+                            <h5 style={{color: "#979595"}}>Hari ini, 16:45 WIB</h5>
+                        </Space>
+                    </Card>
+                    <Card style={{width: "100%", borderRadius: 12, border: "none", backgroundColor: "#F8F8F8"}} bodyStyle={{padding: 16}}>
+                        <Space size={8} direction="vertical">
+                            <Space size={4} direction="vertical">
+                                <Text strong>Muhammad Ridlo</Text>
+                                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt...</Text>
                             </Space>
-            </Card>
-            <Card style={{ width: 436, height:134, borderRadius: 12 }}>
-            <Space size={5} direction="vertical"> 
-                 <Text strong>Muhammad Ridlo</Text>
-                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</Text>
-                 <h5 style={{color: "gray"}}>
-                                Hari ini, 16:45 WIB
-                            </h5>
+                            <h5 style={{color: "#979595"}}>Hari ini, 16:45 WIB</h5>
+                        </Space>
+                    </Card>
+                    <Card style={{width: "100%", borderRadius: 12, border: "none"}} bodyStyle={{padding: 16}}>
+                        <Space size={8} direction="vertical">
+                            <Space size={4} direction="vertical">
+                                <Text strong>Muhammad Ridlo</Text>
+                                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt...</Text>
                             </Space>
-            </Card>
-            <Card style={{ width: 436, height:134, borderRadius: 12 }}>
-            <Space size={5} direction="vertical"> 
-                 <Text strong>Muhammad Ridlo</Text>
-                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</Text>
-                 <h5 style={{color: "gray"}}>
-                                Hari ini, 16:45 WIB
-                            </h5>
+                            <h5 style={{color: "#979595"}}>Hari ini, 16:45 WIB</h5>
+                        </Space>
+                    </Card>
+                    <Card style={{width: "100%", borderRadius: 12, border: "none"}} bodyStyle={{padding: 16}}>
+                        <Space size={8} direction="vertical">
+                            <Space size={4} direction="vertical">
+                                <Text strong>Muhammad Ridlo</Text>
+                                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt...</Text>
                             </Space>
-            </Card>
-            <Card style={{ width: 436, height:134, borderRadius: 12 }}>
-            <Space size={5} direction="vertical"> 
-                 <Text strong>Muhammad Ridlo</Text>
-                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</Text>
-                 <h5 style={{color: "gray"}}>
-                                Hari ini, 16:45 WIB
-                            </h5>
+                            <h5 style={{color: "#979595"}}>Hari ini, 16:45 WIB</h5>
+                        </Space>
+                    </Card>
+                    <Card style={{width: "100%", borderRadius: 12, border: "none"}} bodyStyle={{padding: 16}}>
+                        <Space size={8} direction="vertical">
+                            <Space size={4} direction="vertical">
+                                <Text strong>Muhammad Ridlo</Text>
+                                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt...</Text>
                             </Space>
-            </Card>
-            <Card style={{ width: 436, height:134, borderRadius: 12 }}>
-            <Space size={5} direction="vertical"> 
-                 <Text strong>Muhammad Ridlo</Text>
-                 <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</Text>
-                 <h5 style={{color: "gray"}}>
-                                Hari ini, 16:45 WIB
-                            </h5>
+                            <h5 style={{color: "#979595"}}>Hari ini, 16:45 WIB</h5>
+                        </Space>
+                    </Card>
+                    <Card style={{width: "100%", borderRadius: 12, border: "none"}} bodyStyle={{padding: 16}}>
+                        <Space size={8} direction="vertical">
+                            <Space size={4} direction="vertical">
+                                <Text strong>Muhammad Ridlo</Text>
+                                <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt...</Text>
                             </Space>
-            </Card>
-            
+                            <h5 style={{color: "#979595"}}>Hari ini, 16:45 WIB</h5>
+                        </Space>
+                    </Card>
+                </Space>
             </Space>
-           
         </>
     )
 }

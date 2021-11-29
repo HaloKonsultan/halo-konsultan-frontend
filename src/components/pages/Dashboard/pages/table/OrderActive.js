@@ -8,7 +8,7 @@ function OrderActive() {
         <>
             <Nav title="Konsultasi Aktif"/>
             <div className="dashboard-container">
-                <OrderTableActive dataLimit="tes123" />
+                <OrderTableActive />
             </div>
         </>
     )

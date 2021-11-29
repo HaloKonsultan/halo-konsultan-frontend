@@ -9,12 +9,12 @@ export const ContextOrderToday = createContext()
 export const TodayOrderProvider = props => {
     let history = useHistory()
     const [dataTodayOrder, setDataTodayOrder] = useState([])
-    const [input, setInput] = useState({
+    const [input, setInput] = useState([{
         title: "",
         date: "",
         time: "",
         status: ""
-    })
+    }])
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 

@@ -15,7 +15,8 @@ const Onboard = () => {
                 backgroundImage: `url(${background})`,
                 backgroundSize: "824px",
                 backgroundRepeat: "no-repeat",
-                backgroundPosition: "center"
+                backgroundPosition: "center",
+                padding: 50
             }}>
                 <table className="onboard-table">
                     <tbody>

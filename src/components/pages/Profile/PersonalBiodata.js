@@ -5,6 +5,7 @@ import {Button} from 'antd';
 import {Row, Col} from 'antd';
 import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
+import noImage from "../../../assets/img/no-image.png"
 import noProfile from "../../../assets/img/noprofile.png"
 
 const {Title, Text, Link} = Typography;
@@ -25,34 +26,56 @@ const PersonalBiodata = () => {
 
     return (
         <>
-            <Card style={{boxShadow: "0 0 0 1px #CED4DA", borderRadius: 8, width: 528}} title={
-                <>
-                    <Row>
-                        <Col span={17}>
-                            <Title level={4}> Biodata Diri </Title>
-                        </Col>
-                        <Col span={25}>
-                            <Button onClick={handleDetail} type="primary" ghost style={{borderRadius: 8}}>Edit Biodata
-                                Diri</Button>
-                        </Col>
-                    </Row>
-                </>
-            }>
+            <Card style={{width: "100%", borderRadius: 8, boxShadow: "0px 5px 10px 0px #F1F2FA", border: "none"}}
+                  title={
+                      <>
+                          <Row style={{width: "100%"}}>
+                              <Col span={12}>
+                                  <Title level={4}> Biodata Diri </Title>
+                              </Col>
+                              <Col span={12}>
+                                  <Button onClick={handleDetail} type="primary" ghost
+                                          style={{borderRadius: 8, float: "right"}}>Edit Biodata
+                                      Diri</Button>
+                              </Col>
+                          </Row>
+                      </>
+                  }>
                 <Row>
-                    <Col span={12}>
-                        <img
-                            src={input.photo}
-                            alt="profile-picture"
-                            style={{
-                                width: 200,
-                                height: 200,
-                                objectFit: "cover",
-                                borderRadius: 8,
-                                boxShadow: "0 0 0 1px #CED4DA"
-                            }}/>
+                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                        {
+                            input.photo === undefined &&
+                            <img
+                                src={noImage}
+                                alt="profile-picture"
+                                style={{
+                                    width: 200,
+                                    height: 200,
+                                    objectFit: "cover",
+                                    borderRadius: 12,
+                                    boxShadow: "0 0 0 1px #CED4DA",
+                                    position: "relative"
+
+                                }}/>
+                        }
+                        {
+                            input.photo &&
+                            <img
+                                src={input.photo}
+                                alt="profile-picture"
+                                style={{
+                                    width: 200,
+                                    height: 200,
+                                    objectFit: "cover",
+                                    borderRadius: 12,
+                                    boxShadow: "0 0 0 1px #CED4DA",
+                                    position: "relative"
+
+                                }}/>
+                        }
                     </Col>
-                    <Col span={12}>
-                        <Space size={24} direction="vertical">
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 12, order: 2}}>
+                        <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>
                                 <Text strong>{input.name}</Text>
@@ -77,7 +100,7 @@ const PersonalBiodata = () => {
                                 <Text type="secondary">Kota</Text>
                                 <Text strong>{input.city}</Text>
                             </Space>
-                            <Space size={4} direction="vertical">
+                            <Space size={4} direction="vertical" style={{width: "100%"}}>
                                 <Text type="secondary">Pengalaman Kerja</Text>
                                 {
                                     input.consultant_experience && (
@@ -85,13 +108,12 @@ const PersonalBiodata = () => {
                                             {input.consultant_experience.map((e, index) => {
                                                 return (
                                                     <>
-                                                        <Row>
+                                                        <Row align="middle">
                                                             <Col span={12}>
                                                                 <Text strong>{e.position}</Text><br/>
                                                             </Col>
-                                                            <Col style={{display: "flex", justifyContent: "right"}}
-                                                                 span={12}>
-                                                                <Text strong>{e.start_year} - {e.end_year}</Text>
+                                                            <Col span={12}>
+                                                                <Text strong style={{float: "right"}}>{e.start_year} - {e.end_year}</Text>
                                                             </Col>
                                                         </Row>
                                                     </>
@@ -101,7 +123,7 @@ const PersonalBiodata = () => {
                                     )
                                 }
                             </Space>
-                            <Space size={4} direction="vertical">
+                            <Space size={4} direction="vertical" style={{width: "100%"}}>
                                 <Text type="secondary">Pendidikan</Text>
                                 {
                                     input.consultant_education && (
@@ -109,14 +131,16 @@ const PersonalBiodata = () => {
                                             {input.consultant_education.map((e, index) => {
                                                 return (
                                                     <>
-                                                        <Row>
+                                                        <Row align="middle">
                                                             <Col span={12}>
-                                                                <Text strong>{e.institution_name}</Text><br/>
-                                                                <Text type="secondary">{e.major}</Text>
+                                                                <Space size={2} direction="vertical"
+                                                                       style={{width: "100%"}}>
+                                                                    <Text strong>{e.institution_name}</Text>
+                                                                    <Text type="secondary">{e.major}</Text>
+                                                                </Space>
                                                             </Col>
-                                                            <Col style={{display: "flex", justifyContent: "right"}}
-                                                                 span={12}>
-                                                                <Text strong>{e.start_year} - {e.end_year}</Text>
+                                                            <Col span={12}>
+                                                                <Text strong style={{float: "right"}}>{e.start_year} - {e.end_year}</Text>
                                                             </Col>
                                                         </Row>
                                                     </>

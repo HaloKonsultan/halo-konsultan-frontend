@@ -1,12 +1,13 @@
 import './App.css';
-import HomeMessage from './components/pages/Message/HomeMessage';
 import Routes from "./components/routes/Routes";
+import "./App.css";
+import React from "react";
 
 function App() {
   return (
-    <div>
-      <Routes/>
-    </div>
+      <div className="App">
+          <Routes/>
+      </div>
   );
 }
 

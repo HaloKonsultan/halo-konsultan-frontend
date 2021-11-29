@@ -46,6 +46,7 @@ export const ConsultationDetailProvider = props => {
             id: data.id,
             title: data.title,
             user_name: data.user_name,
+            user_id: data.user_id,
             description: data.description,
             preference: data.preference,
             location: data.location,
@@ -69,7 +70,6 @@ export const ConsultationDetailProvider = props => {
                     file: key.file}
             })
         })
-        console.log("ini detail konsultasi " + JSON.stringify(input))
         setCurrentId(data.id)
     }
 
@@ -81,7 +81,6 @@ export const ConsultationDetailProvider = props => {
         )
             .then((res) => {
                 let data = res.data
-                console.log(data)
                 setDataConsultation([...dataConsultation, {
                     is_confirmed: data.is_confirmed,
                 }])
@@ -98,8 +97,6 @@ export const ConsultationDetailProvider = props => {
         )
             .then((res) => {
                 let data = res.data
-                console.log("data di api decline")
-                console.log(data)
                 setDataConsultation([...dataConsultation, {
                     is_confirmed: data.is_confirmed,
                     message: data.message
@@ -108,9 +105,9 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
-    const functionSubmit = (consultation_id) => {
+    const functionSubmit = (consultation_id, conference_link) => {
         API.patch(`consultants/consultations/${consultation_id}/send-link`, {
-                link: input.conference_link
+                link: conference_link
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
@@ -124,27 +121,27 @@ export const ConsultationDetailProvider = props => {
             })
     }
 
-    // const functionUpdateStatus = (consultation_id) => {
-    //     API.patch(`consultants/consultations/${consultation_id}/end`, {
-    //
-    //         },
-    //         { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
-    //     )
-    //         .then((res) => {
-    //             history.push("/")
-    //         })
-    // }
-
-    const funtionEndConsultation = (consultation_id) => {
-        API.post(`consultants/transaction/withdraw/${consultation_id}`, {
-                bank_code: input.bank_name,
-                account_holder_name: input.card_name,
-                account_number: input.card_number
+    const functionUpdateStatus = (consultation_id) => {
+        API.patch(`consultants/consultations/${consultation_id}/end`, {
+                message: input.message
             },
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
                 history.push("/")
+            })
+    }
+
+    const funtionEndConsultation = (consultation_id) => {
+        API.post(`consultants/transaction/withdraw/${consultation_id}`, {
+                bank_code: String(input.bank_name),
+                account_holder_name: `${input.card_name}`,
+                account_number: `${input.card_number}`
+            },
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                functionUpdateStatus(consultation_id)
             })
     }
 

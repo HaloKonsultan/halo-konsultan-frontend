@@ -1,5 +1,8 @@
 import React from "react"
 import {Button, Form, Input, Modal} from "antd";
+import InputText from "./InputText";
+import ButtonPrimary from "./ButtonPrimary";
+import LabelText from "./LabelText";
 
 const {TextArea} = Input;
 
@@ -26,40 +29,36 @@ function ModalAddDocument(props) {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Judul Dokumen"
+                        label={<LabelText text="Judul Dokumen" />}
                         name="title"
+                        required={false}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input document title!',
+                                message: 'Silahkan isi judul dokumen.',
                             },
                         ]}
                     >
-                        <Input style={{borderRadius: 8}}/>
+                        <InputText/>
+                        {/*<Input style={{borderRadius: 8}}/>*/}
                     </Form.Item>
 
                     <Form.Item
-                        label="Deskripsi Dokumen"
+                        label={<LabelText text="Deskripsi Dokumen" />}
                         name="description"
+                        required={false}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input document description!',
+                                message: 'Silahkan isi deskripsi dokumen.',
                             },
                         ]}
                     >
-                        <TextArea style={{borderRadius: 8}} rows={4} name="description"/>
+                        <TextArea style={{borderRadius: 8}} rows={6} name="description"/>
                     </Form.Item>
 
                     <Form.Item>
-                        <Button
-                            size="large"
-                            className="button"
-                            type="primary" block
-                            style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                            htmlType="submit">
-                            Tambahkan Dokumen
-                        </Button>
+                        <ButtonPrimary text="Tambahkan Dokumen" htmlType="submit"/>
                     </Form.Item>
                 </Form>
             </Modal>
