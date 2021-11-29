@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, List} from 'antd';
+import {Row, Col, List} from 'antd';
 import Nav from "../../layout/Header";
 import HomeMessage from "./HomeMessage";
 import SendMessage from "./SendMessage";
@@ -9,17 +9,17 @@ const Message = () => {
 
     return (
         <>
-            <Row className="center"> 
-            <Col span={12}>
-            <Nav title="Pesan" />
-                    <div className="container-profile">   
+            <Row style={{backgroundColor: "white"}}>
+                <Col span={12}>
+                    <Nav title="Pesan"/>
+                    <div className="container-profile">
                         <HomeMessage/>
                     </div>
                 </Col>
                 <Col span={12}>
-                <NavMessage title="Name"/>
+                    <NavMessage title="Name"/>
                     <div className="container-profile">
-                    <SendMessage/>
+                        <SendMessage/>
                     </div>
                 </Col>
             </Row>

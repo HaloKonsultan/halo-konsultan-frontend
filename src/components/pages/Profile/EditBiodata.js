@@ -21,6 +21,7 @@ import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Pencil, X} from "phosphor-react";
 import {useHistory} from "react-router";
+import SelectDropdown from "../../global/SelectDropdown";
 
 const {Meta} = Card;
 const {Title, Text} = Typography;
@@ -30,12 +31,17 @@ const {TextArea} = Input;
 const EditBiodata = () => {
     let history = useHistory()
     const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata, dataCity, functionDeleteExperience, functionDeleteSkill, functionDeleteEducation} = functions
-    const [value, setValue] = React.useState(1);
+    const {
+        fetchData,
+        functionEditBiodata,
+        functionDeleteExperience,
+        functionDeleteSkill,
+        functionDeleteEducation,
+        dataCity
+    } = functions
 
     useEffect(() => {
         fetchData()
-
     }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
@@ -156,7 +162,7 @@ const EditBiodata = () => {
         functionDeleteExperience(id)
     }
 
-    const deleteEducation= (event) => {
+    const deleteEducation = (event) => {
         let id = parseInt(event.currentTarget.value)
 
         functionDeleteEducation(id)
@@ -171,8 +177,6 @@ const EditBiodata = () => {
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
         let name = event.target.name
-        console.log("tesvalue " + typeOfValue)
-        console.log("tesname " + name)
 
         setInput({...input, [name]: typeOfValue})
     };
@@ -203,34 +207,36 @@ const EditBiodata = () => {
         <>
             <Nav/>
             <div className="container-profile">
-                <Card title="Edit Profil Diri" style={{width: 528, borderRadius: 8}}>
+                <Card title="Edit Profil Diri" style={{width: 720, borderRadius: 8}}>
                     <Space size={24} direction="vertical" style={{width: "100%"}}>
                         <Row>
-                            <Col span={8}>
+                            <Col span={6}>
                                 <img src={input.photo} alt="profile-picture"
-                                     style={{width: 144, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}/>
+                                     style={{
+                                         width: 144,
+                                         height: 144,
+                                         borderRadius: 8,
+                                         boxShadow: "0 0 0 1px #CED4DA"
+                                     }}/>
                             </Col>
-                            <Col span={16}>
-                                {/*<Input style={{borderRadius: 8, height: 48}}*/}
-                                {/*       name="photo"*/}
-                                {/*       onChange={handleChange}*/}
-                                {/*       placeholder="Link Foto"*/}
-                                {/*       />*/}
-                                <Upload {...props}>
-                                    <Button style={{borderRadius: 4}}>Edit Profile</Button>
-                                </Upload>
-                                <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
+                            <Col span={18}>
+                                <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                    <Upload {...props}>
+                                        <Button style={{borderRadius: 4}}>Edit Profile</Button>
+                                    </Upload>
+                                    <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
+                                </Space>
                             </Col>
                         </Row>
-
-                        <div>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Nama Lengkap</Text>
                             <Input style={{borderRadius: 8, height: 48}}
                                    name="name"
                                    onChange={handleChange}
                                    placeholder="Nama lengkap"
-                                   value={input.name}/><br/><br/>
-
+                                   value={input.name}/>
+                        </Space>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Deskripsi</Text>
                             <TextArea
                                 style={{borderRadius: 8}}
@@ -238,33 +244,141 @@ const EditBiodata = () => {
                                 name="description"
                                 placeholder="Deskripsi"
                                 onChange={handleChange}
-                                value={input.description}/><br/><br/>
-
-                            <Text type="secondary">Jenis Kelamin</Text><br/>
+                                value={input.description}/>
+                        </Space>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
+                            <Text type="secondary">Jenis Kelamin</Text>
                             <Radio.Group onChange={onChangeGender}>
-                                <Radio value="Pria">Pria </Radio>
-                                <Radio value="Wanita">Wanita</Radio>
-                            </Radio.Group><br/><br/>
+                                <Space size={240}>
+                                    <Radio value="Pria">Pria </Radio>
+                                    <Radio value="Wanita">Wanita</Radio>
+                                </Space>
+                            </Radio.Group>
+                        </Space>
 
+                        <Row style={{width: "100%"}}>
+                            <Col span={11}>
+                                <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                    <Text type="secondary">Provinsi</Text>
+                                    <SelectDropdown
+                                        defaultValue={input.province}
+                                        onChange={handleProvinceChange}
+                                        placeholder="Provinsi"
+                                        option={
+                                            inputProvince.province && (
+                                                <>
+                                                    {inputProvince.province.map((e, index) => {
+                                                        return (
+                                                            <>
+                                                                <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                            </>
+                                                        )
+                                                    })}
+                                                </>
+                                            )}
+                                    />
+                                </Space>
+                            </Col>
+                            <Col span={1}/>
+                            <Col span={12}>
+                                <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                    <Text type="secondary">Kota</Text>
+                                    <SelectDropdown
+                                        defaultValue={input.city}
+                                        onChange={handleCityChange}
+                                        placeholder="Kota"
+                                        option={
+                                            inputProvince.cities && (
+                                                <>
+                                                    {inputProvince.cities.map((e, index) => {
+                                                        return (
+                                                            <>
+                                                                <Option value={e.name}>{e.name}</Option>
+                                                            </>
+                                                        )
+                                                    })}
+                                                </>
+                                            )}
+                                    />
+                                </Space>
+                            </Col>
+                        </Row>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
+                            <PageHeader
+                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                ghost={false}
+                                subTitle={<Text type="secondary">Pendidikan</Text>}
+                                extra={[
+                                    <Button
+                                        onClick={showEducationModal}
+                                        style={{
+                                            color: "#3B85FA"
+                                        }}
+                                        type="text">
+                                        <b>+ Tambah Riwayat Pendidikan</b>
+                                    </Button>,
+                                ]}
+                            />
+                            {
+                                input.consultant_education && (
+                                    <>
+                                        {input.consultant_education.map((e, index) => {
+                                            return (
+                                                <>
+                                                    <Card
+                                                        style={{
+                                                            width: "100%",
+                                                            height: 68,
+                                                            borderRadius: 8,
+                                                            overflow: "hidden"
+                                                        }}
+                                                        type="inner"
+                                                        title={
+                                                            <>
+                                                                <Row>
+                                                                    <Col span={23}>
+                                                                        <Text>{e.institution_name}</Text><br/>
+                                                                        <Text
+                                                                            type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                                    </Col>
+                                                                    <Col span={1}>
+                                                                        <Space>
+                                                                            {/*<Button value={e.id}*/}
+                                                                            {/*        style={{*/}
+                                                                            {/*            padding: 0,*/}
+                                                                            {/*            paddingTop: 10*/}
+                                                                            {/*        }}*/}
+                                                                            {/*        type="link"><Pencil*/}
+                                                                            {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
+                                                                            {/*    size={24} weight="fill"/></Button>*/}
+                                                                            <Button value={e.id}
+                                                                                    style={{
+                                                                                        padding: 0,
+                                                                                        paddingTop: 10
+                                                                                    }}
+                                                                                    onClick={deleteEducation}
+                                                                                    type="link"><X
+                                                                                size={24}/></Button>
+                                                                        </Space>
+                                                                    </Col>
+                                                                </Row>
+                                                            </>
+                                                        }
+                                                    >
+                                                    </Card>
+                                                </>
+                                            )
+                                        })}
+                                    </>
+                                )}
+                        </Space>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Bidang Keahlian</Text>
-                            <Select
+                            <SelectDropdown
                                 defaultValue={input.position}
                                 onChange={handleCategorieChange}
-                                showSearch
-                                bordered={false}
-                                style={{
-                                    borderRadius: 8,
-                                    overflow: "hidden",
-                                    border: "solid 1px #CED4DA",
-                                    width: "100%"
-                                }}
                                 placeholder="Bidang Kategori"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                {
+                                option={
                                     inputCategories.categories && (
                                         <>
                                             {inputCategories.categories.map((e, index) => {
@@ -275,78 +389,12 @@ const EditBiodata = () => {
                                                 )
                                             })}
                                         </>
-                                    )}
-                            </Select>
-                        </div>
-                        <Space direction="vertical" style={{width: "100%"}}>
-                            <Text type="secondary">Provinsi</Text>
-                            <Select
-                                defaultValue={input.province}
-                                onChange={handleProvinceChange}
-                                showSearch
-                                bordered={false}
-                                style={{
-                                    borderRadius: 8,
-                                    overflow: "hidden",
-                                    border: "solid 1px #CED4DA",
-                                    width: "100%"
-                                }}
-                                placeholder="Provinsi"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                    )
                                 }
-                            >
-                                {
-                                    inputProvince.province && (
-                                        <>
-                                            {inputProvince.province.map((e, index) => {
-                                                return (
-                                                    <>
-                                                        <Option value={[e.name, e.id]}>{e.name}</Option>
-                                                    </>
-                                                )
-                                            })}
-                                        </>
-                                    )}
-                            </Select>
+                            />
                         </Space>
 
-                        <Space direction="vertical" style={{width: "100%"}}>
-                            <Text type="secondary">Kota</Text>
-                            <Select
-                                defaultValue={input.city}
-                                onChange={handleCityChange}
-                                showSearch
-                                bordered={false}
-                                style={{
-                                    borderRadius: 8,
-                                    overflow: "hidden",
-                                    border: "solid 1px #CED4DA",
-                                    width: "100%"
-                                }}
-                                placeholder="Kota"
-                                optionFilterProp="children"
-                                filterOption={(input, option) =>
-                                    option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                                }
-                            >
-                                {
-                                    inputProvince.cities && (
-                                        <>
-                                            {inputProvince.cities.map((e, index) => {
-                                                return (
-                                                    <>
-                                                        <Option value={e.name}>{e.name}</Option>
-                                                    </>
-                                                )
-                                            })}
-                                        </>
-                                    )}
-                            </Select>
-                        </Space>
-
-                        <Space direction="vertical" style={{width: "100%"}}>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
                             <PageHeader
                                 style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                                 ghost={false}
@@ -362,8 +410,7 @@ const EditBiodata = () => {
                                     </Button>,
                                 ]}
                             />
-                            <h6 style={{color: "gray"}}>
-                                Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
+                            <h6 style={{color: "gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
                                 konsultasi
                             </h6>
                             {
@@ -374,7 +421,7 @@ const EditBiodata = () => {
                                                 <>
                                                     <Card
                                                         style={{
-                                                            width: 480,
+                                                            width: "100%",
                                                             height: 68,
                                                             borderRadius: 8,
                                                             overflow: "hidden"
@@ -382,12 +429,12 @@ const EditBiodata = () => {
                                                         type="inner"
                                                         title={<>
                                                             <Row>
-                                                                <Col span={21}>
+                                                                <Col span={23}>
                                                                     <Text>{e.position}</Text><br/>
                                                                     <Text style={{fontSize: 14}}
                                                                           type="secondary">{e.start_year} - {e.end_year}</Text>
                                                                 </Col>
-                                                                <Col span={3}>
+                                                                <Col span={1}>
                                                                     <Space>
                                                                         {/*<Button value={e.id}*/}
                                                                         {/*        style={{padding: 0, paddingTop: 10}}*/}
@@ -395,8 +442,13 @@ const EditBiodata = () => {
                                                                         {/*        onClick={() => updateExperience(e.id, e.position, e.start_year, e.end_year)}*/}
                                                                         {/*    size={24} weight="fill"/></Button>*/}
                                                                         <Button value={e.id}
-                                                                                style={{padding: 0, paddingTop: 10}}
-                                                                                onClick={deleteExperience} type="link"><X
+                                                                                style={{
+                                                                                    padding: 0,
+                                                                                    paddingTop: 10,
+                                                                                    float: "right"
+                                                                                }}
+                                                                                onClick={deleteExperience}
+                                                                                type="link"><X
                                                                             size={24}/></Button>
                                                                     </Space>
                                                                 </Col>
@@ -411,7 +463,7 @@ const EditBiodata = () => {
                                     </>
                                 )}
                         </Space>
-                        <Space direction="vertical" style={{width: "100%"}}>
+                        <Space size={8} direction="vertical" style={{width: "100%"}}>
                             <PageHeader
                                 style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                                 ghost={false}
@@ -435,7 +487,7 @@ const EditBiodata = () => {
                                                 <>
                                                     <Card
                                                         style={{
-                                                            width: 480,
+                                                            width: "100%",
                                                             height: 48,
                                                             borderRadius: 8,
                                                             overflow: "hidden"
@@ -444,10 +496,10 @@ const EditBiodata = () => {
                                                         title={
                                                             <>
                                                                 <Row>
-                                                                    <Col span={21}>
+                                                                    <Col span={23}>
                                                                         <Text>{e.skills}</Text>
                                                                     </Col>
-                                                                    <Col span={3}>
+                                                                    <Col span={1}>
                                                                         <Space>
                                                                             {/*<Button value={e.id}*/}
                                                                             {/*        style={{*/}
@@ -478,74 +530,6 @@ const EditBiodata = () => {
 
                         </Space>
 
-                        <Space direction="vertical" style={{width: "100%"}}>
-                            <PageHeader
-                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
-                                ghost={false}
-                                subTitle={<Text type="secondary">Pendidikan</Text>}
-                                extra={[
-                                    <Button
-                                        onClick={showEducationModal}
-                                        style={{
-                                            color: "#3B85FA"
-                                        }}
-                                        type="text">
-                                        <b>+ Tambah Riwayat Pendidikan</b>
-                                    </Button>,
-                                ]}
-                            />
-                            {
-                                input.consultant_education && (
-                                    <>
-                                        {input.consultant_education.map((e, index) => {
-                                            return (
-                                                <>
-                                                    <Card
-                                                        style={{
-                                                            width: 480,
-                                                            height: 68,
-                                                            borderRadius: 8,
-                                                            overflow: "hidden"
-                                                        }}
-                                                        type="inner"
-                                                        title={
-                                                            <>
-                                                                <Row>
-                                                                    <Col span={21}>
-                                                                        <Text>{e.institution_name}</Text><br/>
-                                                                        <Text
-                                                                            type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
-                                                                    </Col>
-                                                                    <Col span={3}>
-                                                                        <Space>
-                                                                            {/*<Button value={e.id}*/}
-                                                                            {/*        style={{*/}
-                                                                            {/*            padding: 0,*/}
-                                                                            {/*            paddingTop: 10*/}
-                                                                            {/*        }}*/}
-                                                                            {/*        type="link"><Pencil*/}
-                                                                            {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
-                                                                            {/*    size={24} weight="fill"/></Button>*/}
-                                                                            <Button value={e.id}
-                                                                                    style={{
-                                                                                        padding: 0,
-                                                                                        paddingTop: 10
-                                                                                    }}
-                                                                                    onClick={deleteEducation} type="link"><X
-                                                                                size={24}/></Button>
-                                                                        </Space>
-                                                                    </Col>
-                                                                </Row>
-                                                            </>
-                                                        }
-                                                    >
-                                                    </Card>
-                                                </>
-                                            )
-                                        })}
-                                    </>
-                                )}
-                        </Space>
                         <Button size="large"
                                 className="button"
                                 type="primary"
@@ -744,9 +728,7 @@ const EditBiodata = () => {
                                         message: 'Please input start year!',
                                     },
                                 ]}
-
                             >
-
                                 <Input style={{borderRadius: 8, width: 215}}/>
                             </Form.Item>
                         </Col>

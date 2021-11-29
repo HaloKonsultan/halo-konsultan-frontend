@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from "react"
-import {Card, Button, Space, Modal, Form, Row, Col, Input} from 'antd';
+import {Card, Space, Modal, Form, Row, Col, Input} from 'antd';
 import {Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import ButtonDanger from "../../global/ButtonDanger";
 import PrimaryButton from "../../global/ButtonPrimary";
+import "../../../assets/css/dashboard.css"
 
 const {Title} = Typography;
 
@@ -13,7 +14,7 @@ const AcceptDeclineCard = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {input, setInput, currentId, setCurrentId, functions} = useContext(ContextConsultationDetail)
+    const {input, setInput, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById, functionAccept, functionDecline} = functions
     const [isDeclineVisible, setIsDeclineVisible] = useState(false);
 
@@ -60,7 +61,8 @@ const AcceptDeclineCard = () => {
                     display: "flex",
                     justifyContent: "center",
                     borderRadius: 16,
-                    boxShadow: "0 0 0 1px #CED4DA"
+                    boxShadow: "0px 5px 10px 0px #F1F2FA",
+                    border: "none"
                 }}>
                     <Space direction="vertical">
                         <Title level={5}>Apakah Anda Menerima Permintaan Konsultasi ini ?</Title>
@@ -97,10 +99,11 @@ const AcceptDeclineCard = () => {
                     <Form.Item
                         label="Tulis alasan Anda menolak konsultasi untuk membantu klien memahami mengapa konsultasinya ditolak."
                         name="message"
+                        required={false}
                         rules={[
                             {
-                                required: false,
-                                message: 'Please input message name!',
+                                required: true,
+                                message: 'Silahkan isi pesan penolakan.',
                             },
                         ]}
                     >

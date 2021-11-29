@@ -1,22 +1,30 @@
-import React, {useContext, useState} from "react"
-import {Card, Button, Checkbox, Input} from 'antd';
+import React, {useContext, useEffect, useState} from "react"
+import {Card, Button, Checkbox, Space} from 'antd';
 import Cookies from "js-cookie"
 import axios from "axios"
 import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import {ContextUser} from "../components/context/ContextUser";
-import {message, Space} from 'antd';
+import {message} from 'antd';
+import InputText from "../components/global/InputText";
+import ButtonPrimary from "../components/global/ButtonPrimary";
+import {Typography} from 'antd';
+import {getToken} from "../Firebase";
+
+const {Text} = Typography;
 
 const LoginCard = () => {
+    const [isTokenFound, setTokenFound] = useState(false);
     let history = useHistory()
+    let data = getToken(setTokenFound);
     let showPassword = document.getElementById("password");
-
     const {setLoginStatus} = useContext(ContextUser)
 
     const [input, setInput] = useState({
         email: "",
-        password: ""
+        password: "",
+        token: Cookies.get('device_token')
     })
 
     const handleChange = (event) => {
@@ -28,12 +36,14 @@ const LoginCard = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        console.log("ini token")
         console.log(input)
         let inOneHours = new Date(new Date().getTime() + 60 * 60 * 1000);
 
         axios.post(`http://localhost:8000/api/consultants/login`, {
             email: input.email,
-            password: input.password
+            password: input.password,
+            device_token: input.token
         })
             .then((res) => {
                 let token = res.data.access_token
@@ -57,47 +67,35 @@ const LoginCard = () => {
         } else {
             showPassword.type = "password";
         }
-        console.log(showPassword)
     }
 
     return (
         <>
-            <div className="container">
-                <Card className="card">
+            <div className="container" style={{padding: 20}}>
+                <Card style={{boxShadow: "0 0 8px 0 rgba(34,34,34,0.16)", borderRadius: 8, width: 408}}>
                     <form onSubmit={handleSubmit}>
-                        <Space size={24} direction="vertical" style={{width: "100%"}}>
-                            <br/>
-                            <img className="logo1" src={Logo}/>
-                            <br/>
-                            <Space size={1} direction="vertical" style={{width: "100%"}}>
-                                <p>Masukkan Email Anda</p>
-                                <Input style={{borderRadius: 8, height: 48}}
-                                       name="email"
-                                       onChange={handleChange}
-                                       placeholder="Email"
-                                       required/>
+                        <br/>
+                        <img className="logo1" src={Logo} alt="HaloKonsultan Logo"/>
+                        <br/><br/>
+                        <Space direction="vertical" style={{width: "100%"}} size={40}>
+                            <Space direction="vertical" style={{width: "100%"}} size={24}>
+                                <Space direction="vertical" style={{width: "100%"}}>
+                                    <Text type="secondary">Masukkan Email Anda</Text>
+                                    <InputText placeholder="Email" name="email" value={input.email}
+                                               onChange={handleChange} required/>
+                                </Space>
+                                <Space direction="vertical" style={{width: "100%"}}>
+                                    <Text type="secondary">Masukkan Password Anda</Text>
+                                    <InputText id="password" type="password" placeholder="Password" name="password"
+                                               value={input.password} onChange={handleChange} required />
+                                    <Checkbox onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
+                                </Space>
                             </Space>
-                            <Space size={1} direction="vertical" style={{width: "100%"}}>
-                                <p>Masukkan Password Anda</p>
-                                <Input style={{borderRadius: 8, height: 48}}
-                                       name="password"
-                                       type="password"
-                                       onChange={handleChange}
-                                       placeholder="Password"
-                                       id="password"
-                                       required/>
-                                <Checkbox style={{marginTop: 12}} onClick={handleShowPassword}>Tunjukkan Password</Checkbox>
+                            <Space direction="vertical" style={{width: "100%"}} size={32}>
+                                <ButtonPrimary text="Masuk" htmlType="submit"/>
+                                <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p>
+                                </Link>
                             </Space>
-
-                            <Button style={{
-                                borderRadius: 8,
-                                height: 44,
-                                backgroundColor: "#3B85FA",
-                            }} size="large" className="button" type="primary" htmlType="submit" block>
-                                Masuk
-                            </Button>
-                            <Link to="/register"><p className="sign-in">Belum punya akun ? <a href="">Daftar</a></p>
-                            </Link>
                         </Space>
                     </form>
                 </Card>

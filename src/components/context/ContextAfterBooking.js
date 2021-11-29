@@ -30,8 +30,18 @@ export const AfterBookingProvider = props => {
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
+    const fetchDataById = async (consultation_id) => {
+        let result = await API.get(`consultants/consultations/${consultation_id}`,
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
+        let data = result.data.data
+        setInput({
+            ...input,
+            preference: data.preference,
+        })
+        setCurrentId(data.id)
+    }
+
     const functionSubmit = (consultation_id) => {
-        console.log(input)
         API.patch(`consultants/consultations/${consultation_id}/after-book`, {
                 preference: input.preference,
                 price: input.price,
@@ -41,8 +51,9 @@ export const AfterBookingProvider = props => {
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
+                setPrefDate({date: []})
+                setPrefTime({time: []})
                 let data = res.data
-                console.log(data)
                 setDataAfterBooking([...dataAfterBooking, {
                     id: data.id,
                     preference: data.preference,
@@ -55,6 +66,7 @@ export const AfterBookingProvider = props => {
     }
 
     const functions = {
+        fetchDataById,
         functionSubmit
     }
 

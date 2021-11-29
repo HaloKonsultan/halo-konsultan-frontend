@@ -71,7 +71,6 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        console.log(input)
         await dataProvinces()
         await dataCategories()
     }
@@ -270,6 +269,14 @@ export const ProfileProvider = props => {
         })
     }
 
+    const formatRupiah = (angka) => {
+        var	reverse = angka.toString().split('').reverse().join(''),
+            ribuan 	= reverse.match(/\d{1,3}/g);
+            ribuan	= ribuan.join('.').split('').reverse().join('');
+
+        return "Rp " + ribuan
+    }
+
     const functions = {
         fetchData,
         functionEditBiodata,
@@ -279,7 +286,8 @@ export const ProfileProvider = props => {
         functionDeleteSkill,
         functionDeleteEducation,
         dataProvinces,
-        dataCity
+        dataCity,
+        formatRupiah
     }
 
     return (

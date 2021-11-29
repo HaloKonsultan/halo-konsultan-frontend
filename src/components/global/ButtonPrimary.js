@@ -7,6 +7,7 @@ function DangerButton(props) {
         <>
             <Button
                 block
+                form={props.form}
                 onClick={props.onClick}
                 value={props.value}
                 size="large"

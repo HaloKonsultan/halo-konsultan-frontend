@@ -2,7 +2,6 @@ import React, {useEffect, useContext} from "react"
 import {Table, Tag} from 'antd';
 import {ContextOrderActive} from "../../../context/ContextOrderActive";
 import OrderTable from "../../../global/OrderTable";
-import ButtonDanger from "../../../global/ButtonDanger";
 
 function OrderTableActive(props) {
     const {dataOrder, functions} = useContext(ContextOrderActive)
@@ -29,7 +28,6 @@ function OrderTableActive(props) {
             key: 'conference_link',
             align: 'right',
             render: (conference_link) => {
-                console.log(conference_link)
                 if (conference_link === null){
                     return (
                         <>
@@ -51,11 +49,6 @@ function OrderTableActive(props) {
     ];
 
     const data = dataOrder;
-
-    const handleCheck = () => {
-        console.log("ahoy")
-        console.log(props.dataLimit)
-    }
 
     const handleDetail = (event) => {
         let idClient = event
