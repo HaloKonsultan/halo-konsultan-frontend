@@ -67,7 +67,6 @@ const LoginCard = () => {
         } else {
             showPassword.type = "password";
         }
-        console.log(showPassword)
     }
 
     return (

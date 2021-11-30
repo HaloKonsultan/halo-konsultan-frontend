@@ -1,0 +1,19 @@
+.message-modal .ant-modal-content {
+    overflow: auto;
+    border-radius: 8px
+}
+
+.message-label {
+    display: flex;
+
+    /* Change values 👇 to experiment*/
+    align-items: center;
+}
+
+.container-message {
+    margin: 40px;
+}
+
+.hightlight:focus-within {
+    background: #a1c084;
+}
