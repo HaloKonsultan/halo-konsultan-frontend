@@ -6,8 +6,6 @@ const Notifications = (props) => {
     const [isTokenFound, setTokenFound] = useState(false);
     const [input, setInput] = useState([]);
 
-    console.log("Token found", isTokenFound);
-
     // To load once
     useEffect(() => {
         let data;

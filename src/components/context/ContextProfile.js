@@ -24,7 +24,7 @@ export const ProfileProvider = props => {
             id: data.id,
             name: data.name,
             email: data.email,
-            photo: data.photo,
+            photo: "http://localhost:8000/" + data.photo,
             city: data.city,
             province: data.province,
             position: data.position,
@@ -36,7 +36,7 @@ export const ProfileProvider = props => {
             consultant_documentation: data.consultant_documentation.map(key => {
                 return {
                     id: key.id,
-                    photo: key.photo,
+                    photo: "http://localhost:8000/" + key.photo,
                 }
             }),
             consultant_experience: data.consultant_experience.map(key => {
@@ -95,7 +95,7 @@ export const ProfileProvider = props => {
                     consultant_documentation: data.consultant_documentation.map(key => {
                         return {
                             id: key.id,
-                            photo: key.photo,
+                            photo: "http://localhost:8000/" + key.photo,
                         }
                     }),
                     consultant_virtual_account: data.consultant_virtual_account.map(key => {
@@ -130,7 +130,6 @@ export const ProfileProvider = props => {
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
-                photo: input.photo,
                 gender: input.gender,
                 province: input.province,
                 city: input.city,
@@ -146,7 +145,7 @@ export const ProfileProvider = props => {
                 setInput({
                     name: input.name,
                     description: input.description,
-                    photo: input.photo,
+                    photo: "http://localhost:8000/" + input.photo,
                     gender: input.gender,
                     province: input.province,
                     city: input.city,
@@ -177,6 +176,24 @@ export const ProfileProvider = props => {
             })
             .catch(err => {
                 message.error('Mohon isi semua data', 3);
+            })
+    }
+
+    const functionUploadImage = (formdata) => {
+        API.post(`consultants/profile/upload/${Cookies.get('id')}`, formdata,
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
+        )
+            .then((res) => {
+                console.log(res)
+            })
+    }
+
+    const functionUploadDocumentation = (formdata) => {
+        API.post(`consultants/profile/upload/${Cookies.get('id')}`, formdata,
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
+        )
+            .then((res) => {
+                console.log(res)
             })
     }
 
@@ -270,9 +287,9 @@ export const ProfileProvider = props => {
     }
 
     const formatRupiah = (angka) => {
-        var	reverse = angka.toString().split('').reverse().join(''),
-            ribuan 	= reverse.match(/\d{1,3}/g);
-            ribuan	= ribuan.join('.').split('').reverse().join('');
+        var reverse = angka.toString().split('').reverse().join(''),
+            ribuan = reverse.match(/\d{1,3}/g);
+        ribuan = ribuan.join('.').split('').reverse().join('');
 
         return "Rp " + ribuan
     }
@@ -280,7 +297,9 @@ export const ProfileProvider = props => {
     const functions = {
         fetchData,
         functionEditBiodata,
+        functionUploadImage,
         functionEditProfile,
+        functionUploadDocumentation,
         functionDeleteVirtualAccount,
         functionDeleteExperience,
         functionDeleteSkill,

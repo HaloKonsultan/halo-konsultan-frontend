@@ -66,11 +66,11 @@ const ConsultationProfile = () => {
                     </Space>
                     <Space size={4} direction="vertical">
                         <LabelText text="Harga Jasa Diskusi" />
-                        <Text strong>{formatRupiah(input.chat_price)}</Text>
+                        <Text strong>{input.chat_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <LabelText text="Harga Jasa Konsultasi" />
-                        <Text strong>{formatRupiah(input.consultation_price)}</Text>
+                        <Text strong>{input.consultation_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <LabelText text="Dokumentasi Kerja" />

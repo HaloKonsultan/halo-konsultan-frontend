@@ -17,7 +17,7 @@ const EditProfile = () => {
     let history = useHistory()
 
     const {input, setInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditProfile, functionDeleteVirtualAccount} = functions
+    const {fetchData, functionEditProfile, functionDeleteVirtualAccount, functionUploadImage} = functions
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
     useEffect(() => {
@@ -61,6 +61,25 @@ const EditProfile = () => {
             }
         },
     };
+
+    const onImageChange = (event) => {
+        let formdata = new FormData()
+
+        if (event.target.files && event.target.files[0]) {
+            let img = event.target.files[0];
+
+            formdata.append('consultation_doc', img)
+            functionUploadImage(formdata)
+
+            const values = {
+                id: -1,
+                photo: URL.createObjectURL(img)
+            };
+
+            let documentationInput = input.consultant_documentation.push(values)
+            setInput({...input, documentationInput})
+        }
+    }
 
     const handleChange = (event) => {
         let typeOfValue = event.currentTarget.value
@@ -120,7 +139,8 @@ const EditProfile = () => {
                                                                     bank={e.bank}/></Col>
                                                                 <Col lg={20} md={18} xs={16}>
                                                                     <Text strong>{e.name}</Text><br/>
-                                                                    <Text type="secondary">{e.bank} - {e.card_number}</Text>
+                                                                    <Text
+                                                                        type="secondary">{e.bank} - {e.card_number}</Text>
                                                                 </Col>
                                                                 <Col lg={2} md={3} xs={2}>
                                                                     <Space>
@@ -160,12 +180,7 @@ const EditProfile = () => {
                                         ghost={false}
                                         subTitle={<LabelText text="Dokumentasi Kerja"/>}
                                         extra={[
-                                            <Upload {...props} response={false}>
-                                                <Button
-                                                    style={{color: "#3B85FA", padding: 0}} type="text">
-                                                    <b>+ Tambah Dokumentasi Kerja</b>
-                                                </Button>
-                                            </Upload>,
+                                            <input type="file" style={{color: "#3B85FA", padding: 0}} onChange={onImageChange}/>
                                         ]}/>
                                     <ul>
                                         <Space size={[8, 8]} wrap>
