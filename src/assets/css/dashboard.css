@@ -1,4 +1,4 @@
-.table  {
+.table {
     margin: 10px;
 }
 
@@ -10,17 +10,25 @@
     margin: 32px;
 }
 
-@media screen and (min-width: 768px) {
+@media(min-width: 425px) and (max-width: 728px) {
     .today-container {
         margin: 32px;
     }
+
+    .schedule-card .ant-card-head {
+        background-image: none !important;
+        background-color: #3B85FA;
+        height: 100px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
 }
 
-.schedule-card .ant-table-tbody > tr >th{
+.schedule-card .ant-table-tbody > tr > th {
     color: #4B4B4B;
 }
 
-.schedule-card .ant-table-thead > tr > th{
+.schedule-card .ant-table-thead > tr > th {
     color: #4B4B4B;
     background: #F4F4F4 !important;
 }
@@ -29,7 +37,7 @@
     color: #62676B;
 }
 
-.schedule-card .ant-card-head{
+.schedule-card .ant-card-head {
     background-image: url('../img/today-order-bg.png');
     object-fit: cover;
     height: 100px;
@@ -37,11 +45,11 @@
     border-top-right-radius: 8px;
 }
 
-.schedule-card .ant-table-tbody > tr >th{
+.schedule-card .ant-table-tbody > tr > th {
     color: #4B4B4B;
 }
 
-.schedule-card .ant-table-thead > tr >th{
+.schedule-card .ant-table-thead > tr > th {
     color: #4B4B4B;
     background: #F4F4F4 !important;
 }
