@@ -1,5 +1,5 @@
 import React from "react";
-import {Row, Col, List} from 'antd';
+import {Row, Col} from 'antd';
 import Nav from "../../layout/Header";
 import HomeMessage from "./HomeMessage";
 import SendMessage from "./SendMessage";

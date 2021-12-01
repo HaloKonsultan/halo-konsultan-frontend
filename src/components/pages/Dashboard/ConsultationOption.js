@@ -5,8 +5,7 @@ import {
 import {useParams} from "react-router-dom";
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {ContextAfterBooking} from "../../context/ContextAfterBooking";
-import {CalendarBlank, Clock} from "phosphor-react";
-import {Pencil, X} from "phosphor-react";
+import {CalendarBlank, Clock, Pencil, X} from "phosphor-react";
 import ModalAddDocument from "../../global/ModalAddDocument";
 import InputText from "../../global/InputText";
 import ButtonPrimary from "../../global/ButtonPrimary";
@@ -14,7 +13,7 @@ import "../../../assets/css/dashboard.css"
 import LabelText from "../../global/LabelText";
 
 const {Meta} = Card;
-const {Link, Text} = Typography;
+const {Text} = Typography;
 const {TextArea} = Input;
 
 const ConsultationOption = () => {

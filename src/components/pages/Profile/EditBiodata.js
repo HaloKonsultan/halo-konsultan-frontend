@@ -10,11 +10,9 @@ import {
     Input,
     Button,
     Radio,
-    DatePicker,
     Select,
     PageHeader,
     Upload,
-    message
 } from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
@@ -23,8 +21,8 @@ import {Pencil, X} from "phosphor-react";
 import {useHistory} from "react-router";
 import SelectDropdown from "../../global/SelectDropdown";
 
-const {Meta} = Card;
-const {Title, Text} = Typography;
+
+const {Text} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 

@@ -1,9 +1,8 @@
 import React, {useContext, useEffect} from "react"
-import {Card, Typography} from 'antd';
+import {Card, Typography, Row, Col} from 'antd';
 import 'antd/dist/antd.css';
 import {useParams} from "react-router-dom";
 import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
-import {Row, Col} from 'antd';
 import {FileTextOutlined} from '@ant-design/icons';
 
 const {Title, Link} = Typography;

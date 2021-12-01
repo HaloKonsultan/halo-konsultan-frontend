@@ -1,5 +1,5 @@
 import React from "react"
-import {Row, Col, Badge} from 'antd';
+import {Row, Col, Badge, Typography} from 'antd';
 import OrderTableIncoming from "./table/OrderTableIncoming";
 import OrderTableActive from "./table/OrderTableActive";
 import OrderTableWaiting from "./table/OrderTableWaiting";
@@ -7,7 +7,6 @@ import OrderToday from "./table/OrderToday";
 import ProfileNotifications from "./ProfileNotifications";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
-import {Typography} from 'antd';
 import TableHeader from "../../global/TableHeader";
 
 const {Title} = Typography;

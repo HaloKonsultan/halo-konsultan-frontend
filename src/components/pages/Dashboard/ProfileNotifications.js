@@ -1,6 +1,5 @@
 import React, {useContext, useEffect} from "react"
-import {Button, Card} from 'antd';
-import {Typography} from 'antd';
+import {Button, Card, Typography} from 'antd';
 import {ExclamationCircleOutlined} from '@ant-design/icons';
 import {ContextProfile} from "../../context/ContextProfile";
 import {useHistory} from "react-router";

@@ -1,6 +1,6 @@
 import React from "react";
 import Nav from "../../layout/Header";
-import { Input, Space, Card, Typography, Layout} from 'antd';
+import {Input, Space, Card, Typography, Layout} from 'antd';
 import {SendOutlined} from "@ant-design/icons";
 import Cookies from "js-cookie";
 import {PaperPlaneRight} from "phosphor-react";

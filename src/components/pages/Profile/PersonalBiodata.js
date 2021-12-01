@@ -1,14 +1,17 @@
 import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router";
-import {Card} from 'antd';
-import {Button} from 'antd';
-import {Row, Col} from 'antd';
-import {Typography, Space} from 'antd';
+import {
+    Card, 
+    Button, 
+    Row, 
+    Col,
+    Typography,
+    Space } from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
 import noImage from "../../../assets/img/no-image.png"
 import noProfile from "../../../assets/img/noprofile.png"
 
-const {Title, Text, Link} = Typography;
+const {Title, Text} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()

@@ -1,5 +1,5 @@
 import React from "react"
-import {Button, Form, Input, Modal} from "antd";
+import {Form, Input, Modal} from "antd";
 import InputText from "./InputText";
 import ButtonPrimary from "./ButtonPrimary";
 import LabelText from "./LabelText";

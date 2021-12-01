@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from "react"
-import {Card, Space, Modal, Form, Row, Col, Input} from 'antd';
-import {Typography} from 'antd';
+import {Card, Space, Modal, Form, Row, Col, Input, Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
 import {useParams} from "react-router-dom";
 import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";

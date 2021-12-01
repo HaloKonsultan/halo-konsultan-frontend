@@ -1,15 +1,13 @@
 import React, {useContext, useEffect, useState} from "react"
-import {Card, Button, Checkbox, Space} from 'antd';
+import {Card, Button, Checkbox, Space, message, Typography} from 'antd';
 import Cookies from "js-cookie"
 import axios from "axios"
 import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import {ContextUser} from "../components/context/ContextUser";
-import {message} from 'antd';
 import InputText from "../components/global/InputText";
 import ButtonPrimary from "../components/global/ButtonPrimary";
-import {Typography} from 'antd';
 import {getToken} from "../Firebase";
 
 const {Text} = Typography;
