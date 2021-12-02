@@ -24,7 +24,7 @@ export const ProfileProvider = props => {
             id: data.id,
             name: data.name,
             email: data.email,
-            photo: "http://localhost:8000/" + data.photo,
+            photo: "https://api.halokonsultan.me/" + data.photo,
             city: data.city,
             province: data.province,
             position: data.position,
@@ -36,7 +36,7 @@ export const ProfileProvider = props => {
             consultant_documentation: data.consultant_documentation.map(key => {
                 return {
                     id: key.id,
-                    photo: "http://localhost:8000/" + key.photo,
+                    photo: "https://api.halokonsultan.me/" + key.photo,
                 }
             }),
             consultant_experience: data.consultant_experience.map(key => {
@@ -95,7 +95,7 @@ export const ProfileProvider = props => {
                     consultant_documentation: data.consultant_documentation.map(key => {
                         return {
                             id: key.id,
-                            photo: "http://localhost:8000/" + key.photo,
+                            photo: "https://api.halokonsultan.me/" + key.photo,
                         }
                     }),
                     consultant_virtual_account: data.consultant_virtual_account.map(key => {
@@ -145,7 +145,7 @@ export const ProfileProvider = props => {
                 setInput({
                     name: input.name,
                     description: input.description,
-                    photo: "http://localhost:8000/" + input.photo,
+                    photo: "https://api.halokonsultan.me/" + input.photo,
                     gender: input.gender,
                     province: input.province,
                     city: input.city,

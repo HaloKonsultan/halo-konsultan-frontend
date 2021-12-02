@@ -10,18 +10,25 @@
     margin: 32px;
 }
 
-@media(min-width: 425px) and (max-width: 728px) {
+@media(max-width: 425px) {
     .today-container {
         margin: 32px;
     }
 
     .schedule-card .ant-card-head {
-        background-image: none !important;
-        background-color: #3B85FA;
+        background-image: url('../img/today-order-bg-mini.png');
         height: 100px;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
     }
+
+    .accept-decline-card {
+        width: 100%;
+    }
+}
+
+.accept-decline-card {
+    width: 85%;
 }
 
 .schedule-card .ant-table-tbody > tr > th {
