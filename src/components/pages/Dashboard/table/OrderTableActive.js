@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from "react"
-import {Table, Tag} from 'antd';
+import {Tag} from 'antd';
 import {ContextOrderActive} from "../../../context/ContextOrderActive";
 import OrderTable from "../../../global/OrderTable";
 

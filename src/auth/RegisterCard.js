@@ -1,11 +1,10 @@
 import React, {useState} from "react"
-import {Card, Button, Checkbox, Space} from 'antd';
+import {Card, Button, Checkbox, Space, Typography} from 'antd';
 import axios from "axios"
 import "../assets/css/auth.css"
 import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import InputText from "../components/global/InputText";
-import {Typography} from 'antd';
 import ButtonPrimary from "../components/global/ButtonPrimary";
 
 const {Text} = Typography;

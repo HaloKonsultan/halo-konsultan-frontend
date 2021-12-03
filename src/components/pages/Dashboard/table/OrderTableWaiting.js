@@ -1,5 +1,4 @@
 import React, {useEffect, useContext} from "react"
-import {Table} from 'antd';
 import {ContextOrderWaiting} from "../../../context/ContextOrderWaiting";
 import OrderTable from "../../../global/OrderTable";
 

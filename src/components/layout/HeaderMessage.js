@@ -47,9 +47,11 @@ const NavMessage = (props) => {
                 visible={isSkillVisible}
                 onCancel={handleCancel}
                 footer={null}
+                style={{width: 280, height:232}}
                
             >
-                 <Text strong>Apakah Anda ingin mengakhiri percakapan ini?</Text><br/><br/>
+                 <Text strong>Apakah Anda ingin 
+                 mengakhiri percakapan ini?</Text><br/><br/>
                  <Space size={15} direction="vertical">
                  <Button type="primary"style={{width:232, borderRadius: 8}}>Lanjutkan Percakapan</Button>
                  <Button danger
