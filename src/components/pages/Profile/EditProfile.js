@@ -104,7 +104,7 @@ const EditProfile = () => {
     return (
         <>
             <Nav/>
-            <div className="container-profile">
+            <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Row>
                     <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
                         <Card title={<Title level={4}>Edit Profil Konsultasi</Title>}

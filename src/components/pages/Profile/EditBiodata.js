@@ -224,8 +224,8 @@ const EditBiodata = () => {
     return (
         <>
             <Nav/>
-            <div className="container-profile">
-                <Card title="Edit Profil Diri" style={{width: 720, borderRadius: 8}}>
+            <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
+                <Card title="Edit Profil Diri" style={{width: "100%", borderRadius: 8}}>
                     <Space size={24} direction="vertical" style={{width: "100%"}}>
                         <Row>
                             <Col span={6}>
@@ -268,10 +268,15 @@ const EditBiodata = () => {
                         <Space size={8} direction="vertical" style={{width: "100%"}}>
                             <Text type="secondary">Jenis Kelamin</Text>
                             <Radio.Group onChange={onChangeGender}>
-                                <Space size={240}>
-                                    <Radio value="Pria">Pria </Radio>
-                                    <Radio value="Wanita">Wanita</Radio>
-                                </Space>
+                                <Row  style={{width: "100%"}}>
+                                    <Col span={12}>
+                                        <Radio value="Pria">Pria </Radio>
+                                    </Col>
+                                    <Col span={12}>
+                                        <Radio value="Wanita">Wanita</Radio>
+                                    </Col>
+                                </Row>
+                                
                             </Radio.Group>
                         </Space>
 
