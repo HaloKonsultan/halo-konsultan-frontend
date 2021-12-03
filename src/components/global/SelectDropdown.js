@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react"
-import {Button, Select} from "antd";
+import {Select} from "antd";
 import {ContextProfile} from "../context/ContextProfile";
 
 const {Option} = Select;
