@@ -18,11 +18,16 @@ function Dashboard() {
         <>
             <Nav title="Dashboard"/>
             <Row>
-                <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 14, order: 1}}>
+                {/*<Col xs={{span: 24, order: 1}} sm={{span: 18, order: 1}} lg={{span: 14, order: 1}}>*/}
+                {/*    <div className="notification-container table">*/}
+                {/*        <ProfileNotifications/>*/}
+                {/*    </div>*/}
+                {/*</Col>*/}
+                <Col xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 14, order: 2}}>
+                    <div className="notification-container table">
+                        <ProfileNotifications/>
+                    </div>
                     <div className="dashboard-container">
-                        <div className="table">
-                            <ProfileNotifications/>
-                        </div>
                         <div className="table">
                             <TableHeader link="/incoming-order"
                                          title="Konsultasi Masuk "
@@ -41,7 +46,7 @@ function Dashboard() {
                         </div>
                     </div>
                 </Col>
-                <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 10}}>
+                <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10}}>
                     <div className="table today-container" style={{alignItems: "center", justifyContent: "center", display: "flex"}}>
                         <OrderToday/>
                     </div>

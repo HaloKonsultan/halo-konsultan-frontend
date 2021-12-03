@@ -6,13 +6,17 @@
     margin: 32px;
 }
 
+.notification-container {
+    margin: 32px 32px 0 32px;
+}
+
 .today-container {
-    margin: 32px;
+    margin: 32px 32px 0 32px;
 }
 
 @media(max-width: 425px) {
     .today-container {
-        margin: 32px;
+        margin: 32px 32px 0 32px;
     }
 
     .schedule-card .ant-card-head {

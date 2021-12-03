@@ -7,6 +7,7 @@ import {Typography, Space} from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
 import noImage from "../../../assets/img/no-image.png"
 import noProfile from "../../../assets/img/noprofile.png"
+import {SERVER_NAME} from "../../context/API";
 
 const {Title, Text, Link} = Typography;
 
@@ -44,7 +45,7 @@ const PersonalBiodata = () => {
                 <Row>
                     <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
                         {
-                            input.photo === undefined &&
+                            input.photo === SERVER_NAME + null &&
                             <img
                                 src={noImage}
                                 alt="profile-picture"
@@ -59,7 +60,7 @@ const PersonalBiodata = () => {
                                 }}/>
                         }
                         {
-                            input.photo &&
+                            input.photo !== SERVER_NAME + null &&
                             <img
                                 src={input.photo}
                                 alt="profile-picture"

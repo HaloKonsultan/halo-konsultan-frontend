@@ -3,7 +3,7 @@ import axios from "axios";
 import {useHistory} from "react-router";
 import Cookies from "js-cookie";
 import {message} from "antd";
-import API from "./API"
+import API, {SERVER_NAME} from "./API"
 
 export const ContextProfile = createContext()
 
@@ -24,7 +24,7 @@ export const ProfileProvider = props => {
             id: data.id,
             name: data.name,
             email: data.email,
-            photo: "https://api.halokonsultan.me/" + data.photo,
+            photo: SERVER_NAME + data.photo,
             city: data.city,
             province: data.province,
             position: data.position,
@@ -36,7 +36,7 @@ export const ProfileProvider = props => {
             consultant_documentation: data.consultant_documentation.map(key => {
                 return {
                     id: key.id,
-                    photo: "https://api.halokonsultan.me/" + key.photo,
+                    photo: SERVER_NAME + key.photo,
                 }
             }),
             consultant_experience: data.consultant_experience.map(key => {
@@ -71,8 +71,8 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        await dataProvinces()
-        await dataCategories()
+        // await dataProvinces()
+        // await dataCategories()
     }
 
     const functionEditProfile = () => {
@@ -95,7 +95,7 @@ export const ProfileProvider = props => {
                     consultant_documentation: data.consultant_documentation.map(key => {
                         return {
                             id: key.id,
-                            photo: "https://api.halokonsultan.me/" + key.photo,
+                            photo: SERVER_NAME + key.photo,
                         }
                     }),
                     consultant_virtual_account: data.consultant_virtual_account.map(key => {
@@ -145,7 +145,7 @@ export const ProfileProvider = props => {
                 setInput({
                     name: input.name,
                     description: input.description,
-                    photo: "https://api.halokonsultan.me/" + input.photo,
+                    photo: SERVER_NAME + input.photo,
                     gender: input.gender,
                     province: input.province,
                     city: input.city,
