@@ -1,14 +1,18 @@
 import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router";
-import {Card} from 'antd';
-import {Button} from 'antd';
-import {Row, Col} from 'antd';
-import {Typography, Space} from 'antd';
+import {
+    Card, 
+    Button, 
+    Row, 
+    Col,
+    Typography,
+    Space } from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
 import noImage from "../../../assets/img/no-image.png"
 import noProfile from "../../../assets/img/noprofile.png"
+import {SERVER_NAME} from "../../context/API";
 
-const {Title, Text, Link} = Typography;
+const {Title, Text} = Typography;
 
 const PersonalBiodata = () => {
     let history = useHistory()
@@ -42,9 +46,9 @@ const PersonalBiodata = () => {
                       </>
                   }>
                 <Row>
-                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 11, order: 1}}>
                         {
-                            input.photo === undefined &&
+                            input.photo === SERVER_NAME + null &&
                             <img
                                 src={noImage}
                                 alt="profile-picture"
@@ -59,7 +63,7 @@ const PersonalBiodata = () => {
                                 }}/>
                         }
                         {
-                            input.photo &&
+                            input.photo !== SERVER_NAME + null &&
                             <img
                                 src={input.photo}
                                 alt="profile-picture"
@@ -74,7 +78,7 @@ const PersonalBiodata = () => {
                                 }}/>
                         }
                     </Col>
-                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 12, order: 2}}>
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 13, order: 2}}>
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>

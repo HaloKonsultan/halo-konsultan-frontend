@@ -3,7 +3,7 @@ import axios from "axios";
 import {useHistory} from "react-router";
 import Cookies from "js-cookie";
 import {message} from "antd";
-import API from "./API"
+import API, {SERVER_NAME} from "./API"
 
 export const ContextProfile = createContext()
 
@@ -13,6 +13,7 @@ export const ProfileProvider = props => {
     const [input, setInput] = useState([])
     const [inputProvince, setInputProvince] = useState([])
     const [inputCategories, setInputCategories] = useState([])
+    const [errorMessage, setErrorMessage] = useState(true)
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -24,7 +25,7 @@ export const ProfileProvider = props => {
             id: data.id,
             name: data.name,
             email: data.email,
-            photo: "http://localhost:8000/" + data.photo,
+            photo: SERVER_NAME + data.photo,
             city: data.city,
             province: data.province,
             position: data.position,
@@ -36,7 +37,7 @@ export const ProfileProvider = props => {
             consultant_documentation: data.consultant_documentation.map(key => {
                 return {
                     id: key.id,
-                    photo: "http://localhost:8000/" + key.photo,
+                    photo: SERVER_NAME + key.photo,
                 }
             }),
             consultant_experience: data.consultant_experience.map(key => {
@@ -71,6 +72,12 @@ export const ProfileProvider = props => {
                 }
             }),
         })
+        Object.keys(input).forEach(function(key) {
+            if(input[key] === null) {
+                input[key] = '-';
+            }
+        })
+        console.log(input)
         await dataProvinces()
         await dataCategories()
     }
@@ -95,7 +102,7 @@ export const ProfileProvider = props => {
                     consultant_documentation: data.consultant_documentation.map(key => {
                         return {
                             id: key.id,
-                            photo: "http://localhost:8000/" + key.photo,
+                            photo: SERVER_NAME + key.photo,
                         }
                     }),
                     consultant_virtual_account: data.consultant_virtual_account.map(key => {
@@ -127,6 +134,7 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
+        console.log(input)
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -141,11 +149,12 @@ export const ProfileProvider = props => {
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
+                setErrorMessage(false)
                 let data = res.data.data
                 setInput({
                     name: input.name,
                     description: input.description,
-                    photo: "http://localhost:8000/" + input.photo,
+                    photo: SERVER_NAME + input.photo,
                     gender: input.gender,
                     province: input.province,
                     city: input.city,
@@ -176,6 +185,8 @@ export const ProfileProvider = props => {
             })
             .catch(err => {
                 message.error('Mohon isi semua data', 3);
+                setErrorMessage(true)
+                history.push("/edit-biodata")
             })
     }
 
@@ -259,16 +270,19 @@ export const ProfileProvider = props => {
     }
 
     const dataProvinces = async () => {
-        let result = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/provinsi`)
-        let data = result.data.provinsi
-        setInputProvince({
-            province: data.map(key => {
-                return {
-                    id: key.id,
-                    name: key.nama,
-                }
-            }),
+        let result = await axios.get(`https://api.rajaongkir.com/starter/province`, {
+            headers: { 'key': 'aee020347d9bcebda31efff6ec3eaade', 'content-type': 'application/json' }
         })
+        let data = result.data
+        console.log(data)
+        // setInputProvince({
+        //     province: data.map(key => {
+        //         return {
+        //             id: key.id,
+        //             name: key.nama,
+        //         }
+        //     }),
+        // })
     }
 
     const dataCity = async (id) => {
@@ -306,6 +320,7 @@ export const ProfileProvider = props => {
         functionDeleteEducation,
         dataProvinces,
         dataCity,
+        dataCategories,
         formatRupiah
     }
 
@@ -315,6 +330,8 @@ export const ProfileProvider = props => {
             setDataProfile,
             input,
             setInput,
+            errorMessage,
+            setErrorMessage,
             inputProvince,
             setInputProvince,
             inputCategories,

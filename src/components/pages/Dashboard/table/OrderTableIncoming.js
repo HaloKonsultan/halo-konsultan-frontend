@@ -1,5 +1,5 @@
 import React, {useEffect, useContext} from "react"
-import {Table, Button} from 'antd';
+import {Button} from 'antd';
 import {ContextOrderIncoming} from "../../../context/ContextOrderIncoming";
 import OrderTable from "../../../global/OrderTable";
 
@@ -35,6 +35,8 @@ const OrderTableIncoming = (props) => {
         },
         {
             title: '',
+            fixed: 'right',
+            width: 130,
             key: 'id',
             dataIndex: 'id',
             align: 'center',

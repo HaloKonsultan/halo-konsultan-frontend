@@ -35,6 +35,7 @@ import ConsultationHistoryDetail from "../pages/history/pages/ConsultationHistor
 import History from "../pages/history/History";
 
 import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
+import {MessageProvider} from "../context/ContextMessage";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -58,6 +59,7 @@ const Routes = () => {
                     <TodayOrderProvider>
                     <ProfileProvider>
                     <AfterBookingProvider>
+                    <MessageProvider>
                         <Switch>
                             <LoginRoute path="/" search="Dashboard" exact>
                                 <LayoutComponent content={<Dashboard/>}/>
@@ -121,6 +123,7 @@ const Routes = () => {
                                 <LayoutComponent content={<EditProfile/>}/>
                             </LoginRoute>
                         </Switch>
+                    </MessageProvider>
                     </AfterBookingProvider>
                     </ProfileProvider>
                     </TodayOrderProvider>

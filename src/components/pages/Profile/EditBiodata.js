@@ -10,11 +10,9 @@ import {
     Input,
     Button,
     Radio,
-    DatePicker,
     Select,
     PageHeader,
     Upload,
-    message
 } from 'antd';
 import "../../../assets/css/profile.css"
 import Nav from "../../layout/Header";
@@ -22,15 +20,16 @@ import {ContextProfile} from "../../context/ContextProfile";
 import {Pencil, X} from "phosphor-react";
 import {useHistory} from "react-router";
 import SelectDropdown from "../../global/SelectDropdown";
+import LabelText from "../../global/LabelText";
 
-const {Meta} = Card;
-const {Title, Text} = Typography;
+
+const {Text} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
     let history = useHistory()
-    const {input, setInput, inputProvince, inputCategories, functions} = useContext(ContextProfile)
+    const {input, setInput, inputProvince, inputCategories, errorMessage, functions} = useContext(ContextProfile)
     const {
         fetchData,
         functionEditBiodata,
@@ -38,8 +37,10 @@ const EditBiodata = () => {
         functionDeleteSkill,
         functionDeleteEducation,
         functionUploadImage,
-        dataCity
+        dataCity,
+        dataCategories
     } = functions
+    const [gender, setGender] = React.useState(input.gender);
 
     useEffect(() => {
         fetchData()
@@ -54,6 +55,7 @@ const EditBiodata = () => {
         let typeOfValue = e.target.value
         let name = "gender"
         setInput({...input, [name]: typeOfValue})
+        setGender(e.target.value)
     };
 
     const handleCategorieChange = (value) => {
@@ -218,346 +220,357 @@ const EditBiodata = () => {
         event.preventDefault()
 
         functionEditBiodata()
-        history.push(`/profile`)
+        if(errorMessage === false){
+            history.push(`/profile`)
+        }
     }
 
     return (
         <>
             <Nav/>
-            <div className="container-profile">
-                <Card title="Edit Profil Diri" style={{width: 720, borderRadius: 8}}>
-                    <Space size={24} direction="vertical" style={{width: "100%"}}>
-                        <Row>
-                            <Col span={6}>
-                                <img src={input.photo} alt="profile-picture"
-                                     style={{
-                                         width: 144,
-                                         height: 144,
-                                         borderRadius: 8,
-                                         boxShadow: "0 0 0 1px #CED4DA"
-                                     }}/>
-                            </Col>
-                            <Col span={18}>
-                                <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                    <input type="file" name="myImage" onChange={onImageChange} />
-                                    {/*<Upload {...props}>*/}
-                                    {/*    <Button style={{borderRadius: 4}}>Edit Profile</Button>*/}
-                                    {/*</Upload>*/}
-                                    <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
-                                </Space>
-                            </Col>
-                        </Row>
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <Text type="secondary">Nama Lengkap</Text>
-                            <Input style={{borderRadius: 8, height: 48}}
-                                   name="name"
-                                   onChange={handleChange}
-                                   placeholder="Nama lengkap"
-                                   value={input.name}/>
-                        </Space>
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <Text type="secondary">Deskripsi</Text>
-                            <TextArea
-                                style={{borderRadius: 8}}
-                                rows={6}
-                                name="description"
-                                placeholder="Deskripsi"
-                                onChange={handleChange}
-                                value={input.description}/>
-                        </Space>
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <Text type="secondary">Jenis Kelamin</Text>
-                            <Radio.Group onChange={onChangeGender}>
-                                <Space size={240}>
-                                    <Radio value="Pria">Pria </Radio>
-                                    <Radio value="Wanita">Wanita</Radio>
-                                </Space>
-                            </Radio.Group>
-                        </Space>
+            <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
+                <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
+                    <Card title="Edit Profil Diri" style={{width: "100%", borderRadius: 8}}>
+                        <Space size={24} direction="vertical" style={{width: "100%"}}>
+                            <Row>
+                                <Col xs={13} sm={8} md={10} lg={6}>
+                                    <img src={input.photo} alt="profile-picture"
+                                         style={{
+                                             width: 144,
+                                             height: 144,
+                                             borderRadius: 8,
+                                             boxShadow: "0 0 0 1px #CED4DA"
+                                         }}/>
+                                </Col>
+                                <Col xs={11} sm={16} md={14} lg={18}>
+                                    <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                        <input type="file" name="myImage" onChange={onImageChange} title=" "/>
+                                        {/*<Upload {...props}>*/}
+                                        {/*    <Button style={{borderRadius: 4}}>Edit Profile</Button>*/}
+                                        {/*</Upload>*/}
+                                        <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <LabelText text="Nama Lengkap"/>
+                                <Input style={{borderRadius: 8, height: 48}}
+                                       name="name"
+                                       onChange={handleChange}
+                                       placeholder="Nama lengkap"
+                                       value={input.name}/>
+                            </Space>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <LabelText text="Deskripsi"/>
+                                <TextArea
+                                    style={{borderRadius: 8}}
+                                    rows={6}
+                                    name="description"
+                                    placeholder="Deskripsi"
+                                    onChange={handleChange}
+                                    value={input.description}/>
+                            </Space>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <LabelText text="Jenis Kelamin"/>
+                                <Radio.Group onChange={onChangeGender} value={gender}>
+                                    <Row style={{width: "100%"}}>
+                                        <Col span={12}>
+                                            <Radio value="Pria">Pria </Radio>
+                                        </Col>
+                                        <Col span={12}>
+                                            <Radio value="Wanita">Wanita</Radio>
+                                        </Col>
+                                    </Row>
 
-                        <Row style={{width: "100%"}}>
-                            <Col span={11}>
-                                <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                    <Text type="secondary">Provinsi</Text>
-                                    <SelectDropdown
-                                        defaultValue={input.province}
-                                        onChange={handleProvinceChange}
-                                        placeholder="Provinsi"
-                                        option={
-                                            inputProvince.province && (
-                                                <>
-                                                    {inputProvince.province.map((e, index) => {
-                                                        return (
-                                                            <>
-                                                                <Option value={[e.name, e.id]}>{e.name}</Option>
-                                                            </>
-                                                        )
-                                                    })}
-                                                </>
-                                            )}
-                                    />
-                                </Space>
-                            </Col>
-                            <Col span={1}/>
-                            <Col span={12}>
-                                <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                    <Text type="secondary">Kota</Text>
-                                    <SelectDropdown
-                                        defaultValue={input.city}
-                                        onChange={handleCityChange}
-                                        placeholder="Kota"
-                                        option={
-                                            inputProvince.cities && (
-                                                <>
-                                                    {inputProvince.cities.map((e, index) => {
-                                                        return (
-                                                            <>
-                                                                <Option value={e.name}>{e.name}</Option>
-                                                            </>
-                                                        )
-                                                    })}
-                                                </>
-                                            )}
-                                    />
-                                </Space>
-                            </Col>
-                        </Row>
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <PageHeader
-                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
-                                ghost={false}
-                                subTitle={<Text type="secondary">Pendidikan</Text>}
-                                extra={[
-                                    <Button
-                                        onClick={showEducationModal}
-                                        style={{
-                                            color: "#3B85FA"
-                                        }}
-                                        type="text">
-                                        <b>+ Tambah Riwayat Pendidikan</b>
-                                    </Button>,
-                                ]}
-                            />
-                            {
-                                input.consultant_education && (
-                                    <>
-                                        {input.consultant_education.map((e, index) => {
-                                            return (
-                                                <>
-                                                    <Card
-                                                        style={{
-                                                            width: "100%",
-                                                            height: 68,
-                                                            borderRadius: 8,
-                                                            overflow: "hidden"
-                                                        }}
-                                                        type="inner"
-                                                        title={
-                                                            <>
+                                </Radio.Group>
+                            </Space>
+
+                            <Row style={{width: "100%"}}>
+                                <Col span={11}>
+                                    <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                        <LabelText text="Provinsi"/>
+                                        <SelectDropdown
+                                            defaultValue={input.province}
+                                            onChange={handleProvinceChange}
+                                            placeholder="Provinsi"
+                                            option={
+                                                inputProvince.province && (
+                                                    <>
+                                                        {inputProvince.province.map((e, index) => {
+                                                            return (
+                                                                <>
+                                                                    <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                                </>
+                                                            )
+                                                        })}
+                                                    </>
+                                                )}
+                                        />
+                                    </Space>
+                                </Col>
+                                <Col span={1}/>
+                                <Col span={12}>
+                                    <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                        <LabelText text="Kota"/>
+                                        <SelectDropdown
+                                            defaultValue={input.city}
+                                            onChange={handleCityChange}
+                                            placeholder="Kota"
+                                            option={
+                                                inputProvince.cities && (
+                                                    <>
+                                                        {inputProvince.cities.map((e, index) => {
+                                                            return (
+                                                                <>
+                                                                    <Option value={e.name}>{e.name}</Option>
+                                                                </>
+                                                            )
+                                                        })}
+                                                    </>
+                                                )}
+                                        />
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <PageHeader
+                                    style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                    ghost={false}
+                                    subTitle={<LabelText text="Pendidikan"/>}
+                                    extra={[
+                                        <Button
+                                            onClick={showEducationModal}
+                                            style={{
+                                                color: "#3B85FA"
+                                            }}
+                                            type="text">
+                                            <b>+ Tambah Riwayat Pendidikan</b>
+                                        </Button>,
+                                    ]}
+                                />
+                                {
+                                    input.consultant_education && (
+                                        <>
+                                            {input.consultant_education.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Card
+                                                            style={{
+                                                                width: "100%",
+                                                                height: 68,
+                                                                borderRadius: 8,
+                                                                overflow: "hidden"
+                                                            }}
+                                                            type="inner"
+                                                            title={
+                                                                <>
+                                                                    <Row>
+                                                                        <Col xs={22} sm={22} md={22} lg={23}>
+                                                                            <Text>{e.institution_name}</Text><br/>
+                                                                            <Text
+                                                                                type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                                        </Col>
+                                                                        <Col xs={2} sm={2} md={2} lg={1}>
+                                                                            <Space>
+                                                                                {/*<Button value={e.id}*/}
+                                                                                {/*        style={{*/}
+                                                                                {/*            padding: 0,*/}
+                                                                                {/*            paddingTop: 10*/}
+                                                                                {/*        }}*/}
+                                                                                {/*        type="link"><Pencil*/}
+                                                                                {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
+                                                                                {/*    size={24} weight="fill"/></Button>*/}
+                                                                                <Button value={e.id}
+                                                                                        style={{
+                                                                                            padding: 0,
+                                                                                            paddingTop: 10
+                                                                                        }}
+                                                                                        onClick={deleteEducation}
+                                                                                        type="link"><X
+                                                                                    size={24}/></Button>
+                                                                            </Space>
+                                                                        </Col>
+                                                                    </Row>
+                                                                </>
+                                                            }
+                                                        >
+                                                        </Card>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
+                            </Space>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <LabelText text="Bidang Keahlian"/>
+                                <SelectDropdown
+                                    defaultValue={input.position}
+                                    onChange={handleCategorieChange}
+                                    placeholder="Bidang Kategori"
+                                    option={
+                                        inputCategories.categories && (
+                                            <>
+                                                {inputCategories.categories.map((e, index) => {
+                                                    return (
+                                                        <>
+                                                            <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                        </>
+                                                    )
+                                                })}
+                                            </>
+                                        )
+                                    }
+                                />
+                            </Space>
+
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <PageHeader
+                                    style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                    ghost={false}
+                                    subTitle={<LabelText text="Pengalaman"/>}
+                                    extra={[
+                                        <Button
+                                            onClick={showExperienceModal}
+                                            style={{
+                                                color: "#3B85FA"
+                                            }}
+                                            type="text">
+                                            <b>+ Tambah Pengalaman Kerja</b>
+                                        </Button>,
+                                    ]}
+                                />
+                                <h6 style={{color: "gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan
+                                    bidang
+                                    konsultasi
+                                </h6>
+                                {
+                                    input.consultant_experience && (
+                                        <>
+                                            {input.consultant_experience.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Card
+                                                            style={{
+                                                                width: "100%",
+                                                                height: 68,
+                                                                borderRadius: 8,
+                                                                overflow: "hidden"
+                                                            }}
+                                                            type="inner"
+                                                            title={<>
                                                                 <Row>
-                                                                    <Col span={23}>
-                                                                        <Text>{e.institution_name}</Text><br/>
-                                                                        <Text
-                                                                            type="secondary">{e.major} {e.start_year} - {e.end_year}</Text>
+                                                                    <Col xs={22} sm={22} md={22} lg={23}>
+                                                                        <Text>{e.position}</Text><br/>
+                                                                        <Text style={{fontSize: 14}}
+                                                                              type="secondary">{e.start_year} - {e.end_year}</Text>
                                                                     </Col>
-                                                                    <Col span={1}>
+                                                                    <Col xs={2} sm={2} md={2} lg={1}>
                                                                         <Space>
                                                                             {/*<Button value={e.id}*/}
-                                                                            {/*        style={{*/}
-                                                                            {/*            padding: 0,*/}
-                                                                            {/*            paddingTop: 10*/}
-                                                                            {/*        }}*/}
+                                                                            {/*        style={{padding: 0, paddingTop: 10}}*/}
                                                                             {/*        type="link"><Pencil*/}
-                                                                            {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
+                                                                            {/*        onClick={() => updateExperience(e.id, e.position, e.start_year, e.end_year)}*/}
                                                                             {/*    size={24} weight="fill"/></Button>*/}
                                                                             <Button value={e.id}
                                                                                     style={{
                                                                                         padding: 0,
-                                                                                        paddingTop: 10
+                                                                                        paddingTop: 10,
+                                                                                        float: "right"
                                                                                     }}
-                                                                                    onClick={deleteEducation}
+                                                                                    onClick={deleteExperience}
                                                                                     type="link"><X
                                                                                 size={24}/></Button>
                                                                         </Space>
                                                                     </Col>
                                                                 </Row>
                                                             </>
-                                                        }
-                                                    >
-                                                    </Card>
-                                                </>
-                                            )
-                                        })}
-                                    </>
-                                )}
-                        </Space>
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <Text type="secondary">Bidang Keahlian</Text>
-                            <SelectDropdown
-                                defaultValue={input.position}
-                                onChange={handleCategorieChange}
-                                placeholder="Bidang Kategori"
-                                option={
-                                    inputCategories.categories && (
-                                        <>
-                                            {inputCategories.categories.map((e, index) => {
-                                                return (
-                                                    <>
-                                                        <Option value={[e.name, e.id]}>{e.name}</Option>
+                                                            }
+                                                        >
+                                                        </Card>
                                                     </>
                                                 )
                                             })}
                                         </>
-                                    )
-                                }
-                            />
-                        </Space>
+                                    )}
+                            </Space>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
+                                <PageHeader
+                                    style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
+                                    ghost={false}
+                                    subTitle={<LabelText text="Keahlian"/>}
+                                    extra={[
+                                        <Button
+                                            onClick={showSkillModal}
+                                            style={{
+                                                color: "#3B85FA"
+                                            }}
+                                            type="text">
+                                            <b>+ Tambah Bidang Keahlian</b>
+                                        </Button>,
+                                    ]}
+                                />
+                                {
+                                    input.consultant_skill && (
+                                        <>
+                                            {input.consultant_skill.map((e, index) => {
+                                                return (
+                                                    <>
+                                                        <Card
+                                                            style={{
+                                                                width: "100%",
+                                                                height: 48,
+                                                                borderRadius: 8,
+                                                                overflow: "hidden"
+                                                            }}
+                                                            type="inner"
+                                                            title={
+                                                                <>
+                                                                    <Row>
+                                                                        <Col xs={22} sm={22} md={22} lg={23}>
+                                                                            <Text>{e.skills}</Text>
+                                                                        </Col>
+                                                                        <Col xs={2} sm={2} md={2} lg={1}>
+                                                                            <Space>
+                                                                                {/*<Button value={e.id}*/}
+                                                                                {/*        style={{*/}
+                                                                                {/*            padding: 0,*/}
+                                                                                {/*            paddingBottom: 10*/}
+                                                                                {/*        }} type="link"><Pencil*/}
+                                                                                {/*        onClick={() => updateSkill(e.id, e.skills)}*/}
+                                                                                {/*    size={24} weight="fill"/></Button>*/}
+                                                                                <Button value={e.id}
+                                                                                        style={{
+                                                                                            padding: 0,
+                                                                                            paddingBottom: 10
+                                                                                        }}
+                                                                                        onClick={deleteSkill}
+                                                                                        type="link"><X
+                                                                                    size={24}/></Button>
+                                                                            </Space>
+                                                                        </Col>
+                                                                    </Row>
+                                                                </>
+                                                            }
+                                                        >
+                                                        </Card>
+                                                    </>
+                                                )
+                                            })}
+                                        </>
+                                    )}
 
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <PageHeader
-                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
-                                ghost={false}
-                                subTitle={<Text type="secondary">Pengalaman</Text>}
-                                extra={[
-                                    <Button
-                                        onClick={showExperienceModal}
-                                        style={{
-                                            color: "#3B85FA"
-                                        }}
-                                        type="text">
-                                        <b>+ Tambah Pengalaman Kerja</b>
-                                    </Button>,
-                                ]}
-                            />
-                            <h6 style={{color: "gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan bidang
-                                konsultasi
-                            </h6>
-                            {
-                                input.consultant_experience && (
-                                    <>
-                                        {input.consultant_experience.map((e, index) => {
-                                            return (
-                                                <>
-                                                    <Card
-                                                        style={{
-                                                            width: "100%",
-                                                            height: 68,
-                                                            borderRadius: 8,
-                                                            overflow: "hidden"
-                                                        }}
-                                                        type="inner"
-                                                        title={<>
-                                                            <Row>
-                                                                <Col span={23}>
-                                                                    <Text>{e.position}</Text><br/>
-                                                                    <Text style={{fontSize: 14}}
-                                                                          type="secondary">{e.start_year} - {e.end_year}</Text>
-                                                                </Col>
-                                                                <Col span={1}>
-                                                                    <Space>
-                                                                        {/*<Button value={e.id}*/}
-                                                                        {/*        style={{padding: 0, paddingTop: 10}}*/}
-                                                                        {/*        type="link"><Pencil*/}
-                                                                        {/*        onClick={() => updateExperience(e.id, e.position, e.start_year, e.end_year)}*/}
-                                                                        {/*    size={24} weight="fill"/></Button>*/}
-                                                                        <Button value={e.id}
-                                                                                style={{
-                                                                                    padding: 0,
-                                                                                    paddingTop: 10,
-                                                                                    float: "right"
-                                                                                }}
-                                                                                onClick={deleteExperience}
-                                                                                type="link"><X
-                                                                            size={24}/></Button>
-                                                                    </Space>
-                                                                </Col>
-                                                            </Row>
-                                                        </>
-                                                        }
-                                                    >
-                                                    </Card>
-                                                </>
-                                            )
-                                        })}
-                                    </>
-                                )}
-                        </Space>
-                        <Space size={8} direction="vertical" style={{width: "100%"}}>
-                            <PageHeader
-                                style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
-                                ghost={false}
-                                subTitle={<Text type="secondary">Keahlian</Text>}
-                                extra={[
-                                    <Button
-                                        onClick={showSkillModal}
-                                        style={{
-                                            color: "#3B85FA"
-                                        }}
-                                        type="text">
-                                        <b>+ Tambah Bidang Keahlian</b>
-                                    </Button>,
-                                ]}
-                            />
-                            {
-                                input.consultant_skill && (
-                                    <>
-                                        {input.consultant_skill.map((e, index) => {
-                                            return (
-                                                <>
-                                                    <Card
-                                                        style={{
-                                                            width: "100%",
-                                                            height: 48,
-                                                            borderRadius: 8,
-                                                            overflow: "hidden"
-                                                        }}
-                                                        type="inner"
-                                                        title={
-                                                            <>
-                                                                <Row>
-                                                                    <Col span={23}>
-                                                                        <Text>{e.skills}</Text>
-                                                                    </Col>
-                                                                    <Col span={1}>
-                                                                        <Space>
-                                                                            {/*<Button value={e.id}*/}
-                                                                            {/*        style={{*/}
-                                                                            {/*            padding: 0,*/}
-                                                                            {/*            paddingBottom: 10*/}
-                                                                            {/*        }} type="link"><Pencil*/}
-                                                                            {/*        onClick={() => updateSkill(e.id, e.skills)}*/}
-                                                                            {/*    size={24} weight="fill"/></Button>*/}
-                                                                            <Button value={e.id}
-                                                                                    style={{
-                                                                                        padding: 0,
-                                                                                        paddingBottom: 10
-                                                                                    }}
-                                                                                    onClick={deleteSkill} type="link"><X
-                                                                                size={24}/></Button>
-                                                                        </Space>
-                                                                    </Col>
-                                                                </Row>
-                                                            </>
-                                                        }
-                                                    >
-                                                    </Card>
-                                                </>
-                                            )
-                                        })}
-                                    </>
-                                )}
+                            </Space>
 
+                            <Button size="large"
+                                    className="button"
+                                    type="primary"
+                                    block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
+                                    onClick={handleSubmit}>
+                                Simpan
+                            </Button>
                         </Space>
-
-                        <Button size="large"
-                                className="button"
-                                type="primary"
-                                block style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
-                                onClick={handleSubmit}>
-                            Simpan
-                        </Button>
-                    </Space>
-                </Card>
+                    </Card>
+                </Col>
             </div>
 
             {/*MODAL HERE*/}

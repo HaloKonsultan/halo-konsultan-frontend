@@ -1,5 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Row, Col, PageHeader, Form, Space, Upload, message, Button, Card, Modal, Input, Typography} from 'antd';
+import {
+    Row, 
+    Col, 
+    PageHeader, 
+    Space, 
+    Upload, 
+    Button, 
+    Card, 
+    Typography} from 'antd';
 import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Select} from 'antd';
@@ -104,9 +112,9 @@ const EditProfile = () => {
     return (
         <>
             <Nav/>
-            <div className="container-profile">
+            <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Row>
-                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 24, order: 1}}>
                         <Card title={<Title level={4}>Edit Profil Konsultasi</Title>}
                               style={{
                                   width: "100%",
@@ -135,9 +143,9 @@ const EditProfile = () => {
                                                     return (
                                                         <>
                                                             <Row gutter={[16, 16]}>
-                                                                <Col lg={2} md={3} xs={4}><ImageBank
+                                                                <Col lg={3} md={3} xs={4}><ImageBank
                                                                     bank={e.bank}/></Col>
-                                                                <Col lg={20} md={18} xs={16}>
+                                                                <Col lg={19} md={18} xs={16}>
                                                                     <Text strong>{e.name}</Text><br/>
                                                                     <Text
                                                                         type="secondary">{e.bank} - {e.card_number}</Text>
@@ -219,7 +227,6 @@ const EditProfile = () => {
                             </Space>
                         </Card>
                     </Col>
-                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10, order: 2}}/>
                 </Row>
             </div>
 

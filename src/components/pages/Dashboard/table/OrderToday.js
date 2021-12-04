@@ -1,9 +1,7 @@
 import React, {useContext, useEffect} from "react";
-import {Card, Space} from 'antd';
+import {Card, Typography} from 'antd';
 import Title from "antd/es/typography/Title";
-import {format} from 'date-fns';
 import {ContextOrderToday} from "../../../context/ContextOrderToday";
-import {Typography} from 'antd';
 
 const {Text, Link} = Typography;
 const {Meta} = Card;

@@ -14,6 +14,7 @@ function OrderTable(props) {
         <>
             <Table
                 locale={emptyTable}
+                scroll={{ x: 600 }}
                 onRow={props.onRow}
                 style={{
                     borderRadius: 8,

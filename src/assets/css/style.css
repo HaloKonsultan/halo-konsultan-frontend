@@ -1,5 +1,9 @@
 /* Responsive pada layar mobile */
 @media(min-width: 321px) and (max-width: 425px) {
+    .title-text {
+        display: none;
+    }
+
     section#box-login {
         width: 90%;
         height: 630px;
@@ -7,6 +11,7 @@
         margin-right: 5%;
         margin-top: 30px;
     }
+
     .menu-moble {
         top: 20px;
         right: 10%;
