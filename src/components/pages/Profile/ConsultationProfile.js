@@ -49,9 +49,8 @@ const ConsultationProfile = () => {
                                         return (
                                             <>
                                                 <Row>
-                                                    <Col span={2}><ImageBank bank={e.bank}/></Col>
-                                                    <Col span={1}/>
-                                                    <Col span={20}>
+                                                    <Col lg={3} md={3} xs={4}><ImageBank bank={e.bank}/></Col>
+                                                    <Col lg={19} md={18} xs={16}>
                                                         <Text strong>{e.name}</Text>
                                                         <br/>
                                                         <Text type="secondary">{e.bank} - {e.card_number}</Text>

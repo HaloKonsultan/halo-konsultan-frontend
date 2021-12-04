@@ -9,6 +9,7 @@ import {ContextUser} from "../components/context/ContextUser";
 import InputText from "../components/global/InputText";
 import ButtonPrimary from "../components/global/ButtonPrimary";
 import {getToken} from "../Firebase";
+import API from "../components/context/API";
 
 const {Text} = Typography;
 
@@ -38,7 +39,7 @@ const LoginCard = () => {
         console.log(input)
         let inOneHours = new Date(new Date().getTime() + 60 * 60 * 1000);
 
-        axios.post(`http://localhost:8000/api/consultants/login`, {
+        API.post(`consultants/login`, {
             email: input.email,
             password: input.password,
             device_token: input.token

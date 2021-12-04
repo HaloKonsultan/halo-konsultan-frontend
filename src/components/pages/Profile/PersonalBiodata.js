@@ -46,7 +46,7 @@ const PersonalBiodata = () => {
                       </>
                   }>
                 <Row>
-                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 11, order: 1}}>
                         {
                             input.photo === SERVER_NAME + null &&
                             <img
@@ -78,7 +78,7 @@ const PersonalBiodata = () => {
                                 }}/>
                         }
                     </Col>
-                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 12, order: 2}}>
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 13, order: 2}}>
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>

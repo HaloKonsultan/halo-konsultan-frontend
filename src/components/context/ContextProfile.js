@@ -13,6 +13,7 @@ export const ProfileProvider = props => {
     const [input, setInput] = useState([])
     const [inputProvince, setInputProvince] = useState([])
     const [inputCategories, setInputCategories] = useState([])
+    const [errorMessage, setErrorMessage] = useState(true)
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -71,8 +72,14 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        // await dataProvinces()
-        // await dataCategories()
+        Object.keys(input).forEach(function(key) {
+            if(input[key] === null) {
+                input[key] = '-';
+            }
+        })
+        console.log(input)
+        await dataProvinces()
+        await dataCategories()
     }
 
     const functionEditProfile = () => {
@@ -127,6 +134,7 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
+        console.log(input)
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -141,6 +149,7 @@ export const ProfileProvider = props => {
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
+                setErrorMessage(false)
                 let data = res.data.data
                 setInput({
                     name: input.name,
@@ -176,6 +185,8 @@ export const ProfileProvider = props => {
             })
             .catch(err => {
                 message.error('Mohon isi semua data', 3);
+                setErrorMessage(true)
+                history.push("/edit-biodata")
             })
     }
 
@@ -259,16 +270,19 @@ export const ProfileProvider = props => {
     }
 
     const dataProvinces = async () => {
-        let result = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/provinsi`)
-        let data = result.data.provinsi
-        setInputProvince({
-            province: data.map(key => {
-                return {
-                    id: key.id,
-                    name: key.nama,
-                }
-            }),
+        let result = await axios.get(`https://api.rajaongkir.com/starter/province`, {
+            headers: { 'key': 'aee020347d9bcebda31efff6ec3eaade', 'content-type': 'application/json' }
         })
+        let data = result.data
+        console.log(data)
+        // setInputProvince({
+        //     province: data.map(key => {
+        //         return {
+        //             id: key.id,
+        //             name: key.nama,
+        //         }
+        //     }),
+        // })
     }
 
     const dataCity = async (id) => {
@@ -306,6 +320,7 @@ export const ProfileProvider = props => {
         functionDeleteEducation,
         dataProvinces,
         dataCity,
+        dataCategories,
         formatRupiah
     }
 
@@ -315,6 +330,8 @@ export const ProfileProvider = props => {
             setDataProfile,
             input,
             setInput,
+            errorMessage,
+            setErrorMessage,
             inputProvince,
             setInputProvince,
             inputCategories,

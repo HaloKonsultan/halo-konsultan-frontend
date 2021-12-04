@@ -6,6 +6,7 @@ import Logo from "../assets/img/logo.png"
 import {Link, useHistory} from "react-router-dom"
 import InputText from "../components/global/InputText";
 import ButtonPrimary from "../components/global/ButtonPrimary";
+import API from "../components/context/API";
 
 const {Text} = Typography;
 
@@ -32,7 +33,7 @@ const RegisterCard = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(input)
-        axios.post(`http://localhost:8000/api/consultants/register`, {
+        API.post(`consultants/register`, {
             name: input.name,
             email: input.email,
             password: input.password

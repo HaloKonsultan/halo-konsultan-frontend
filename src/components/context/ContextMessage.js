@@ -1,7 +1,6 @@
 import React, {useState, createContext} from "react";
 import API from "./API";
 import Cookies from "js-cookie";
-import {ContextConsultationDetail} from "./ContextConsultationDetail";
 
 export const ContextMessage = createContext()
 
@@ -19,12 +18,12 @@ export const MessageProvider = props => {
     }
 
     return (
-        <ContextConsultationDetail.Provider value = {{
+        <ContextMessage.Provider value = {{
             input,
             setInput,
             functions,
         }}>
             {props.children}
-        </ContextConsultationDetail.Provider>
+        </ContextMessage.Provider>
     )
 }
