@@ -17,7 +17,7 @@ const SendMessage = () => {
                  <h5 style={{color: "gray"}}>
                               6/6/21
                             </h5>
-            </Card>
+        </Card>
             <Input style={{borderRadius: 26, height: 48 }}
                     placeholder="Tulis Pesanmu disini"
                      /></Footer>

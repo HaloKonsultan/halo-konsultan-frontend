@@ -10,13 +10,13 @@ const Message = () => {
     return (
         <>
             <Row style={{backgroundColor: "white"}}>
-                <Col span={12}>
+                <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}}  lg={{span: 15, order: 1}}>
                     <Nav title="Pesan"/>
                     <div className="container-profile">
                         <HomeMessage/>
                     </div>
                 </Col>
-                <Col span={12}>
+                <Col  xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 9, order: 2}}>
                     <NavMessage title="Name"/>
                     <div className="container-profile">
                         <SendMessage/>
