@@ -10,6 +10,8 @@ import {CirclesFour, ChatCenteredDots, ClockCounterClockwise, User} from "phosph
 import ReactNotificationComponent from "../pages/notification/ReactNotification";
 import Notifications from "../pages/notification/Notifications";
 import {onMessageListener} from "../../Firebase";
+import {SERVER_NAME} from "../context/API";
+import noImage from "../../assets/img/no-image.png";
 
 const {SubMenu} = Menu;
 const {Text} = Typography;
@@ -82,13 +84,27 @@ const LayoutComponent = (props) => {
                         </div>
 
                         <Space style={{marginTop: 32, marginBottom: 32}}>
-                            <img src={input.photo} className="people" alt="" style={{
-                                width: 40,
-                                height: 40,
-                                objectFit: "cover",
-                                borderRadius: "50%",
-                                marginLeft: "24px",
-                            }}/>
+                            {
+                                input.photo === SERVER_NAME + null &&
+                                <img
+                                    src={noImage}
+                                    alt="profile-picture"
+                                    style={{
+                                        width: 40,
+                                        height: 40,
+                                        objectFit: "cover",
+                                        borderRadius: "50%",
+                                        marginLeft: "24px",
+                                    }}/>
+                                ||
+                                <img src={input.photo} className="people" alt="" style={{
+                                    width: 40,
+                                    height: 40,
+                                    objectFit: "cover",
+                                    borderRadius: "50%",
+                                    marginLeft: "24px",
+                                }}/>
+                            }
                             <Space size={24} direction="vertical">
                                 <Space size={4} direction="vertical">
                                     <Text strong>{input.name}</Text>

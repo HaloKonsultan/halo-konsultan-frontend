@@ -1,5 +1,5 @@
 import React from "react"
-import { Row, Col } from 'antd';
+import {Row, Col} from 'antd';
 import Detail from "../Detail";
 import AcceptDeclineCard from "../AcceptDeclineCard";
 import Nav from "../../../layout/Header";
@@ -10,8 +10,13 @@ const ConsultationDetail = () => {
         <>
             <Nav title="Detail Konsultasi" onBack={() => window.history.back()}/>
             <Row className="center">
-                <Col span={13}><Detail /></Col>
-                <Col span={11}><AcceptDeclineCard /></Col>
+                <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                    <Detail/>
+                </Col>
+                <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10, order: 2}}>
+                    <AcceptDeclineCard/>
+                </Col>
+                <Col  xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 3, order: 3}}/>
             </Row>
         </>
     )

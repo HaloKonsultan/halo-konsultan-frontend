@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState} from "react"
-import {Card, Space, Modal, Form, Row, Col, Input} from 'antd';
-import {Typography} from 'antd';
+import {Card, Space, Modal, Form, Row, Col, Input, Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
 import {useParams} from "react-router-dom";
 import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
@@ -55,29 +54,34 @@ const AcceptDeclineCard = () => {
 
     return (
         <>
-            <div className="dashboard-container">
-                <Card style={{
-                    width: 440,
-                    display: "flex",
-                    justifyContent: "center",
-                    borderRadius: 16,
-                    boxShadow: "0px 5px 10px 0px #F1F2FA",
-                    border: "none"
-                }}>
-                    <Space direction="vertical">
-                        <Title level={5}>Apakah Anda Menerima Permintaan Konsultasi ini ?</Title>
-                        <Space size={24}>
-                            <PrimaryButton onClick={handleAccept}
-                                           value={Id}
-                                           text={<>
-                                               <CheckOutlined/> <b>Terima Permintaan</b>
-                                           </>}
-                            />
-                            <ButtonDanger onClick={showDeclineModal} text={<b>Tolak Permintaan</b>}/>
-                        </Space>
-                    </Space>
+                <Card
+                    className="dashboard-container"
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        borderRadius: 16,
+                        boxShadow: "0px 5px 10px 0px #F1F2FA",
+                        border: "none"
+                    }}>
+                    <Row>
+                        <Col>
+                            <Title level={5} style={{width: "100%"}}>Apakah Anda Menerima Permintaan Konsultasi ini
+                                ?</Title>
+                        </Col>
+                        <Col>
+                            <Row gutter={12}>
+                                <Col span={12}>
+                                    <ButtonDanger onClick={showDeclineModal} text={<b>Tolak Permintaan</b>}/>
+
+                                </Col>
+                                <Col span={12}>
+                                    <PrimaryButton onClick={handleAccept} value={Id}
+                                                   text={<><CheckOutlined/> <b>Terima Permintaan</b></>}/>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
                 </Card>
-            </div>
 
             <Modal
                 className="profile-modal"

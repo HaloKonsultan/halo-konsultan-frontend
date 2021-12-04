@@ -16,7 +16,7 @@ const Onboard = () => {
                 backgroundSize: "824px",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                padding: 50
+                padding: 20
             }}>
                 <table className="onboard-table">
                     <tbody>
@@ -26,8 +26,8 @@ const Onboard = () => {
                     <tr>
                         <td>
                             <Row>
-                                <Col span={4}><img className="image-table" src={image1} alt=""/></Col>
-                                <Col span={20}>
+                                <Col xs={6} sm={4} lg={4}><img className="image-table" src={image1} alt=""/></Col>
+                                <Col xs={18} sm={20} lg={20}>
                                     <h2>Kemudahan Mencari Klien</h2>
                                     <p>Dengan HaloKonsultan, Anda dapat kesempatan untuk lebih mudah dalam mencari klien
                                         Anda.</p>
@@ -38,8 +38,8 @@ const Onboard = () => {
                     <tr>
                         <td>
                             <Row>
-                                <Col span={4}><img className="image-table" src={image2} alt=""/></Col>
-                                <Col span={20}>
+                                <Col xs={6} sm={4} lg={4}><img className="image-table" src={image2} alt=""/></Col>
+                                <Col xs={18} sm={20} lg={20}>
                                     <h2>Konsultasi Lebih Fleksibel</h2>
                                     <p>Atur jadwal untuk memberikan konsultasi kepada klien Anda, sehingga Anda memiliki
                                         fleksibilitas terhadap waktu Anda.</p>
@@ -50,8 +50,8 @@ const Onboard = () => {
                     <tr>
                         <td>
                             <Row>
-                                <Col span={4}><img className="image-table" src={image3} alt=""/></Col>
-                                <Col span={20}>
+                                <Col xs={6} sm={4} lg={4}><img className="image-table" src={image3} alt=""/></Col>
+                                <Col xs={18} sm={20} lg={20}>
                                     <h2>Manajemen Konsultasi yang Lebih Baik</h2>
                                     <p>HaloKonsultan membantu mengatur konsultasi Anda dengan lebih baik, dan memberi
                                         pengalaman konsultasi yang baik.</p>
