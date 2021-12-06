@@ -43,7 +43,7 @@ function Dashboard() {
                                          title="Menunggu Pembayaran"/>
                             <OrderTableWaiting/>
                         </div>
-                    </div>
+                     </div>
                 </Col>
                 <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10}}>
                     <div className="table today-container"

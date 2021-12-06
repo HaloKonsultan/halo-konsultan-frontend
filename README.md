@@ -83,6 +83,22 @@ Sidebar
 - payment
 - menerima pembayaran
 
+
+Fitur Sprint#3
+
+Prioritas
+1. Notifikasi
+   Notifikasi apabila ada order masuk dari client
+3. Redesign
+   Perubahan tampilan sesuai saran pada sprint review
+5. Refactor
+7. Responsive
+8. Forum
+   Sarana komunikasi antara konsultan dan klien
+
+Aplikasi dapat dilihat di
+halokonsultan.me
+
 =========================================================
 
 Cara menjalankan front-end 
