@@ -9,6 +9,7 @@ export const ContextProfile = createContext()
 
 export const ProfileProvider = props => {
     let history = useHistory()
+    const [loading, setLoading] = useState(true)
     const [dataProfile, setDataProfile] = useState([])
     const [input, setInput] = useState([])
     const [inputProvince, setInputProvince] = useState([])
@@ -72,14 +73,10 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        Object.keys(input).forEach(function(key) {
-            if(input[key] === null) {
-                input[key] = '-';
-            }
-        })
         console.log(input)
         await dataProvinces()
         await dataCategories()
+        setLoading(false)
     }
 
     const functionEditProfile = () => {
@@ -130,11 +127,18 @@ export const ProfileProvider = props => {
                     }),
                 })
                 message.success('Data telah dihapus!', 3);
+
             })
     }
 
     const functionEditBiodata = () => {
-        console.log(input)
+        Object.keys(input).forEach(function(key) {
+            if(input[key] === null || input[key] === "") {
+                console.log(key)
+                setErrorMessage(true)
+                history.push("/edit-biodata")
+            }
+        })
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -152,12 +156,6 @@ export const ProfileProvider = props => {
                 setErrorMessage(false)
                 let data = res.data.data
                 setInput({
-                    name: input.name,
-                    description: input.description,
-                    photo: SERVER_NAME + input.photo,
-                    gender: input.gender,
-                    province: input.province,
-                    city: input.city,
                     consultant_experience: data.consultant_experience.map(key => {
                         return {
                             id: key.id,
@@ -185,8 +183,6 @@ export const ProfileProvider = props => {
             })
             .catch(err => {
                 message.error('Mohon isi semua data', 3);
-                setErrorMessage(true)
-                history.push("/edit-biodata")
             })
     }
 
@@ -326,6 +322,8 @@ export const ProfileProvider = props => {
         <ContextProfile.Provider value={{
             dataProfile,
             setDataProfile,
+            loading,
+            setLoading,
             input,
             setInput,
             errorMessage,

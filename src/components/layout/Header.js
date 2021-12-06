@@ -6,9 +6,8 @@ import Cookies from "js-cookie";
 import {ContextUser} from "../context/ContextUser";
 import API from "../context/API";
 import Logo from "../../assets/img/logo.png";
-const {Title} = Typography;
-
-const {Header, Content, Footer} = Layout;
+import InputText from "../global/InputText";
+const {Text} = Typography;
 
 const Nav = (props) => {
     let history = useHistory()
@@ -53,8 +52,8 @@ const Nav = (props) => {
                             <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 0, order: 2}}>
                                 <PageHeader
                                     onBack={props.onBack}
-                                    style={{backgroundColor: "white", borderBottom: "1px solid #CED4DA"}}
-                                    title={<img src={Logo} style={{width: 137}} alt=""/>}
+                                    style={{backgroundColor: "white"}}
+                                    title={<img src={Logo} style={{width: 150}} alt=""/>}
                                     extra={[
                                         <Button key="1" size="large" type="link" onClick={handleLogout} danger>
                                             <b>
@@ -67,10 +66,10 @@ const Nav = (props) => {
                                     ]}
                                 />
                             </Col>
-                            <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 0}}>
-                                <div className="notification-container">
+                            <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 0}} style={{backgroundColor: "white", marginTop: 0}}>
+                                <div style={{backgroundColor: "white", margin: "16px 32px 16px 32px", display: props.mobile}}>
                                     <Space direction="horizontal" style={{width: '100%', justifyContent: 'center'}}>
-                                        <Title level={4} style={{justifyContent: "center"}}>Dashboard</Title>
+                                        <Text style={{justifyContent: "center", fontWeight: 700, fontSize: 24}}>{props.mobileTitle}</Text>
                                     </Space>
                                 </div>
                             </Col>
@@ -81,5 +80,10 @@ const Nav = (props) => {
         </>
     )
 }
+
+Nav.defaultProps = {
+    mobile: "none",
+};
+
 
 export default Nav

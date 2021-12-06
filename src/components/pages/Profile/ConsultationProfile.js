@@ -33,8 +33,8 @@ const ConsultationProfile = () => {
                               <Col span={12}> <Title level={4}> Profil Konsultasi </Title></Col>
                               <Col span={12}>
                                   <Button onClick={handleDetail} type="primary" ghost
-                                          style={{borderRadius: 8, float: "right"}}>Edit Profil
-                                      Konsultasi</Button>
+                                          style={{borderRadius: 8, float: "right", height: "100%"}}>
+                                      Edit Profil Konsultasi</Button>
                               </Col>
                           </Row>
                       </>

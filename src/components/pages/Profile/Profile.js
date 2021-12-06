@@ -10,7 +10,7 @@ const Profile = () => {
 
     return (
         <>
-        <Nav title="Profil"/>
+        <Nav title="Profil" mobileTitle="Profil" mobile="true"/>
             <Row className="center">
                 <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
                     <div className="container-profile"  style={{alignItems: "center", display: "flex"}}>   

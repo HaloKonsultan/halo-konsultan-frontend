@@ -15,13 +15,8 @@ function Dashboard() {
 
     return (
         <>
-            <Nav title="Dashboard"/>
+            <Nav title="Dashboard" mobileTitle="Dashboard" mobile="true"/>
             <Row>
-                {/*<Col xs={{span: 24, order: 1}} sm={{span: 18, order: 1}} lg={{span: 14, order: 1}}>*/}
-                {/*    <div className="notification-container table">*/}
-                {/*        <ProfileNotifications/>*/}
-                {/*    </div>*/}
-                {/*</Col>*/}
                 <Col xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 14, order: 2}}>
                     <div className="notification-container">
                         <ProfileNotifications/>

@@ -1,7 +1,8 @@
-import React, { useState, createContext } from "react";
-import { useHistory } from "react-router-dom"
+import React, {useState, createContext} from "react";
+import {useHistory} from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
+import {message} from "antd";
 
 export const ContextOrderToday = createContext()
 
@@ -20,7 +21,7 @@ export const TodayOrderProvider = props => {
     const fetchData = async () => {
         let result = await API.get(
             `consultants/consultations/user/${Cookies.get('id')}/today`,
-            { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
         let data = result.data.data.data
         setDataTodayOrder(data.map((e) => {
             return {
@@ -31,6 +32,7 @@ export const TodayOrderProvider = props => {
                 status: e.status
             }
         }))
+
     }
 
     const functionDetail = (idClient) => {
@@ -43,7 +45,7 @@ export const TodayOrderProvider = props => {
     }
 
     return (
-        <ContextOrderToday.Provider value = {{
+        <ContextOrderToday.Provider value={{
             dataTodayOrder,
             setDataTodayOrder,
             input,

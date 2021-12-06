@@ -1,13 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {
-    Row, 
-    Col, 
-    PageHeader, 
-    Space, 
-    Upload, 
-    Button, 
-    Card, 
-    Typography} from 'antd';
+import {Row, Col, PageHeader, Space, Upload, Button, Card, Typography} from 'antd';
 import Nav from "../../layout/Header";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Select} from 'antd';
@@ -51,23 +43,6 @@ const EditProfile = () => {
 
     const handleVirtualAccountError = (errorInfo) => {
         console.log('Failed:', errorInfo);
-    };
-
-    //upload dokumentasi kerja
-    const props = {
-        onChange({file}) {
-            if (file.status !== 'uploading') {
-                const values = {
-                    id: -1,
-                    photo: file.name
-                };
-                let documentationInput = input.consultant_documentation.push(values)
-
-                console.log("ini documentation input")
-                console.log(values)
-                //setInput({...input, documentationInput})
-            }
-        },
     };
 
     const onImageChange = (event) => {
@@ -188,7 +163,8 @@ const EditProfile = () => {
                                         ghost={false}
                                         subTitle={<LabelText text="Dokumentasi Kerja"/>}
                                         extra={[
-                                            <input type="file" style={{color: "#3B85FA", padding: 0}} onChange={onImageChange}/>
+                                            <input type="file" style={{color: "#3B85FA", padding: 0}}
+                                                   onChange={onImageChange}/>
                                         ]}/>
                                     <ul>
                                         <Space size={[8, 8]} wrap>

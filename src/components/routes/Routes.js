@@ -101,7 +101,7 @@ const Routes = () => {
 
                             {/*Message*/}
                             <LoginRoute path="/message" search="Pesan" exact>
-                                <LayoutComponent content={<Message/>}/>
+                                <LayoutComponent content={<Message/>} backgroundColor="white"/>
                             </LoginRoute>
 
                             {/*History*/}

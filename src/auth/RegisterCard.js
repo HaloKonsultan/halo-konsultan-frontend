@@ -66,7 +66,7 @@ const RegisterCard = () => {
                                 </Space>
                                 <Space direction="vertical" style={{width: "100%"}}>
                                     <Text type="secondary">Masukkan Email Anda</Text>
-                                    <InputText placeholder="Email" name="email" value={input.email}
+                                    <InputText placeholder="Email" name="email" type="email" value={input.email}
                                                onChange={handleChange}/>
                                 </Space>
                                 <Space direction="vertical" style={{width: "100%"}}>

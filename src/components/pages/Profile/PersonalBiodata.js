@@ -17,7 +17,7 @@ const {Title, Text} = Typography;
 const PersonalBiodata = () => {
     let history = useHistory()
 
-    const {input, functions} = useContext(ContextProfile)
+    const {input, setLoading, functions} = useContext(ContextProfile)
     const {fetchData} = functions
 
     useEffect(() => {
@@ -25,6 +25,7 @@ const PersonalBiodata = () => {
     }, [])
 
     const handleDetail = () => {
+        setLoading(true)
         history.push('/edit-biodata')
     }
 

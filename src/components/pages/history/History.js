@@ -6,7 +6,7 @@ function History() {
 
     return (
         <>
-            <Nav title="Riwayat"/>
+            <Nav title="Riwayat" mobileTitle="Riwayat" mobile="true"/>
             <div className="dashboard-container">
                 <div className="table">
                     <HistoryTable/>

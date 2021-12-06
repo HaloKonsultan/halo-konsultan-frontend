@@ -80,7 +80,7 @@ const LoginCard = () => {
                             <Space direction="vertical" style={{width: "100%"}} size={24}>
                                 <Space direction="vertical" style={{width: "100%"}}>
                                     <Text type="secondary">Masukkan Email Anda</Text>
-                                    <InputText placeholder="Email" name="email" value={input.email}
+                                    <InputText placeholder="Email" name="email" type="email" value={input.email}
                                                onChange={handleChange} required/>
                                 </Space>
                                 <Space direction="vertical" style={{width: "100%"}}>

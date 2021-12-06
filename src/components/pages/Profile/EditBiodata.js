@@ -29,7 +29,7 @@ const {TextArea} = Input;
 
 const EditBiodata = () => {
     let history = useHistory()
-    const {input, setInput, inputProvince, inputCategories, errorMessage, functions} = useContext(ContextProfile)
+    const {input, setInput, inputProvince, inputCategories, errorMessage, loading, setLoading, functions} = useContext(ContextProfile)
     const {
         fetchData,
         functionEditBiodata,
@@ -106,7 +106,7 @@ const EditBiodata = () => {
         setInput({...input, experience})
 
         setIsExperienceVisible(false);
-        functionEditBiodata()
+        //functionEditBiodata()
     }
 
     const handleSkill = (values) => {
@@ -115,7 +115,7 @@ const EditBiodata = () => {
         setInput({...input, skill})
 
         setIsSkillVisible(false);
-        functionEditBiodata()
+        //functionEditBiodata()
     };
 
     const handleEducation = (values) => {
@@ -124,7 +124,7 @@ const EditBiodata = () => {
         setInput({...input, education})
 
         setIsHistoryVisible(false);
-        functionEditBiodata()
+        //functionEditBiodata()
     };
 
     // const updateExperience = (id, position, start_year, end_year) => {
@@ -188,19 +188,6 @@ const EditBiodata = () => {
         console.log('Failed:', errorInfo);
     };
 
-    // const props = {
-    //     onChange({file}) {
-    //         if (file.status !== 'uploading') {
-    //             let typeOfValue = file.name
-    //             let name = "photo"
-    //             console.log()
-    //
-    //             //setInput({...input, [name]: typeOfValue})
-    //         }
-    //     },
-    // };
-    //
-
     const onImageChange = (event) => {
         let formdata = new FormData()
 
@@ -218,7 +205,7 @@ const EditBiodata = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
+        console.log("ini input", input)
         functionEditBiodata()
         if(errorMessage === false){
             history.push(`/profile`)
@@ -230,7 +217,7 @@ const EditBiodata = () => {
             <Nav/>
             <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
-                    <Card title="Edit Profil Diri" style={{width: "100%", borderRadius: 8}}>
+                    <Card title="Edit Profil Diri" style={{width: "100%", borderRadius: 8}} loading={loading}>
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Row>
                                 <Col xs={13} sm={8} md={10} lg={6}>

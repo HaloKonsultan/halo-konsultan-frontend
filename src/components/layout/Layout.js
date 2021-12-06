@@ -12,6 +12,7 @@ import Notifications from "../pages/notification/Notifications";
 import {onMessageListener} from "../../Firebase";
 import {SERVER_NAME} from "../context/API";
 import noImage from "../../assets/img/no-image.png";
+import InputText from "../global/InputText";
 
 const {SubMenu} = Menu;
 const {Text} = Typography;
@@ -131,7 +132,7 @@ const LayoutComponent = (props) => {
                     </Sider>
                 }
                 <Layout>
-                    <Content style={{backgroundColor: "#F7F8FA"}}>
+                    <Content style={{backgroundColor: props.backgroundColor}}>
                         <div className="site-layout-content" style={{minHeight: "100vh"}}>
                             {props.content}
                         </div>
@@ -141,5 +142,9 @@ const LayoutComponent = (props) => {
         </>
     )
 }
+
+LayoutComponent.defaultProps = {
+    backgroundColor: "#F7F8FA"
+};
 
 export default LayoutComponent
