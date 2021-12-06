@@ -1,6 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {Table, Tag} from 'antd';
 import {ContextHistory} from "../../context/ContextHistory";
+import OrderTable from "../../global/OrderTable";
 
 const HistoryTable = () => {
     const {dataHistory, functions} = useContext(ContextHistory)
@@ -58,20 +59,29 @@ const HistoryTable = () => {
 
     return (
         <>
-            <Table
+            <OrderTable
                 onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {
                             handleDetail(record.id)
-                        },
+                        }, // click row
                     };
                 }}
-                style={{
-                    borderRadius: 8,
-                    overflow: "hidden",
-                    boxShadow: "0 0 0 1px #CED4DA"
-                }}
-                columns={columns} dataSource={data} pagination={false}/>
+                columns={columns} dataSource={data.slice(-5)}/>
+            {/*<Table*/}
+            {/*    onRow={(record, rowIndex) => {*/}
+            {/*        return {*/}
+            {/*            onClick: event => {*/}
+            {/*                handleDetail(record.id)*/}
+            {/*            },*/}
+            {/*        };*/}
+            {/*    }}*/}
+            {/*    style={{*/}
+            {/*        borderRadius: 8,*/}
+            {/*        overflow: "hidden",*/}
+            {/*        boxShadow: "0 0 0 1px #CED4DA"*/}
+            {/*    }}*/}
+            {/*    columns={columns} dataSource={data} pagination={false}/>*/}
         </>
     )
 }

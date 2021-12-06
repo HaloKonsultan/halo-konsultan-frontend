@@ -1,5 +1,5 @@
 import React from "react"
-import {Row, Col, Badge, Typography} from 'antd';
+import {Row, Col, Space, Badge, Typography} from 'antd';
 import OrderTableIncoming from "./table/OrderTableIncoming";
 import OrderTableActive from "./table/OrderTableActive";
 import OrderTableWaiting from "./table/OrderTableWaiting";
@@ -23,7 +23,7 @@ function Dashboard() {
                 {/*    </div>*/}
                 {/*</Col>*/}
                 <Col xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 14, order: 2}}>
-                    <div className="notification-container table">
+                    <div className="notification-container">
                         <ProfileNotifications/>
                     </div>
                     <div className="dashboard-container">
@@ -46,7 +46,8 @@ function Dashboard() {
                     </div>
                 </Col>
                 <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10}}>
-                    <div className="table today-container" style={{alignItems: "center", justifyContent: "center", display: "flex"}}>
+                    <div className="table today-container"
+                         style={{alignItems: "center", justifyContent: "center", display: "flex"}}>
                         <OrderToday/>
                     </div>
                 </Col>

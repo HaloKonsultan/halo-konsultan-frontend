@@ -39,14 +39,14 @@ const PersonalBiodata = () => {
                               </Col>
                               <Col span={12}>
                                   <Button onClick={handleDetail} type="primary" ghost
-                                          style={{borderRadius: 8, float: "right"}}>Edit Biodata
-                                      Diri</Button>
+                                          style={{borderRadius: 8, float: "right", height: "100%"}}>
+                                      <span>Edit</span> <span>Biodata Diri</span></Button>
                               </Col>
                           </Row>
                       </>
                   }>
                 <Row>
-                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 11, order: 1}}>
+                    <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} md={{span: 24, order: 1}} lg={{span: 24, order: 1}} xl={{span: 11, order: 1}}>
                         {
                             input.photo === SERVER_NAME + null &&
                             <img
@@ -57,9 +57,9 @@ const PersonalBiodata = () => {
                                     height: 200,
                                     objectFit: "cover",
                                     borderRadius: 12,
+                                    marginBottom: 24,
                                     boxShadow: "0 0 0 1px #CED4DA",
                                     position: "relative"
-
                                 }}/>
                         }
                         {
@@ -72,13 +72,14 @@ const PersonalBiodata = () => {
                                     height: 200,
                                     objectFit: "cover",
                                     borderRadius: 12,
+                                    marginBottom: 24,
                                     boxShadow: "0 0 0 1px #CED4DA",
                                     position: "relative"
 
                                 }}/>
                         }
                     </Col>
-                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 13, order: 2}}>
+                    <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} md={{span: 24, order: 2}} lg={{span: 24, order: 2}} xl={{span: 13, order: 2}} >
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Space size={4} direction="vertical">
                                 <Text type="secondary">Nama</Text>

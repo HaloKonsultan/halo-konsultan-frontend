@@ -18,7 +18,7 @@ const Profile = () => {
                     </div>
                 </Col>
                 <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10, order: 2}}>
-                    <div className="container-profile"  style={{alignItems: "center" }}>
+                    <div className="container-profile right-side"  style={{alignItems: "center"}}>
                         <ConsultationProfile/>
                     </div>
                 </Col >

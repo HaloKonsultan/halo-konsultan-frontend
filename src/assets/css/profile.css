@@ -11,5 +11,20 @@
 }
 
 .container-profile {
-    margin: 40px;
+    margin: 32px;
+}
+
+
+.right-side {
+    margin: 32px 32px 32px 0;
+}
+
+@media(max-width: 950px) {
+    .right-side {
+        margin: 32px;
+    }
+
+    .container-profile {
+        margin: 32px 32px 0 32px;
+    }
 }

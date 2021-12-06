@@ -76,8 +76,9 @@ const LayoutComponent = (props) => {
 
                     <Sider theme="light" width={266}
                            style={{border: "solid 1px lightgrey"}}
-                           breakpoint="md"
+                           breakpoint="lg"
                            collapsedWidth="0"
+                           trigger={null}
                     >
                         <div>
                             <img src={Logo} className="logo" alt=""/>

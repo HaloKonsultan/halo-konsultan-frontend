@@ -270,31 +270,29 @@ export const ProfileProvider = props => {
     }
 
     const dataProvinces = async () => {
-        let result = await axios.get(`https://api.rajaongkir.com/starter/province`, {
-            headers: { 'key': 'aee020347d9bcebda31efff6ec3eaade', 'content-type': 'application/json' }
-        })
-        let data = result.data
+        let result = await axios.get(`https://api.binderbyte.com/wilayah/provinsi?api_key=079fc527c1d3fdf63c64cc384bc51b9e6fff9b7552c8eb493db7b2035d70c421`)
+        let data = result.data.value
         console.log(data)
-        // setInputProvince({
-        //     province: data.map(key => {
-        //         return {
-        //             id: key.id,
-        //             name: key.nama,
-        //         }
-        //     }),
-        // })
+        setInputProvince({
+            province: data.map(key => {
+                return {
+                    id: key.id,
+                    name: key.name,
+                }
+            }),
+        })
     }
 
     const dataCity = async (id) => {
-        let resultCity = await axios.get(`https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=${id}`)
-        let data = resultCity.data.kota_kabupaten
+        let resultCity = await axios.get(`https://api.binderbyte.com/wilayah/kabupaten?api_key=079fc527c1d3fdf63c64cc384bc51b9e6fff9b7552c8eb493db7b2035d70c421&id_provinsi=${id}`)
+        let data = resultCity.data.value
         setInputProvince({
             ...inputProvince,
             cities: data.map(key => {
                 return {
                     id: key.id,
                     id_province: key.id_provinsi,
-                    name: key.nama,
+                    name: key.name,
                 }
             }),
         })

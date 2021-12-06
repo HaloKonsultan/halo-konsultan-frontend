@@ -35,7 +35,6 @@ const OrderTableIncoming = (props) => {
         },
         {
             title: '',
-            fixed: 'right',
             width: 130,
             key: 'id',
             dataIndex: 'id',
