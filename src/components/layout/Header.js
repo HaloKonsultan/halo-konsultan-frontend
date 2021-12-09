@@ -7,12 +7,16 @@ import Cookies from "js-cookie";
 import {ContextUser} from "../context/ContextUser";
 import API from "../context/API";
 import Logo from "../../assets/img/logo.png";
+import {SERVER_NAME} from "../context/API";
+import noImage from "../../assets/img/no-image.png";
+import {ContextProfile} from "../context/ContextProfile";
 import InputText from "../global/InputText";
 const {Text} = Typography;
 const {Sider} = Layout;
 
 const Nav = (props) => {
     let history = useHistory()
+    const {input, setInput, functions} = useContext(ContextProfile)
     const {loginStatus, setLoginStatus} = useContext(ContextUser)
     const location = useLocation();
 
@@ -103,6 +107,35 @@ const Nav = (props) => {
                             onClose={onClose} 
                             visible={visible}
                             >
+                            <Space style={{marginTop: 32, marginBottom: 32}}>
+                                {
+                                    input.photo === SERVER_NAME + null &&
+                                    <img
+                                        src={noImage}
+                                        alt="profile-picture"
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            objectFit: "cover",
+                                            borderRadius: "50%",
+                                            marginLeft: "24px",
+                                        }}/>
+                                    ||
+                                    <img src={input.photo} className="people" alt="" style={{
+                                        width: 40,
+                                        height: 40,
+                                        objectFit: "cover",
+                                        borderRadius: "50%",
+                                        marginLeft: "24px",
+                                    }}/>
+                                }
+                                <Space size={24} direction="vertical">
+                                    <Space size={4} direction="vertical">
+                                        <Text strong>{input.name}</Text>
+                                        <Text type="secondary">{input.position}</Text>
+                                    </Space>
+                                </Space>
+                            </Space>
                            <Menu
                                 mode="inline" s
                                 defaultSelectedKeys={['1']}
