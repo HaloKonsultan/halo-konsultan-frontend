@@ -36,6 +36,7 @@ import History from "../pages/history/History";
 
 import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
 import {MessageProvider} from "../context/ContextMessage";
+import SendMessage from "../pages/Message/SendMessage";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -102,6 +103,9 @@ const Routes = () => {
                             {/*Message*/}
                             <LoginRoute path="/message" search="Pesan" exact>
                                 <LayoutComponent content={<Message/>} backgroundColor="white"/>
+                            </LoginRoute>
+                            <LoginRoute path="/get-message/:Id" search="Pesan" exact>
+                                <LayoutComponent content={<SendMessage/>} backgroundColor="white"/>
                             </LoginRoute>
 
                             {/*History*/}

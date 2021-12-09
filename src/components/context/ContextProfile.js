@@ -137,6 +137,7 @@ export const ProfileProvider = props => {
                 console.log(key)
                 setErrorMessage(true)
                 history.push("/edit-biodata")
+                setErrorMessage(false)
             }
         })
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {

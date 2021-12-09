@@ -1,24 +1,26 @@
 import React, {useContext, useState} from "react"
-import {useHistory, useLocation} from "react-router-dom"
-import {Button, Layout, PageHeader, Row, Col, Modal, Typography, Space} from 'antd';
-import {ContextProfile} from "../context/ContextProfile"
+import {Button, Layout, PageHeader, Row, Col, Modal, Typography, Space, Form, Input} from 'antd';
+import PrimaryButton from "../global/ButtonPrimary";
+import ButtonDanger from "../global/ButtonDanger";
+import {ContextMessage} from "../context/ContextMessage";
 
-
-const {Header, Content, Footer} = Layout;
-const {Title, Text} = Typography;
+const {Text, Title} = Typography;
 const NavMessage = (props) => {
-    let history = useHistory()
-    const location = useLocation();
+    const {functions} = useContext(ContextMessage)
+    const {functionEndForum} = functions
+    const [isEndForum, setIsEndForum] = useState(false);
 
-    const {input} = useContext(ContextProfile)
-    const [isSkillVisible, setIsSkillVisible] = useState(false);
-
-    const showSkillModal = () => {
-        setIsSkillVisible(true);
+    const showModal = () => {
+        setIsEndForum(true);
     };
 
     const handleCancel = () => {
-        setIsSkillVisible(false);
+        setIsEndForum(false);
+    };
+
+    const onFinish = () => {
+        functionEndForum()
+        setIsEndForum(false);
     };
 
     return (
@@ -33,7 +35,7 @@ const NavMessage = (props) => {
                             <Button  key="1" size="large"
                             danger 
                             style= {{borderRadius: 8}}
-                            onClick={showSkillModal}>
+                            onClick={showModal}>
                                     <Row>
                                         <Col span={12}>Akhiri Diskusi</Col>
                                     </Row>
@@ -43,25 +45,38 @@ const NavMessage = (props) => {
                 }
 
                 <Modal
-                destroyOnClose={true}
-                visible={isSkillVisible}
-                onCancel={handleCancel}
-                footer={null}
-                style={{width: 280, height:232}}
-               
-            >
-                 <Text strong>Apakah Anda ingin 
-                 mengakhiri percakapan ini?</Text><br/><br/>
-                 <Space size={15} direction="vertical">
-                 <Button type="primary"style={{width:232, borderRadius: 8}}>Lanjutkan Percakapan</Button>
-                 <Button danger
-                 style={{width:232, borderRadius: 8}}> Akhiri Diskusi
-                          </Button>
-                          </Space>
-                
-
-                       
-            </Modal>
+                    className="profile-modal"
+                    title={<Title level={4}>Apakah Anda ingin mengakhiri percakapan ini ?</Title>}
+                    visible={isEndForum}
+                    onCancel={handleCancel}
+                    footer={null}
+                >
+                    <Form
+                        name="basic"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        layout="vertical"
+                        onFinish={onFinish}
+                        //onFinishFailed={onFinishFailed}
+                        autoComplete="off"
+                    >
+                        <Form.Item>
+                            <Row>
+                                <Col span={12}>
+                                    <div style={{marginRight: 4}}>
+                                        <PrimaryButton onClick={handleCancel} text="Lanjutkan Percakapan"/>
+                                    </div>
+                                </Col>
+                                <Col span={12}>
+                                    <div style={{marginLeft: 4}}>
+                                        <ButtonDanger htmlType="submit" text="Akhiri Diskusi"/>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Form.Item>
+                    </Form>
+                </Modal>
             
             </Layout>
         </>

@@ -9,22 +9,15 @@ const Message = () => {
 
     return (
         <>
-            <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/>
-            <SendMessage/>
-            {/*<Row style={{backgroundColor: "white"}}>*/}
-            {/*    <Col span={12}>*/}
-            {/*        <Nav title="Pesan"/>*/}
-            {/*        <div className="container-profile">*/}
-            {/*            <HomeMessage/>*/}
-            {/*        </div>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={12}>*/}
-            {/*        <NavMessage title="Name"/>*/}
-            {/*        <div className="container-profile">*/}
-            {/*            <SendMessage/>*/}
-            {/*        </div>*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
+            <Row>
+                <Col span={12} style={{borderRight: "1px solid #CED4DA", minHeight: "100vh"}}>
+                    <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/>
+                    <HomeMessage/>
+                </Col>
+                <Col span={12}>
+                    <SendMessage/>
+                </Col>
+            </Row>
         </>
     )
 }

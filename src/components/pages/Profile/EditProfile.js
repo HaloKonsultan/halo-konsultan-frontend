@@ -16,7 +16,7 @@ const {Text, Title} = Typography;
 const EditProfile = () => {
     let history = useHistory()
 
-    const {input, setInput, functions} = useContext(ContextProfile)
+    const {input, setInput, loading, functions} = useContext(ContextProfile)
     const {fetchData, functionEditProfile, functionDeleteVirtualAccount, functionUploadImage} = functions
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
@@ -96,7 +96,8 @@ const EditProfile = () => {
                                   borderRadius: 8,
                                   boxShadow: "0px 5px 10px 0px #F1F2FA",
                                   border: "none"
-                              }}>
+                              }}
+                              loading={loading}>
 
                             <Space size={24} direction="vertical" style={{width: "100%"}}>
                                 <Space size={8} direction="vertical" style={{width: "100%"}}>

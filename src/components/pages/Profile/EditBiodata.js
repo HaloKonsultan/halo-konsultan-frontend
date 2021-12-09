@@ -21,15 +21,16 @@ import {Pencil, X} from "phosphor-react";
 import {useHistory} from "react-router";
 import SelectDropdown from "../../global/SelectDropdown";
 import LabelText from "../../global/LabelText";
+import {SERVER_NAME} from "../../context/API";
+import noImage from "../../../assets/img/no-image.png";
 
-
-const {Text} = Typography;
+const {Text, Title} = Typography;
 const {Option} = Select;
 const {TextArea} = Input;
 
 const EditBiodata = () => {
     let history = useHistory()
-    const {input, setInput, inputProvince, inputCategories, errorMessage, loading, setLoading, functions} = useContext(ContextProfile)
+    const {input, setInput, inputProvince, inputCategories, errorMessage, loading, functions} = useContext(ContextProfile)
     const {
         fetchData,
         functionEditBiodata,
@@ -156,19 +157,43 @@ const EditBiodata = () => {
     const deleteSkill = (event) => {
         let id = parseInt(event.currentTarget.value)
 
-        functionDeleteSkill(id)
+        if(id !== -1) {
+            functionDeleteSkill(id)
+        }
+        else {
+            let index = input.consultant_skill.findIndex(x => x.skills === event.currentTarget.name);
+            console.log("ini index",index)
+            input.consultant_skill.splice(index, 1);
+            setInput({...input})
+        }
     }
 
     const deleteExperience = (event) => {
         let id = parseInt(event.currentTarget.value)
 
-        functionDeleteExperience(id)
+        if(id !== -1) {
+            functionDeleteExperience(id)
+        }
+        else {
+            let index = input.consultant_experience.findIndex(x => x.position === event.currentTarget.name);
+            console.log("ini index",index)
+            input.consultant_experience.splice(index, 1);
+            setInput({...input})
+        }
     }
 
     const deleteEducation = (event) => {
         let id = parseInt(event.currentTarget.value)
 
-        functionDeleteEducation(id)
+        if(id !== -1) {
+            functionDeleteEducation(id)
+        }
+        else {
+            let index = input.consultant_education.findIndex(x => x.institution_name === event.currentTarget.name);
+            console.log("ini index",index)
+            input.consultant_education.splice(index, 1);
+            setInput({...input})
+        }
     }
 
     const handleCancel = () => {
@@ -217,24 +242,34 @@ const EditBiodata = () => {
             <Nav/>
             <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
-                    <Card title="Edit Profil Diri" style={{width: "100%", borderRadius: 8}} loading={loading}>
+                    <Card title={<Title level={4}>Edit Profil Diri</Title>} style={{width: "100%", borderRadius: 8}} loading={loading}>
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Row>
                                 <Col xs={13} sm={8} md={10} lg={6}>
-                                    <img src={input.photo} alt="profile-picture"
-                                         style={{
-                                             width: 144,
-                                             height: 144,
-                                             borderRadius: 8,
-                                             boxShadow: "0 0 0 1px #CED4DA"
-                                         }}/>
+                                    {
+                                        input.photo === SERVER_NAME + null &&
+                                        <img src={noImage} alt="profile-picture"
+                                             style={{
+                                                 width: 144,
+                                                 height: 144,
+                                                 borderRadius: 8,
+                                                 boxShadow: "0 0 0 1px #CED4DA"
+                                             }}/>
+                                    }
+                                    {
+                                        input.photo !== SERVER_NAME + null &&
+                                        <img src={input.photo} alt="profile-picture"
+                                             style={{
+                                                 width: 144,
+                                                 height: 144,
+                                                 borderRadius: 8,
+                                                 boxShadow: "0 0 0 1px #CED4DA"
+                                             }}/>
+                                    }
                                 </Col>
                                 <Col xs={11} sm={16} md={14} lg={18}>
                                     <Space size={8} direction="vertical" style={{width: "100%"}}>
                                         <input type="file" name="myImage" onChange={onImageChange} title=" "/>
-                                        {/*<Upload {...props}>*/}
-                                        {/*    <Button style={{borderRadius: 4}}>Edit Profile</Button>*/}
-                                        {/*</Upload>*/}
                                         <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
                                     </Space>
                                 </Col>
@@ -368,6 +403,7 @@ const EditBiodata = () => {
                                                                                 {/*        onClick={() => updateEducation(e.id, e.institution_name, e.major, e.start_year, e.end_year)}*/}
                                                                                 {/*    size={24} weight="fill"/></Button>*/}
                                                                                 <Button value={e.id}
+                                                                                        name={e.institution_name}
                                                                                         style={{
                                                                                             padding: 0,
                                                                                             paddingTop: 10
@@ -459,6 +495,7 @@ const EditBiodata = () => {
                                                                             {/*        onClick={() => updateExperience(e.id, e.position, e.start_year, e.end_year)}*/}
                                                                             {/*    size={24} weight="fill"/></Button>*/}
                                                                             <Button value={e.id}
+                                                                                    name={e.position}
                                                                                     style={{
                                                                                         padding: 0,
                                                                                         paddingTop: 10,
@@ -526,6 +563,7 @@ const EditBiodata = () => {
                                                                                 {/*        onClick={() => updateSkill(e.id, e.skills)}*/}
                                                                                 {/*    size={24} weight="fill"/></Button>*/}
                                                                                 <Button value={e.id}
+                                                                                        name={e.skills}
                                                                                         style={{
                                                                                             padding: 0,
                                                                                             paddingBottom: 10
