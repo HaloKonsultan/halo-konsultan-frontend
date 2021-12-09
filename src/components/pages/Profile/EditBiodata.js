@@ -232,9 +232,6 @@ const EditBiodata = () => {
         event.preventDefault()
         console.log("ini input", input)
         functionEditBiodata()
-        if(errorMessage === false){
-            history.push(`/profile`)
-        }
     }
 
     return (
@@ -674,7 +671,7 @@ const EditBiodata = () => {
                             type="primary" block
                             style={{borderRadius: 8, backgroundColor: "#3B85FA"}}
                             htmlType="submit">
-                            Tambahkan Riwayat Pendidikan
+                            Tambahkan Pengalaman Kerja
                         </Button>
                     </Form.Item>
                 </Form>

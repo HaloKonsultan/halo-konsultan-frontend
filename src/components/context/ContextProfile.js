@@ -73,7 +73,6 @@ export const ProfileProvider = props => {
                 }
             }),
         })
-        console.log(input)
         await dataProvinces()
         await dataCategories()
         setLoading(false)
@@ -132,14 +131,12 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
-        Object.keys(input).forEach(function(key) {
-            if(input[key] === null || input[key] === "") {
-                console.log(key)
-                setErrorMessage(true)
-                history.push("/edit-biodata")
-                setErrorMessage(false)
-            }
-        })
+        // Object.keys(input).forEach(function(key) {
+        //     if(input[key] === null || input[key] === "") {
+        //         setErrorMessage(true)
+        //         history.push("/edit-biodata")
+        //     }
+        // })
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,
@@ -154,36 +151,38 @@ export const ProfileProvider = props => {
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
-                setErrorMessage(false)
-                let data = res.data.data
-                setInput({
-                    consultant_experience: data.consultant_experience.map(key => {
-                        return {
-                            id: key.id,
-                            position: key.position,
-                            start_year: key.start_year,
-                            end_year: key.end_year
-                        }
-                    }),
-                    consultant_education: data.consultant_education.map(key => {
-                        return {
-                            id: key.id,
-                            institution_name: key.institution_name,
-                            major: key.major,
-                            start_year: key.start_year,
-                            end_year: key.end_year
-                        }
-                    }),
-                    consultant_skill: data.consultant_skill.map(key => {
-                        return {
-                            id: key.id,
-                            skills: key.skills,
-                        }
-                    }),
-                })
+                history.push(`/profile`)
+                // let data = res.data.data
+                // setInput({
+                //     consultant_experience: data.consultant_experience.map(key => {
+                //         return {
+                //             id: key.id,
+                //             position: key.position,
+                //             start_year: key.start_year,
+                //             end_year: key.end_year
+                //         }
+                //     }),
+                //     consultant_education: data.consultant_education.map(key => {
+                //         return {
+                //             id: key.id,
+                //             institution_name: key.institution_name,
+                //             major: key.major,
+                //             start_year: key.start_year,
+                //             end_year: key.end_year
+                //         }
+                //     }),
+                //     consultant_skill: data.consultant_skill.map(key => {
+                //         return {
+                //             id: key.id,
+                //             skills: key.skills,
+                //         }
+                //     }),
+                // })
             })
             .catch(err => {
+                console.log(err)
                 message.error('Mohon isi semua data', 3);
+                history.push("/edit-biodata")
             })
     }
 
@@ -269,7 +268,6 @@ export const ProfileProvider = props => {
     const dataProvinces = async () => {
         let result = await axios.get(`https://api.binderbyte.com/wilayah/provinsi?api_key=079fc527c1d3fdf63c64cc384bc51b9e6fff9b7552c8eb493db7b2035d70c421`)
         let data = result.data.value
-        console.log(data)
         setInputProvince({
             province: data.map(key => {
                 return {
