@@ -19,6 +19,10 @@
         margin: 32px 32px 0 32px;
     }
 
+    .dashboard-container {
+        margin: 32px 32px 0 32px;
+    }
+
     .schedule-card .ant-card-head {
         background-image: url('../img/today-order-bg-mini.png');
         height: 100px;

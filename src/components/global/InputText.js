@@ -5,7 +5,7 @@ function InputText(props) {
 
     return (
         <>
-            <Input style={{borderRadius: 8, height: 48, backgroundColor: "#F4F4F4", border: props.border}}
+            <Input style={{borderRadius: 8, height: 48, backgroundColor: "white", border: props.border}}
                    type={props.type}
                    name={props.name}
                    onChange={props.onChange}
