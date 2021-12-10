@@ -3,28 +3,30 @@ import {Row, Col} from 'antd';
 import Nav from "../../layout/Header";
 import HomeMessage from "./HomeMessage";
 import SendMessage from "./SendMessage";
-import NavMessage from "../../layout/HeaderMessage";
+// import NavMessage from "../../layout/HeaderMessage";
 
 const Message = () => {
 
     return (
         <>
-            <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/>
-            <SendMessage/>
-            {/*<Row style={{backgroundColor: "white"}}>*/}
-            {/*    <Col span={12}>*/}
-            {/*        <Nav title="Pesan"/>*/}
-            {/*        <div className="container-profile">*/}
-            {/*            <HomeMessage/>*/}
-            {/*        </div>*/}
-            {/*    </Col>*/}
-            {/*    <Col span={12}>*/}
-            {/*        <NavMessage title="Name"/>*/}
-            {/*        <div className="container-profile">*/}
-            {/*            <SendMessage/>*/}
-            {/*        </div>*/}
-            {/*    </Col>*/}
-            {/*</Row>*/}
+            {/* <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/> */}
+            {/* <SendMessage/> */}
+
+            <Row style={{backgroundColor: "white"}}>
+            <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+                   <Nav title="Pesan" mobileTitle="Pesan" mobile="true" />
+                   <div className="container-profile" style={{alignItems: "center", display: "flex"}}>
+                       <HomeMessage/>
+                     </div>
+               </Col>
+               <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
+               <Nav title="Pesan" mobileTitle="Pesan" mobile="true" />
+                   <div className="container-profile"  style={{alignItems: "center", display: "flex"}}>
+                       <SendMessage/>
+                   </div>
+                   </Col>
+               {/* <Col  xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 2, order: 3}}/> */}
+            </Row>
         </>
     )
 }

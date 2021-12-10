@@ -1,5 +1,6 @@
 import React, {useContext, useState} from "react"
 import {useHistory, useLocation} from "react-router-dom"
+import Cookies from "js-cookie";
 import {Button, Layout, PageHeader, Row, Col, Modal, Typography, Space} from 'antd';
 import {ContextProfile} from "../context/ContextProfile"
 
@@ -20,14 +21,16 @@ const NavMessage = (props) => {
     const handleCancel = () => {
         setIsSkillVisible(false);
     };
+    
 
     return (
         <>
             <Layout>
             {
+             Cookies.get('token') !== undefined &&
                     <PageHeader
                         onBack={props.onBack}
-                        style={{backgroundColor: "white", borderBottom: " 1px solid #CED4DA"}}
+                        style={{backgroundColor: "white", borderBottom: " 1px solid #CED4DA", width:"100%"}}
                         title={props.title}
                         extra={[
                             <Button  key="1" size="large"
