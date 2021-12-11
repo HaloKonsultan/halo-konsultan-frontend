@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useContext, useEffect} from "react"
 import {Row, Col, Space, Badge, Typography} from 'antd';
 import OrderTableIncoming from "./table/OrderTableIncoming";
 import OrderTableActive from "./table/OrderTableActive";
@@ -8,10 +8,12 @@ import ProfileNotifications from "./ProfileNotifications";
 import "../../../assets/css/dashboard.css"
 import Nav from "../../layout/Header";
 import TableHeader from "../../global/TableHeader";
+import {ContextOrderIncoming} from "../../context/ContextOrderIncoming";
 
 const {Title} = Typography;
 
 function Dashboard() {
+    const {dataIncomingOrder} = useContext(ContextOrderIncoming)
 
     return (
         <>
@@ -25,7 +27,7 @@ function Dashboard() {
                         <div className="table">
                             <TableHeader link="/incoming-order"
                                          title="Konsultasi Masuk "
-                                         badge={<Badge style={{backgroundColor: '#3B85FA'}} count={5}/>}/>
+                                         badge={<Badge style={{backgroundColor: '#3B85FA'}} count={dataIncomingOrder.length}/>}/>
                             <OrderTableIncoming/>
                         </div>
                         <div className="table">

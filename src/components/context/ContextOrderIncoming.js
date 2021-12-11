@@ -30,7 +30,7 @@ export const IncomingOrderProvider = props => {
                 name: e.name,
                 date: e.date_created,
                 time: e.time,
-                status: e.status
+                status: e.status,
             }
         }))
     }

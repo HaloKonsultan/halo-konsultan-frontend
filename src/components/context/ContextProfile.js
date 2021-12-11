@@ -15,6 +15,7 @@ export const ProfileProvider = props => {
     const [inputProvince, setInputProvince] = useState([])
     const [inputCategories, setInputCategories] = useState([])
     const [errorMessage, setErrorMessage] = useState(true)
+    const [price, setPrice] = useState("")
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -73,6 +74,7 @@ export const ProfileProvider = props => {
                 }
             }),
         })
+        setPrice(input.consultation_price)
         await dataProvinces()
         await dataCategories()
         setLoading(false)
@@ -152,32 +154,6 @@ export const ProfileProvider = props => {
         )
             .then((res) => {
                 history.push(`/profile`)
-                // let data = res.data.data
-                // setInput({
-                //     consultant_experience: data.consultant_experience.map(key => {
-                //         return {
-                //             id: key.id,
-                //             position: key.position,
-                //             start_year: key.start_year,
-                //             end_year: key.end_year
-                //         }
-                //     }),
-                //     consultant_education: data.consultant_education.map(key => {
-                //         return {
-                //             id: key.id,
-                //             institution_name: key.institution_name,
-                //             major: key.major,
-                //             start_year: key.start_year,
-                //             end_year: key.end_year
-                //         }
-                //     }),
-                //     consultant_skill: data.consultant_skill.map(key => {
-                //         return {
-                //             id: key.id,
-                //             skills: key.skills,
-                //         }
-                //     }),
-                // })
             })
             .catch(err => {
                 console.log(err)
@@ -323,6 +299,8 @@ export const ProfileProvider = props => {
             setDataProfile,
             loading,
             setLoading,
+            price,
+            setPrice,
             input,
             setInput,
             errorMessage,

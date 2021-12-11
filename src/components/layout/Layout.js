@@ -41,7 +41,6 @@ const LayoutComponent = (props) => {
     }, [])
 
     const handleMenu = (event) => {
-        console.log(event.key)
         switch (event.key) {
             case "1":
                 return history.push('/')
