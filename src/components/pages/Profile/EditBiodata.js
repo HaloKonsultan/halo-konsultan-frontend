@@ -30,7 +30,15 @@ const {TextArea} = Input;
 
 const EditBiodata = () => {
     let history = useHistory()
-    const {input, setInput, inputProvince, inputCategories, errorMessage, loading, functions} = useContext(ContextProfile)
+    const {
+        input,
+        setInput,
+        inputProvince,
+        inputCategories,
+        errorMessage,
+        loading,
+        functions
+    } = useContext(ContextProfile)
     const {
         fetchData,
         functionEditBiodata,
@@ -50,6 +58,7 @@ const EditBiodata = () => {
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
     const [isSkillVisible, setIsSkillVisible] = useState(false);
     const [isHistoryVisible, setIsHistoryVisible] = useState(false);
+    const [sizeError, setSizeError] = useState(false);
 
     const onChangeGender = e => {
         console.log('radio checked', e.target.value);
@@ -157,12 +166,11 @@ const EditBiodata = () => {
     const deleteSkill = (event) => {
         let id = parseInt(event.currentTarget.value)
 
-        if(id !== -1) {
+        if (id !== -1) {
             functionDeleteSkill(id)
-        }
-        else {
+        } else {
             let index = input.consultant_skill.findIndex(x => x.skills === event.currentTarget.name);
-            console.log("ini index",index)
+            console.log("ini index", index)
             input.consultant_skill.splice(index, 1);
             setInput({...input})
         }
@@ -171,12 +179,11 @@ const EditBiodata = () => {
     const deleteExperience = (event) => {
         let id = parseInt(event.currentTarget.value)
 
-        if(id !== -1) {
+        if (id !== -1) {
             functionDeleteExperience(id)
-        }
-        else {
+        } else {
             let index = input.consultant_experience.findIndex(x => x.position === event.currentTarget.name);
-            console.log("ini index",index)
+            console.log("ini index", index)
             input.consultant_experience.splice(index, 1);
             setInput({...input})
         }
@@ -185,12 +192,11 @@ const EditBiodata = () => {
     const deleteEducation = (event) => {
         let id = parseInt(event.currentTarget.value)
 
-        if(id !== -1) {
+        if (id !== -1) {
             functionDeleteEducation(id)
-        }
-        else {
+        } else {
             let index = input.consultant_education.findIndex(x => x.institution_name === event.currentTarget.name);
-            console.log("ini index",index)
+            console.log("ini index", index)
             input.consultant_education.splice(index, 1);
             setInput({...input})
         }
@@ -215,11 +221,16 @@ const EditBiodata = () => {
 
     const onImageChange = (event) => {
         let formdata = new FormData()
+        let size = event.target.files[0].size;
+        console.log("size = ", size)
 
-        if (event.target.files && event.target.files[0]) {
+        if (size > 524288) {
+            setSizeError(true)
+        } else if (event.target.files && event.target.files[0]) {
+            setSizeError(false)
             let img = event.target.files[0];
             formdata.append('photo', img)
-
+            console.log("size = ", size)
             functionUploadImage(formdata)
             setInput({...input, photo: URL.createObjectURL(img)})
 
@@ -239,7 +250,8 @@ const EditBiodata = () => {
             <Nav/>
             <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
-                    <Card title={<Title level={4}>Edit Profil Diri</Title>} style={{width: "100%", borderRadius: 8}} loading={loading}>
+                    <Card title={<Title level={4}>Edit Profil Diri</Title>} style={{width: "100%", borderRadius: 8}}
+                          loading={loading}>
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Row>
                                 <Col xs={13} sm={8} md={10} lg={6}>
@@ -267,10 +279,18 @@ const EditBiodata = () => {
                                 <Col xs={11} sm={16} md={14} lg={18}>
                                     <Space size={8} direction="vertical" style={{width: "100%"}}>
                                         <input type="file" name="myImage" onChange={onImageChange} title=" "/>
+                                        {
+                                            sizeError === true &&
+                                            <LabelText text="Ukuran foto melebihi 512KB!"
+                                                       fontSize={12}
+                                                       fontColor="#EA3A3A"/>
+                                        }
+
                                         <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
                                     </Space>
                                 </Col>
                             </Row>
+
                             <Space size={8} direction="vertical" style={{width: "100%"}}>
                                 <LabelText text="Nama Lengkap"/>
                                 <Input style={{borderRadius: 8, height: 48}}
@@ -580,7 +600,6 @@ const EditBiodata = () => {
                                             })}
                                         </>
                                     )}
-
                             </Space>
 
                             <Button size="large"

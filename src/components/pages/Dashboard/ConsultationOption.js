@@ -11,6 +11,7 @@ import InputText from "../../global/InputText";
 import ButtonPrimary from "../../global/ButtonPrimary";
 import "../../../assets/css/dashboard.css"
 import LabelText from "../../global/LabelText";
+import {ContextProfile} from "../../context/ContextProfile";
 
 const {Meta} = Card;
 const {Text} = Typography;
@@ -18,20 +19,10 @@ const {TextArea} = Input;
 
 const ConsultationOption = () => {
     let {Id} = useParams()
-    console.log(Id)
+    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(ContextAfterBooking)
+    const {price, setPrice} = useContext(ContextProfile)
 
-    const {
-        input,
-        setInput,
-        prefTime,
-        setPrefTime,
-        prefDate,
-        setPrefDate,
-        inputDocument,
-        setInputDocument,
-        functions
-    } = useContext(ContextAfterBooking)
-    const {fetchDataById, functionSubmit, functionSubmitDocument} = functions
+    const {fetchDataById, functionSubmit} = functions
     const [dateValidation, setDateValidation] = useState({
         date1: false,
         date2: false,
@@ -42,6 +33,7 @@ const ConsultationOption = () => {
     useEffect(() => {
         if (Id !== undefined) {
             fetchDataById(Id)
+            console.log("ini di detail", price)
         }
     }, []);
 
@@ -83,6 +75,8 @@ const ConsultationOption = () => {
         let typeOfValue = event.currentTarget.value
         let name = event.target.name
 
+        console.log("ini handle change", typeOfValue)
+        setPrice(typeOfValue)
         setInput({...input, [name]: typeOfValue})
     };
 
@@ -127,6 +121,7 @@ const ConsultationOption = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
+        setInput({...input, photo: price})
         let found1 = prefDate.date.find(colDef => colDef.id === 1)
         let found2 = prefDate.date.find(colDef => colDef.id === 2)
         let found3 = prefDate.date.find(colDef => colDef.id === 3)
@@ -271,7 +266,7 @@ const ConsultationOption = () => {
                                     <LabelText text="Harga Jasa"/>
                                     <LabelText fontSize={12} fontColor="#979595"
                                                text="Harga jasa secara default adalah harga yang Anda cantumkan di profil."/>
-                                    <InputText name="price" onChange={handleChange} placeholder="Harga Jasa"/>
+                                    <InputText name="price" value={price} onChange={handleChange} placeholder="Harga Jasa"/>
                                 </Space>
                             </Space>
                         </form>
