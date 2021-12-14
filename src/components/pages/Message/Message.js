@@ -22,7 +22,7 @@ const {userName} = useContext(ContextMessage)
                      </div>
                </Col>
                <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
-               <NavMessage title={userName} mobileTitle="Name" mobile="true"/>
+               <NavMessage title={userName} mobileTitle= {userName} mobile="true"/>
                    <div className="container-profile"  style={{alignItems: "center", display: "flex"}}>
                        <SendMessage/>
                    </div>
