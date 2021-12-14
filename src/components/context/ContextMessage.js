@@ -32,7 +32,6 @@ export const MessageProvider = props => {
     }
     
     const fetchMessageById = async (id_message) => {
-        console.log(id_message)
         let result = await API.get(`consultants/forums/get-all-messages/${id_message}`,
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
         let data = result.data
@@ -52,7 +51,6 @@ export const MessageProvider = props => {
     }
     
     const functionSendMessage = () => {
-        console.log("ini yang akan dikirim", message, messageId)
         API.post(`consultants/forums/send/${messageId}`, {
                 consultant_id: Cookies.get('id'),
                 message : message
@@ -60,7 +58,6 @@ export const MessageProvider = props => {
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
-                console.log("respon setelah kirim pesan", res)
             })
     }
 
@@ -69,7 +66,6 @@ export const MessageProvider = props => {
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
         )
             .then((res) => {
-                console.log(res)
                 window.location.reload();
             })
     }

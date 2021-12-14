@@ -241,7 +241,7 @@ const EditBiodata = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log("ini input", input)
+        // console.log("ini input", input)
         functionEditBiodata()
     }
 
@@ -261,6 +261,7 @@ const EditBiodata = () => {
                                              style={{
                                                  width: 144,
                                                  height: 144,
+                                                 objectFit: "cover",
                                                  borderRadius: 8,
                                                  boxShadow: "0 0 0 1px #CED4DA"
                                              }}/>
@@ -467,7 +468,7 @@ const EditBiodata = () => {
                                 <PageHeader
                                     style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                                     ghost={false}
-                                    subTitle={<LabelText text="Pengalaman"/>}
+                                    subTitle={<LabelText text="Pengalaman (Opsional)"/>}
                                     extra={[
                                         <Button
                                             onClick={showExperienceModal}
@@ -480,8 +481,7 @@ const EditBiodata = () => {
                                     ]}
                                 />
                                 <h6 style={{color: "gray"}}>Hanya cantumkan pengalaman kerja yang berhubungan dengan
-                                    bidang
-                                    konsultasi
+                                    bidang konsultasi
                                 </h6>
                                 {
                                     input.consultant_experience && (
@@ -538,7 +538,7 @@ const EditBiodata = () => {
                                 <PageHeader
                                     style={{backgroundColor: "transparent", padding: 0, width: "100%"}}
                                     ghost={false}
-                                    subTitle={<LabelText text="Keahlian"/>}
+                                    subTitle={<LabelText text="Keahlian (Opsional)"/>}
                                     extra={[
                                         <Button
                                             onClick={showSkillModal}

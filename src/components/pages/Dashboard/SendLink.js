@@ -93,13 +93,13 @@ const SendLink = (props) => {
                 input.preference !== "offline" &&
                 <>
                     <form id="1" onSubmit={handleSubmit}>
-                        <Space size={24} direction="vertical">
-                            <Space size={8} direction="vertical">
+                        <Space size={24} direction="vertical" style={{width: "100%"}}>
+                            <Space size={8} direction="vertical" style={{width: "100%"}}>
                                 {
                                     input.conference_link === null && input.status !== "done" &&
                                         <>
                                             <Text type="secondary">Masukkan Link Conference untuk Klien </Text>
-                                            <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                            <Input style={{width: "100%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                                    name="conference_link"
                                                    disabled={props.disabled}
                                                    value={typeOfValue} onChange={handleChange}/>
@@ -107,7 +107,7 @@ const SendLink = (props) => {
                                 }
                                 {
                                     input.conference_link !== null && input.status !== "done" &&
-                                    <Input style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
+                                    <Input style={{width: "100%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}
                                            name="conference_link"
                                            disabled={true}
                                            value={input.conference_link} onChange={handleChange}/>

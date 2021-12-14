@@ -1,7 +1,7 @@
 import React, { useState, createContext } from "react";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
-import API from "./API"
+import API, {SERVER_NAME} from "./API"
 
 export const ContextConsultationDetail = createContext()
 
@@ -66,7 +66,8 @@ export const ConsultationDetailProvider = props => {
                 return {
                     id: key.id,
                     name: key.name,
-                    file: key.file}
+                    file: SERVER_NAME + key.file
+                }
             })
         })
         setCurrentId(data.id)

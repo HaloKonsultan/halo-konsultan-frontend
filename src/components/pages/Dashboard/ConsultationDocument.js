@@ -7,7 +7,7 @@ import {FileTextOutlined} from '@ant-design/icons';
 
 const {Title, Link} = Typography;
 
-const SendLink = () => {
+const ConsultantDocument = () => {
     let {Id} = useParams()
     console.log(Id)
 
@@ -26,7 +26,7 @@ const SendLink = () => {
                 input.consultation_document && (
                     <>
                         <Card title={<Title style={{color: "black", margin: 0}} level={4}>Dokumen Klien</Title>}
-                              style={{width: 438, borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
+                              style={{width: "100%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA"}}>
                             {input.consultation_document.map((e, index) => {
                                 return (
                                     <>
@@ -53,4 +53,4 @@ const SendLink = () => {
     )
 }
 
-export default SendLink
+export default ConsultantDocument

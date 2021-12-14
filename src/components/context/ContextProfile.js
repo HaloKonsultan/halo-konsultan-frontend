@@ -132,6 +132,23 @@ export const ProfileProvider = props => {
             })
     }
 
+    const functionDeleteConsultantDoc = (idDoc) => {
+        API.delete(`consultants/profile/documentation/${idDoc}`, {
+            headers: {
+                "Authorization": "Bearer " + Cookies.get('token')
+            }
+        })
+            .then(() => {
+                setInput({
+                    ...input, consultant_documentation: input.consultant_documentation.filter((res) => {
+                        return res.id !== idDoc
+                    }),
+                })
+                message.success('Data telah dihapus!', 3);
+
+            })
+    }
+
     const functionEditBiodata = () => {
         // Object.keys(input).forEach(function(key) {
         //     if(input[key] === null || input[key] === "") {
@@ -156,7 +173,6 @@ export const ProfileProvider = props => {
                 history.push(`/profile`)
             })
             .catch(err => {
-                console.log(err)
                 message.error('Mohon isi semua data', 3);
                 history.push("/edit-biodata")
             })
@@ -167,16 +183,14 @@ export const ProfileProvider = props => {
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
-                console.log(res)
             })
     }
 
     const functionUploadDocumentation = (formdata) => {
-        API.post(`consultants/profile/upload/${Cookies.get('id')}`, formdata,
+        API.post(`consultants/profile/documentation/${Cookies.get('id')}`, formdata,
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}}
         )
             .then((res) => {
-                console.log(res)
             })
     }
 
@@ -287,6 +301,7 @@ export const ProfileProvider = props => {
         functionDeleteExperience,
         functionDeleteSkill,
         functionDeleteEducation,
+        functionDeleteConsultantDoc,
         dataProvinces,
         dataCity,
         dataCategories,

@@ -1,14 +1,11 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Row, Col} from 'antd';
 import Nav from "../../layout/Header";
 import HomeMessage from "./HomeMessage";
 import SendMessage from "./SendMessage";
-import NavMessage from "../../layout/HeaderMessage";
-import {ContextMessage} from "../../context/ContextMessage";
 
 const Message = () => {
 
-const {userName} = useContext(ContextMessage)
     return (
         <>
             {/* <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/> */}

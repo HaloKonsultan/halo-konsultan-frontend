@@ -3,7 +3,7 @@
 }
 
 .dashboard-container {
-    margin: 32px;
+    margin: 32px 32px 0 32px;
 }
 
 .notification-container {
@@ -20,7 +20,7 @@
     }
 
     .dashboard-container {
-        margin: 32px 32px 0 32px;
+        margin: 32px;
     }
 
     .schedule-card .ant-card-head {
