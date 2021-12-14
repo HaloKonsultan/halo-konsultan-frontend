@@ -49,7 +49,7 @@ const SendMessage = () => {
                                                         {
                                                             e.sender === "client" &&
                                                             <Card style={{
-                                                                width: "80%",
+                                                                float: "left",
                                                                 border: "none",
                                                                 borderRadius: "12px 12px 12px 0",
                                                                 backgroundColor: "#F4F4F4"
