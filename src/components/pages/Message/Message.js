@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Row, Col} from 'antd';
 import Nav from "../../layout/Header";
+import NavMessage from "../../layout/HeaderMessage";
 import HomeMessage from "./HomeMessage";
 import SendMessage from "./SendMessage";
+import {ContextMessage} from "../../context/ContextMessage";
 
 const Message = () => {
+
+    const {userName} = useContext(ContextMessage)
 
     return (
         <>
