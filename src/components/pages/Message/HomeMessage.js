@@ -5,14 +5,11 @@ import InputText from "../../global/InputText";
 import 'antd/dist/antd.css';
 import "../../../assets/css/message.css"
 import {ContextMessage} from "../../context/ContextMessage";
-import {useHistory} from "react-router-dom";
-import Cookies from "js-cookie";
 
 const {Text} = Typography;
 
 const HomeMessage = () => {
-    const [background, setBackground] = useState("white");
-    const {input, setUserName, setMessageId, setIsEnded, isEnded, functions} = useContext(ContextMessage)
+    const {input, setUserName, setMessageId, setIsEnded, functions} = useContext(ContextMessage)
     const {fetchDataById} = functions
 
     useEffect(() => {
@@ -23,8 +20,6 @@ const HomeMessage = () => {
         setMessageId(id)
         setUserName(name)
         setIsEnded(end)
-        console.log(input)
-        console.log("is ended",isEnded)
     }
     return (
         <>

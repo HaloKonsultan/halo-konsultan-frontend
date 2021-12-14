@@ -17,7 +17,13 @@ const EditProfile = () => {
     let history = useHistory()
 
     const {input, setInput, loading, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditProfile, functionDeleteVirtualAccount, functionUploadImage} = functions
+    const {
+        fetchData,
+        functionEditProfile,
+        functionDeleteVirtualAccount,
+        functionUploadDocumentation,
+        functionDeleteConsultantDoc
+    } = functions
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
     useEffect(() => {
@@ -51,8 +57,10 @@ const EditProfile = () => {
         if (event.target.files && event.target.files[0]) {
             let img = event.target.files[0];
 
-            formdata.append('consultation_doc', img)
-            functionUploadImage(formdata)
+            formdata.append('consultation_doc[][photo]', img)
+            formdata.append('consultation_doc[][id]', -1)
+            console.log(formdata)
+            functionUploadDocumentation(formdata)
 
             const values = {
                 id: -1,
@@ -82,6 +90,12 @@ const EditProfile = () => {
         let idVA = parseInt(event.currentTarget.value)
 
         functionDeleteVirtualAccount(idVA)
+    }
+
+    const handleDeleteDocumentation = (event) => {
+        let idDoc = parseInt(event.currentTarget.value)
+
+        functionDeleteConsultantDoc(idDoc)
     }
 
     return (
@@ -176,14 +190,25 @@ const EditProfile = () => {
                                                             return (
                                                                 <>
                                                                     <li>
-                                                                        <img src={e.photo}
-                                                                             alt="" style={{
-                                                                            width: 210,
-                                                                            height: 168,
-                                                                            objectFit: "cover",
-                                                                            borderRadius: 8,
-                                                                            boxShadow: "0 0 0 1px #CED4DA"
-                                                                        }}/>
+                                                                        <div style={{position: "relative"}}>
+                                                                            <img src={e.photo}
+                                                                                 alt="" style={{
+                                                                                width: 210,
+                                                                                height: 168,
+                                                                                objectFit: "cover",
+                                                                                borderRadius: 8,
+                                                                                boxShadow: "0 0 0 1px #CED4DA"
+                                                                            }}/>
+                                                                            <Button value={e.id} style={{
+                                                                                position: "absolute",
+                                                                                top: 4,
+                                                                                right: 0,
+                                                                                color: "white"
+                                                                            }}
+                                                                                    onClick={handleDeleteDocumentation}
+                                                                                    type="text"><X size={24}/>
+                                                                            </Button>
+                                                                        </div>
                                                                     </li>
                                                                 </>
                                                             )

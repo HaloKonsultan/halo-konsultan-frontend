@@ -7,6 +7,7 @@ import {ContextMessage} from "../context/ContextMessage";
 const {Text, Title} = Typography;
 const NavMessage = (props) => {
     const {functions} = useContext(ContextMessage)
+    const {isEnded} = useContext(ContextMessage)
     const {functionEndForum} = functions
     const [isEndForum, setIsEndForum] = useState(false);
 
@@ -33,11 +34,14 @@ const NavMessage = (props) => {
                         title={props.title}
                         extra={[
                             <Button  key="1" size="large"
-                            danger 
+                            danger type={isEnded !== 1 ? "primary" : "text"} ghost
                             style= {{borderRadius: 8}}
                             onClick={showModal}>
                                     <Row>
-                                        <Col span={12}>Akhiri Diskusi</Col>
+                                        {
+                                            isEnded !== 1 &&
+                                            <Col span={12}>Akhiri Diskusi</Col>
+                                        }
                                     </Row>
                           </Button>
                         ]}
@@ -77,7 +81,7 @@ const NavMessage = (props) => {
                         </Form.Item>
                     </Form>
                 </Modal>
-            
+
             </Layout>
         </>
     )
