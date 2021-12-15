@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react"
 import {Card, Space, Modal, Form, Row, Col, Input, Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
-import {useParams} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import ButtonDanger from "../../global/ButtonDanger";
 import PrimaryButton from "../../global/ButtonPrimary";
@@ -10,6 +10,7 @@ import "../../../assets/css/dashboard.css"
 const {Title} = Typography;
 
 const AcceptDeclineCard = () => {
+    let history = useHistory()
     let {Id} = useParams()
     console.log(Id)
 
@@ -41,8 +42,8 @@ const AcceptDeclineCard = () => {
 
     function handleAccept(event) {
         let idClient = parseInt(event.currentTarget.value)
-
-        functionAccept(idClient)
+        history.push(`/incoming-order/detail/accept/${idClient}`)
+        // functionAccept(idClient)
     }
 
     const handleChange = (event) => {

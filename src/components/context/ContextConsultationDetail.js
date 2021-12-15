@@ -147,7 +147,6 @@ export const ConsultationDetailProvider = props => {
 
     const functions = {
         fetchDataById,
-        functionAccept,
         functionSubmit,
         functionDecline,
         funtionEndConsultation
@@ -157,6 +156,7 @@ export const ConsultationDetailProvider = props => {
         <ContextConsultationDetail.Provider value = {{
             dataConsultation,
             setDataConsultation,
+            functionAccept,
             input,
             setInput,
             currentId,

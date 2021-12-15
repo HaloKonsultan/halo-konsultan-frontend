@@ -1,34 +1,21 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Row, Col} from 'antd';
 import Nav from "../../layout/Header";
-import NavMessage from "../../layout/HeaderMessage";
 import HomeMessage from "./HomeMessage";
 import SendMessage from "./SendMessage";
-import {ContextMessage} from "../../context/ContextMessage";
 
 const Message = () => {
 
-    const {userName} = useContext(ContextMessage)
-
     return (
         <>
-            {/* <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/> */}
-            {/* <SendMessage/> */}
-
-            <Row style={{backgroundColor: "white"}}>
-            <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
-                   <Nav title="Pesan" mobileTitle="Pesan" mobile="true" />
-                   <div className="container-profile" style={{alignItems: "center", display: "flex"}}>
-                       <HomeMessage/>
-                     </div>
-               </Col>
-               <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 12, order: 1}}>
-               <NavMessage title={userName} mobileTitle= {userName} mobile="true"/>
-                   <div className="container-profile"  style={{alignItems: "center", display: "flex"}}>
-                       <SendMessage/>
-                   </div>
-                   </Col>
-               {/* <Col  xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 2, order: 3}}/> */}
+            <Row>
+                <Col span={12} style={{borderRight: "1px solid #CED4DA", minHeight: "100vh"}}>
+                    <Nav title="Pesan" mobileTitle="Pesan" mobile="true"/>
+                    <HomeMessage/>
+                </Col>
+                <Col span={12}>
+                    <SendMessage/>
+                </Col>
             </Row>
         </>
     )

@@ -266,7 +266,8 @@ const ConsultationOption = () => {
                                     <LabelText text="Harga Jasa"/>
                                     <LabelText fontSize={12} fontColor="#979595"
                                                text="Harga jasa secara default adalah harga yang Anda cantumkan di profil."/>
-                                    <InputText name="price" value={price} onChange={handleChange} placeholder="Harga Jasa"/>
+                                    <InputText name="price" value={price} onChange={handleChange}
+                                               placeholder="Harga Jasa"/>
                                 </Space>
                             </Space>
                         </form>
