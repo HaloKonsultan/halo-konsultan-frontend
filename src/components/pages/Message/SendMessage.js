@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import {Card, Input, Row, Col, Tag} from 'antd';
-import {Typography, Space, Button} from 'antd';
+import {Typography, Space, Button, Spin} from 'antd';
 import {Layout} from 'antd';
 import {PaperPlaneRight} from "phosphor-react";
 import NavMessage from "../../layout/HeaderMessage";
@@ -10,7 +10,7 @@ const {Footer, Content} = Layout;
 const {Text, Link} = Typography;
 
 const SendMessage = () => {
-    const {input, inputMessage, setInputMessage, userName, messageId, isEnded, message, setMessage, functions} = useContext(ContextMessage)
+    const {loading, inputMessage, setInputMessage, userName, messageId, isEnded, message, setMessage, functions} = useContext(ContextMessage)
     const {fetchMessageById, functionSendMessage, fetchDataById} = functions
 
     useEffect(() => {
@@ -37,6 +37,7 @@ const SendMessage = () => {
                 messageId &&
                 <>
                     <NavMessage title={userName}/>
+                    <Spin spinning={loading}>
                     <Layout style={{backgroundColor: "white"}}>
                         <Content style={{backgroundColor: "white", padding: 24}}>
                             <Space direction="vertical" size={24} style={{width: "100%", minHeight: "80vh"}}>
@@ -113,6 +114,7 @@ const SendMessage = () => {
                         }
 
                     </Layout>
+                    </Spin>
                 </>
             }
         </>

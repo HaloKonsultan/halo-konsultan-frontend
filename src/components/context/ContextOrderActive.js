@@ -7,6 +7,7 @@ export const ContextOrderActive = createContext()
 
 export const OrderProvider = props => {
     let history = useHistory()
+    const [loading, setLoading] = useState(false)
     const [dataOrder, setDataOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
@@ -18,6 +19,7 @@ export const OrderProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
+        setLoading(true)
         let result = await API.get(
             `consultants/consultations/user/${Cookies.get('id')}/active`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
@@ -33,6 +35,7 @@ export const OrderProvider = props => {
                 conference_link: e.conference_link
             }
         }))
+        setLoading(false)
     }
 
     const functionDetail = (idClient) => {
@@ -46,6 +49,8 @@ export const OrderProvider = props => {
 
     return (
         <ContextOrderActive.Provider value = {{
+            loading,
+            setLoading,
             dataOrder,
             setDataOrder,
             input,

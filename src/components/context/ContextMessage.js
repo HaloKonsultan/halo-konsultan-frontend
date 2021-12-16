@@ -11,6 +11,7 @@ export const MessageProvider = props => {
     const [message, setMessage] = useState("")
     const [userName, setUserName] = useState("")
     const [isEnded, setIsEnded] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const fetchDataById = async () => {
         let result = await API.get(`consultants/forums/get-all-conversation/${Cookies.get('id')}`,
@@ -32,6 +33,7 @@ export const MessageProvider = props => {
     }
     
     const fetchMessageById = async (id_message) => {
+        setLoading(true)
         let result = await API.get(`consultants/forums/get-all-messages/${id_message}`,
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
         let data = result.data
@@ -47,7 +49,7 @@ export const MessageProvider = props => {
                 }
             }),
         })
-
+        setLoading(false)
     }
     
     const functionSendMessage = () => {
@@ -79,6 +81,8 @@ export const MessageProvider = props => {
 
     return (
         <ContextMessage.Provider value = {{
+            loading,
+            setLoading,
             input,
             setInput,
             inputMessage,

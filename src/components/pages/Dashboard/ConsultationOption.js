@@ -12,6 +12,7 @@ import ButtonPrimary from "../../global/ButtonPrimary";
 import "../../../assets/css/dashboard.css"
 import LabelText from "../../global/LabelText";
 import {ContextProfile} from "../../context/ContextProfile";
+import {Border, Danger, PrimaryBlue} from "../../global/Constants";
 
 const {Meta} = Card;
 const {Text} = Typography;
@@ -166,7 +167,7 @@ const ConsultationOption = () => {
                                                     width: "100%",
                                                     height: 48,
                                                     borderRadius: 8,
-                                                    borderColor: dateValidation.date1 ? "red" : "#CED4DA"
+                                                    borderColor: dateValidation.date1 ? Danger : Border
                                                 }}
                                                 suffixIcon={<CalendarBlank size={24} weight="fill"/>}
                                                 format={'DD-MM-YYYY'}
@@ -178,7 +179,7 @@ const ConsultationOption = () => {
                                                     width: "100%",
                                                     height: 48,
                                                     borderRadius: 8,
-                                                    borderColor: dateValidation.date1 ? "red" : "#CED4DA"
+                                                    borderColor: dateValidation.date1 ? Danger : Border
                                                 }}
                                                 suffixIcon={<Clock size={24} weight="fill"/>}
                                                 format={'HH:mm'}
@@ -199,7 +200,7 @@ const ConsultationOption = () => {
                                                     width: "100%",
                                                     height: 48,
                                                     borderRadius: 8,
-                                                    borderColor: dateValidation.date2 ? "red" : "#CED4DA"
+                                                    borderColor: dateValidation.date2 ? Danger : Border
                                                 }}
                                                 suffixIcon={<CalendarBlank size={24} weight="fill"/>}
                                                 format={'DD-MM-YYYY'}
@@ -211,7 +212,7 @@ const ConsultationOption = () => {
                                                     width: "100%",
                                                     height: 48,
                                                     borderRadius: 8,
-                                                    borderColor: dateValidation.date2 ? "red" : "#CED4DA"
+                                                    borderColor: dateValidation.date2 ? Danger : Border
                                                 }}
                                                 format={'HH:mm'}
                                                 suffixIcon={<Clock size={24} weight="fill"/>}
@@ -231,7 +232,7 @@ const ConsultationOption = () => {
                                                     width: "100%",
                                                     height: 48,
                                                     borderRadius: 8,
-                                                    borderColor: dateValidation.date3 ? "red" : "#CED4DA"
+                                                    borderColor: dateValidation.date3 ? Danger : Border
                                                 }}
                                                 suffixIcon={<CalendarBlank size={24} weight="fill"/>}
                                                 format={'DD-MM-YYYY'}
@@ -243,7 +244,7 @@ const ConsultationOption = () => {
                                                     width: "100%",
                                                     height: 48,
                                                     borderRadius: 8,
-                                                    borderColor: dateValidation.date3 ? "red" : "#CED4DA"
+                                                    borderColor: dateValidation.date3 ? Danger : Border
                                                 }}
                                                 format={'HH:mm'}
                                                 suffixIcon={<Clock size={24} weight="fill"/>}
@@ -277,7 +278,7 @@ const ConsultationOption = () => {
                                 ghost={false}
                                 subTitle={<LabelText text="Dokumen yang Diperlukan (Opsional)"/>}
                                 extra={[
-                                    <Button onClick={showExperienceModal} style={{color: "#3B85FA", padding: 0}}
+                                    <Button onClick={showExperienceModal} style={{color: PrimaryBlue, padding: 0}}
                                             type="text">
                                         <b>+ Tambah Dokumen</b>
                                     </Button>,

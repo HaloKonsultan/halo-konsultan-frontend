@@ -7,6 +7,7 @@ export const ContextOrderWaiting = createContext()
 
 export const WaitingPaymentProvider = props => {
     let history = useHistory()
+    const [loading, setLoading] = useState(false)
     const [dataPayment, setDataPayment] = useState([])
     const [input, setInput] = useState({
         title: "",
@@ -19,6 +20,7 @@ export const WaitingPaymentProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
+        setLoading(true)
         let result = await API.get(
             `consultants/consultations/user/${Cookies.get('id')}/waiting`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
@@ -33,6 +35,7 @@ export const WaitingPaymentProvider = props => {
                 status: e.status
             }
         }))
+        setLoading(false)
     }
 
     const functionDetail = (consultation_id) => {
@@ -46,6 +49,8 @@ export const WaitingPaymentProvider = props => {
 
     return (
         <ContextOrderWaiting.Provider value = {{
+            loading,
+            setLoading,
             dataPayment,
             setDataPayment,
             input,

@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from "react";
 import {Card, Typography} from 'antd';
 import Title from "antd/es/typography/Title";
 import {ContextOrderToday} from "../../../context/ContextOrderToday";
+import {PrimaryWhite, SecondaryWhite} from "../../../global/Constants";
 
 const {Text, Link} = Typography;
 const {Meta} = Card;
@@ -28,12 +29,12 @@ const OrderToday = () => {
         <>
             <Card
                 className="schedule-card"
-                style={{width: "100%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA", backgroundColor: "#F4F4F4"}}
+                style={{width: "100%", borderRadius: 8, boxShadow: "0 0 0 1px #CED4DA", backgroundColor: SecondaryWhite}}
                 title={
                     <>
                         <Meta
-                            title={<Title style={{color: "white", margin: 0}} level={4}>Konsultasi hari ini</Title>}
-                            description={<p style={{color: "white", margin: 0}}>{arrhari[hari]+", "+tanggal+" "+arrbulan[bulan]+" "+tahun}</p>}
+                            title={<Title style={{color: PrimaryWhite, margin: 0}} level={4}>Konsultasi hari ini</Title>}
+                            description={<p style={{color: PrimaryWhite, margin: 0}}>{arrhari[hari]+", "+tanggal+" "+arrbulan[bulan]+" "+tahun}</p>}
                         />
                     </>
                 }

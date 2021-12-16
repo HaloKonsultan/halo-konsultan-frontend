@@ -7,6 +7,7 @@ export const ContextOrderIncoming = createContext()
 
 export const IncomingOrderProvider = props => {
     let history = useHistory()
+    const [loading, setLoading] = useState(false)
     const [dataIncomingOrder, setDataIncomingOrder] = useState([])
     const [input, setInput] = useState({
         title: "",
@@ -19,6 +20,7 @@ export const IncomingOrderProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchData = async () => {
+        setLoading(true)
         let result = await API.get(
             `consultants/consultations/user/${Cookies.get('id')}/incoming`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
@@ -33,6 +35,7 @@ export const IncomingOrderProvider = props => {
                 status: e.status,
             }
         }))
+        setLoading(false)
     }
 
     const functionDetail = (idClient) => {
@@ -46,6 +49,8 @@ export const IncomingOrderProvider = props => {
 
     return (
         <ContextOrderIncoming.Provider value = {{
+            loading,
+            setLoading,
             dataIncomingOrder,
             setDataIncomingOrder,
             input,

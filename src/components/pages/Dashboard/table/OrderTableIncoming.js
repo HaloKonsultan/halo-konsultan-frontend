@@ -4,7 +4,7 @@ import {ContextOrderIncoming} from "../../../context/ContextOrderIncoming";
 import OrderTable from "../../../global/OrderTable";
 
 const OrderTableIncoming = (props) => {
-    const {dataIncomingOrder, functions} = useContext(ContextOrderIncoming)
+    const {loading, dataIncomingOrder, functions} = useContext(ContextOrderIncoming)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
@@ -55,7 +55,7 @@ const OrderTableIncoming = (props) => {
 
     return (
         <>
-            <OrderTable columns={columns} dataSource={data.slice(-5)}/>
+            <OrderTable loading={loading} columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
 }
