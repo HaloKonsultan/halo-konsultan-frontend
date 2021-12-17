@@ -37,6 +37,7 @@ import History from "../pages/history/History";
 import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
 import {MessageProvider} from "../context/ContextMessage";
 import SendMessage from "../pages/Message/SendMessage";
+import {NotificationProvider} from "../context/ContextNotification";
 
 const Routes = () => {
     const LoginRoute = ({...props}) => {
@@ -61,6 +62,7 @@ const Routes = () => {
                     <ProfileProvider>
                     <AfterBookingProvider>
                     <MessageProvider>
+                    <NotificationProvider>
                         <Switch>
                             <LoginRoute path="/" search="Dashboard" exact>
                                 <LayoutComponent content={<Dashboard/>}/>
@@ -127,6 +129,7 @@ const Routes = () => {
                                 <LayoutComponent content={<EditProfile/>}/>
                             </LoginRoute>
                         </Switch>
+                    </NotificationProvider>
                     </MessageProvider>
                     </AfterBookingProvider>
                     </ProfileProvider>

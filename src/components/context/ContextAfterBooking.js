@@ -3,12 +3,14 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API from "./API"
 import {ContextConsultationDetail} from "./ContextConsultationDetail";
+import {ContextNotification} from "./ContextNotification";
 
 export const ContextAfterBooking = createContext()
 
 export const AfterBookingProvider = props => {
     let history = useHistory()
     const {functionAccept} = useContext(ContextConsultationDetail)
+    // const {pushNotification} = useContext(ContextNotification)
     const [dataAfterBooking, setDataAfterBooking] = useState([])
     const [inputDocument, setInputDocument] = useState({
         title: "",
@@ -44,6 +46,7 @@ export const AfterBookingProvider = props => {
 
     const functionSubmit = (consultation_id) => {
         functionAccept(consultation_id)
+        //pushNotification(consultation_id, "Konsultasi Diterima", `Konsultasi ${input.title} anda diterima konsultan`)
         API.patch(`consultants/consultations/${consultation_id}/after-book`, {
                 preference: input.preference,
                 price: input.price,

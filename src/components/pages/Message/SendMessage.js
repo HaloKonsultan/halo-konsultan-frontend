@@ -5,13 +5,17 @@ import {Layout} from 'antd';
 import {PaperPlaneRight} from "phosphor-react";
 import NavMessage from "../../layout/HeaderMessage";
 import {ContextMessage} from "../../context/ContextMessage";
+import {ContextNotification} from "../../context/ContextNotification";
+import {ContextProfile} from "../../context/ContextProfile";
 
 const {Footer, Content} = Layout;
 const {Text, Link} = Typography;
 
 const SendMessage = () => {
-    const {loading, inputMessage, setInputMessage, userName, messageId, isEnded, message, setMessage, functions} = useContext(ContextMessage)
+    const {loading, inputMessage, setInputMessage, userName, messageId, isEnded, message, setMessage, clientId, functions} = useContext(ContextMessage)
     const {fetchMessageById, functionSendMessage, fetchDataById} = functions
+    const {pushNotification} = useContext(ContextNotification)
+    const {input} = useContext(ContextProfile)
 
     useEffect(() => {
         fetchMessageById(messageId)
@@ -28,6 +32,7 @@ const SendMessage = () => {
         functionSendMessage()
         fetchMessageById(messageId)
         fetchDataById()
+        pushNotification(clientId, input.name, message)
         setMessage("")
     }
 

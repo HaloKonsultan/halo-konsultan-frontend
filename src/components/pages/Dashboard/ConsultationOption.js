@@ -13,6 +13,7 @@ import "../../../assets/css/dashboard.css"
 import LabelText from "../../global/LabelText";
 import {ContextProfile} from "../../context/ContextProfile";
 import {Border, Danger, PrimaryBlue} from "../../global/Constants";
+import {ContextNotification} from "../../context/ContextNotification";
 
 const {Meta} = Card;
 const {Text} = Typography;
@@ -22,6 +23,7 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(ContextAfterBooking)
     const {price, setPrice} = useContext(ContextProfile)
+    const {pushNotification} = useContext(ContextNotification)
 
     const {fetchDataById, functionSubmit} = functions
     const [dateValidation, setDateValidation] = useState({
@@ -138,6 +140,7 @@ const ConsultationOption = () => {
             dates.forEach(date => input.date.push(date))
             console.log(prefDate.date)
             functionSubmit(Id)
+            pushNotification(Id, "Konsultasi Diterima", `Konsultasi ${input.title} anda diterima konsultan`)
         }
     };
 

@@ -11,6 +11,7 @@ export const MessageProvider = props => {
     const [message, setMessage] = useState("")
     const [userName, setUserName] = useState("")
     const [isEnded, setIsEnded] = useState("")
+    const [clientId, setClientId] = useState("")
     const [loading, setLoading] = useState(false)
 
     const fetchDataById = async () => {
@@ -81,6 +82,8 @@ export const MessageProvider = props => {
 
     return (
         <ContextMessage.Provider value = {{
+            clientId,
+            setClientId,
             loading,
             setLoading,
             input,

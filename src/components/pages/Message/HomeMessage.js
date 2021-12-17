@@ -9,7 +9,7 @@ import {ContextMessage} from "../../context/ContextMessage";
 const {Text} = Typography;
 
 const HomeMessage = () => {
-    const {input, setUserName, setMessageId, setIsEnded, functions} = useContext(ContextMessage)
+    const {input, setUserName, setMessageId, setIsEnded, setClientId, functions} = useContext(ContextMessage)
     const {fetchDataById} = functions
     const [q, setQ] = useState("");
     let counter = 0;
@@ -18,10 +18,11 @@ const HomeMessage = () => {
         fetchDataById()
     }, [])
 
-    const handleGetMessage = (id, name, end) => {
+    const handleGetMessage = (id, name, end, clientId) => {
         setMessageId(id)
         setUserName(name)
         setIsEnded(end)
+        setClientId(clientId)
     }
 
     const dataMessage = input.data && (
@@ -39,7 +40,7 @@ const HomeMessage = () => {
                         <Card style={{width: "100%", borderRadius: 12, border: "none", cursor: "pointer"}}
                               className="hightlight"
                               tabindex={counter+1}
-                              onClick={() => handleGetMessage(e.id, e.user_name, e.is_ended)}
+                              onClick={() => handleGetMessage(e.id, e.user_name, e.is_ended, e.user_id)}
                               bodyStyle={{padding: 16}}>
                             <Space size={8} direction="vertical">
                                 <Space size={4} direction="vertical">
