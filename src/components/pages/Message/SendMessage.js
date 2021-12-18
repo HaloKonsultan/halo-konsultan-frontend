@@ -35,8 +35,11 @@ const SendMessage = () => {
         <>
             {
                 messageId &&
-                <>
-                    <NavMessage title={userName}/>
+                <>  
+                <Col xs={{span: 24, order: 1}} closable={false}  >
+                <NavMessage title={userName} onBack={true} closable={false}/>
+                </Col>
+                    {/* <NavMessage title={userName} onBack={true}/> */}
                     <Layout style={{backgroundColor: "white"}}>
                         <Content style={{backgroundColor: "white", padding: 24}}>
                             <Space direction="vertical" size={24} style={{width: "100%", minHeight: "80vh"}}>
