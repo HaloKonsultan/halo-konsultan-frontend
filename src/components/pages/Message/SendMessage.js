@@ -46,7 +46,7 @@ const SendMessage = () => {
                             <NavMessage title={userName}/>
                         </Col>
                         <Col xs={{span: 24}} sm={{span: 24}} lg={{span: 0}}>
-                            <NavMessage title={userName} onBack={true}/>
+                            <NavMessage title={userName} onBack={() => window.history.back()}/>
                         </Col>
                     </Row>
                     <Spin spinning={loading}>

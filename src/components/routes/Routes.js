@@ -106,7 +106,7 @@ const Routes = () => {
                             <LoginRoute path="/message" search="Pesan" exact>
                                 <LayoutComponent content={<Message/>} backgroundColor="white"/>
                             </LoginRoute>
-                            <LoginRoute path="/get-message/:Id" search="Pesan" exact>
+                            <LoginRoute path="/get-message" search="Pesan" exact>
                                 <LayoutComponent content={<SendMessage/>} backgroundColor="white"/>
                             </LoginRoute>
 
