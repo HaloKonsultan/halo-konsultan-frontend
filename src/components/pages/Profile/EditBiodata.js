@@ -222,7 +222,6 @@ const EditBiodata = () => {
     const onImageChange = (event) => {
         let formdata = new FormData()
         let size = event.target.files[0].size;
-        console.log("size = ", size)
 
         if (size > 524288) {
             setSizeError(true)
@@ -230,12 +229,9 @@ const EditBiodata = () => {
             setSizeError(false)
             let img = event.target.files[0];
             formdata.append('photo', img)
-            console.log("size = ", size)
+
             functionUploadImage(formdata)
             setInput({...input, photo: URL.createObjectURL(img)})
-
-            console.log("ini input foto ", formdata)
-            console.log("ini event foto ", event)
         }
     }
 
