@@ -21,14 +21,11 @@ function OrderTable(props) {
                     overflow: "hidden",
                     boxShadow: "0 0 0 1px #CED4DA"
                 }}
-                loading={{
-                    indicator: <div><Spin /></div>,
-                    spinning: false
-                }}
                 rowKey={"active"}
                 columns={props.columns}
                 dataSource={props.dataSource}
                 pagination={false}
+                loading={props.loading}
             />
         </>
     )

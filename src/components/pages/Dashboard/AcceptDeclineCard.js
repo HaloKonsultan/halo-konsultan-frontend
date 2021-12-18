@@ -6,6 +6,7 @@ import {ContextConsultationDetail} from "../../context/ContextConsultationDetail
 import ButtonDanger from "../../global/ButtonDanger";
 import PrimaryButton from "../../global/ButtonPrimary";
 import "../../../assets/css/dashboard.css"
+import {ContextNotification} from "../../context/ContextNotification";
 
 const {Title} = Typography;
 
@@ -15,6 +16,7 @@ const AcceptDeclineCard = () => {
     console.log(Id)
 
     const {input, setInput, functions} = useContext(ContextConsultationDetail)
+    const {pushNotification} = useContext(ContextNotification)
     const {fetchDataById, functionAccept, functionDecline} = functions
     const [isDeclineVisible, setIsDeclineVisible] = useState(false);
 
@@ -34,6 +36,7 @@ const AcceptDeclineCard = () => {
 
     const onFinish = () => {
         functionDecline(Id)
+        pushNotification(Id, "Konsultasi Ditolak", `Konsultasi ${input.title} anda ditolak konsultan`)
     };
 
     const onFinishFailed = (errorInfo) => {

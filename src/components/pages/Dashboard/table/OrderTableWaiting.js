@@ -3,7 +3,7 @@ import {ContextOrderWaiting} from "../../../context/ContextOrderWaiting";
 import OrderTable from "../../../global/OrderTable";
 
 const OrderTableWaiting = (props) => {
-    const {dataPayment, functions} = useContext(ContextOrderWaiting)
+    const {dataPayment, loading, functions} = useContext(ContextOrderWaiting)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
@@ -43,6 +43,7 @@ const OrderTableWaiting = (props) => {
     return (
         <>
             <OrderTable
+                loading={loading}
                 onRow={(record, rowIndex) => {
                     return {
                         onClick: event => {

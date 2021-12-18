@@ -2,9 +2,10 @@ import React, {useEffect, useContext} from "react"
 import {Tag} from 'antd';
 import {ContextOrderActive} from "../../../context/ContextOrderActive";
 import OrderTable from "../../../global/OrderTable";
+import {Danger} from "../../../global/Constants";
 
 function OrderTableActive(props) {
-    const {dataOrder, functions} = useContext(ContextOrderActive)
+    const {loading, dataOrder, functions} = useContext(ContextOrderActive)
     const {fetchData, functionDetail} = functions
 
     useEffect(() => {
@@ -31,7 +32,7 @@ function OrderTableActive(props) {
                 if (conference_link === null){
                     return (
                         <>
-                            <Tag style={{borderRadius: 20, color: "#F63131", fontWeight: "bold"}} color='#FDD6D6'>
+                            <Tag style={{borderRadius: 20, color: Danger, fontWeight: "bold"}} color="#FDD6D6">
                                 Belum ada link
                             </Tag>
                         </>
@@ -66,6 +67,7 @@ function OrderTableActive(props) {
                         }, // click row
                     };
                 }}
+                loading={loading}
                 columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
