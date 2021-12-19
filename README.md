@@ -14,7 +14,7 @@ Urutan berdasarkan prioritas
    Sarana komunikasi antara konsultan dan klien (tidak realtime)
 
 Aplikasi dapat dilihat di
-halokonsultan.me
+https://halokonsultan.me/
 
 =========================================================
 
