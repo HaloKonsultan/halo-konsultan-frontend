@@ -3,14 +3,14 @@ WEBSITE - CONSULTANT
 Fitur Sprint#3
 
 Urutan berdasarkan prioritas
-1. Notifikasi
+1. Notifikasi : 
    Konsultan akan menerima notifikasi apabila ada order masuk dari klien atau pesan masuk dari klien
-3. Redesign
+3. Redesign : 
    Perubahan tampilan dengan menyesuaikan saran pada stackholder pada sprint review 2
 5. Refactor
-7. Responsive
+7. Responsive : 
    Web harus responsive ketika dalam tampilan mobile
-9. Forum
+9. Forum : 
    Sarana komunikasi antara konsultan dan klien (tidak realtime)
 
 Aplikasi dapat dilihat di
