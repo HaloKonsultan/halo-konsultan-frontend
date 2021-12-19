@@ -1,46 +1,22 @@
 WEBSITE - CONSULTANT
 
-Fitur Sprint#1
+Fitur Sprint#3
 
-login (http://localhost:3000/login)
-- validasi email dan password (tidak kosong) 
-- jika sukses, redirect ke beranda 
-- return user object, simpan ke global state 
+Urutan berdasarkan prioritas
+1. Notifikasi
+   Konsultan akan menerima notifikasi apabila ada order masuk dari klien atau pesan masuk dari klien
+3. Redesign
+   Perubahan tampilan dengan menyesuaikan saran pada stackholder pada sprint review 2
+5. Refactor
+7. Responsive
+   Web harus responsive ketika dalam tampilan mobile
+9. Forum
+   Sarana komunikasi antara konsultan dan klien (tidak realtime)
 
-register (http://localhost:3000/register)
-- validasi nama lengkap, email, password (tidak kosong, format email sesuai)
-- jika email sudah terdaftar, tampilkan pesan error email sudah terdaftar
-- jika sukses, redirect ke beranda, tampilkan pesan lengkapi profil 
-- jika gagal, tampilkan pesan kesalahan 
+Aplikasi dapat dilihat di
+halokonsultan.me
 
-beranda (http://localhost:3000)
-- get data konsultasi yang masuk 
-- get data konsultasi aktif 
-- get data konsultasi menunggu pembayaran 
-- get data konsultasi hari ini 
-- ketika lihat semua diklik, masuk ke list konsultasi (sesuai status) 
-- ketika data konsultasi diklik, masuk detail konsultasi 
-
-list konsultasi (http://localhost:3000/incoming-order, http://localhost:3000/order, http://localhost:3000/waiting-payment)
-- get data list konsultasi sesuai status 
-- pagination 10 data/page 
-
-riwayat (http://localhost:3000/history)
-- get data list riwayat konsultasi (selesai || ditolak) 
-- paginasi limit 10 data/page 
-- ketika data diklik, masuk ke detail konsultasi
-
-konsultasi belum terkonfirmasi (http://localhost:3000/incoming-order/detail/:id)
-- get data detail konsultasi 
-- handle konfirmasi konsultasi 
-- handle pembatalan konsultasi 
-- validasi preferensi, jadwal, dan dokumen yang dibutuhkan (tidak kosong) 
-
-konsultasi setelah dikonfirmasi (http://localhost:3000/incoming-order/detail/accept/:id)
-- get data detail konsultasi (deskripsi, dokumen, jadwal, lokasi) 
-- insert link conference 
-- handle download dokumen 
-
+=========================================================
 
 Fitur Sprint#2
 
@@ -83,47 +59,54 @@ Sidebar
 - payment
 - menerima pembayaran
 
+=========================================================
 
-Fitur Sprint#3
+Fitur Sprint#1
 
-Prioritas
-1. Notifikasi
-   Notifikasi apabila ada order masuk dari client
-3. Redesign
-   Perubahan tampilan sesuai saran pada sprint review
-5. Refactor
-7. Responsive
-8. Forum
-   Sarana komunikasi antara konsultan dan klien
+login (http://localhost:3000/login)
+- validasi email dan password (tidak kosong) 
+- jika sukses, redirect ke beranda 
+- return user object, simpan ke global state 
 
-Aplikasi dapat dilihat di
-halokonsultan.me
+register (http://localhost:3000/register)
+- validasi nama lengkap, email, password (tidak kosong, format email sesuai)
+- jika email sudah terdaftar, tampilkan pesan error email sudah terdaftar
+- jika sukses, redirect ke beranda, tampilkan pesan lengkapi profil 
+- jika gagal, tampilkan pesan kesalahan 
+
+beranda (http://localhost:3000)
+- get data konsultasi yang masuk 
+- get data konsultasi aktif 
+- get data konsultasi menunggu pembayaran 
+- get data konsultasi hari ini 
+- ketika lihat semua diklik, masuk ke list konsultasi (sesuai status) 
+- ketika data konsultasi diklik, masuk detail konsultasi 
+
+list konsultasi (http://localhost:3000/incoming-order, http://localhost:3000/order, http://localhost:3000/waiting-payment)
+- get data list konsultasi sesuai status 
+- pagination 10 data/page 
+
+riwayat (http://localhost:3000/history)
+- get data list riwayat konsultasi (selesai || ditolak) 
+- paginasi limit 10 data/page 
+- ketika data diklik, masuk ke detail konsultasi
+
+konsultasi belum terkonfirmasi (http://localhost:3000/incoming-order/detail/:id)
+- get data detail konsultasi 
+- handle konfirmasi konsultasi 
+- handle pembatalan konsultasi 
+- validasi preferensi, jadwal, dan dokumen yang dibutuhkan (tidak kosong) 
+
+konsultasi setelah dikonfirmasi (http://localhost:3000/incoming-order/detail/accept/:id)
+- get data detail konsultasi (deskripsi, dokumen, jadwal, lokasi) 
+- insert link conference 
+- handle download dokumen 
 
 =========================================================
 
 Cara menjalankan front-end 
 - clone HaloKonsultan-Frontend
-- clone HaloKonsultan-Backend https://github.com/HaloKonsultan/halo-konsultan-backend
 - npm start
-- pastikan backend telah berjalan
-
-Cara menjalankan Backend
-- clone Halokonsultan-Backend https://github.com/HaloKonsultan/halo-konsultan-backend
-- composer install
-- composer update
-- buat .env file di HaloKonsultan-backend, yang isinya diambil dari .env.example
-- nyalakan xampp untuk apache dan MySQL
-- buka phpmyadmin dan buat database baru
-- ganti DB_DATABASE(line 12) dengan nama database yang dibuat di phpmyadmin
-- php artisan key:generate
-- php artisan jwt:secret
-- php artisan migrate: --seed
-- untuk menjalankan backend, gunakan perintah "php artisan serve"
-
-Tambahan :
-- untuk login dapat menggunakan email yang ada di table consultant yang telah di generate di database phpmyadmin dan password "password"
-
-
 
 # Getting Started with Create React App
 
