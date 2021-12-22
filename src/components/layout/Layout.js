@@ -13,6 +13,7 @@ import {onMessageListener} from "../../Firebase";
 import {SERVER_NAME} from "../context/API";
 import noImage from "../../assets/img/no-image.png";
 import InputText from "../global/InputText";
+import {ContextNotification} from "../context/ContextNotification";
 
 const {SubMenu} = Menu;
 const {Text} = Typography;
@@ -20,21 +21,8 @@ const {Sider, Content} = Layout;
 
 const LayoutComponent = (props) => {
     let history = useHistory()
-    const {input, setInput, functions} = useContext(ContextProfile)
-    const {fetchData, functionEditBiodata} = functions
-    const [show, setShow] = useState(false);
-    const [notification, setNotification] = useState({title: "", body: ""});
-
-    onMessageListener()
-        .then((payload) => {
-            setShow(true);
-            setNotification({
-                title: payload.notification.title,
-                body: payload.notification.body,
-            });
-            console.log(notification)
-        })
-        .catch((err) => console.log("failed: ", err));
+    const {input, functions} = useContext(ContextProfile)
+    const {fetchData} = functions
 
     useEffect(() => {
         fetchData()
@@ -59,17 +47,6 @@ const LayoutComponent = (props) => {
 
     return (
         <>
-            <div className="App">
-                {show ? (
-                    <ReactNotificationComponent
-                        title={notification.title}
-                        body={notification.body}
-                    />
-                ) : (
-                    <></>
-                )}
-                <Notifications/>
-            </div>
             <Layout>
                 {
                     Cookies.get('token') !== undefined &&

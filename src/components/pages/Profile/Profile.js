@@ -3,7 +3,6 @@ import { Row, Col} from 'antd';
 import Nav from "../../layout/Header";
 import PersonalBiodata from "./PersonalBiodata";
 import ConsultationProfile from "./ConsultationProfile";
-import Cookies from "js-cookie";
 import 'antd/dist/antd.css';
 
 const Profile = () => {

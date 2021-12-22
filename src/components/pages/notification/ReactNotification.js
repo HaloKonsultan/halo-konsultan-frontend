@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useContext, useState} from "react";
 import PropTypes from "prop-types";
+import {notification} from 'antd';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {ContextNotification} from "../../context/ContextNotification";
 
 const ReactNotificationComponent = ({ title, body }) => {
     let hideNotif = title === "";
 
     if (!hideNotif) {
-        toast.info(<Display />);
         console.log("panggil")
+        toast.info(<Display />);
     }
 
     function Display() {
@@ -24,11 +26,11 @@ const ReactNotificationComponent = ({ title, body }) => {
         <ToastContainer
             autoClose={3000}
             newestOnTop={false}
-            closeOnClick
             rtl={false}
             pauseOnFocusLoss={false}
             draggable
             pauseOnHover={false}
+            limit={1}
         />
     );
 };

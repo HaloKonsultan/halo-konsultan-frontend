@@ -150,12 +150,6 @@ export const ProfileProvider = props => {
     }
 
     const functionEditBiodata = () => {
-        // Object.keys(input).forEach(function(key) {
-        //     if(input[key] === null || input[key] === "") {
-        //         setErrorMessage(true)
-        //         history.push("/edit-biodata")
-        //     }
-        // })
         API.patch(`consultants/profile/biodata/${Cookies.get('id')}`, {
                 name: input.name,
                 description: input.description,

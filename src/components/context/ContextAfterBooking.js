@@ -1,9 +1,10 @@
 import React, {useState, createContext, useContext} from "react";
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
-import API from "./API"
+import API, {SERVER_NAME} from "./API"
 import {ContextConsultationDetail} from "./ContextConsultationDetail";
 import {ContextNotification} from "./ContextNotification";
+import {message} from "antd";
 
 export const ContextAfterBooking = createContext()
 
@@ -12,6 +13,7 @@ export const AfterBookingProvider = props => {
     const {functionAccept} = useContext(ContextConsultationDetail)
     // const {pushNotification} = useContext(ContextNotification)
     const [dataAfterBooking, setDataAfterBooking] = useState([])
+    const [price, setPrice] = useState("")
     const [inputDocument, setInputDocument] = useState({
         title: "",
         description: ""
@@ -33,6 +35,13 @@ export const AfterBookingProvider = props => {
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
+    const fetchData = async () => {
+        let result = await API.get(`consultants/profile/${Cookies.get('id')}`,
+            {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
+        let data = result.data.data
+        setPrice(data.consultation_price)
+    }
+
     const fetchDataById = async (consultation_id) => {
         let result = await API.get(`consultants/consultations/${consultation_id}`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
@@ -42,11 +51,11 @@ export const AfterBookingProvider = props => {
             preference: data.preference,
         })
         setCurrentId(data.id)
+        await fetchData()
     }
 
-    const functionSubmit = (consultation_id) => {
-        functionAccept(consultation_id)
-        //pushNotification(consultation_id, "Konsultasi Diterima", `Konsultasi ${input.title} anda diterima konsultan`)
+    const functionSubmit = async (consultation_id) => {
+        await functionAccept(consultation_id)
         API.patch(`consultants/consultations/${consultation_id}/after-book`, {
                 preference: input.preference,
                 price: input.price,
@@ -68,15 +77,21 @@ export const AfterBookingProvider = props => {
                 }])
                 history.push("/success")
             })
+            .catch(err => {
+                console.log("error after booking", err)
+            })
     }
 
     const functions = {
+        fetchData,
         fetchDataById,
         functionSubmit
     }
 
     return (
         <ContextAfterBooking.Provider value = {{
+            price,
+            setPrice,
             dataAfterBooking,
             setDataAfterBooking,
             prefDate,

@@ -21,8 +21,7 @@ const {TextArea} = Input;
 
 const ConsultationOption = () => {
     let {Id} = useParams()
-    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, functions} = useContext(ContextAfterBooking)
-    const {price, setPrice} = useContext(ContextProfile)
+    const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, price, setPrice, functions} = useContext(ContextAfterBooking)
     const {pushNotification} = useContext(ContextNotification)
 
     const {fetchDataById, functionSubmit} = functions
@@ -78,7 +77,6 @@ const ConsultationOption = () => {
         let typeOfValue = event.currentTarget.value
         let name = event.target.name
 
-        console.log("ini handle change", typeOfValue)
         setPrice(typeOfValue)
         setInput({...input, [name]: typeOfValue})
     };
@@ -124,7 +122,6 @@ const ConsultationOption = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        setInput({...input, photo: price})
         let found1 = prefDate.date.find(colDef => colDef.id === 1)
         let found2 = prefDate.date.find(colDef => colDef.id === 2)
         let found3 = prefDate.date.find(colDef => colDef.id === 3)
@@ -139,6 +136,7 @@ const ConsultationOption = () => {
             let dates = prefDate.date.map((item, i) => Object.assign({}, item, prefTime.time[i]));
             dates.forEach(date => input.date.push(date))
             console.log(prefDate.date)
+            input.price = price
             functionSubmit(Id)
             pushNotification(Id, "Konsultasi Diterima", `Konsultasi ${input.title} anda diterima konsultan`)
         }

@@ -7,6 +7,8 @@ export const ContextNotification = createContext()
 
 export const NotificationProvider = props => {
 
+    const [show, setShow] = useState(false);
+
     const pushNotification = (id, title, message) => {
         API.post(`consultants/notification/${id}`, {
                 title: title,
@@ -22,6 +24,8 @@ export const NotificationProvider = props => {
     return (
         <ContextNotification.Provider value = {{
             pushNotification,
+            show,
+            setShow,
         }}>
             {props.children}
         </ContextNotification.Provider>
