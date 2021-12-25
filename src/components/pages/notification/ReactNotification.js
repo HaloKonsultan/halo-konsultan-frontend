@@ -24,7 +24,7 @@ const ReactNotificationComponent = ({ title, body }) => {
 
     return (
         <ToastContainer
-            autoClose={3000}
+            autoClose={5000}
             newestOnTop={false}
             rtl={false}
             pauseOnFocusLoss={false}

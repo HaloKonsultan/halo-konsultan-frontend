@@ -14,10 +14,10 @@ const ConsultationProfile = () => {
     let history = useHistory()
 
     const {input, functions} = useContext(ContextProfile)
-    const {fetchData, formatRupiah} = functions
+    const {fetchData, functionFormatRupiah} = functions
 
     useEffect(() => {
-        fetchData()
+        fetchData(1)
     }, [])
 
     const handleDetail = () => {

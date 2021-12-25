@@ -1,7 +1,7 @@
 import React from "react"
 import {Button} from "antd";
 
-function DangerButton(props) {
+function ButtonPrimary(props) {
 
     return (
         <>
@@ -13,11 +13,21 @@ function DangerButton(props) {
                 className="button"
                 type="primary"
                 htmlType={props.htmlType}
-                style={{height: 44, borderRadius: 8, backgroundColor: "#3B85FA", width: "100%"}}>
+                style={{
+                    height: 44,
+                    borderRadius: 8,
+                    backgroundColor: props.backgroundColor,
+                    width: "100%",
+                    color: props.textColor
+                }}>
                 {props.text}
             </Button>
         </>
     )
 }
 
-export default DangerButton
+ButtonPrimary.defaultProps = {
+    backgroundColor: "#3B85FA"
+};
+
+export default ButtonPrimary

@@ -1,6 +1,6 @@
-import React, {useEffect, useContext} from "react"
-import {ContextOrderWaiting} from "../../../context/ContextOrderWaiting";
-import OrderTable from "../../../global/OrderTable";
+import React, {useContext, useEffect} from "react"
+import {ContextOrderWaiting} from "../../../../context/ContextOrderWaiting";
+import OrderTable from "../../../../global/OrderTable";
 
 const OrderTableWaiting = (props) => {
     const {dataPayment, loading, functions} = useContext(ContextOrderWaiting)
@@ -11,9 +11,7 @@ const OrderTableWaiting = (props) => {
     }, [])
 
     const handleDetail = (event) => {
-        let idClient = event
-
-        functionDetail(idClient)
+        functionDetail(event)
     }
 
     const columns = [
@@ -35,10 +33,6 @@ const OrderTableWaiting = (props) => {
     ];
 
     const data = dataPayment;
-
-    let emptyTable = {
-        emptyText: 'Tidak ada konsultasi masuk',
-    };
 
     return (
         <>

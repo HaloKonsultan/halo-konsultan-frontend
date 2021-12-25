@@ -8,13 +8,7 @@ export const ContextHistory = createContext()
 export const HistoryProvider = props => {
     let history = useHistory()
     const [dataHistory, setDataHistory] = useState([])
-    const [input, setInput] = useState({
-        title: "",
-        name: "",
-        date: "",
-        status: "",
-        is_confirmed: ""
-    })
+    const [input, setInput] = useState([])
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
@@ -30,7 +24,8 @@ export const HistoryProvider = props => {
                 name: e.name,
                 date: e.date,
                 status: e.status,
-                is_confirmed: e.is_confirmed
+                is_confirmed: e.is_confirmed,
+                date_updated: e.date_updated
             }
         }))
     }

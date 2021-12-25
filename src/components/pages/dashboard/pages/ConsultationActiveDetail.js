@@ -1,9 +1,9 @@
 import React from "react"
 import {Row, Col, Space, Card} from 'antd';
-import Detail from "../Detail";
+import Detail from "../components/Detail";
 import Nav from "../../../layout/Header";
-import SendLink from "../SendLink";
-import ConsultationDocument from "../ConsultationDocument";
+import ConferenceLink from "../components/ConferenceLink";
+import ConsultationDocument from "../components/Document";
 
 const ConsultationActiveDetail = () => {
 
@@ -17,7 +17,7 @@ const ConsultationActiveDetail = () => {
                         <Card style={{width: "100%", borderRadius: 8, boxShadow: "0px 5px 10px 0px #F1F2FA", border: "none"}}>
                         <Space size={20} direction="vertical" style={{width: "100%"}}>
                             <ConsultationDocument/>
-                            <SendLink/>
+                            <ConferenceLink/>
                         </Space>
                         </Card>
                     </div>

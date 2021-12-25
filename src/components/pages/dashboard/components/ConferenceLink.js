@@ -2,16 +2,16 @@ import React, {useContext, useEffect, useState} from "react"
 import {Button, Col, Form, Input, Modal, Row, Select, Space, Typography} from 'antd';
 import 'antd/dist/antd.css';
 import {useParams} from "react-router-dom";
-import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
+import {ContextConsultationDetail} from "../../../context/ContextConsultationDetail";
 import {ArrowRightOutlined} from '@ant-design/icons';
-import ButtonDanger from "../../global/ButtonDanger";
-import ModalChooseAccount from "../../global/ModalChooseAccount";
-import PrimaryButton from "../../global/ButtonPrimary";
+import ButtonDanger from "../../../global/ButtonDanger";
+import ModalChooseAccount from "../../../global/ModalChooseAccount";
+import PrimaryButton from "../../../global/ButtonPrimary";
 
 const {Option} = Select;
 const {Title, Link, Text} = Typography;
 
-const SendLink = (props) => {
+const ConferenceLink = (props) => {
     let {Id} = useParams()
     console.log(Id)
 
@@ -194,4 +194,4 @@ const SendLink = (props) => {
     )
 }
 
-export default SendLink
+export default ConferenceLink

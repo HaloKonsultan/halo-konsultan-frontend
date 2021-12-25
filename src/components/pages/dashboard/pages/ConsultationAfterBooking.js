@@ -1,7 +1,7 @@
 import React from "react"
 import { Row, Col } from 'antd';
-import Detail from "../Detail";
-import ConsultationOption from "../ConsultationOption";
+import Detail from "../components/Detail";
+import ConsultationOption from "../components/ConsultationOption";
 import Nav from "../../../layout/Header";
 
 const ConsultationAfterBooking = () => {

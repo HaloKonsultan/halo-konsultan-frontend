@@ -9,3 +9,4 @@ export const Inactive = "#B0B0B0";
 export const Placeholder = "#979595";
 export const Danger = "#F63131";
 export const Warning = "#FFD23F";
+export const DangerBackground = "#FDD6D6"

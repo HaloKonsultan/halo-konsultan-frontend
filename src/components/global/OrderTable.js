@@ -1,11 +1,7 @@
-import React, {useContext} from "react"
-import {Table, Spin} from "antd";
-import {ContextOrderActive} from "../context/ContextOrderActive";
+import React from "react"
+import {Table} from "antd";
 
 function OrderTable(props) {
-    const {functions} = useContext(ContextOrderActive)
-    const {functionDetail} = functions
-
     let emptyTable = {
         emptyText: 'Tidak ada konsultasi aktif',
     };
@@ -24,11 +20,15 @@ function OrderTable(props) {
                 rowKey={"active"}
                 columns={props.columns}
                 dataSource={props.dataSource}
-                pagination={false}
+                pagination={props.pagination}
                 loading={props.loading}
             />
         </>
     )
 }
+
+OrderTable.defaultProps = {
+    pagination: false,
+};
 
 export default OrderTable

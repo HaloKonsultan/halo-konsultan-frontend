@@ -1,9 +1,12 @@
-import React, {useEffect, useContext, useState} from "react"
-import {Button} from 'antd';
-import {ContextOrderIncoming} from "../../../context/ContextOrderIncoming";
-import OrderTable from "../../../global/OrderTable";
+import React, {useContext, useEffect} from "react"
+import OrderTableIncoming from "../../components/table/OrderTableIncoming";
+import Nav from "../../../../layout/Header";
+import {ContextOrderIncoming} from "../../../../context/ContextOrderIncoming";
+import {Button} from "antd";
+import OrderTable from "../../../../global/OrderTable";
 
-const OrderTableIncoming = (props) => {
+function OrderIncoming() {
+
     const {loading, dataIncomingOrder, functions} = useContext(ContextOrderIncoming)
     const {fetchData, functionDetail} = functions
 
@@ -49,15 +52,14 @@ const OrderTableIncoming = (props) => {
 
     const data = dataIncomingOrder;
 
-    let emptyTable = {
-        emptyText: 'Tidak ada konsultasi masuk',
-    };
-
     return (
         <>
-            <OrderTable loading={loading} columns={columns} dataSource={data.slice(-5)}/>
+            <Nav title="Konsultasi Masuk"/>
+            <div className="dashboard-container">
+                <OrderTable loading={loading} columns={columns} dataSource={data} pagination={{position: ['bottomCenter'], pageSize: 10}}/>
+            </div>
         </>
     )
 }
 
-export default OrderTableIncoming
+export default OrderIncoming

@@ -1,7 +1,7 @@
 import React from "react"
 import {Row, Col} from 'antd';
-import Detail from "../Detail";
-import AcceptDeclineCard from "../AcceptDeclineCard";
+import Detail from "../components/Detail";
+import ConfirmationCard from "../components/ConfirmationCard";
 import Nav from "../../../layout/Header";
 
 const ConsultationDetail = () => {
@@ -14,7 +14,7 @@ const ConsultationDetail = () => {
                     <Detail/>
                 </Col>
                 <Col xs={{span: 24, order: 2}} sm={{span: 24, order: 2}} lg={{span: 10, order: 2}}>
-                    <AcceptDeclineCard/>
+                    <ConfirmationCard/>
                 </Col>
                 <Col  xs={{span: 24, order: 3}} sm={{span: 24, order: 3}} lg={{span: 3, order: 3}}/>
             </Row>

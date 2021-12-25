@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from "react";
 import {Card, Typography} from 'antd';
 import Title from "antd/es/typography/Title";
-import {ContextOrderToday} from "../../../context/ContextOrderToday";
-import {PrimaryWhite, SecondaryWhite} from "../../../global/Constants";
+import {ContextOrderToday} from "../../../../context/ContextOrderToday";
+import {PrimaryWhite, SecondaryWhite} from "../../../../global/Constants";
 
 const {Text, Link} = Typography;
 const {Meta} = Card;

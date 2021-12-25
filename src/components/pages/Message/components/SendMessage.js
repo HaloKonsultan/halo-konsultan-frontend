@@ -3,10 +3,10 @@ import {Card, Input, Row, Col, Tag} from 'antd';
 import {Typography, Space, Button, Spin} from 'antd';
 import {Layout} from 'antd';
 import {PaperPlaneRight} from "phosphor-react";
-import NavMessage from "../../layout/HeaderMessage";
-import {ContextMessage} from "../../context/ContextMessage";
-import {ContextNotification} from "../../context/ContextNotification";
-import {ContextProfile} from "../../context/ContextProfile";
+import NavMessage from "../../../layout/HeaderMessage";
+import {ContextMessage} from "../../../context/ContextMessage";
+import {ContextNotification} from "../../../context/ContextNotification";
+import {ContextProfile} from "../../../context/ContextProfile";
 
 const {Footer, Content} = Layout;
 const {Text, Link} = Typography;

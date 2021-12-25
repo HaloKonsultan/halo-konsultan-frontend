@@ -4,8 +4,8 @@ import 'antd/dist/antd.css';
 import {useParams} from "react-router-dom";
 import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
 import {FileTextOutlined} from '@ant-design/icons';
-import SendLink from "../Dashboard/SendLink";
-import ConsultationDocument from "../Dashboard/ConsultationDocument";
+import ConferenceLink from "../dashboard/components/ConferenceLink";
+import ConsultationDocument from "../dashboard/components/Document";
 
 const {Title, Link, Text} = Typography;
 
@@ -13,7 +13,7 @@ const ConsultationHistory = () => {
     let {Id} = useParams()
     console.log(Id)
 
-    const {dataConsultation, input, setInput, functions} = useContext(ContextConsultationDetail)
+    const {input, functions} = useContext(ContextConsultationDetail)
     const {fetchDataById} = functions
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const ConsultationHistory = () => {
                             input.status === 'done' && input.is_confirmed !== 0 && (
                                 <>
                                     <ConsultationDocument/>
-                                    {/*<SendLink disabled={true}/>*/}
+                                    {/*<ConferenceLink disabled={true}/>*/}
                                 </>
                             )
                         }

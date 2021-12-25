@@ -41,7 +41,7 @@ const PersonalBiodata = () => {
                               <Col span={12}>
                                   <Button onClick={handleDetail} type="primary" ghost
                                           style={{borderRadius: 8, float: "right", height: "100%"}}>
-                                      <span>Edit</span> <span>Biodata Diri</span></Button>
+                                      Edit Biodata Diri</Button>
                               </Col>
                           </Row>
                       </>

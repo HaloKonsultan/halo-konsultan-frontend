@@ -1,15 +1,15 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Space, Card, Typography, Row, Col, Button} from 'antd';
 import {MagnifyingGlass} from "phosphor-react";
-import InputText from "../../global/InputText";
+import InputText from "../../../global/InputText";
 import 'antd/dist/antd.css';
-import "../../../assets/css/message.css"
-import {ContextMessage} from "../../context/ContextMessage";
+import "../../../../assets/css/message.css"
+import {ContextMessage} from "../../../context/ContextMessage";
 import {useHistory} from "react-router-dom";
 
 const {Text} = Typography;
 
-const HomeMessage = () => {
+const ListContact = () => {
     let history = useHistory()
     const {input, setUserName, setMessageId, setIsEnded, setClientId, functions} = useContext(ContextMessage)
     const {fetchDataById} = functions
@@ -119,4 +119,4 @@ const HomeMessage = () => {
     )
 }
 
-export default HomeMessage
+export default ListContact

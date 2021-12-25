@@ -1,8 +1,8 @@
-import React, {useEffect, useContext} from "react"
+import React, {useContext, useEffect} from "react"
 import {Tag} from 'antd';
-import {ContextOrderActive} from "../../../context/ContextOrderActive";
-import OrderTable from "../../../global/OrderTable";
-import {Danger} from "../../../global/Constants";
+import {ContextOrderActive} from "../../../../context/ContextOrderActive";
+import OrderTable from "../../../../global/OrderTable";
+import {Danger} from "../../../../global/Constants";
 
 function OrderTableActive(props) {
     const {loading, dataOrder, functions} = useContext(ContextOrderActive)
@@ -52,9 +52,7 @@ function OrderTableActive(props) {
     const data = dataOrder;
 
     const handleDetail = (event) => {
-        let idClient = event
-
-        functionDetail(idClient)
+        functionDetail(event)
     }
 
     return (

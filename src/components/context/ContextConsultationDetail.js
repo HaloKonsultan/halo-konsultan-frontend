@@ -7,6 +7,7 @@ export const ContextConsultationDetail = createContext()
 
 export const ConsultationDetailProvider = props => {
     let history = useHistory()
+    const [loading, setLoading] = useState(false)
     const [dataConsultation, setDataConsultation] = useState([])
     const [input, setInput] = useState({
         title: "",
@@ -38,6 +39,7 @@ export const ConsultationDetailProvider = props => {
     const [fetchStatus, setFetchStatus] = useState(false)
 
     const fetchDataById = async (consultation_id) => {
+        setLoading(true)
         let result = await API.get(`consultants/consultations/${consultation_id}`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
         let data = result.data.data
@@ -71,6 +73,7 @@ export const ConsultationDetailProvider = props => {
             })
         })
         setCurrentId(data.id)
+        setLoading(false)
     }
 
     const functionAccept = (consultation_id) => {
@@ -159,6 +162,7 @@ export const ConsultationDetailProvider = props => {
             functionAccept,
             input,
             setInput,
+            loading,
             currentId,
             setCurrentId,
             functions,

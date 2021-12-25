@@ -1,19 +1,20 @@
 import React, {useContext, useEffect, useState} from "react"
 import {
-    Radio, Space, DatePicker, TimePicker, Button, Input, Typography, Card, PageHeader, Row, Col
+    Radio, Space, DatePicker, TimePicker, Button, Input, Typography, Card, PageHeader, Row, Col, Divider
 } from 'antd';
 import {useParams} from "react-router-dom";
 import {ArrowRightOutlined} from "@ant-design/icons";
-import {ContextAfterBooking} from "../../context/ContextAfterBooking";
+import {ContextAfterBooking} from "../../../context/ContextAfterBooking";
 import {CalendarBlank, Clock, Pencil, X} from "phosphor-react";
-import ModalAddDocument from "../../global/ModalAddDocument";
-import InputText from "../../global/InputText";
-import ButtonPrimary from "../../global/ButtonPrimary";
-import "../../../assets/css/dashboard.css"
-import LabelText from "../../global/LabelText";
-import {ContextProfile} from "../../context/ContextProfile";
-import {Border, Danger, PrimaryBlue} from "../../global/Constants";
-import {ContextNotification} from "../../context/ContextNotification";
+import ModalAddDocument from "../../../global/ModalAddDocument";
+import InputText from "../../../global/InputText";
+import ButtonPrimary from "../../../global/ButtonPrimary";
+import "../../../../assets/css/dashboard.css"
+import LabelText from "../../../global/LabelText";
+import {ContextProfile} from "../../../context/ContextProfile";
+import {Border, Danger, PrimaryBlue} from "../../../global/Constants";
+import {ContextNotification} from "../../../context/ContextNotification";
+import moment from "moment";
 
 const {Meta} = Card;
 const {Text} = Typography;
@@ -123,16 +124,18 @@ const ConsultationOption = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         let found1 = prefDate.date.find(colDef => colDef.id === 1)
-        let found2 = prefDate.date.find(colDef => colDef.id === 2)
-        let found3 = prefDate.date.find(colDef => colDef.id === 3)
+        // let found2 = prefDate.date.find(colDef => colDef.id === 2)
+        // let found3 = prefDate.date.find(colDef => colDef.id === 3)
 
         if (found1 === undefined) {
             setDateValidation({...dateValidation, date1: true})
-        } else if (found2 === undefined) {
-            setDateValidation({...dateValidation, date2: true})
-        } else if (found3 === undefined) {
-            setDateValidation({...dateValidation, date3: true})
-        } else {
+        }
+        // else if (found2 === undefined) {
+        //     setDateValidation({...dateValidation, date2: true})
+        // } else if (found3 === undefined) {
+        //     setDateValidation({...dateValidation, date3: true})
+        // }
+        else {
             let dates = prefDate.date.map((item, i) => Object.assign({}, item, prefTime.time[i]));
             dates.forEach(date => input.date.push(date))
             console.log(prefDate.date)
@@ -160,7 +163,7 @@ const ConsultationOption = () => {
                                     </Space>
                                 }
                                 <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                    <LabelText text="Pilih Jadwal Kosong"/>
+                                    <LabelText text="Opsi Jadwal Konsultasi (GMT +7)"/>
                                     <Space size={16} direction="vertical" style={{width: "100%"}}>
                                         <Row gutter={[16, 16]}>
                                             <Col span={12}> <DatePicker
@@ -169,6 +172,9 @@ const ConsultationOption = () => {
                                                     height: 48,
                                                     borderRadius: 8,
                                                     borderColor: dateValidation.date1 ? Danger : Border
+                                                }}
+                                                disabledDate={(current) => {
+                                                    return moment().add(-1, 'days')  >= current
                                                 }}
                                                 suffixIcon={<CalendarBlank size={24} weight="fill"/>}
                                                 format={'DD-MM-YYYY'}
@@ -186,7 +192,7 @@ const ConsultationOption = () => {
                                                 format={'HH:mm'}
                                                 name="date[0].time"
                                                 onChange={(date, dateString) => onChangeTime(date, dateString, 1)}
-                                                picker="Waktu" required/>
+                                                picker="Waktu" placeholder="Waktu Kosong #1" required/>
                                             </Col>
                                             {
                                                 dateValidation.date1 &&
@@ -196,72 +202,85 @@ const ConsultationOption = () => {
                                                                fontColor="#EA3A3A"/>
                                                 </Col>
                                             }
-                                            <Col span={12}><DatePicker
-                                                style={{
-                                                    width: "100%",
-                                                    height: 48,
-                                                    borderRadius: 8,
-                                                    borderColor: dateValidation.date2 ? Danger : Border
-                                                }}
-                                                suffixIcon={<CalendarBlank size={24} weight="fill"/>}
-                                                format={'DD-MM-YYYY'}
-                                                onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
-                                                placeholder="Jadwal Kosong #2" required/>
-                                            </Col>
-                                            <Col span={12}><TimePicker
-                                                style={{
-                                                    width: "100%",
-                                                    height: 48,
-                                                    borderRadius: 8,
-                                                    borderColor: dateValidation.date2 ? Danger : Border
-                                                }}
-                                                format={'HH:mm'}
-                                                suffixIcon={<Clock size={24} weight="fill"/>}
-                                                onChange={(date, dateString) => onChangeTime(date, dateString, 2)}
-                                                picker="Waktu" required/>
-                                            </Col>
-                                            {
-                                                dateValidation.date2 &&
-                                                <Col span={24}>
-                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi"
-                                                               fontSize={12}
-                                                               fontColor="#EA3A3A"/>
-                                                </Col>
-                                            }
-                                            <Col span={12}><DatePicker
-                                                style={{
-                                                    width: "100%",
-                                                    height: 48,
-                                                    borderRadius: 8,
-                                                    borderColor: dateValidation.date3 ? Danger : Border
-                                                }}
-                                                suffixIcon={<CalendarBlank size={24} weight="fill"/>}
-                                                format={'DD-MM-YYYY'}
-                                                onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
-                                                placeholder="Jadwal Kosong #3" required/>
-                                            </Col>
-                                            <Col span={12}><TimePicker
-                                                style={{
-                                                    width: "100%",
-                                                    height: 48,
-                                                    borderRadius: 8,
-                                                    borderColor: dateValidation.date3 ? Danger : Border
-                                                }}
-                                                format={'HH:mm'}
-                                                suffixIcon={<Clock size={24} weight="fill"/>}
-                                                onChange={(date, dateString) => onChangeTime(date, dateString, 3)}
-                                                picker="Waktu" required/>
-                                            </Col>
-                                            {
-                                                dateValidation.date3 &&
-                                                <Col span={24}>
-                                                    <LabelText text="Silahkan melengkapi jadwal konsultasi"
-                                                               fontSize={12}
-                                                               fontColor="#EA3A3A"/>
-                                                </Col>
-                                            }
                                         </Row>
                                     </Space>
+
+                                    <Divider style={{marginTop: 10, marginBottom: 0}}/>
+                                    <LabelText text="Opsional"/>
+                                    <Space size={16} direction="vertical" style={{width: "100%"}}>
+                                    <Row gutter={[16, 16]}>
+                                        <Col span={12}><DatePicker
+                                            style={{
+                                                width: "100%",
+                                                height: 48,
+                                                borderRadius: 8,
+                                                borderColor: dateValidation.date2 ? Danger : Border
+                                            }}
+                                            disabledDate={(current) => {
+                                                return moment().add(-1, 'days')  >= current
+                                            }}
+                                            suffixIcon={<CalendarBlank size={24} weight="fill"/>}
+                                            format={'DD-MM-YYYY'}
+                                            onChange={(date, dateString) => onChangeDate(date, dateString, 2)}
+                                            placeholder="Jadwal Kosong #2" required/>
+                                        </Col>
+                                        <Col span={12}><TimePicker
+                                            style={{
+                                                width: "100%",
+                                                height: 48,
+                                                borderRadius: 8,
+                                                borderColor: dateValidation.date2 ? Danger : Border
+                                            }}
+                                            format={'HH:mm'}
+                                            suffixIcon={<Clock size={24} weight="fill"/>}
+                                            onChange={(date, dateString) => onChangeTime(date, dateString, 2)}
+                                            picker="Waktu" placeholder="Waktu Kosong #1" required/>
+                                        </Col>
+                                        {
+                                            dateValidation.date2 &&
+                                            <Col span={24}>
+                                                <LabelText text="Silahkan melengkapi jadwal konsultasi"
+                                                           fontSize={12}
+                                                           fontColor="#EA3A3A"/>
+                                            </Col>
+                                        }
+                                        <Col span={12}><DatePicker
+                                            style={{
+                                                width: "100%",
+                                                height: 48,
+                                                borderRadius: 8,
+                                                borderColor: dateValidation.date3 ? Danger : Border
+                                            }}
+                                            disabledDate={(current) => {
+                                                return moment().add(-1, 'days')  >= current
+                                            }}
+                                            suffixIcon={<CalendarBlank size={24} weight="fill"/>}
+                                            format={'DD-MM-YYYY'}
+                                            onChange={(date, dateString) => onChangeDate(date, dateString, 3)}
+                                            placeholder="Jadwal Kosong #3" required/>
+                                        </Col>
+                                        <Col span={12}><TimePicker
+                                            style={{
+                                                width: "100%",
+                                                height: 48,
+                                                borderRadius: 8,
+                                                borderColor: dateValidation.date3 ? Danger : Border
+                                            }}
+                                            format={'HH:mm'}
+                                            suffixIcon={<Clock size={24} weight="fill"/>}
+                                            onChange={(date, dateString) => onChangeTime(date, dateString, 3)}
+                                            picker="Waktu" placeholder="Waktu Kosong #1" required/>
+                                        </Col>
+                                        {
+                                            dateValidation.date3 &&
+                                            <Col span={24}>
+                                                <LabelText text="Silahkan melengkapi jadwal konsultasi"
+                                                           fontSize={12}
+                                                           fontColor="#EA3A3A"/>
+                                            </Col>
+                                        }
+                                    </Row>
+                                </Space>
                                 </Space>
 
                                 <Space size={8} direction="vertical" style={{width: "100%"}}>

@@ -1,14 +1,14 @@
-import React, {useContext, useEffect} from "react"
-import {Row, Col, Space, Badge, Typography} from 'antd';
-import OrderTableIncoming from "./table/OrderTableIncoming";
-import OrderTableActive from "./table/OrderTableActive";
-import OrderTableWaiting from "./table/OrderTableWaiting";
-import OrderToday from "./table/OrderToday";
-import ProfileNotifications from "./ProfileNotifications";
-import "../../../assets/css/dashboard.css"
-import Nav from "../../layout/Header";
-import TableHeader from "../../global/TableHeader";
-import {ContextOrderIncoming} from "../../context/ContextOrderIncoming";
+import React, {useContext} from "react"
+import {Row, Col, Badge, Typography} from 'antd';
+import OrderTableIncoming from "../components/table/OrderTableIncoming";
+import OrderTableActive from "../components/table/OrderTableActive";
+import OrderTableWaiting from "../components/table/OrderTableWaiting";
+import OrderToday from "../components/table/OrderToday";
+import ProfileNotifications from "../components/ProfileNotifications";
+import Nav from "../../../layout/Header";
+import TableHeader from "../../../global/TableHeader";
+import "../../../../assets/css/dashboard.css"
+import {ContextOrderIncoming} from "../../../context/ContextOrderIncoming";
 
 const {Title} = Typography;
 

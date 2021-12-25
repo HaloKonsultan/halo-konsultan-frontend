@@ -19,7 +19,7 @@ export const ProfileProvider = props => {
     const [currentId, setCurrentId] = useState(-1)
     const [fetchStatus, setFetchStatus] = useState(false)
 
-    const fetchData = async () => {
+    const fetchData = async (format) => {
         let result = await API.get(`consultants/profile/${Cookies.get('id')}`,
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
         let data = result.data.data
@@ -77,7 +77,18 @@ export const ProfileProvider = props => {
         setPrice(input.consultation_price)
         await dataProvinces()
         await dataCategories()
+        if (format === 1) {
+            functionFormatRupiah()
+        }
         setLoading(false)
+    }
+
+    const functionFormatRupiah = () => {
+        setInput({
+            ...input,
+            chat_price: formatRupiah(input.chat_price),
+            consultation_price: formatRupiah(input.consultation_price)
+        })
     }
 
     const functionEditProfile = () => {
@@ -299,7 +310,8 @@ export const ProfileProvider = props => {
         dataProvinces,
         dataCity,
         dataCategories,
-        formatRupiah
+        formatRupiah,
+        functionFormatRupiah
     }
 
     return (

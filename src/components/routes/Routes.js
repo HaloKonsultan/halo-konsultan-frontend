@@ -20,23 +20,23 @@ import {TodayOrderProvider} from "../context/ContextOrderToday";
 import {ProfileProvider} from "../context/ContextProfile";
 import {AfterBookingProvider} from "../context/ContextAfterBooking";
 import LayoutComponent from "../layout/Layout";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import Dashboard from "../pages/dashboard/pages/Dashboard";
 import Message from "../pages/Message/Message";
-import OrderIncoming from "../pages/Dashboard/pages/table/OrderIncoming";
-import OrderActive from "../pages/Dashboard/pages/table/OrderActive";
-import WaitingPayment from "../pages/Dashboard/pages/table/OrderWaiting";
-import ConsultationRequest from "../pages/Dashboard/pages/ConsultationIncoming";
-import ConsultationAfterBooking from "../pages/Dashboard/pages/ConsultationAfterBooking";
+import OrderIncoming from "../pages/dashboard/pages/table/OrderIncoming";
+import OrderActive from "../pages/dashboard/pages/table/OrderActive";
+import WaitingPayment from "../pages/dashboard/pages/table/OrderWaiting";
+import ConsultationRequest from "../pages/dashboard/pages/ConsultationIncoming";
+import ConsultationAfterBooking from "../pages/dashboard/pages/ConsultationAfterBooking";
 import EditProfile from "../pages/Profile/EditProfile";
 import EditBiodata from "../pages/Profile/EditBiodata";
 import Profile from "../pages/Profile/Profile";
-import ConsultationActiveDetail from "../pages/Dashboard/pages/ConsultationActiveDetail";
+import ConsultationActiveDetail from "../pages/dashboard/pages/ConsultationActiveDetail";
 import ConsultationHistoryDetail from "../pages/history/pages/ConsultationHistoryDetail";
 import History from "../pages/history/History";
 
-import CompleteSuccess from "../pages/Dashboard/CompleteSuccess";
+import CompleteSuccess from "../pages/dashboard/components/CompleteSuccess";
 import {MessageProvider} from "../context/ContextMessage";
-import SendMessage from "../pages/Message/SendMessage";
+import SendMessage from "../pages/Message/components/SendMessage";
 import {NotificationProvider} from "../context/ContextNotification";
 
 const Routes = () => {

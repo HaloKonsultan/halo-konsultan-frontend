@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from "react"
 import {useParams} from "react-router-dom"
 import {Typography, Space, Card} from 'antd';
-import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
-import LabelText from "../../global/LabelText";
+import {ContextConsultationDetail} from "../../../context/ContextConsultationDetail";
+import LabelText from "../../../global/LabelText";
 
 const {Title, Paragraph, Text} = Typography;
 

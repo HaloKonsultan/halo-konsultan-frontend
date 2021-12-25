@@ -1,18 +1,24 @@
-import React from "react"
-import { Row, Col } from 'antd';
+import React, {useContext} from "react"
+import {Row, Col, Spin} from 'antd';
 import Nav from "../../../layout/Header";
-import Detail from "../../Dashboard/Detail";
+import Detail from "../../dashboard/components/Detail";
 import ConsultationHistory from "../ConsultationHistory";
+import {ContextConsultationDetail} from "../../../context/ContextConsultationDetail";
 
 const ConsultationHistoryDetail = () => {
+    const {loading} = useContext(ContextConsultationDetail)
 
     return (
         <>
             <Nav title="Detail Konsultasi" onBack={() => window.history.back()}/>
-            <Row className="center">
-                <Col span={13}><Detail /></Col>
-                <Col span={11}><ConsultationHistory /></Col>
-            </Row>
+            <div>
+                <Spin spinning={loading}>
+                    <Row className="center">
+                        <Col span={13}><Detail /></Col>
+                        <Col span={11}><ConsultationHistory /></Col>
+                    </Row>
+                </Spin>
+            </div>
         </>
     )
 }

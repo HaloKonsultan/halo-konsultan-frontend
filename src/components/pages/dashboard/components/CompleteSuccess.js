@@ -2,7 +2,7 @@ import React from "react";
 import {Result, Button} from 'antd';
 import {CheckCircleFilled} from "@ant-design/icons";
 import {Link} from "react-router-dom";
-import Nav from "../../layout/Header";
+import Nav from "../../../layout/Header";
 
 const CompleteSuccess = () => {
     return (

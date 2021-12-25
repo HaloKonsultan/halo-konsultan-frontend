@@ -29,25 +29,39 @@ const HistoryTable = () => {
             key: 'name',
         },
         {
-            title: 'Tanggal Konsultasi',
+            title: 'Tanggal Konsultasi Masuk',
             dataIndex: 'date',
             key: 'date',
+        },
+        {
+            title: 'Tanggal Konsultasi Selesai',
+            dataIndex: 'date_updated',
+            key: 'date_updated',
+        },
+        {
+            title: 'Tanggal Transaksi',
+            dataIndex: 'date_updated',
+            key: 'date_updated',
+        },
+        {
+            title: 'Nominal Transaksi',
+            dataIndex: 'price',
+            key: 'price',
         },
         {
             title: 'Status',
             key: 'status',
             dataIndex: 'status',
             render: (status, data) => {
-                let color = status === 'done' && data.is_confirmed === 1 ?  '#3B85FA' : '#F63131';
-                let fontColor = status === 'done' && data.is_confirmed === 1 ? '#FDD6D6' : '#D8E7FE';
-                let consultationStatus = status === 'done' && data.is_confirmed === 1 ? 'Selesai' : 'Ditolak'
-                {console.log(status)}
-                {console.log("confirm dibawah")}
-                {console.log(data.is_confirmed)}
+                let color = status === 'done' && data.is_confirmed === 1 ? '#D8E7FE' : '#FDD6D6';
                 return (
                     <>
-                        <Tag style={{borderRadius: 20, fontWeight: "bold"}} color={color}>
-                            {consultationStatus}
+                        <Tag style={{
+                            borderRadius: 20,
+                            color: status === 'done' && data.is_confirmed === 1 ? '#3B85FA' : '#F63131',
+                            fontWeight: "bold"
+                        }} color={color}>
+                            {status === 'done' && data.is_confirmed === 1 ? 'Selesai' : 'Ditolak'}
                         </Tag>
                     </>
                 )
@@ -67,21 +81,7 @@ const HistoryTable = () => {
                         }, // click row
                     };
                 }}
-                columns={columns} dataSource={data.slice(-5)}/>
-            {/*<Table*/}
-            {/*    onRow={(record, rowIndex) => {*/}
-            {/*        return {*/}
-            {/*            onClick: event => {*/}
-            {/*                handleDetail(record.id)*/}
-            {/*            },*/}
-            {/*        };*/}
-            {/*    }}*/}
-            {/*    style={{*/}
-            {/*        borderRadius: 8,*/}
-            {/*        overflow: "hidden",*/}
-            {/*        boxShadow: "0 0 0 1px #CED4DA"*/}
-            {/*    }}*/}
-            {/*    columns={columns} dataSource={data} pagination={false}/>*/}
+                columns={columns} dataSource={data} pagination={{position: ['bottomCenter'], pageSize: 10}}/>
         </>
     )
 }

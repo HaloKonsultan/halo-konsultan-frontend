@@ -2,15 +2,15 @@ import React, {useContext, useEffect, useState} from "react"
 import {Card, Space, Modal, Form, Row, Col, Input, Typography} from 'antd';
 import {CheckOutlined} from '@ant-design/icons';
 import {useHistory, useParams} from "react-router-dom";
-import {ContextConsultationDetail} from "../../context/ContextConsultationDetail";
-import ButtonDanger from "../../global/ButtonDanger";
-import PrimaryButton from "../../global/ButtonPrimary";
-import "../../../assets/css/dashboard.css"
-import {ContextNotification} from "../../context/ContextNotification";
+import {ContextConsultationDetail} from "../../../context/ContextConsultationDetail";
+import ButtonDanger from "../../../global/ButtonDanger";
+import PrimaryButton from "../../../global/ButtonPrimary";
+import "../../../../assets/css/dashboard.css"
+import {ContextNotification} from "../../../context/ContextNotification";
 
 const {Title} = Typography;
 
-const AcceptDeclineCard = () => {
+const ConfirmationCard = () => {
     let history = useHistory()
     let {Id} = useParams()
     console.log(Id)
@@ -138,4 +138,4 @@ const AcceptDeclineCard = () => {
     )
 }
 
-export default AcceptDeclineCard
+export default ConfirmationCard
