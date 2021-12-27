@@ -24,12 +24,18 @@ const ConsultationOption = () => {
     let {Id} = useParams()
     const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, price, setPrice, functions} = useContext(ContextAfterBooking)
     const {pushNotification} = useContext(ContextNotification)
+    const [selectedTime, setSelectedTime] = useState(null);
 
     const {fetchDataById, functionSubmit} = functions
     const [dateValidation, setDateValidation] = useState({
         date1: false,
         date2: false,
         date3: false
+    })
+    const [timeValidation, setTimeValidation] = useState({
+        time1: false,
+        time2: false,
+        time3: false
     })
     const [preference, setPreference] = useState(input.preference)
 
@@ -63,13 +69,13 @@ const ConsultationOption = () => {
         dateValidation.date3 = false
     }
 
-    function onChangeTime(time, timeString, id) {
-        console.log("ini waktu " + timeString);
+    function onChangeTime(timeString, id) {
+        console.log("ini waktu " + moment(timeString).format("HH:mm"));
         const index = prefTime.time.map(e => e.id).indexOf(id);
         if (index !== -1) prefTime.time.splice(index, 1)
         let timeInput = prefTime.time.push({
             id: id,
-            time: timeString
+            time: moment(timeString).format("HH:mm")
         })
         setPrefTime({...prefTime, timeInput})
     }
@@ -123,11 +129,11 @@ const ConsultationOption = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        let found1 = prefDate.date.find(colDef => colDef.id === 1)
+        let dateEmpty = prefDate.date.find(colDef => colDef.id === 1)
         // let found2 = prefDate.date.find(colDef => colDef.id === 2)
         // let found3 = prefDate.date.find(colDef => colDef.id === 3)
 
-        if (found1 === undefined) {
+        if (dateEmpty === undefined) {
             setDateValidation({...dateValidation, date1: true})
         }
         // else if (found2 === undefined) {
@@ -138,7 +144,7 @@ const ConsultationOption = () => {
         else {
             let dates = prefDate.date.map((item, i) => Object.assign({}, item, prefTime.time[i]));
             dates.forEach(date => input.date.push(date))
-            console.log(prefDate.date)
+            console.log(dates)
             input.price = price
             functionSubmit(Id)
             pushNotification(Id, "Konsultasi Diterima", `Konsultasi ${input.title} anda diterima konsultan`)
@@ -191,7 +197,12 @@ const ConsultationOption = () => {
                                                 suffixIcon={<Clock size={24} weight="fill"/>}
                                                 format={'HH:mm'}
                                                 name="date[0].time"
-                                                onChange={(date, dateString) => onChangeTime(date, dateString, 1)}
+                                                value={selectedTime}
+                                                onSelect={(value) => {
+                                                    const timeString = value;
+                                                    setSelectedTime(timeString);
+                                                    onChangeTime(timeString, 1)
+                                                }}
                                                 picker="Waktu" placeholder="Waktu Kosong #1" required/>
                                             </Col>
                                             {
@@ -233,7 +244,12 @@ const ConsultationOption = () => {
                                             }}
                                             format={'HH:mm'}
                                             suffixIcon={<Clock size={24} weight="fill"/>}
-                                            onChange={(date, dateString) => onChangeTime(date, dateString, 2)}
+                                            value={selectedTime}
+                                            onSelect={(value) => {
+                                                const timeString = value;
+                                                setSelectedTime(timeString);
+                                                onChangeTime(timeString, 1)
+                                            }}
                                             picker="Waktu" placeholder="Waktu Kosong #1" required/>
                                         </Col>
                                         {
@@ -268,7 +284,12 @@ const ConsultationOption = () => {
                                             }}
                                             format={'HH:mm'}
                                             suffixIcon={<Clock size={24} weight="fill"/>}
-                                            onChange={(date, dateString) => onChangeTime(date, dateString, 3)}
+                                            value={selectedTime}
+                                            onSelect={(value) => {
+                                                const timeString = value;
+                                                setSelectedTime(timeString);
+                                                onChangeTime(timeString, 1)
+                                            }}
                                             picker="Waktu" placeholder="Waktu Kosong #1" required/>
                                         </Col>
                                         {

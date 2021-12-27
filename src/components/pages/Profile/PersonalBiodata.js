@@ -9,7 +9,6 @@ import {
     Space } from 'antd';
 import {ContextProfile} from "../../context/ContextProfile";
 import noImage from "../../../assets/img/no-image.png"
-import noProfile from "../../../assets/img/noprofile.png"
 import {SERVER_NAME} from "../../context/API";
 
 const {Title, Text} = Typography;
@@ -21,7 +20,7 @@ const PersonalBiodata = () => {
     const {fetchData} = functions
 
     useEffect(() => {
-        fetchData()
+        fetchData(1)
     }, [])
 
     const handleDetail = () => {

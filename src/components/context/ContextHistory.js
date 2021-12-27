@@ -25,7 +25,10 @@ export const HistoryProvider = props => {
                 date: e.date,
                 status: e.status,
                 is_confirmed: e.is_confirmed,
-                date_updated: e.date_updated
+                consultations_created: e.consultations_created,
+                consultations_date: e.consultations_date,
+                transactions_date: e.transactions_date,
+                income: e.income * 0.1
             }
         }))
     }

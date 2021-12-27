@@ -52,6 +52,15 @@ export const MessageProvider = props => {
         })
         setLoading(false)
     }
+
+    const functionReadMessage = (id_message) => {
+        API.patch(`consultants/forums/read/${id_message}`,{},
+            { headers: { "Authorization": "Bearer " + Cookies.get('token') }}
+        )
+            .then((res) => {
+                // console.log(res)
+            })
+    }
     
     const functionSendMessage = () => {
         API.post(`consultants/forums/send/${messageId}`, {
@@ -77,7 +86,8 @@ export const MessageProvider = props => {
         fetchDataById,
         fetchMessageById,
         functionSendMessage,
-        functionEndForum
+        functionReadMessage,
+        functionEndForum,
     }
 
     return (

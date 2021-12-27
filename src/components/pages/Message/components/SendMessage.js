@@ -13,11 +13,12 @@ const {Text, Link} = Typography;
 
 const SendMessage = () => {
     const {loading, inputMessage, setInputMessage, userName, messageId, isEnded, message, setMessage, clientId, functions} = useContext(ContextMessage)
-    const {fetchMessageById, functionSendMessage, fetchDataById} = functions
+    const {fetchMessageById, functionSendMessage, functionReadMessage, fetchDataById} = functions
     const {pushNotification} = useContext(ContextNotification)
     const {input} = useContext(ContextProfile)
 
     useEffect(() => {
+        setInputMessage([])
         fetchMessageById(messageId)
     }, [messageId])
 
@@ -55,8 +56,14 @@ const SendMessage = () => {
                                 <Space direction="vertical" size={24} style={{width: "100%", minHeight: "80vh"}}>
                                     {
                                         inputMessage.data && (
+
                                             <>
                                                 {inputMessage.data.map((e, index) => {
+                                                    if(e.sender === "client") {
+                                                        if(e.is_read === 0) {
+                                                            functionReadMessage(e.id)
+                                                        }
+                                                    }
                                                     return (
                                                         <>
                                                             {
@@ -83,7 +90,6 @@ const SendMessage = () => {
                                                                     <Text style={{color: "white"}}>{e.message}</Text>
                                                                 </Card>
                                                             }
-
                                                         </>
                                                     )
                                                 })}

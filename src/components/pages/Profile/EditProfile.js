@@ -27,7 +27,7 @@ const EditProfile = () => {
     const [isAccountVisible, setIsAccountVisible] = useState(false);
 
     useEffect(() => {
-        fetchData()
+        fetchData(2)
     }, [])
 
     const showAccountModal = () => {
@@ -110,8 +110,7 @@ const EditProfile = () => {
                                   borderRadius: 8,
                                   boxShadow: "0px 5px 10px 0px #F1F2FA",
                                   border: "none"
-                              }}
-                              loading={loading}>
+                              }}>
 
                             <Space size={24} direction="vertical" style={{width: "100%"}}>
                                 <Space size={8} direction="vertical" style={{width: "100%"}}>

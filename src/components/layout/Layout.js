@@ -25,7 +25,7 @@ const LayoutComponent = (props) => {
     const {fetchData} = functions
 
     useEffect(() => {
-        fetchData()
+        fetchData(2)
     }, [])
 
     const handleMenu = (event) => {

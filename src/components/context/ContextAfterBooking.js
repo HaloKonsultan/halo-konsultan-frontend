@@ -3,15 +3,12 @@ import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie";
 import API, {SERVER_NAME} from "./API"
 import {ContextConsultationDetail} from "./ContextConsultationDetail";
-import {ContextNotification} from "./ContextNotification";
-import {message} from "antd";
 
 export const ContextAfterBooking = createContext()
 
 export const AfterBookingProvider = props => {
     let history = useHistory()
     const {functionAccept} = useContext(ContextConsultationDetail)
-    // const {pushNotification} = useContext(ContextNotification)
     const [dataAfterBooking, setDataAfterBooking] = useState([])
     const [price, setPrice] = useState("")
     const [inputDocument, setInputDocument] = useState({

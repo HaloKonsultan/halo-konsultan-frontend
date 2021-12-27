@@ -20,6 +20,16 @@ const ConsultationProfile = () => {
         fetchData(1)
     }, [])
 
+    const formatRupiah = (angka) => {
+        console.log("angka ", angka)
+        var reverse = angka.toString().split('').reverse().join(''),
+            ribuan = reverse.match(/\d{1,3}/g);
+        ribuan = ribuan.join('.').split('').reverse().join('');
+
+        input.consultation_price = "Rp " + ribuan
+        return "Rp " + ribuan
+    }
+
     const handleDetail = () => {
         history.push('/edit-profile')
     }
@@ -41,7 +51,7 @@ const ConsultationProfile = () => {
                   }>
                 <Space size={24} direction="vertical" style={{width: "100%"}}>
                     <Space size={4} direction="vertical" style={{width: "100%"}}>
-                        <LabelText text="Rekening" />
+                        <LabelText text="Rekening"/>
                         {
                             input.consultant_virtual_account && (
                                 <>
@@ -64,15 +74,15 @@ const ConsultationProfile = () => {
                         }
                     </Space>
                     <Space size={4} direction="vertical">
-                        <LabelText text="Harga Jasa Diskusi" />
+                        <LabelText text="Harga Jasa Diskusi"/>
                         <Text strong>{input.chat_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
-                        <LabelText text="Harga Jasa Konsultasi" />
+                        <LabelText text="Harga Jasa Konsultasi"/>
                         <Text strong>{input.consultation_price}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
-                        <LabelText text="Dokumentasi Kerja" />
+                        <LabelText text="Dokumentasi Kerja"/>
                         <ul>
                             <Space size={[8, 8]} wrap>
                                 {

@@ -30,23 +30,23 @@ const HistoryTable = () => {
         },
         {
             title: 'Tanggal Konsultasi Masuk',
-            dataIndex: 'date',
-            key: 'date',
+            dataIndex: 'consultations_created',
+            key: 'consultations_created',
         },
         {
             title: 'Tanggal Konsultasi Selesai',
-            dataIndex: 'date_updated',
-            key: 'date_updated',
+            dataIndex: 'consultations_date',
+            key: 'consultations_date',
         },
         {
             title: 'Tanggal Transaksi',
-            dataIndex: 'date_updated',
-            key: 'date_updated',
+            dataIndex: 'transactions_date',
+            key: 'transactions_date',
         },
         {
             title: 'Nominal Transaksi',
-            dataIndex: 'price',
-            key: 'price',
+            dataIndex: 'income',
+            key: 'income',
         },
         {
             title: 'Status',

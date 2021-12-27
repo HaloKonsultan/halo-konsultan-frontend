@@ -52,7 +52,7 @@ const EditBiodata = () => {
     const [gender, setGender] = React.useState(input.gender);
 
     useEffect(() => {
-        fetchData()
+        fetchData(2)
     }, [])
 
     const [isExperienceVisible, setIsExperienceVisible] = useState(false);
@@ -247,7 +247,7 @@ const EditBiodata = () => {
             <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
                     <Card title={<Title level={4}>Edit Profil Diri</Title>} style={{width: "100%", borderRadius: 8}}
-                          loading={loading}>
+                          >
                         <Space size={24} direction="vertical" style={{width: "100%"}}>
                             <Row>
                                 <Col xs={13} sm={8} md={10} lg={6}>

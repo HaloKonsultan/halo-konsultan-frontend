@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Space, Card, Typography, Row, Col, Button} from 'antd';
+import {Space, Card, Typography, Row, Col, Button, Badge} from 'antd';
 import {MagnifyingGlass} from "phosphor-react";
 import InputText from "../../../global/InputText";
 import 'antd/dist/antd.css';
@@ -20,18 +20,20 @@ const ListContact = () => {
         fetchDataById()
     }, [])
 
-    const handleGetMessage = (id, name, end, clientId) => {
+    const handleGetMessage = (id, name, end, clientId, last_message) => {
         setMessageId(id)
         setUserName(name)
         setIsEnded(end)
         setClientId(clientId)
+        // functionReadMessage(id)
     }
 
-    const handleGetMessageMobile = (id, name, end, clientId) => {
+    const handleGetMessageMobile = (id, name, end, clientId, last_message) => {
         setMessageId(id)
         setUserName(name)
         setIsEnded(end)
         setClientId(clientId)
+        // functionReadMessage(id)
 
         history.push("/get-message")
     }
@@ -51,11 +53,17 @@ const ListContact = () => {
                         <Card style={{width: "100%", borderRadius: 12, border: "none", cursor: "pointer"}}
                               className="hightlight"
                               tabindex={counter + 1}
-                              onClick={() => handleGetMessage(e.id, e.user_name, e.is_ended, e.user_id)}
+                              onClick={() => handleGetMessage(e.id, e.user_name, e.is_ended, e.user_id, e.last_messages_is_read)}
                               bodyStyle={{padding: 16}}>
                             <Space size={8} direction="vertical">
                                 <Space size={4} direction="vertical">
-                                    <Text style={{color: "#222729", fontWeight: "700"}}>{e.user_name}</Text>
+                                    <Text style={{color: "#222729", fontWeight: "700"}}>
+                                        {e.user_name}
+
+                                        {/*{e.last_messages_is_read === 1 ?*/}
+                                        {/*    <Badge style={{marginLeft: 5}} status="processing"/> : ""}*/}
+                                    </Text>
+
                                     <Text style={{color: "#4B4B4B"}}>{e.last_messages}</Text>
                                 </Space>
                                 <h5 style={{color: "#979595"}}>{e.last_messages_time} WIB</h5>
