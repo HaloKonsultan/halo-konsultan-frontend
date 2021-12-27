@@ -25,6 +25,8 @@ const ConsultationOption = () => {
     const {input, setInput, prefTime, setPrefTime, prefDate, setPrefDate, price, setPrice, functions} = useContext(ContextAfterBooking)
     const {pushNotification} = useContext(ContextNotification)
     const [selectedTime, setSelectedTime] = useState(null);
+    const [selectedTime2, setSelectedTime2] = useState(null);
+    const [selectedTime3, setSelectedTime3] = useState(null);
 
     const {fetchDataById, functionSubmit} = functions
     const [dateValidation, setDateValidation] = useState({
@@ -244,10 +246,10 @@ const ConsultationOption = () => {
                                             }}
                                             format={'HH:mm'}
                                             suffixIcon={<Clock size={24} weight="fill"/>}
-                                            value={selectedTime}
+                                            value={selectedTime2}
                                             onSelect={(value) => {
                                                 const timeString = value;
-                                                setSelectedTime(timeString);
+                                                setSelectedTime2(timeString);
                                                 onChangeTime(timeString, 1)
                                             }}
                                             picker="Waktu" placeholder="Waktu Kosong #1" required/>
@@ -284,10 +286,10 @@ const ConsultationOption = () => {
                                             }}
                                             format={'HH:mm'}
                                             suffixIcon={<Clock size={24} weight="fill"/>}
-                                            value={selectedTime}
+                                            value={selectedTime3}
                                             onSelect={(value) => {
                                                 const timeString = value;
-                                                setSelectedTime(timeString);
+                                                setSelectedTime3(timeString);
                                                 onChangeTime(timeString, 1)
                                             }}
                                             picker="Waktu" placeholder="Waktu Kosong #1" required/>

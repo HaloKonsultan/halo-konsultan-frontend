@@ -23,7 +23,7 @@ export const OrderProvider = props => {
         let result = await API.get(
             `consultants/consultations/user/${Cookies.get('id')}/active`,
             { headers: { "Authorization": "Bearer " + Cookies.get('token') }})
-        let data = result.data.data.data
+        let data = result.data.data
         setDataOrder(data.map((e) => {
             return {
                 id: e.id,

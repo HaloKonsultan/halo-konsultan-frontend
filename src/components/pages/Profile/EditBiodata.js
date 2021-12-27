@@ -223,7 +223,7 @@ const EditBiodata = () => {
         let formdata = new FormData()
         let size = event.target.files[0].size;
 
-        if (size > 524288) {
+        if (size > 1048576) {
             setSizeError(true)
         } else if (event.target.files && event.target.files[0]) {
             setSizeError(false)
@@ -278,12 +278,12 @@ const EditBiodata = () => {
                                         <input type="file" name="myImage" onChange={onImageChange} title=" "/>
                                         {
                                             sizeError === true &&
-                                            <LabelText text="Ukuran foto melebihi 512KB!"
+                                            <LabelText text="Ukuran foto melebihi 1 MB!"
                                                        fontSize={12}
                                                        fontColor="#EA3A3A"/>
                                         }
 
-                                        <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 512KB</h4>
+                                        <h4 style={{color: "gray"}}>Pilih file dengan ukuran maksimal 1 MB</h4>
                                     </Space>
                                 </Col>
                             </Row>
