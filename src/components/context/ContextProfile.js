@@ -280,9 +280,8 @@ export const ProfileProvider = props => {
     }
 
     const formatRupiah = (angka) => {
-        var reverse = angka.toString().split('').reverse().join(''),
-            ribuan = reverse.match(/\d{1,3}/g);
-        ribuan = ribuan.join('.').split('').reverse().join('');
+        let ribuan
+        ribuan = angka.toString().split('').reverse().join('').match(/\d{1,3}/g).join('.').split('').reverse().join('');
 
         return "Rp " + ribuan
     }

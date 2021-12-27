@@ -75,11 +75,11 @@ const ConsultationProfile = () => {
                     </Space>
                     <Space size={4} direction="vertical">
                         <LabelText text="Harga Jasa Diskusi"/>
-                        <Text strong>{input.chat_price}</Text>
+                        <Text strong>Rp. {input.chat_price ? input.chat_price.toString().split('').reverse().join('').match(/\d{1,3}/g).join('.').split('').reverse().join('') : ""}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <LabelText text="Harga Jasa Konsultasi"/>
-                        <Text strong>{input.consultation_price}</Text>
+                        <Text strong>Rp. {input.consultation_price ? input.consultation_price.toString().split('').reverse().join('').match(/\d{1,3}/g).join('.').split('').reverse().join('') : ""}</Text>
                     </Space>
                     <Space size={4} direction="vertical">
                         <LabelText text="Dokumentasi Kerja"/>
