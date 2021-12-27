@@ -24,111 +24,58 @@ export const ProfileProvider = props => {
         let result = await API.get(`consultants/profile/${Cookies.get('id')}`,
             {headers: {"Authorization": "Bearer " + Cookies.get('token')}})
         let data = result.data.data
-        if (format === 1 || format === 2) {
-            setInput({
-                id: data.id,
-                name: data.name,
-                email: data.email,
-                photo: SERVER_NAME + data.photo,
-                city: data.city,
-                province: data.province,
-                position: data.position,
-                category_id: data.category_id,
-                gender: data.gender,
-                description: data.description,
-                chat_price: formatRupiah(data.chat_price),
-                consultation_price: formatRupiah(data.consultation_price),
-                consultant_documentation: data.consultant_documentation.map(key => {
-                    return {
-                        id: key.id,
-                        photo: SERVER_NAME + key.photo,
-                    }
-                }),
-                consultant_experience: data.consultant_experience.map(key => {
-                    return {
-                        id: key.id,
-                        position: key.position,
-                        start_year: key.start_year,
-                        end_year: key.end_year
-                    }
-                }),
-                consultant_education: data.consultant_education.map(key => {
-                    return {
-                        id: key.id,
-                        institution_name: key.institution_name,
-                        major: key.major,
-                        start_year: key.start_year,
-                        end_year: key.end_year
-                    }
-                }),
-                consultant_skill: data.consultant_skill.map(key => {
-                    return {
-                        id: key.id,
-                        skills: key.skills,
-                    }
-                }),
-                consultant_virtual_account: data.consultant_virtual_account.map(key => {
-                    return {
-                        id: key.id,
-                        name: key.name,
-                        card_number: key.card_number,
-                        bank: key.bank
-                    }
-                }),
-            })
-        } else {
-            setInput({
-                id: data.id,
-                name: data.name,
-                email: data.email,
-                photo: SERVER_NAME + data.photo,
-                city: data.city,
-                province: data.province,
-                position: data.position,
-                category_id: data.category_id,
-                gender: data.gender,
-                description: data.description,
-                chat_price: data.chat_price,
-                consultation_price: data.consultation_price,
-                consultant_documentation: data.consultant_documentation.map(key => {
-                    return {
-                        id: key.id,
-                        photo: SERVER_NAME + key.photo,
-                    }
-                }),
-                consultant_experience: data.consultant_experience.map(key => {
-                    return {
-                        id: key.id,
-                        position: key.position,
-                        start_year: key.start_year,
-                        end_year: key.end_year
-                    }
-                }),
-                consultant_education: data.consultant_education.map(key => {
-                    return {
-                        id: key.id,
-                        institution_name: key.institution_name,
-                        major: key.major,
-                        start_year: key.start_year,
-                        end_year: key.end_year
-                    }
-                }),
-                consultant_skill: data.consultant_skill.map(key => {
-                    return {
-                        id: key.id,
-                        skills: key.skills,
-                    }
-                }),
-                consultant_virtual_account: data.consultant_virtual_account.map(key => {
-                    return {
-                        id: key.id,
-                        name: key.name,
-                        card_number: key.card_number,
-                        bank: key.bank
-                    }
-                }),
-            })
-        }
+        setInput({
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            photo: SERVER_NAME + data.photo,
+            city: data.city,
+            province: data.province,
+            position: data.position,
+            category_id: data.category_id,
+            gender: data.gender,
+            description: data.description,
+            chat_price: data.chat_price,
+            consultation_price: data.consultation_price,
+            consultant_documentation: data.consultant_documentation.map(key => {
+                return {
+                    id: key.id,
+                    photo: SERVER_NAME + key.photo,
+                }
+            }),
+            consultant_experience: data.consultant_experience.map(key => {
+                return {
+                    id: key.id,
+                    position: key.position,
+                    start_year: key.start_year,
+                    end_year: key.end_year
+                }
+            }),
+            consultant_education: data.consultant_education.map(key => {
+                return {
+                    id: key.id,
+                    institution_name: key.institution_name,
+                    major: key.major,
+                    start_year: key.start_year,
+                    end_year: key.end_year
+                }
+            }),
+            consultant_skill: data.consultant_skill.map(key => {
+                return {
+                    id: key.id,
+                    skills: key.skills,
+                }
+            }),
+            consultant_virtual_account: data.consultant_virtual_account.map(key => {
+                return {
+                    id: key.id,
+                    name: key.name,
+                    card_number: key.card_number,
+                    bank: key.bank
+                }
+            }),
+        })
+
         setPrice(input.consultation_price)
         await dataProvinces()
         await dataCategories()
