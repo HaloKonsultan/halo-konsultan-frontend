@@ -47,6 +47,13 @@ const HistoryTable = () => {
             title: 'Nominal Transaksi',
             dataIndex: 'income',
             key: 'income',
+            render: (income) => {
+                return(
+                    <>
+                        {income ? "Rp. " + income.toString().split('').reverse().join('').match(/\d{1,3}/g).join('.').split('').reverse().join('') : "-"}
+                    </>
+                )
+            }
         },
         {
             title: 'Status',

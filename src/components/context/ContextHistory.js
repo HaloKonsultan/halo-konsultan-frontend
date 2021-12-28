@@ -28,7 +28,7 @@ export const HistoryProvider = props => {
                 consultations_created: e.consultations_created,
                 consultations_date: e.consultations_date,
                 transactions_date: e.transactions_date,
-                income: e.income * 0.1
+                income: parseInt(e.income * 0.9)
             }
         }))
     }

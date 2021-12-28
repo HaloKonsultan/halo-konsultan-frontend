@@ -27,7 +27,6 @@ const ConsultationOption = () => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [selectedTime2, setSelectedTime2] = useState(null);
     const [selectedTime3, setSelectedTime3] = useState(null);
-
     const {fetchDataById, functionSubmit} = functions
     const [dateValidation, setDateValidation] = useState({
         date1: false,
@@ -40,11 +39,13 @@ const ConsultationOption = () => {
         time3: false
     })
     const [preference, setPreference] = useState(input.preference)
+    const area = new Date();
+    const offset = area.getTimezoneOffset();
 
     useEffect(() => {
         if (Id !== undefined) {
             fetchDataById(Id)
-            console.log("ini di detail", price)
+            console.log("ini di detail", offset)
         }
     }, []);
 
@@ -57,6 +58,16 @@ const ConsultationOption = () => {
 
         setInput({...input, [name]: typeOfValue})
     };
+
+    function getTimeZone(offset) {
+        if (offset === -420) {
+            return "(WIB)"
+        } else if (offset === -480) {
+            return "(WITA)"
+        } else {
+            return "(WIT)"
+        }
+    }
 
     function onChangeDate(date, dateString, id) {
         const index = prefDate.date.map(e => e.id).indexOf(id);
@@ -171,7 +182,7 @@ const ConsultationOption = () => {
                                     </Space>
                                 }
                                 <Space size={8} direction="vertical" style={{width: "100%"}}>
-                                    <LabelText text="Opsi Jadwal Konsultasi (GMT +7)"/>
+                                    <LabelText text={"Opsi Jadwal Konsultasi " + getTimeZone(offset)}/>
                                     <Space size={16} direction="vertical" style={{width: "100%"}}>
                                         <Row gutter={[16, 16]}>
                                             <Col span={12}> <DatePicker
