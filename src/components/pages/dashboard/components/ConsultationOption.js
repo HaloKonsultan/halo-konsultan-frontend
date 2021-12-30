@@ -91,6 +91,9 @@ const ConsultationOption = () => {
             time: moment(timeString).format("HH:mm")
         })
         setPrefTime({...prefTime, timeInput})
+        dateValidation.date1 = false
+        dateValidation.date2 = false
+        dateValidation.date3 = false
     }
 
     const handleChange = (event) => {
@@ -143,11 +146,22 @@ const ConsultationOption = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         let dateEmpty = prefDate.date.find(colDef => colDef.id === 1)
-        // let found2 = prefDate.date.find(colDef => colDef.id === 2)
-        // let found3 = prefDate.date.find(colDef => colDef.id === 3)
+        let timeEmpty = prefTime.time.find(colDef => colDef.id === 1)
+        let dateEmpty2 = prefDate.date.find(colDef => colDef.id === 2)
+        let timeEmpty2 = prefTime.time.find(colDef => colDef.id === 2)
+        let dateEmpty3 = prefDate.date.find(colDef => colDef.id === 3)
+        let timeEmpty3 = prefTime.time.find(colDef => colDef.id === 3)
+        console.log(prefDate)
+        console.log(prefTime)
 
-        if (dateEmpty === undefined) {
+        if (dateEmpty === undefined || timeEmpty === undefined) {
             setDateValidation({...dateValidation, date1: true})
+        }
+        else if((dateEmpty2 !== undefined && timeEmpty2 === undefined) || (dateEmpty2 === undefined && timeEmpty2 !== undefined)) {
+            setDateValidation({...dateValidation, date2: true})
+        }
+        else if((dateEmpty3 !== undefined && timeEmpty3 === undefined) || (dateEmpty3 === undefined && timeEmpty3 !== undefined)) {
+            setDateValidation({...dateValidation, date3: true})
         }
         // else if (found2 === undefined) {
         //     setDateValidation({...dateValidation, date2: true})
@@ -261,7 +275,7 @@ const ConsultationOption = () => {
                                             onSelect={(value) => {
                                                 const timeString = value;
                                                 setSelectedTime2(timeString);
-                                                onChangeTime(timeString, 1)
+                                                onChangeTime(timeString, 2)
                                             }}
                                             picker="Waktu" placeholder="Waktu Kosong #1" required/>
                                         </Col>
@@ -301,7 +315,7 @@ const ConsultationOption = () => {
                                             onSelect={(value) => {
                                                 const timeString = value;
                                                 setSelectedTime3(timeString);
-                                                onChangeTime(timeString, 1)
+                                                onChangeTime(timeString, 3)
                                             }}
                                             picker="Waktu" placeholder="Waktu Kosong #1" required/>
                                         </Col>
