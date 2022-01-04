@@ -54,7 +54,7 @@ function OrderIncoming() {
 
     return (
         <>
-            <Nav title="Konsultasi Masuk"/>
+            <Nav title="Konsultasi Masuk" onBack={() => window.history.back()}/>
             <div className="dashboard-container">
                 <OrderTable loading={loading} columns={columns} dataSource={data} pagination={{position: ['bottomCenter'], pageSize: 10}}/>
             </div>

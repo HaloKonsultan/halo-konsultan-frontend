@@ -243,7 +243,7 @@ const EditBiodata = () => {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Edit Biodata" onBack={() => window.history.back()}/>
             <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 14, order: 1}}>
                     <Card title={<Title level={4}>Edit Profil Diri</Title>} style={{width: "100%", borderRadius: 8}}

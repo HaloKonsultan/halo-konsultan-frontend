@@ -100,7 +100,7 @@ const EditProfile = () => {
 
     return (
         <>
-            <Nav/>
+            <Nav title="Edit Profil" onBack={() => window.history.back()}/>
             <div className="container-profile" style={{display: "flex", alignItems: "center"}}>
                 <Row>
                     <Col xs={{span: 24, order: 1}} sm={{span: 24, order: 1}} lg={{span: 24, order: 1}}>

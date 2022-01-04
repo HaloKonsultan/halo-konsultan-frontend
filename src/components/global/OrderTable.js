@@ -15,7 +15,8 @@ function OrderTable(props) {
                 style={{
                     borderRadius: 8,
                     overflow: "hidden",
-                    boxShadow: "0 0 0 1px #CED4DA"
+                    boxShadow: "0 0 0 1px #CED4DA",
+                    cursor: "pointer"
                 }}
                 rowKey={"active"}
                 columns={props.columns}

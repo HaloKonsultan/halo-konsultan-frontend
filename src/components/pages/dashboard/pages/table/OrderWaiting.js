@@ -38,7 +38,7 @@ function IncomingOrder() {
 
     return (
         <>
-            <Nav title="Menunggu Pembayaran"/>
+            <Nav title="Menunggu Pembayaran" onBack={() => window.history.back()}/>
             <div className="dashboard-container">
                 <OrderTable
                     loading={loading}

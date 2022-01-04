@@ -59,7 +59,7 @@ function OrderActive() {
 
     return (
         <>
-            <Nav title="Konsultasi Aktif"/>
+            <Nav title="Konsultasi Aktif" onBack={() => window.history.back()}/>
             <div className="dashboard-container">
                 <OrderTable
                     onRow={(record, rowIndex) => {

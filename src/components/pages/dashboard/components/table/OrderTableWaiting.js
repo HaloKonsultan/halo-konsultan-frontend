@@ -38,13 +38,13 @@ const OrderTableWaiting = (props) => {
         <>
             <OrderTable
                 loading={loading}
-                onRow={(record, rowIndex) => {
-                    return {
-                        onClick: event => {
-                            handleDetail(record.id)
-                        }, // click row
-                    };
-                }}
+                // onRow={(record, rowIndex) => {
+                //     return {
+                //         onClick: event => {
+                //             handleDetail(record.id)
+                //         }, // click row
+                //     };
+                // }}
                 columns={columns} dataSource={data.slice(-5)}/>
         </>
     )
